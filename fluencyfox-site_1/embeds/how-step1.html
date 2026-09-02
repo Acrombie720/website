@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Fluency Assessor: product demo animation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --header:#1E1E1E;
+    --text:#383D3A;
+    --button:#92BAD5;
+    --button-dark:#5474A1;
+    --tag-bg:#F0F6F3;
+    --solution:#5474A1;
+    --communication:#5D54A1;
+    --ai:#7EA57A;
+    --border:#E5E7E5;
+    --panel-bg:#F3F6F5;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    background:#FFFFFF;
+    display:flex; align-items:center; justify-content:center;
+    padding:0 20px;
+    font-family:"Poppins", -apple-system, "Segoe UI", sans-serif;
+    color:var(--text);
+  }
+
+  .frame{
+    width:1040px; max-width:100%;
+    background:#F0F4F6;
+    border-radius:18px;
+    overflow:hidden;
+  }
+  .frame-top{
+    display:flex; align-items:center; gap:10px;
+    padding:16px 22px; border-bottom:1px solid var(--border);
+  }
+  .frame-top .dot{ width:9px; height:9px; border-radius:50%; background:#E3E1DC; }
+  .frame-top .crumb{ font-size:12.5px; color:#9A968E; margin-left:6px; }
+  .frame-top .crumb b{ color:var(--text); font-weight:500; }
+
+  .stage{ position:relative; width:100%; height:600px; }
+
+  .screen{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:44px;
+    opacity:0; transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease;
+    pointer-events:none;
+  }
+  .screen.active{ opacity:1; transform:translateY(0); pointer-events:auto; z-index:2; }
+
+  /* ================= Screen A - Create Custom Test ================= */
+  .test-card{
+    width:640px; max-width:100%;
+    background:#fff; border:1px solid var(--border); border-radius:20px;
+    padding:36px 44px 34px;
+  }
+  .test-card h2{ margin:0 0 26px; text-align:center; font-size:19px; font-weight:600; color:var(--header); }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12.5px; font-weight:600; color:var(--header); margin-bottom:7px; }
+  .field .box{
+    border:1px solid #DCDFDD; border-radius:9px; padding:11px 14px;
+    font-size:13.5px; color:var(--text); background:#fff; min-height:20px;
+    display:flex; align-items:flex-start;
+  }
+  .field .box.area{ min-height:64px; align-items:flex-start; }
+  .field .box .placeholder{ color:#B3B0A9; }
+  .caret{ display:inline-block; width:1.5px; height:15px; background:var(--button-dark); margin-left:1px; animation:blink 1s steps(1) infinite; vertical-align:-2px; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .btn-row{ display:flex; justify-content:center; margin-top:24px; }
+  .btn{
+    font-family:"Poppins", sans-serif; font-weight:500; font-size:13.5px;
+    border-radius:12px; padding:11px 30px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary{ background:var(--button); color:#fff; }
+  .btn-primary.pressed{ transform:scale(.88); background:var(--button-dark); box-shadow:0 0 0 9px rgba(146,186,213,0.35); }
+
+  /* ================= Screen B - Suggested Assessments ================= */
+  .suggest-wrap{ width:100%; display:flex; flex-direction:column; align-items:center; gap:22px; }
+  .suggest-head{ text-align:center; }
+  .suggest-head h2{ margin:0 0 4px; font-size:19px; font-weight:600; color:var(--header); }
+  .suggest-head p{ margin:0; font-size:12.5px; color:#9A968E; }
+
+  .loading{ display:flex; align-items:center; gap:10px; font-size:13px; color:#9A968E; }
+  .loading .dots{ display:flex; gap:5px; }
+  .loading .dots span{ width:6px; height:6px; border-radius:50%; background:var(--button); animation:dotpulse 1s ease-in-out infinite; }
+  .loading .dots span:nth-child(2){ animation-delay:.15s; }
+  .loading .dots span:nth-child(3){ animation-delay:.3s; }
+  @keyframes dotpulse{ 0%,80%,100%{ opacity:.25; transform:scale(.7); } 40%{ opacity:1; transform:scale(1); } }
+
+  .cards-row{ display:flex; gap:16px; }
+  .card{
+    width:300px; background:#fff; border:1px solid var(--border); border-radius:12px;
+    padding:20px 20px 18px; display:flex; flex-direction:column;
+    opacity:0; transform:translateY(16px);
+    transition:opacity .45s ease, transform .45s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card.in{ opacity:1; transform:translateY(0); }
+  .card.chosen{ border-color:var(--button-dark); box-shadow:0 0 0 3px rgba(84,116,161,0.15); }
+  .card-top{ display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px; }
+  .card-top h3{ margin:0; font-size:14.5px; font-weight:600; color:var(--header); line-height:1.3; }
+  .pill-time{ font-size:10.5px; color:#8C887F; border:1px solid var(--border); border-radius:999px; padding:3px 9px; flex-shrink:0; margin-left:8px; white-space:nowrap; }
+  .card p.desc{ font-size:12px; line-height:1.55; color:var(--text); margin:0 0 14px; min-height:70px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:auto; padding-bottom:16px; }
+  .tag{ background:var(--tag-bg); color:var(--text); font-size:11px; padding:5px 12px; border-radius:999px; }
+  .card-foot{ border-top:1px solid var(--border); padding-top:12px; display:flex; justify-content:flex-end; gap:8px; }
+  .btn-outline{ background:#fff; border:1px solid #DCDFDD; color:var(--text); font-size:12px; padding:7px 16px; border-radius:12px; font-weight:500; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+  .btn-select{ background:var(--button); color:#fff; font-size:12px; padding:7px 16px; border-radius:12px; font-weight:500; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+  .btn-select.pressed{ transform:scale(.86); background:var(--button-dark); box-shadow:0 0 0 8px rgba(146,186,213,0.35); }
+  .btn-outline.pressed{ transform:scale(.88); background:#F0F0EE; box-shadow:0 0 0 7px rgba(0,0,0,0.05); }
+
+  /* ================= Screen C - Scoring Weightings ================= */
+  .weight-wrap{ width:700px; max-width:100%; }
+  .weight-head{ display:flex; align-items:center; gap:6px; margin-bottom:12px; }
+  .weight-head span{ font-size:13px; font-weight:600; color:var(--header); }
+  .info-dot{ width:14px; height:14px; border-radius:50%; border:1.3px solid #B3B0A9; color:#9A968E; font-size:9px; display:flex; align-items:center; justify-content:center; }
+
+  .bar{ display:flex; gap:3px; height:42px; border-radius:10px; overflow:hidden; margin-bottom:16px; }
+  .seg{ display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; font-weight:600; transition:flex-basis .6s cubic-bezier(.4,0,.2,1); }
+  .seg.solution{ background:var(--solution); }
+  .seg.communication{ background:var(--communication); }
+  .seg.ai{ background:var(--ai); }
+
+  .weight-cards{ display:flex; gap:14px; margin-bottom:14px; }
+  .wcard{ flex:1; background:#fff; border:1px solid var(--border); border-radius:10px; padding:13px 15px; }
+  .wcard .lbl{ display:flex; align-items:flex-start; gap:6px; font-size:11.5px; font-weight:500; color:var(--text); margin-bottom:10px; min-height:32px; line-height:1.4; }
+  .wcard .lbl > span:not(.dot):not(.info-dot){ flex:1; }
+  .wcard .dot{ width:7px; height:7px; border-radius:50%; flex-shrink:0; margin-top:5px; }
+  .wcard .info-dot{ margin-top:1px; }
+  .wcard .dot.solution{ background:var(--solution); }
+  .wcard .dot.communication{ background:var(--communication); }
+  .wcard .dot.ai{ background:var(--ai); }
+  .wcard .val{ border:1px solid #DCDFDD; border-radius:8px; padding:8px 12px; font-size:14px; color:var(--header); font-weight:500; transition:background .2s ease; }
+  .wcard .val.editing{ background:#F5F9FC; border-color:var(--button); }
+
+  .weight-foot{ display:flex; justify-content:space-between; align-items:center; margin-bottom:26px; }
+  .weight-foot .total{ font-size:13px; font-weight:600; color:var(--header); }
+  .weight-foot .reset{ font-size:12px; font-weight:500; color:var(--button-dark); }
+
+  .send-row{ display:flex; justify-content:flex-end; }
+  .btn-send{ background:var(--button); color:#fff; font-size:13.5px; font-weight:500; padding:11px 26px; border-radius:12px; display:inline-flex; align-items:center; gap:9px; transition:transform .12s ease, box-shadow .12s ease, background .12s ease; }
+  .btn-send.pressed{ transform:scale(.9); background:var(--button-dark); box-shadow:0 0 0 9px rgba(146,186,213,0.35); }
+  .btn-send svg{ display:block; }
+
+  .toast{
+    position:absolute; left:50%; bottom:28px; transform:translate(-50%,14px) scale(.94);
+    background:#EFF6EF; color:#3E6B49; font-family:"Poppins", sans-serif;
+    font-style:italic; font-size:17px; font-weight:500;
+    padding:22px 34px; border-radius:16px; display:flex; align-items:center; gap:14px;
+    opacity:0; transition:opacity .35s ease, transform .35s ease; z-index:5; white-space:nowrap;
+  }
+  .toast.show{ opacity:1; transform:translate(-50%,0) scale(1); }
+  .toast .tick{ width:26px; height:26px; border-radius:50%; background:#D9EBDC; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+  /* ---------------- cursor ---------------- */
+  .cursor{
+    position:absolute; z-index:20; width:22px; height:22px; pointer-events:none;
+    transition:left .55s cubic-bezier(.4,0,.2,1), top .55s cubic-bezier(.4,0,.2,1), opacity .3s ease;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+    opacity:0;
+  }
+  .cursor.show{ opacity:1; }
+  .cursor svg{ display:block; }
+  .cursor.click svg .ring{ animation:clickring .45s ease-out; }
+  @keyframes clickring{ 0%{ r:2; opacity:.9; } 100%{ r:13; opacity:0; } }
+</style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="frame-top">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="crumb">fluencyfox.ai / <b>New Assessment</b></div>
+  </div>
+
+  <div class="stage" id="stage">
+
+    <!-- Screen A -->
+    <div class="screen" id="screenA">
+      <div class="test-card">
+        <h2>Create Custom Test</h2>
+        <div class="field">
+          <label>Job Role</label>
+          <div class="box"><span id="roleText"></span><span class="caret" id="caretRole"></span><span class="placeholder" id="rolePh">e.g. Senior Frontend Engineer</span></div>
+        </div>
+        <div class="field">
+          <label>Test Title</label>
+          <div class="box"><span id="titleText"></span><span class="caret" id="caretTitle"></span><span class="placeholder" id="titlePh">e.g. Build a sales dashboard from a CSV</span></div>
+        </div>
+        <div class="field">
+          <label>Assessment Task</label>
+          <div class="box area"><span id="taskText"></span><span class="caret" id="caretTask"></span><span class="placeholder" id="taskPh">Describe the task, any data or tools to use, and what the candidate should deliver</span></div>
+        </div>
+        <div class="btn-row"><div class="btn btn-primary" id="btnGo">Save &amp; Continue</div></div>
+      </div>
+    </div>
+
+    <!-- Screen B -->
+    <div class="screen" id="screenB">
+      <div class="suggest-wrap">
+        <div class="suggest-head">
+          <h2>Suggested Assessments</h2>
+          <p id="suggestSub">Based on: Senior Frontend Engineer, Grid Performance Fix</p>
+        </div>
+        <div class="loading" id="loading">
+          <div class="dots"><span></span><span></span><span></span></div>
+          Generating suggested assessments…
+        </div>
+        <div class="cards-row" id="cardsRow" style="display:none;">
+          <div class="card" id="card1">
+            <div class="card-top"><h3>Grid Performance Fix</h3><span class="pill-time">45m</span></div>
+            <p class="desc">Improve a product listing page that becomes slow with 5,000 items while preserving smooth scrolling and interactive filters.</p>
+            <div class="tags"><span class="tag">Perfomance</span><span class="tag">JavaScript</span><span class="tag">Scalability</span></div>
+            <div class="card-foot"><div class="btn-outline">Edit</div><div class="btn-select" id="selectBtn">Select</div></div>
+          </div>
+          <div class="card" id="card2">
+            <div class="card-top"><h3>Design System Widget</h3><span class="pill-time">45m</span></div>
+            <p class="desc">Create a reusable notification component family with variants, actions, dismissal behavior, and keyboard accessibility.</p>
+            <div class="tags"><span class="tag">UI Design</span><span class="tag">Accessibility</span><span class="tag">Attention to Detail</span></div>
+            <div class="card-foot"><div class="btn-outline">Edit</div><div class="btn-select">Select</div></div>
+          </div>
+          <div class="card" id="card3">
+            <div class="card-top"><h3>Team Handoff Challenge</h3><span class="pill-time">45m</span></div>
+            <p class="desc">Walk through how you would refactor a brittle front-end feature into a maintainable component structure while coordinating the work with a junior developer.</p>
+            <div class="tags"><span class="tag">Communication</span><span class="tag">Mentoring</span><span class="tag">Technical Leadership</span></div>
+            <div class="card-foot"><div class="btn-outline">Edit</div><div class="btn-select">Select</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen C -->
+    <div class="screen" id="screenC">
+      <div class="weight-wrap">
+        <div class="weight-head"><span>Scoring Weightings</span><div class="info-dot">i</div></div>
+        <div class="bar">
+          <div class="seg solution" id="segSolution" style="flex-basis:60%;">60%</div>
+          <div class="seg communication" id="segComm" style="flex-basis:30%;">30%</div>
+          <div class="seg ai" id="segAI" style="flex-basis:10%;">10%</div>
+        </div>
+        <div class="weight-cards">
+          <div class="wcard">
+            <div class="lbl"><span class="dot solution"></span><span>Solution (Output Quality)</span><span class="info-dot" style="width:12px;height:12px;font-size:8px;">i</span></div>
+            <div class="val" id="valSolution">60</div>
+          </div>
+          <div class="wcard">
+            <div class="lbl"><span class="dot communication"></span><span>Communication (Verbal Narration)</span><span class="info-dot" style="width:12px;height:12px;font-size:8px;">i</span></div>
+            <div class="val" id="valComm">30</div>
+          </div>
+          <div class="wcard">
+            <div class="lbl"><span class="dot ai"></span><span>AI Collaboration (Diagnostic)</span><span class="info-dot" style="width:12px;height:12px;font-size:8px;">i</span></div>
+            <div class="val" id="valAI">10</div>
+          </div>
+        </div>
+        <div class="weight-foot">
+          <div class="total">Total: <span id="totalPct">100</span>%</div>
+          <div class="reset">Reset to defaults</div>
+        </div>
+        <div class="send-row">
+          <div class="btn-send" id="btnSend">
+            Send to Candidates
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="toast" id="toast"><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E6B49" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>Sent to candidates</div>
+    </div>
+
+    <svg class="cursor" id="cursor" viewBox="0 0 24 24">
+      <circle class="ring" cx="7" cy="7" r="2" fill="none" stroke="#5474A1" stroke-width="1.5"/>
+      <path d="M4 2 L4 19 L8.2 15.2 L11 21.5 L13.7 20.3 L11 14 L16.5 14 Z" fill="#1E1E1E" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/>
+    </svg>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const stage = document.getElementById('stage');
+  const cursor = document.getElementById('cursor');
+  const screenA = document.getElementById('screenA');
+  const screenB = document.getElementById('screenB');
+  const screenC = document.getElementById('screenC');
+
+  function stageRect(){ return stage.getBoundingClientRect(); }
+
+  async function moveCursorTo(el, opts){
+    opts = opts || {};
+    const sr = stageRect();
+    const r = el.getBoundingClientRect();
+    const x = r.left - sr.left + (opts.dx !== undefined ? opts.dx : r.width/2) - 11;
+    const y = r.top - sr.top + (opts.dy !== undefined ? opts.dy : r.height/2) - 4;
+    cursor.classList.add('show');
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    await sleep(560);
+  }
+
+  async function clickEl(el){
+    cursor.classList.add('click');
+    await sleep(90);
+    el.classList.add('pressed');
+    await sleep(420);
+    el.classList.remove('pressed');
+    cursor.classList.remove('click');
+    await sleep(120);
+  }
+
+  async function typeInto(textEl, caretEl, phEl, str, speed){
+    phEl.style.display = 'none';
+    caretEl.style.display = 'inline-block';
+    for(let i=1;i<=str.length;i++){
+      textEl.textContent = str.slice(0,i);
+      await sleep(speed || 22);
+    }
+    await sleep(260);
+    caretEl.style.display = 'none';
+  }
+
+  function resetField(textEl, caretEl, phEl){
+    textEl.textContent = '';
+    caretEl.style.display = 'none';
+    phEl.style.display = 'inline';
+  }
+
+  function showScreen(el){
+    [screenA, screenB, screenC].forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  async function animateWeights(){
+    const bar = { s: 60, c: 30, a: 10 };
+    const target = { s: 40, c: 35, a: 25 };
+    const steps = 16;
+    for(let i=1;i<=steps;i++){
+      const t = i/steps;
+      const s = Math.round(bar.s + (target.s-bar.s)*t);
+      const c = Math.round(bar.c + (target.c-bar.c)*t);
+      const a = 100 - s - c;
+      document.getElementById('segSolution').style.flexBasis = s+'%';
+      document.getElementById('segComm').style.flexBasis = c+'%';
+      document.getElementById('segAI').style.flexBasis = a+'%';
+      document.getElementById('segSolution').textContent = s+'%';
+      document.getElementById('segComm').textContent = c+'%';
+      document.getElementById('segAI').textContent = a+'%';
+      document.getElementById('valSolution').textContent = s;
+      document.getElementById('valComm').textContent = c;
+      document.getElementById('valAI').textContent = a;
+      document.getElementById('totalPct').textContent = s+c+a;
+      await sleep(45);
+    }
+  }
+
+  function resetWeights(){
+    document.getElementById('segSolution').style.flexBasis = '60%';
+    document.getElementById('segComm').style.flexBasis = '30%';
+    document.getElementById('segAI').style.flexBasis = '10%';
+    document.getElementById('segSolution').textContent = '60%';
+    document.getElementById('segComm').textContent = '30%';
+    document.getElementById('segAI').textContent = '10%';
+    document.getElementById('valSolution').textContent = '60';
+    document.getElementById('valComm').textContent = '30';
+    document.getElementById('valAI').textContent = '10';
+    document.getElementById('totalPct').textContent = '100';
+  }
+
+  async function run(){
+    // ---- reset everything ----
+    resetField(document.getElementById('roleText'), document.getElementById('caretRole'), document.getElementById('rolePh'));
+    resetField(document.getElementById('titleText'), document.getElementById('caretTitle'), document.getElementById('titlePh'));
+    resetField(document.getElementById('taskText'), document.getElementById('caretTask'), document.getElementById('taskPh'));
+    document.getElementById('loading').style.display = 'flex';
+    document.getElementById('cardsRow').style.display = 'none';
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('in','chosen'));
+    resetWeights();
+    document.getElementById('toast').classList.remove('show');
+    cursor.classList.remove('show');
+
+    showScreen(screenA);
+    await sleep(500);
+
+    await typeInto(document.getElementById('roleText'), document.getElementById('caretRole'), document.getElementById('rolePh'), 'Senior Frontend Engineer', 26);
+    await sleep(300);
+    await typeInto(document.getElementById('titleText'), document.getElementById('caretTitle'), document.getElementById('titlePh'), 'Grid Performance Fix', 30);
+    await sleep(300);
+    await typeInto(document.getElementById('taskText'), document.getElementById('caretTask'), document.getElementById('taskPh'), 'Improve a product listing page that becomes slow with 5,000 items while preserving smooth scrolling and interactive filters.', 14);
+    await sleep(500);
+
+    const btnGo = document.getElementById('btnGo');
+    await moveCursorTo(btnGo);
+    await clickEl(btnGo);
+    await sleep(150);
+
+    showScreen(screenB);
+    await sleep(900);
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('cardsRow').style.display = 'flex';
+    const cards = [document.getElementById('card1'), document.getElementById('card2'), document.getElementById('card3')];
+    for(const c of cards){ c.classList.add('in'); await sleep(160); }
+    await sleep(500);
+
+    const card1 = document.getElementById('card1');
+    const selectBtn = document.getElementById('selectBtn');
+    await moveCursorTo(selectBtn);
+    await clickEl(selectBtn);
+    card1.classList.add('chosen');
+    await sleep(500);
+
+    showScreen(screenC);
+    await sleep(700);
+    await animateWeights();
+    await sleep(700);
+
+    const btnSend = document.getElementById('btnSend');
+    await moveCursorTo(btnSend);
+    await clickEl(btnSend);
+    document.getElementById('toast').classList.add('show');
+    cursor.classList.remove('show');
+    await sleep(2200);
+
+    document.getElementById('toast').classList.remove('show');
+    await sleep(600);
+
+    run();
+  }
+
+  run();
+})();
+</script>
+
+</body>
+</html>
