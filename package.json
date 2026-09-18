@@ -1,24 +1,23 @@
 {
   "name": "fluencyfox-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Build tooling for fluencyfox.ai. The site itself is static HTML in fluencyfox-site_6/.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build/build.mjs && node build/make-csv.mjs && node build/make-og.mjs",
+    "images": "node build/optimise-images.mjs --write",
+    "preview": "python3 -m http.server 4173 --directory fluencyfox-site_6"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Acrombie720/website.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Acrombie720/website/issues"
   },
   "homepage": "https://github.com/Acrombie720/website#readme",
   "dependencies": {
     "sharp": "^0.35.4"
-  }
+  },
+  "private": true
 }

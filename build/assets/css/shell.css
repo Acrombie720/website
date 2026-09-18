@@ -1,0 +1,161 @@
+/* Shared chrome for every generated page: the top bar, the footer, and the
+   methodology / related / CSV blocks the generator appends.
+
+   Each rule reads a CSS variable with a hard-coded fallback, so a page that
+   defines its own palette (the Data Index does) is picked up automatically,
+   and a page that defines nothing still looks right. */
+
+.ff-page {
+  --ff-max: 1120px;
+}
+
+.ff-page :focus-visible {
+  outline: 2px solid var(--link, #1B4B8F);
+  outline-offset: 2px;
+}
+
+/* ---------- top bar ---------- */
+
+.ff-bar {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  padding-block: 18px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--rule, #DCE2E8);
+}
+
+.ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
+.ff-bar-logo img { height: 30px; width: auto; display: block; }
+
+.ff-bar-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px 22px;
+  flex-wrap: wrap;
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-size: 0.875rem;
+}
+
+.ff-bar-nav a {
+  color: var(--ink-2, #4C5765);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ff-bar-nav a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+
+.ff-bar-cta {
+  border: 1px solid var(--ink, #0C1116);
+  border-radius: 99px;
+  padding: 7px 15px;
+  color: var(--ink, #0C1116) !important;
+}
+.ff-bar-cta:hover {
+  background: var(--ink, #0C1116);
+  color: var(--paper, #F4F6F8) !important;
+  text-decoration: none !important;
+}
+
+/* ---------- blocks the generator appends ---------- */
+
+.ff-csv {
+  max-width: var(--ff-max);
+  margin: 0 auto 36px;
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.8125rem;
+}
+
+.ff-methodology,
+.ff-related {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  margin-bottom: 44px;
+}
+
+.ff-methodology h2,
+.ff-related h2 {
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink, #0C1116);
+}
+
+.ff-methodology dl { margin: 0; }
+
+.ff-meth-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 6px 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule-soft, #E8ECF1);
+}
+.ff-meth-row:last-child { border-bottom: 0; }
+
+.ff-methodology dt {
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3, #7B8797);
+}
+.ff-methodology dd { margin: 0; color: var(--ink-2, #4C5765); }
+.ff-methodology dd ul { margin: 0; padding-left: 1.1em; }
+.ff-methodology dd li { margin-bottom: 6px; }
+
+.ff-related ul { margin: 0; padding-left: 1.1em; }
+.ff-related li { margin-bottom: 7px; }
+
+@media (max-width: 620px) {
+  .ff-meth-row { grid-template-columns: 1fr; gap: 3px; }
+}
+
+/* ---------- footer ---------- */
+
+.ff-foot {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  border-top: 1px solid var(--rule, #DCE2E8);
+  padding-block: 32px 48px;
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-size: 0.875rem;
+}
+
+.ff-foot-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 28px 32px;
+}
+
+.ff-foot-cols h2 {
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #7B8797);
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+}
+
+.ff-foot-cols a {
+  display: block;
+  color: var(--ink-2, #4C5765);
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.ff-foot-cols a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+.ff-foot-cols p { margin: 0 0 8px; color: var(--ink-2, #4C5765); }
+
+.ff-foot-legal {
+  margin: 28px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-3, #7B8797);
+}
