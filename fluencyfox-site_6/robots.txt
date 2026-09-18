@@ -1,37 +1,66 @@
 # Fluencyfox robots.txt
 # Search engines: fully allowed.
 # AI crawler blocks below mirror what Cloudflare was already serving.
-# To open the marketing site to AI assistants, delete the blocks you no longer want.
+# The research programme (/research/, /ai-fluency*, /guides/) is open to all of them
+# on purpose: those pages exist to be quoted and cited.
+# To open the marketing site too, delete the blocks you no longer want.
 
 User-agent: *
 Allow: /
 Content-Signal: search=yes,ai-train=no,use=reference
 
 User-agent: Amazonbot
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: Applebot-Extended
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: Bytespider
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: CCBot
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: ClaudeBot
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: CloudflareBrowserRenderingCrawler
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: Google-Extended
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: GPTBot
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 User-agent: meta-externalagent
+Allow: /research/
+Allow: /ai-fluency
+Allow: /guides/
 Disallow: /
 
 Sitemap: https://fluencyfox.ai/sitemap.xml

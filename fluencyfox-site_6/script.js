@@ -12,6 +12,8 @@ let current = 0;
 
 slides.forEach((_, i) => {
   const dot = document.createElement('button');
+  dot.type = 'button';
+  dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
   if (i === 0) dot.classList.add('active');
   dot.addEventListener('click', () => goToSlide(i));
   dotsWrap.appendChild(dot);
@@ -75,4 +77,12 @@ document.querySelectorAll('.how-embed').forEach(wrap => {
   }
   resize();
   new ResizeObserver(resize).observe(wrap);
+});
+
+// Carousel slides 2+ sit outside the viewport, so loading="lazy" would hold them
+// back until someone swipes and leave a blank gap. Keep them out of the initial
+// page load, then fetch them the moment the page has finished loading.
+window.addEventListener('load', () => {
+  document.querySelectorAll('#testimonialTrack img[loading="lazy"]')
+    .forEach(img => { img.loading = 'eager'; });
 });

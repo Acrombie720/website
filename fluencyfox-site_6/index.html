@@ -27,7 +27,12 @@
 <link rel="icon" type="image/png" sizes="512x512" href="assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<!-- Fonts load without blocking the first paint. The noscript copy keeps
+     them working if JavaScript is off. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap"></noscript>
+<link rel="preload" as="image" href="assets/hero-mountains.webp" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 
 <script type="application/ld+json">
@@ -86,7 +91,7 @@
 <header class="site-header">
   <div class="wrap">
     <a href="#top" class="logo">
-      <img class="logo-full" src="assets/logo-full.svg" alt="Fluencyfox">
+      <img class="logo-full" src="assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
     </a>
     <nav class="nav-links" id="navLinks">
       <a class="navlink" href="#testimonials">Testimonials</a>
@@ -109,14 +114,14 @@
       <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
     </div>
     <div class="hero-visual">
-      <img class="hero-bg" src="assets/hero-mountains.webp" alt="">
+      <img class="hero-bg" src="assets/hero-mountains.webp" alt="" width="2048" height="1526" fetchpriority="high" decoding="async">
       <div class="hero-mockup-wrap">
-        <img src="assets/hero-mockup.svg" alt="A live Fluencyfox assessment: candidate screenshare, AI team-leader chat, and a scored task result">
+        <img src="assets/hero-mockup.svg" alt="A live Fluencyfox assessment: candidate screenshare, AI team-leader chat, and a scored task result" width="1202" height="682" decoding="async">
         <video autoplay muted loop playsinline poster="assets/hero-candidate-screenshare-poster.jpg">
           <source src="assets/hero-candidate-screenshare.mp4" type="video/mp4">
         </video>
       </div>
-      <img class="hero-fg" src="assets/hero-flowers-overlap.webp" alt="" aria-hidden="true">
+      <img class="hero-fg" src="assets/hero-flowers-overlap.webp" alt="" aria-hidden="true" width="2216" height="1288" decoding="async">
     </div>
   </section>
 
@@ -131,10 +136,10 @@
 
         <div class="testimonial-slide">
           <div class="testimonial-photo">
-            <img src="assets/testimonial-eleonora.webp" alt="Eleonora Shepel">
+            <img src="assets/testimonial-eleonora.webp" alt="Eleonora Shepel" width="814" height="1001" loading="lazy" decoding="async">
           </div>
           <div class="testimonial-copy">
-            <img class="brand-logo" src="assets/hived-logo.png" alt="HIVED">
+            <img class="brand-logo" src="assets/hived-logo.png" alt="HIVED" width="442" height="249" loading="lazy" decoding="async">
             <blockquote>“When somebody is applying for a role and they don't have 20 years of experience in their CV, it's very hard to stand out. Thanks to Fluencyfox you can actually get a glimpse at how the person actually thinks, how they work, and how they use AI to get there. And that makes the process a lot more personable.”</blockquote>
             <div class="attribution">
               <p>Eleonora Shepel</p>
@@ -145,11 +150,11 @@
 
         <div class="testimonial-slide">
           <div class="testimonial-photo">
-            <img src="assets/testimonial-tess.jpg" alt="Tess Cohen">
+            <img src="assets/testimonial-tess.jpg" alt="Tess Cohen" width="400" height="562" loading="lazy" decoding="async">
           </div>
           <div class="testimonial-copy">
             <div class="brand-logo lockup">
-              <img src="assets/spin-logo.jpg" alt="">
+              <img src="assets/spin-logo.jpg" alt="" width="200" height="200" loading="lazy" decoding="async">
               <span>Spin.vc</span>
             </div>
             <blockquote>“Setup was so easy and candidates responded really well. I was blown away by how much the report picked up, strengths and weaknesses across text, audio, and video, catching specific things I would've missed. We used it for marketing and comms roles, and the scoring was spot on every time.”</blockquote>
@@ -166,7 +171,7 @@
           </div>
           <div class="testimonial-copy">
             <div class="brand-logo lockup">
-              <img src="assets/silvertree-logo.jpg" alt="">
+              <img src="assets/silvertree-logo.jpg" alt="" width="200" height="200" loading="lazy" decoding="async">
               <span>SilverTree Equity</span>
             </div>
             <blockquote>“We used the fluency assessor to screen candidates for our graduate forward deployed engineering scheme, helping us find 6 tier 1 hires out of an initial pool of 700.”</blockquote>
@@ -182,7 +187,7 @@
 
         <div class="testimonial-slide">
           <div class="testimonial-photo">
-            <img src="assets/testimonial-jay-cushen.jpg" alt="Jay Cushen">
+            <img src="assets/testimonial-jay-cushen.jpg" alt="Jay Cushen" width="904" height="1071" loading="lazy" decoding="async">
           </div>
           <div class="testimonial-copy">
             <blockquote>“The test was unique and unlike anything I have ever had to do for job applications. I really liked how it gave us the freedom to approach a problem as we wished using whatever AI tool we want. I like how it was recorded, and we got to show our personality rather than just the results. It was a very fun experience.”</blockquote>
@@ -438,13 +443,13 @@
     </div>
 
     <div class="cta-banner">
-      <img class="bg" src="assets/hero-mountains.webp" alt="">
+      <img class="bg" src="assets/hero-mountains.webp" alt="" width="2048" height="1526" loading="lazy" decoding="async">
       <div class="panel">
         <h2>See a live assessment.</h2>
         <p>Watch a real candidate session end-to-end and the dashboard your team would review it in. Half an hour, no slides.</p>
         <a href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener" class="btn btn-white">Book a Demo</a>
       </div>
-      <img class="fg" src="assets/hero-flowers-overlap.webp" alt="" aria-hidden="true">
+      <img class="fg" src="assets/hero-flowers-overlap.webp" alt="" aria-hidden="true" width="2216" height="1288" loading="lazy" decoding="async">
     </div>
   </section>
 
@@ -455,7 +460,7 @@
   <div class="wrap">
     <div class="footer-top">
       <a href="#top" class="logo">
-        <img class="logo-full" src="assets/logo-full.svg" alt="Fluencyfox">
+        <img class="logo-full" src="assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
       </a>
       <a href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener" class="btn btn-solid-dark">Book a Demo</a>
     </div>
@@ -483,7 +488,7 @@
           <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <svg viewBox="0 0 24 24" fill="#5474a1"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
           </a>
-          <span class="footer-social-disabled" aria-label="X">
+          <span class="footer-social-disabled" role="img" aria-label="X, coming soon">
             <svg viewBox="0 0 24 24" fill="#1e1e1e"><path d="M18.24 3H21l-6.5 7.43L22 21h-6.19l-4.84-6.32L5.5 21H3l6.96-7.95L2.5 3h6.34l4.37 5.78L18.24 3zm-1.08 16.17h1.72L7.9 4.74H6.06l11.1 14.43z"/></svg>
           </span>
         </div>

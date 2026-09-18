@@ -61,15 +61,15 @@
           '<h3>Cookie settings</h3>' +
           '<div class="ff-consent-row">' +
             '<div><strong>Essential</strong><p>Required for the site to function. Cannot be switched off.</p></div>' +
-            '<label class="ff-consent-toggle disabled"><input type="checkbox" checked disabled><span></span></label>' +
+            '<label class="ff-consent-toggle disabled"><input type="checkbox" checked disabled aria-label="Strictly necessary cookies, always on"><span></span></label>' +
           '</div>' +
           '<div class="ff-consent-row">' +
             '<div><strong>Analytics</strong><p>Helps us understand how visitors use the site so we can improve it.</p></div>' +
-            '<label class="ff-consent-toggle"><input type="checkbox" id="ffConsentAnalytics"><span></span></label>' +
+            '<label class="ff-consent-toggle"><input type="checkbox" id="ffConsentAnalytics" aria-label="Analytics cookies"><span></span></label>' +
           '</div>' +
           '<div class="ff-consent-row">' +
             '<div><strong>Marketing</strong><p>Used to deliver relevant ads and measure campaign performance.</p></div>' +
-            '<label class="ff-consent-toggle"><input type="checkbox" id="ffConsentMarketing"><span></span></label>' +
+            '<label class="ff-consent-toggle"><input type="checkbox" id="ffConsentMarketing" aria-label="Marketing cookies"><span></span></label>' +
           '</div>' +
           '<div class="ff-consent-modal-actions">' +
             '<button type="button" class="btn btn-outline" id="ffConsentSavePrefs">Save Preferences</button>' +
