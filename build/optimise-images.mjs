@@ -60,5 +60,24 @@ for (const job of VARIANTS) {
     if (write) writeFileSync(new URL(name, DIR), out);
   }
 }
+// The hero mockup ships as a 627KB SVG. It is a fixed-size UI illustration, so a
+// WebP at twice its display size looks identical and costs a fraction.
+const RASTER = [
+  { file: 'hero-mockup.svg', widths: [768, 1280, 2404], baseWidth: 1202, quality: 82 },
+];
+console.log('');
+for (const job of RASTER) {
+  const src = readFileSync(new URL(job.file, DIR));
+  const stem = job.file.replace(/\.svg$/, '');
+  for (const w of job.widths) {
+    const out = await sharp(src, { density: Math.round(72 * w / job.baseWidth) })
+      .resize({ width: w }).webp({ quality: job.quality, effort: 6 }).toBuffer();
+    const m = await sharp(out).metadata();
+    const name = `${stem}-${w}.webp`;
+    console.log(`${name.padEnd(30)} ${m.width}x${m.height} ${kb(out.length)}`);
+    if (write) writeFileSync(new URL(name, DIR), out);
+  }
+}
+
 console.log(`\nRecompressed ${kb(before)} -> ${kb(after)}, saves ${kb(before - after)}`);
 if (!write) console.log('Dry run. Add --write to apply.');
