@@ -350,11 +350,18 @@ ${entries.map(e => `  <url>
 const pages = walk(PAGES).map(parse).sort((a, b) => a.slug.localeCompare(b.slug));
 const byslug = new Map(pages.map(p => [p.slug, p]));
 
+// Write <slug>.html, NOT <slug>/index.html.
+//
+// Cloudflare Pages treats the two differently, and only one of them gives the
+// URL we want. A folder is served at /path/ and the slashless /path 307s to
+// it. A file is served at /path with no slash, the same way /privacy already
+// works on this site. Canonical URLs on this site carry no trailing slash, so
+// the page has to be a file or every canonical points at a redirect.
 for (const page of pages) {
-  const dir = join(OUT, page.slug.replace(/^\//, ''));
-  mkdirSync(dir, { recursive: true });
+  const file = join(OUT, page.slug.replace(/^\//, '') + '.html');
+  mkdirSync(dirname(file), { recursive: true });
   const html = render(page, byslug);
-  writeFileSync(join(dir, 'index.html'), html);
+  writeFileSync(file, html);
   console.log(`${page.slug.padEnd(38)} ${(html.length / 1024).toFixed(0)}KB`);
 }
 
