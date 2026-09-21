@@ -37,6 +37,9 @@
       --rule:      #263039;
       --rule-soft: #1D262E;
       --link:      #7FAEEA;
+    /* Invert the lightness, rotate the hue back, so the blue and the sand
+       in the mark survive rather than flattening to white. */
+    --logo-filter: invert(1) hue-rotate(180deg);
 
       --c-demand:    #93A6E8;
       --c-demand-bg: #1B2340;
@@ -60,6 +63,9 @@
     --rule:      #263039;
     --rule-soft: #1D262E;
     --link:      #7FAEEA;
+    /* Invert the lightness, rotate the hue back, so the blue and the sand
+       in the mark survive rather than flattening to white. */
+    --logo-filter: invert(1) hue-rotate(180deg);
 
     --c-demand:    #93A6E8;
     --c-demand-bg: #1B2340;

@@ -60,6 +60,9 @@
     --link:      #92bad5;
     --accent-bg: #23323f;
     --accent:    #92bad5;
+    /* The wordmark is #1e1e1e, the same as headings, so it needs its
+       lightness inverted here. shell.css reads this. */
+    --logo-filter: invert(1) hue-rotate(180deg);
   }
 }
 
@@ -445,14 +448,3 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   cursor: pointer;
 }
 .cite-copy:hover { border-color: var(--ink); color: var(--ink); }
-
-/* The wordmark is drawn in the same #1e1e1e as the headings, so after dark
-   it disappears into the page. Inverting lightness while rotating the hue
-   back keeps the blue and the sand recognisable instead of flattening the
-   mark to white. The research pages have the same problem and the same fix
-   would work in shell.css. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .ff-bar-logo img {
-    filter: invert(1) hue-rotate(180deg);
-  }
-}

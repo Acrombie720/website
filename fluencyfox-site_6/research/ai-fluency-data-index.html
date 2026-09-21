@@ -38,7 +38,16 @@
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
-.ff-bar-logo img { height: 30px; width: auto; display: block; }
+/* The wordmark is drawn in #1E1E1E, so on a page with a dark palette it
+   disappears into the background. A page that goes dark sets --logo-filter
+   in its own palette block; a page that does not is left alone, which is
+   why this is a variable rather than a media query. */
+.ff-bar-logo img {
+  height: 30px;
+  width: auto;
+  display: block;
+  filter: var(--logo-filter, none);
+}
 
 .ff-bar-nav {
   margin-left: auto;
@@ -210,6 +219,9 @@
       --rule:      #263039;
       --rule-soft: #1D262E;
       --link:      #7FAEEA;
+    /* Invert the lightness, rotate the hue back, so the blue and the sand
+       in the mark survive rather than flattening to white. */
+    --logo-filter: invert(1) hue-rotate(180deg);
 
       --c-demand:    #93A6E8;
       --c-demand-bg: #1B2340;
@@ -233,6 +245,9 @@
     --rule:      #263039;
     --rule-soft: #1D262E;
     --link:      #7FAEEA;
+    /* Invert the lightness, rotate the hue back, so the blue and the sand
+       in the mark survive rather than flattening to white. */
+    --logo-filter: invert(1) hue-rotate(180deg);
 
     --c-demand:    #93A6E8;
     --c-demand-bg: #1B2340;
