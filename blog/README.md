@@ -64,17 +64,22 @@ That runs, in order: this project, the social cards, the page generator, the
 CSV and the Data Index card. Then commit `fluencyfox-site_6/` as usual and
 Cloudflare Pages picks it up.
 
-Once the deploy is live:
+Search engines are told automatically. Merging to main runs the IndexNow
+workflow, which works out which pages the merge changed, waits until
+Cloudflare Pages is actually serving them, and submits that list to Bing,
+ChatGPT's search, Yandex, Naver and Seznam. Google does not take part in
+IndexNow and finds posts through the sitemap on its own schedule.
+
+The waiting matters. Those engines fetch a submitted URL within minutes, so
+telling them before the deploy is live is worse than telling them an hour
+late.
 
 ```bash
-npm run ping              # tells Bing, ChatGPT search and Yandex what changed
+npm run ping              # the same thing by hand, if a deploy happened outside the workflow
 ```
 
-It reads `sitemap.xml`, submits only what has changed since the last run, and
-records what it sent. Google does not take part in IndexNow and finds posts
-through the sitemap on its own schedule. Run it after the deploy, not before:
-the engines fetch within minutes and a 404 at that moment is worse than
-telling them an hour later.
+By hand it reads `sitemap.xml`, submits whatever has changed since the last
+manual run, and records what it sent.
 
 Building from the root matters. The blog build writes
 `build/generated/blog-posts.json`, and three things downstream read it: the

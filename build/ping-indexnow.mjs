@@ -1,8 +1,13 @@
 // Tells the IndexNow search engines which pages changed.
 //
-//   node build/ping-indexnow.mjs           submit what changed since last time
-//   node build/ping-indexnow.mjs --all     submit every URL in the sitemap
-//   node build/ping-indexnow.mjs --dry-run print what would be sent
+//   node build/ping-indexnow.mjs             submit what changed since last time
+//   node build/ping-indexnow.mjs --all       submit every URL in the sitemap
+//   node build/ping-indexnow.mjs <url> <url> submit exactly these
+//   node build/ping-indexnow.mjs --dry-run   print what would be sent
+//
+// Given URLs explicitly, it submits those and leaves the local record of
+// what has been sent alone. That is the mode CI uses, because CI knows
+// precisely which pages the push changed and keeps no state between runs.
 //
 // Bing, ChatGPT's search, Yandex, Naver and Seznam share one endpoint, so a
 // single call reaches all of them. Google does not take part: it finds new
@@ -21,8 +26,16 @@ const SITEMAP = join(ROOT, 'fluencyfox-site_6', 'sitemap.xml');
 const SENT = join(ROOT, 'build', 'generated', 'indexnow-sent.json');
 const ENDPOINT = 'https://api.indexnow.org/indexnow';
 
-const all = process.argv.includes('--all');
-const dryRun = process.argv.includes('--dry-run');
+const args = process.argv.slice(2);
+const all = args.includes('--all');
+const dryRun = args.includes('--dry-run');
+const given = args.filter(a => a.startsWith('http'));
+
+for (const url of given) {
+  if (!url.startsWith(site.origin + '/')) {
+    throw new Error(`${url} is not on ${site.origin}. IndexNow rejects a mixed host list.`);
+  }
+}
 
 if (!site.indexNowKey) throw new Error('No indexNowKey in build/site.config.mjs.');
 
@@ -37,7 +50,9 @@ for (const block of xml.split('<url>').slice(1)) {
 }
 
 const sent = existsSync(SENT) ? JSON.parse(readFileSync(SENT, 'utf8')) : {};
-const urls = Object.keys(current).filter(url => all || sent[url] !== current[url]);
+const urls = given.length
+  ? given
+  : Object.keys(current).filter(url => all || sent[url] !== current[url]);
 
 if (!urls.length) {
   console.log('Nothing changed since the last ping.');
@@ -71,6 +86,8 @@ if (res.status !== 200 && res.status !== 202) {
   throw new Error(`IndexNow returned ${res.status} ${res.statusText}. Nothing recorded as sent.`);
 }
 
-mkdirSync(dirname(SENT), { recursive: true });
-writeFileSync(SENT, JSON.stringify({ ...sent, ...current }, null, 2) + '\n');
+if (!given.length) {
+  mkdirSync(dirname(SENT), { recursive: true });
+  writeFileSync(SENT, JSON.stringify({ ...sent, ...current }, null, 2) + '\n');
+}
 console.log(`\nIndexNow accepted the list (${res.status}).`);
