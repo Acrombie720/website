@@ -1,0 +1,103 @@
+---
+// Every head tag the blog needs, in one place, so no post can forget one.
+// Deliberately matches what build/build.mjs emits for the research pages:
+// same canonical policy, same OG set, same JSON-LD shape and @ids.
+import { site } from '../../../build/site.config.mjs';
+import shellCss from '../../../build/assets/css/shell.css?raw';
+import blogCss from '../styles/blog.css?raw';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Site-relative, slashless, e.g. /blog/some-post. */
+  path: string;
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  ogImageAlt?: string;
+  published?: string;
+  updated?: string;
+  noindex?: boolean;
+  /** schema.org nodes for this page, minus the breadcrumb, which is added here. */
+  schema?: Record<string, unknown>[];
+  breadcrumb?: { name: string; url: string }[];
+}
+
+const {
+  title, description, path, canonical, ogType = 'website',
+  ogImage = site.defaultOgImage, ogImageAlt = title,
+  published, updated, noindex = false, schema = [], breadcrumb = [],
+} = Astro.props;
+
+const abs = (p: string) => (p.startsWith('http') ? p : site.origin + p);
+const canonicalUrl = canonical ?? abs(path);
+
+const crumbs = [{ name: 'Home', url: site.origin + '/' }, ...breadcrumb];
+const graph = [
+  ...schema,
+  {
+    '@type': 'BreadcrumbList',
+    '@id': canonicalUrl + '#breadcrumb',
+    itemListElement: crumbs.map((c, i) => ({
+      '@type': 'ListItem', position: i + 1, name: c.name, item: c.url,
+    })),
+  },
+];
+
+// The only sequence that can break out of a <script> block.
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2)
+  .replace(/<\//g, '<\\/');
+
+const fonts = 'https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap';
+---
+<!DOCTYPE html>
+<html lang={site.lang}>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large'} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Inlined, so nothing but the fonts blocks the first render. -->
+<style is:inline set:html={shellCss + '\n' + blogCss}></style>
+
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={site.locale} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={abs(ogImage)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+{published && <meta property="article:published_time" content={published} />}
+{updated && <meta property="article:modified_time" content={updated} />}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={abs(ogImage)} />
+
+<link rel="icon" type="image/png" sizes="512x512" href={site.logo} />
+<link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href={site.origin + '/blog/rss.xml'} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="style" href={fonts} />
+<link rel="stylesheet" href={fonts} media="print" onload="this.media='all'" />
+<noscript><link rel="stylesheet" href={fonts} /></noscript>
+
+<script type="application/ld+json" is:inline set:html={jsonld}></script>
+</head>
+<body class="ff-page">
+<SiteHeader />
+<main id="main">
+  <slot />
+</main>
+<SiteFooter />
+</body>
+</html>

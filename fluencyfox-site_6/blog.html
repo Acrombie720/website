@@ -1,0 +1,473 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>The Fluencyfox blog: AI fluency, assessment and hiring</title><meta name="description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta name="robots" content="noindex,follow"><link rel="canonical" href="https://fluencyfox.ai/blog"><!-- Inlined, so nothing but the fonts blocks the first render. --><style>/* Shared chrome for every generated page: the top bar, the footer, and the
+   methodology / related / CSV blocks the generator appends.
+
+   Each rule reads a CSS variable with a hard-coded fallback, so a page that
+   defines its own palette (the Data Index does) is picked up automatically,
+   and a page that defines nothing still looks right. */
+
+.ff-page {
+  --ff-max: 1120px;
+}
+
+.ff-page :focus-visible {
+  outline: 2px solid var(--link, #1B4B8F);
+  outline-offset: 2px;
+}
+
+/* ---------- top bar ---------- */
+
+.ff-bar {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  padding-block: 18px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--rule, #DCE2E8);
+}
+
+.ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
+.ff-bar-logo img { height: 30px; width: auto; display: block; }
+
+.ff-bar-nav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px 22px;
+  flex-wrap: wrap;
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-size: 0.875rem;
+}
+
+.ff-bar-nav a {
+  color: var(--ink-2, #4C5765);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ff-bar-nav a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+
+.ff-bar-cta {
+  border: 1px solid var(--ink, #0C1116);
+  border-radius: 99px;
+  padding: 7px 15px;
+  color: var(--ink, #0C1116) !important;
+}
+.ff-bar-cta:hover {
+  background: var(--ink, #0C1116);
+  color: var(--paper, #F4F6F8) !important;
+  text-decoration: none !important;
+}
+
+/* ---------- blocks the generator appends ---------- */
+
+.ff-csv {
+  max-width: var(--ff-max);
+  margin: 0 auto 36px;
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.8125rem;
+}
+
+.ff-methodology,
+.ff-related {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  margin-bottom: 44px;
+}
+
+.ff-methodology h2,
+.ff-related h2 {
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink, #0C1116);
+}
+
+.ff-methodology dl { margin: 0; }
+
+.ff-meth-row {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 6px 20px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rule-soft, #E8ECF1);
+}
+.ff-meth-row:last-child { border-bottom: 0; }
+
+.ff-methodology dt {
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3, #7B8797);
+}
+.ff-methodology dd { margin: 0; color: var(--ink-2, #4C5765); }
+.ff-methodology dd ul { margin: 0; padding-left: 1.1em; }
+.ff-methodology dd li { margin-bottom: 6px; }
+
+.ff-related ul { margin: 0; padding-left: 1.1em; }
+.ff-related li { margin-bottom: 7px; }
+
+@media (max-width: 620px) {
+  .ff-meth-row { grid-template-columns: 1fr; gap: 3px; }
+}
+
+/* ---------- footer ---------- */
+
+.ff-foot {
+  max-width: var(--ff-max);
+  margin-inline: auto;
+  border-top: 1px solid var(--rule, #DCE2E8);
+  padding-block: 32px 48px;
+  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
+  font-size: 0.875rem;
+}
+
+.ff-foot-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 28px 32px;
+}
+
+.ff-foot-cols h2 {
+  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #7B8797);
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+}
+
+.ff-foot-cols a {
+  display: block;
+  color: var(--ink-2, #4C5765);
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.ff-foot-cols a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+.ff-foot-cols p { margin: 0 0 8px; color: var(--ink-2, #4C5765); }
+
+.ff-foot-legal {
+  margin: 28px 0 0;
+  font-size: 0.8125rem;
+  color: var(--ink-3, #7B8797);
+}
+
+/* Blog typography. The palette and the type scale are lifted from
+   build/assets/css/data-index.css so the blog and the research pages read as
+   one publication, and shell.css picks these variables up for the bar and
+   the footer without knowing anything about this file. */
+
+:root {
+  --paper:     #F4F6F8;
+  --surface:   #FFFFFF;
+  --ink:       #0C1116;
+  --ink-2:     #4C5765;
+  --ink-3:     #7B8797;
+  --rule:      #DCE2E8;
+  --rule-soft: #E8ECF1;
+  --link:      #1B4B8F;
+  --accent-bg: #E3E7F4;
+  --accent:    #33468C;
+
+  --s--1: 0.8125rem;
+  --s-0:  1rem;
+  --s-1:  1.1875rem;
+  --s-2:  1.5rem;
+  --s-3:  2.125rem;
+  --s-4:  3rem;
+
+  --ff-ui:    "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --ff-mono:  "IBM Plex Mono", ui-monospace, monospace;
+  --ff-serif: "Source Serif 4", Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:     #0B0F13;
+    --surface:   #131A21;
+    --ink:       #E9EFF4;
+    --ink-2:     #9DAAB8;
+    --ink-3:     #76828F;
+    --rule:      #263039;
+    --rule-soft: #1D262E;
+    --link:      #7FAEEA;
+    --accent-bg: #1B2340;
+    --accent:    #93A6E8;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--ff-serif);
+  font-size: var(--s-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-inline: 20px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--link); }
+
+.wrap { max-width: 1120px; margin-inline: auto; padding-block: 48px 72px; }
+.measure { max-width: 68ch; }
+
+.eyebrow {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+}
+
+h1 {
+  font-family: var(--ff-ui);
+  font-weight: 800;
+  font-size: var(--s-4);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+.dek {
+  font-size: var(--s-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0;
+}
+
+.byline {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin-top: 20px;
+}
+
+header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-bottom: 40px; }
+
+/* ---------- the index ---------- */
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+
+.post-list li { border-bottom: 1px solid var(--rule); }
+
+.post-list a.card {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 8px 28px;
+  padding: 26px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.post-list a.card:hover h2 { text-decoration: underline; }
+
+.post-list time {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  padding-top: 6px;
+}
+
+.post-list h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  margin: 0 0 8px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.post-list p { margin: 0; color: var(--ink-2); max-width: 68ch; }
+
+.empty {
+  border: 1px dashed var(--rule);
+  padding: 28px;
+  color: var(--ink-2);
+  font-family: var(--ff-ui);
+}
+
+@media (max-width: 680px) {
+  .post-list a.card { grid-template-columns: 1fr; gap: 6px; }
+  .post-list time { padding-top: 0; }
+  h1 { font-size: var(--s-3); }
+}
+
+/* ---------- the post ---------- */
+
+.prose { font-size: var(--s-1); line-height: 1.7; }
+
+.prose > * + * { margin-top: 1.1em; }
+
+.prose h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin-top: 2em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.prose h3 {
+  font-family: var(--ff-ui);
+  font-weight: 600;
+  font-size: var(--s-1);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 1.8em;
+}
+
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li + li { margin-top: 0.4em; }
+
+.prose blockquote {
+  margin: 1.6em 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--accent);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+.prose code {
+  font-family: var(--ff-mono);
+  font-size: 0.85em;
+  background: var(--rule-soft);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.prose pre {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+
+.prose table { width: 100%; border-collapse: collapse; font-size: var(--s-0); }
+.prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.prose th { font-family: var(--ff-ui); font-size: var(--s--1); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+
+.prose img { border: 1px solid var(--rule); border-radius: 6px; margin-block: 1.6em; }
+
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin-block: 2.4em; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+.tag {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 99px;
+  padding: 5px 12px;
+}
+
+/* ---------- what follows a post ---------- */
+
+.cta {
+  margin-top: 56px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 28px 30px;
+  max-width: 68ch;
+}
+.cta h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  letter-spacing: -0.022em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.cta p { margin: 0 0 18px; color: var(--ink-2); }
+.cta a {
+  display: inline-block;
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  padding: 9px 18px;
+  color: var(--ink);
+}
+.cta a:hover { background: var(--ink); color: var(--paper); }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+}
+.pager a { color: var(--ink-2); text-decoration: none; max-width: 32ch; }
+.pager a:hover { color: var(--ink); text-decoration: underline; }
+.pager b { display: block; font-family: var(--ff-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 4px; }
+.pager .next { text-align: right; }
+
+.backlink {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 22px;
+}
+.backlink:hover { color: var(--ink); }
+</style><meta property="og:type" content="website"><meta property="og:site_name" content="Fluencyfox"><meta property="og:locale" content="en_GB"><meta property="og:url" content="https://fluencyfox.ai/blog"><meta property="og:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta property="og:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta property="og:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta name="twitter:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png"><link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href="https://fluencyfox.ai/blog/rss.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"></noscript><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fluencyfox.ai/blog#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://fluencyfox.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://fluencyfox.ai/blog"
+        }
+      ]
+    }
+  ]
+}</script></head> <body class="ff-page"> <header class="ff-bar"> <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a> <nav class="ff-bar-nav" aria-label="Main"> <a href="/blog">Blog</a> <a href="/research/ai-fluency-data-index">Research</a> <a href="/#how-it-works">How It Works</a> <a class="ff-bar-cta" href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener">Book a Demo</a> </nav> </header> <main id="main">  <div class="wrap"> <header class="top"> <p class="eyebrow">Fluencyfox · Blog</p> <h1>Notes on hiring for AI fluency</h1> <p class="dek">What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it.</p> </header> <p class="empty">No posts yet. The first one is being written.</p> </div>  </main> <footer class="ff-foot"> <div class="ff-foot-cols"> <div> <h2>Blog</h2>  <a href="/blog">All posts</a> </div> <div> <h2>Research</h2> <a href="/research/ai-fluency-data-index">AI Fluency Data Index</a> </div> <div> <h2>Product</h2> <a href="/#how-it-works">How It Works</a><a href="/#measure">What We Measure</a><a href="/#testimonials">Testimonials</a> </div> <div> <h2>Docs</h2> <a href="/privacy">Privacy Policy</a> <a href="/terms">Terms &amp; Conditions</a> </div> <div> <h2>Fluencyfox</h2> <p>71–75 Shelton Street,<br>London, UK WC2H 9JQ</p> <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener">LinkedIn</a> </div> </div> <p class="ff-foot-legal">Fluencyfox is a product of
+<a href="https://www.calyptus.co/" target="_blank" rel="noopener">Calyptus</a>.</p> </footer> </body> </html>

@@ -1,0 +1,114 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { render } from 'astro:content';
+import { site } from '../../../build/site.config.mjs';
+import Base from '../layouts/Base.astro';
+import { publishedPosts, relatedTo, longDate, isoDate, readingMinutes } from '../lib/posts';
+
+export const getStaticPaths = (async () => {
+  const posts = await publishedPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    // Newest first, so "previous" is the older post.
+    props: { post, newer: posts[i - 1] ?? null, older: posts[i + 1] ?? null, all: posts },
+  }));
+}) satisfies GetStaticPaths;
+
+const { post, newer, older, all } = Astro.props;
+const { Content } = await render(post);
+
+const d = post.data;
+const url = `${site.origin}/blog/${post.id}`;
+const published = isoDate(d.published);
+const updated = isoDate(d.updated ?? d.published);
+const ogImage = d.ogImage ?? `/og/blog/${post.id}.png`;
+const related = relatedTo(post, all);
+
+const schema = [{
+  '@type': 'BlogPosting',
+  '@id': url + '#article',
+  headline: d.title,
+  description: d.description,
+  url,
+  datePublished: published,
+  dateModified: updated,
+  inLanguage: site.lang,
+  isAccessibleForFree: true,
+  wordCount: post.body?.trim().split(/\s+/).length,
+  keywords: d.tags.length ? d.tags : undefined,
+  author: d.author === site.name
+    ? { '@type': 'Organization', name: site.name, url: site.origin + '/' }
+    : { '@type': 'Person', name: d.author },
+  publisher: {
+    '@type': 'Organization',
+    '@id': site.origin + '/#organization',
+    name: site.name,
+    url: site.origin + '/',
+    logo: { '@type': 'ImageObject', url: site.origin + site.logo },
+  },
+  image: site.origin + ogImage,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+}];
+---
+<Base
+  title={d.title}
+  description={d.description}
+  path={`/blog/${post.id}`}
+  canonical={d.canonical}
+  ogType="article"
+  ogImage={ogImage}
+  published={published}
+  updated={updated}
+  noindex={d.noindex || d.draft}
+  schema={schema}
+  breadcrumb={[
+    { name: 'Blog', url: site.origin + '/blog' },
+    { name: d.title, url },
+  ]}
+>
+  <div class="wrap">
+    <a class="backlink" href="/blog">← All posts</a>
+
+    <header class="top">
+      <p class="eyebrow">Fluencyfox · Blog</p>
+      <h1>{d.title}</h1>
+      <p class="dek">{d.description}</p>
+      <div class="byline">
+        <span>{d.author}</span>
+        <time datetime={published}>{longDate(d.published)}</time>
+        {d.updated && <span>Updated {longDate(d.updated)}</span>}
+        <span>{readingMinutes(post.body ?? '')} min read</span>
+      </div>
+    </header>
+
+    <article class="prose measure">
+      <Content />
+    </article>
+
+    {d.tags.length > 0 && (
+      <div class="tags">{d.tags.map(tag => <span class="tag">{tag}</span>)}</div>
+    )}
+
+    <section class="cta">
+      <h2>See what a real assessment looks like</h2>
+      <p>Fluencyfox gives candidates a real task on the tools they would use in the job, then scores what they actually did with them.</p>
+      <a href={site.demoUrl} target="_blank" rel="noopener">Book a demo</a>
+    </section>
+
+    {related.length > 0 && (
+      <nav class="ff-related" aria-labelledby="related">
+        <h2 id="related">Related</h2>
+        <ul>
+          {related.map(r => <li><a href={`/blog/${r.id}`}>{r.data.title}</a></li>)}
+        </ul>
+      </nav>
+    )}
+
+    {(older || newer) && (
+      <nav class="pager" aria-label="More posts">
+        {older ? <a href={`/blog/${older.id}`}><b>Previous</b>{older.data.title}</a> : <span></span>}
+        {newer ? <a class="next" href={`/blog/${newer.id}`}><b>Next</b>{newer.data.title}</a> : <span></span>}
+      </nav>
+    )}
+  </div>
+</Base>

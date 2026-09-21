@@ -1,0 +1,42 @@
+---
+// The generator's footer, plus a Blog column listing the three most recent
+// posts. build/build.mjs renders the identical column on every other page,
+// reading the manifest this project writes, so the two stay in step.
+import { site, researchNav, productNav } from '../../../build/site.config.mjs';
+import { publishedPosts } from '../lib/posts';
+
+const recent = (await publishedPosts()).slice(0, 3);
+---
+<footer class="ff-foot">
+  <div class="ff-foot-cols">
+    <div>
+      <h2>Blog</h2>
+      {recent.map(post => <a href={`/blog/${post.id}`}>{post.data.title}</a>)}
+      <a href="/blog">All posts</a>
+    </div>
+
+    <div>
+      <h2>Research</h2>
+      {researchNav.map((l: { url: string; label: string }) => <a href={l.url}>{l.label}</a>)}
+    </div>
+
+    <div>
+      <h2>Product</h2>
+      {productNav.map((l: { url: string; label: string }) => <a href={l.url}>{l.label}</a>)}
+    </div>
+
+    <div>
+      <h2>Docs</h2>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms &amp; Conditions</a>
+    </div>
+
+    <div>
+      <h2>Fluencyfox</h2>
+      <p set:html={site.address}></p>
+      <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+  <p class="ff-foot-legal">Fluencyfox is a product of
+    <a href={site.parent.url} target="_blank" rel="noopener">{site.parent.name}</a>.</p>
+</footer>
