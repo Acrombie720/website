@@ -22,9 +22,13 @@
   --s-3:  2.125rem;
   --s-4:  3rem;
 
-  --ff-ui:    "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-  --ff-mono:  "IBM Plex Mono", ui-monospace, monospace;
-  --ff-serif: "Source Serif 4", Georgia, serif;
+  /* --font-* come from the Astro fonts config, which serves them from this
+     origin and supplies a metric-matched fallback for each. The literal
+     names stay as a second fallback so the page is right even if a font
+     file fails. */
+  --ff-ui:    var(--font-ui), "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --ff-mono:  var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --ff-serif: var(--font-serif), "Source Serif 4", Georgia, serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -285,3 +289,93 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   margin-bottom: 22px;
 }
 .backlink:hover { color: var(--ink); }
+
+/* ---------- breadcrumbs ---------- */
+
+.crumbs {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.crumbs a { color: var(--ink-3); text-decoration: none; }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.crumbs span { padding-inline: 6px; }
+
+/* ---------- the answer up front ---------- */
+
+.takeaways {
+  max-width: 68ch;
+  margin: 0 0 36px;
+  padding: 22px 26px;
+  background: var(--accent-bg);
+  border-radius: 10px;
+}
+.takeaways h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.takeaways ul { margin: 0; padding-left: 1.1em; color: var(--ink); }
+.takeaways li + li { margin-top: 8px; }
+
+/* ---------- contents ---------- */
+
+.toc {
+  max-width: 68ch;
+  margin: 0 0 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.toc h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 1.3em;
+  font-family: var(--ff-ui);
+  font-size: var(--s-0);
+}
+.toc li + li { margin-top: 6px; }
+.toc a { color: var(--ink-2); text-decoration: none; }
+.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Every heading has an id, so the contents list and anyone quoting a section
+   can link straight to it. This keeps the target clear of the top edge. */
+.prose h2, .prose h3 { scroll-margin-top: 24px; }
+
+/* ---------- questions ---------- */
+
+.faq { margin-top: 56px; }
+.faq h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+}
+.faq dl { margin: 0; }
+.faq-row { padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+.faq-row:last-child { border-bottom: 0; }
+.faq dt {
+  font-family: var(--ff-ui);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.faq dd { margin: 0; color: var(--ink-2); }

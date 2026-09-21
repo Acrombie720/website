@@ -2,6 +2,7 @@
 // Every head tag the blog needs, in one place, so no post can forget one.
 // Deliberately matches what build/build.mjs emits for the research pages:
 // same canonical policy, same OG set, same JSON-LD shape and @ids.
+import { Font } from 'astro:assets';
 import { site } from '../../../build/site.config.mjs';
 import shellCss from '../../../build/assets/css/shell.css?raw';
 import blogCss from '../styles/blog.css?raw';
@@ -50,7 +51,6 @@ const graph = [
 const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2)
   .replace(/<\//g, '<\\/');
 
-const fonts = 'https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap';
 ---
 <!DOCTYPE html>
 <html lang={site.lang}>
@@ -85,11 +85,11 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;
 
 <link rel="icon" type="image/png" sizes="512x512" href={site.logo} />
 <link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href={site.origin + '/blog/rss.xml'} />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href={fonts} />
-<link rel="stylesheet" href={fonts} media="print" onload="this.media='all'" />
-<noscript><link rel="stylesheet" href={fonts} /></noscript>
+<!-- Self-hosted and preloaded. No third-party connection before text paints,
+     and Astro's metric-matched fallbacks keep the swap from shifting the page. -->
+<Font cssVariable="--font-ui" preload />
+<Font cssVariable="--font-serif" preload />
+<Font cssVariable="--font-mono" />
 
 <script type="application/ld+json" is:inline set:html={jsonld}></script>
 </head>

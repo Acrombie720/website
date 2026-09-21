@@ -4,6 +4,15 @@ description: "The example post. It shows every field the build enforces and ever
 published: 2026-09-21
 author: Fluencyfox
 tags: ["Housekeeping"]
+takeaways:
+  - "One Markdown file in blog/src/content/posts/ is one post, and the filename is the URL."
+  - "Title, description and date are checked at build time, so a post cannot ship bad metadata."
+  - "Everything else is optional: takeaways, FAQ, tags, an author profile, a custom social card."
+faq:
+  - q: "Where do the images in a post go?"
+    a: "Next to the Markdown file, referenced relatively. Astro compresses them, generates a srcset and writes the width and height into the page, which is most of what Core Web Vitals asks for."
+  - q: "How long before a new post is indexed?"
+    a: "Google finds it through sitemap.xml on its own schedule. Bing, ChatGPT search and Yandex are told within minutes by npm run ping, which is worth running after the deploy is live."
 draft: true
 ---
 

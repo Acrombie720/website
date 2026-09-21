@@ -15,7 +15,11 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { post, newer, older, all } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
+// Only the section headings. A contents list is worth having once a post has
+// three of them, and is clutter below that.
+const toc = headings.filter(h => h.depth === 2);
 
 const d = post.data;
 const url = `${site.origin}/blog/${post.id}`;
@@ -23,6 +27,12 @@ const published = isoDate(d.published);
 const updated = isoDate(d.updated ?? d.published);
 const ogImage = d.ogImage ?? `/og/blog/${post.id}.png`;
 const related = relatedTo(post, all);
+
+const author = d.authorUrl
+  ? { '@type': 'Person', name: d.author, url: d.authorUrl, sameAs: [d.authorUrl] }
+  : d.author === site.name
+    ? { '@type': 'Organization', name: site.name, url: site.origin + '/' }
+    : { '@type': 'Person', name: d.author };
 
 const schema = [{
   '@type': 'BlogPosting',
@@ -36,9 +46,8 @@ const schema = [{
   isAccessibleForFree: true,
   wordCount: post.body?.trim().split(/\s+/).length,
   keywords: d.tags.length ? d.tags : undefined,
-  author: d.author === site.name
-    ? { '@type': 'Organization', name: site.name, url: site.origin + '/' }
-    : { '@type': 'Person', name: d.author },
+  author,
+  ...(d.takeaways.length ? { abstract: d.takeaways.join(' ') } : {}),
   publisher: {
     '@type': 'Organization',
     '@id': site.origin + '/#organization',
@@ -49,6 +58,20 @@ const schema = [{
   image: site.origin + ogImage,
   mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 }];
+
+// A question with its answer, published as data. This is the shape an answer
+// engine can lift wholesale, and the research pages already emit it.
+if (d.faq.length) {
+  schema.push({
+    '@type': 'FAQPage',
+    '@id': url + '#faq',
+    mainEntity: d.faq.map(item => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  });
+}
 ---
 <Base
   title={d.title}
@@ -67,7 +90,9 @@ const schema = [{
   ]}
 >
   <div class="wrap">
-    <a class="backlink" href="/blog">← All posts</a>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">›</span> <a href="/blog">Blog</a>
+    </nav>
 
     <header class="top">
       <p class="eyebrow">Fluencyfox · Blog</p>
@@ -81,9 +106,37 @@ const schema = [{
       </div>
     </header>
 
+    {d.takeaways.length > 0 && (
+      <aside class="takeaways" aria-labelledby="takeaways">
+        <h2 id="takeaways">In short</h2>
+        <ul>{d.takeaways.map(point => <li>{point}</li>)}</ul>
+      </aside>
+    )}
+
+    {toc.length >= 3 && (
+      <nav class="toc" aria-labelledby="contents">
+        <h2 id="contents">Contents</h2>
+        <ol>{toc.map(h => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+      </nav>
+    )}
+
     <article class="prose measure">
       <Content />
     </article>
+
+    {d.faq.length > 0 && (
+      <section class="faq measure" aria-labelledby="faq">
+        <h2 id="faq">Questions this post answers</h2>
+        <dl>
+          {d.faq.map(item => (
+            <div class="faq-row">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    )}
 
     {d.tags.length > 0 && (
       <div class="tags">{d.tags.map(tag => <span class="tag">{tag}</span>)}</div>

@@ -23,9 +23,21 @@ The first paragraph. Then `## Section headings`, lists, quotes, tables and
 code blocks, all of which are already styled.
 ```
 
-Optional front matter: `updated` (set it when you revise a post, it goes into
-the sitemap and the structured data), `author` (defaults to Fluencyfox),
-`draft`, `ogImage`, `canonical`, `noindex`.
+Optional front matter:
+
+| Field | What it does |
+| --- | --- |
+| `updated` | Set it when you revise a post. Goes into the sitemap and `dateModified`, and recency is one of the few things that demonstrably moves AI citations. |
+| `takeaways` | Three or four sentences answering the post's question outright. Rendered in a box at the top and published as the article's `abstract`. This is the passage an answer engine lifts. |
+| `faq` | `q`/`a` pairs, rendered at the end and published as FAQPage data. |
+| `author`, `authorUrl` | A named author with a profile becomes a Person entity rather than an anonymous byline. |
+| `ogImage` | Overrides the card that gets rendered for the post. |
+| `canonical` | When the canonical copy lives elsewhere. Keeps the post out of the sitemap. |
+| `draft`, `noindex` | |
+
+A post with three or more `##` headings gets a contents list automatically,
+and every heading gets an id, so a section can be linked to and quoted on its
+own.
 
 The lengths are enforced. A title or description outside the limits fails the
 build rather than shipping something Google will truncate.
@@ -52,6 +64,18 @@ That runs, in order: this project, the social cards, the page generator, the
 CSV and the Data Index card. Then commit `fluencyfox-site_6/` as usual and
 Cloudflare Pages picks it up.
 
+Once the deploy is live:
+
+```bash
+npm run ping              # tells Bing, ChatGPT search and Yandex what changed
+```
+
+It reads `sitemap.xml`, submits only what has changed since the last run, and
+records what it sent. Google does not take part in IndexNow and finds posts
+through the sitemap on its own schedule. Run it after the deploy, not before:
+the engines fetch within minutes and a 404 at that moment is worse than
+telling them an hour later.
+
 Building from the root matters. The blog build writes
 `build/generated/blog-posts.json`, and three things downstream read it: the
 sitemap, the blog column in the footer of every other page, and the 1200x630
@@ -71,3 +95,16 @@ social card rendered for each post.
   page per tag would be thin and would compete with the posts themselves.
 - **The CSS is inlined** in every page, so nothing but the web fonts blocks
   the first render.
+
+## Deliberately not done
+
+- **No llms.txt.** Measured crawler logs put AI bot requests for it at a
+  rounding error, Google has said on the record it does not support it, and
+  no major model provider has committed to reading one. The robots.txt
+  Content-Signal line and the structured data do the same job with evidence
+  behind them.
+- **No tag archive pages**, for the reason above.
+- **No pagination** on the index yet. It is worth adding somewhere past
+  twenty posts, and Astro has `paginate()` for it.
+- **No view transitions or prefetching.** Both ship JavaScript to buy
+  smoothness on a site that currently ships none.

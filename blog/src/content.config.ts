@@ -15,6 +15,16 @@ const posts = defineCollection({
     published: z.coerce.date(),
     updated: z.coerce.date().optional(),
     author: z.string().default('Fluencyfox'),
+    // A profile for the author, which is what turns a byline into an entity
+    // a search or answer engine can attach a reputation to.
+    authorUrl: z.string().url().optional(),
+    // Three or four sentences that answer the post's question outright, shown
+    // at the top. Answer engines quote the passage that answers the question,
+    // so it is worth writing one deliberately rather than hoping for it.
+    takeaways: z.array(z.string()).default([]),
+    // Questions this post answers, rendered at the end and published as
+    // FAQPage data, the same way the research pages do it.
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
     // Shown on the post and used to pick related posts. There are no tag
     // archive pages on purpose: a handful of posts per tag makes thin pages
     // that compete with the posts themselves.

@@ -13,6 +13,10 @@ export const site = {
   demoUrl: 'https://calendly.com/callum-calyptus/30m',
   linkedin: 'https://www.linkedin.com/company/fluencyfox/',
   address: '71–75 Shelton Street,<br>London, UK WC2H 9JQ',
+  // IndexNow. The same string is the filename and the contents of the key
+  // file in fluencyfox-site_6/, which is how the protocol proves the key is
+  // ours. Rotating it means renaming that file and changing this line.
+  indexNowKey: '557e471de8f93dc71a4da1fb75f00480',
 };
 
 // Hand-written pages the generator does not own, but the sitemap still needs.

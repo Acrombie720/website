@@ -184,9 +184,13 @@
   --s-3:  2.125rem;
   --s-4:  3rem;
 
-  --ff-ui:    "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-  --ff-mono:  "IBM Plex Mono", ui-monospace, monospace;
-  --ff-serif: "Source Serif 4", Georgia, serif;
+  /* --font-* come from the Astro fonts config, which serves them from this
+     origin and supplies a metric-matched fallback for each. The literal
+     names stay as a second fallback so the page is right even if a font
+     file fails. */
+  --ff-ui:    var(--font-ui), "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --ff-mono:  var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --ff-serif: var(--font-serif), "Source Serif 4", Georgia, serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -447,7 +451,98 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   margin-bottom: 22px;
 }
 .backlink:hover { color: var(--ink); }
-</style><meta property="og:type" content="website"><meta property="og:site_name" content="Fluencyfox"><meta property="og:locale" content="en_GB"><meta property="og:url" content="https://fluencyfox.ai/blog"><meta property="og:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta property="og:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta property="og:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta name="twitter:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png"><link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href="https://fluencyfox.ai/blog/rss.xml"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap"></noscript><script type="application/ld+json">{
+
+/* ---------- breadcrumbs ---------- */
+
+.crumbs {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.crumbs a { color: var(--ink-3); text-decoration: none; }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.crumbs span { padding-inline: 6px; }
+
+/* ---------- the answer up front ---------- */
+
+.takeaways {
+  max-width: 68ch;
+  margin: 0 0 36px;
+  padding: 22px 26px;
+  background: var(--accent-bg);
+  border-radius: 10px;
+}
+.takeaways h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.takeaways ul { margin: 0; padding-left: 1.1em; color: var(--ink); }
+.takeaways li + li { margin-top: 8px; }
+
+/* ---------- contents ---------- */
+
+.toc {
+  max-width: 68ch;
+  margin: 0 0 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.toc h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 1.3em;
+  font-family: var(--ff-ui);
+  font-size: var(--s-0);
+}
+.toc li + li { margin-top: 6px; }
+.toc a { color: var(--ink-2); text-decoration: none; }
+.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Every heading has an id, so the contents list and anyone quoting a section
+   can link straight to it. This keeps the target clear of the top edge. */
+.prose h2, .prose h3 { scroll-margin-top: 24px; }
+
+/* ---------- questions ---------- */
+
+.faq { margin-top: 56px; }
+.faq h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+}
+.faq dl { margin: 0; }
+.faq-row { padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+.faq-row:last-child { border-bottom: 0; }
+.faq dt {
+  font-family: var(--ff-ui);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.faq dd { margin: 0; color: var(--ink-2); }
+</style><meta property="og:type" content="website"><meta property="og:site_name" content="Fluencyfox"><meta property="og:locale" content="en_GB"><meta property="og:url" content="https://fluencyfox.ai/blog"><meta property="og:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta property="og:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta property="og:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The Fluencyfox blog: AI fluency, assessment and hiring"><meta name="twitter:description" content="What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it."><meta name="twitter:image" content="https://fluencyfox.ai/assets/hero-visual.jpg"><link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png"><link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href="https://fluencyfox.ai/blog/rss.xml"><!-- Self-hosted and preloaded. No third-party connection before text paints,
+     and Astro's metric-matched fallbacks keep the swap from shifting the page. --><style>@font-face{font-family:"Libre Franklin-69d938f59f4e057c";src:url("/blog/_astro/fonts/1421d4d44885bde6.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c";src:url("/blog/_astro/fonts/1421d4d44885bde6.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:normal;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c";src:url("/blog/_astro/fonts/1421d4d44885bde6.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:normal;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c";src:url("/blog/_astro/fonts/1421d4d44885bde6.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:700;font-style:normal;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c";src:url("/blog/_astro/fonts/1421d4d44885bde6.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:800;font-style:normal;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c fallback: Arial";src:local("Arial");font-display:swap;font-weight:400;font-style:normal;size-adjust:102.0635%;ascent-override:94.6469%;descent-override:24.1026%;line-gap-override:0%;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c fallback: Arial";src:local("Arial");font-display:swap;font-weight:500;font-style:normal;size-adjust:102.0635%;ascent-override:94.6469%;descent-override:24.1026%;line-gap-override:0%;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c fallback: Arial";src:local("Arial");font-display:swap;font-weight:600;font-style:normal;size-adjust:102.0635%;ascent-override:94.6469%;descent-override:24.1026%;line-gap-override:0%;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c fallback: Arial Bold";src:local("Arial Bold");font-display:swap;font-weight:700;font-style:normal;size-adjust:94.7955%;ascent-override:101.9035%;descent-override:25.9506%;line-gap-override:0%;}@font-face{font-family:"Libre Franklin-69d938f59f4e057c fallback: Arial Bold";src:local("Arial Bold");font-display:swap;font-weight:800;font-style:normal;size-adjust:94.7955%;ascent-override:101.9035%;descent-override:25.9506%;line-gap-override:0%;}:root{--font-ui:"Libre Franklin-69d938f59f4e057c","Libre Franklin-69d938f59f4e057c fallback: Arial","Libre Franklin-69d938f59f4e057c fallback: Arial Bold","Helvetica Neue",Arial,sans-serif;}</style> <link rel="preload" href="/blog/_astro/fonts/1421d4d44885bde6.woff2" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:"Source Serif 4-a4097fbe0be26e72";src:url("/blog/_astro/fonts/8a33882ad1615531.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400 600;font-style:normal;}@font-face{font-family:"Source Serif 4-a4097fbe0be26e72 fallback: Times New Roman";src:local("Times New Roman");font-display:swap;font-weight:400 600;font-style:normal;size-adjust:117.9077%;ascent-override:87.8653%;descent-override:28.4121%;line-gap-override:0%;}:root{--font-serif:"Source Serif 4-a4097fbe0be26e72","Source Serif 4-a4097fbe0be26e72 fallback: Times New Roman",Georgia,serif;}</style> <link rel="preload" href="/blog/_astro/fonts/8a33882ad1615531.woff2" as="font" type="font/woff2" crossorigin><style>@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1";src:url("/blog/_astro/fonts/45f5561f938fa232.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:400;font-style:normal;}@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1";src:url("/blog/_astro/fonts/e24ff982d90e3401.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:500;font-style:normal;}@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1";src:url("/blog/_astro/fonts/f276da2ba24f5203.woff2") format("woff2");font-display:swap;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-weight:600;font-style:normal;}@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:102.5167%;descent-override:27.5045%;}@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:normal;size-adjust:99.9837%;ascent-override:102.5167%;descent-override:27.5045%;}@font-face{font-family:"IBM Plex Mono-83622ec8fc0e55d1 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:normal;size-adjust:99.9837%;ascent-override:102.5167%;descent-override:27.5045%;}:root{--font-mono:"IBM Plex Mono-83622ec8fc0e55d1","IBM Plex Mono-83622ec8fc0e55d1 fallback: Courier New",ui-monospace,monospace;}</style> <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -469,5 +564,6 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
       ]
     }
   ]
-}</script></head> <body class="ff-page"> <header class="ff-bar"> <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a> <nav class="ff-bar-nav" aria-label="Main"> <a href="/blog">Blog</a> <a href="/research/ai-fluency-data-index">Research</a> <a href="/#how-it-works">How It Works</a> <a class="ff-bar-cta" href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener">Book a Demo</a> </nav> </header> <main id="main">  <div class="wrap"> <header class="top"> <p class="eyebrow">Fluencyfox · Blog</p> <h1>Notes on hiring for AI fluency</h1> <p class="dek">What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it.</p> </header> <p class="empty">No posts yet. The first one is being written.</p> </div>  </main> <footer class="ff-foot"> <div class="ff-foot-cols"> <div> <h2>Blog</h2>  <a href="/blog">All posts</a> </div> <div> <h2>Research</h2> <a href="/research/ai-fluency-data-index">AI Fluency Data Index</a> </div> <div> <h2>Product</h2> <a href="/#how-it-works">How It Works</a><a href="/#measure">What We Measure</a><a href="/#testimonials">Testimonials</a> </div> <div> <h2>Docs</h2> <a href="/privacy">Privacy Policy</a> <a href="/terms">Terms &amp; Conditions</a> </div> <div> <h2>Fluencyfox</h2> <p>71–75 Shelton Street,<br>London, UK WC2H 9JQ</p> <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener">LinkedIn</a> </div> </div> <p class="ff-foot-legal">Fluencyfox is a product of
+}</script><style>@layer astro.images{:where([data-astro-image]){height:auto}:where([data-astro-image=full-width]){width:100%}:where([data-astro-image=constrained]){max-width:100%}[data-astro-image-fit=fill]{object-fit:fill}[data-astro-image-fit=contain]{object-fit:contain}[data-astro-image-fit=cover]{object-fit:cover}[data-astro-image-fit=scale-down]{object-fit:scale-down}[data-astro-image-pos=top]{object-position:top}[data-astro-image-pos=bottom]{object-position:bottom}[data-astro-image-pos=left]{object-position:left}[data-astro-image-pos=right]{object-position:right}[data-astro-image-pos=center]{object-position:center}[data-astro-image-pos=top-bottom]{object-position:top bottom}[data-astro-image-pos=top-left]{object-position:top left}[data-astro-image-pos=top-right]{object-position:top right}[data-astro-image-pos=top-center]{object-position:top center}[data-astro-image-pos=bottom-top]{object-position:bottom top}[data-astro-image-pos=bottom-left]{object-position:bottom left}[data-astro-image-pos=bottom-right]{object-position:bottom right}[data-astro-image-pos=bottom-center]{object-position:bottom center}[data-astro-image-pos=left-top]{object-position:left top}[data-astro-image-pos=left-bottom]{object-position:left bottom}[data-astro-image-pos=left-right]{object-position:left right}[data-astro-image-pos=left-center]{object-position:left center}[data-astro-image-pos=right-top]{object-position:right top}[data-astro-image-pos=right-bottom]{object-position:right bottom}[data-astro-image-pos=right-left]{object-position:right left}[data-astro-image-pos=right-center]{object-position:right center}[data-astro-image-pos=center-top]{object-position:center top}[data-astro-image-pos=center-bottom]{object-position:center bottom}[data-astro-image-pos=center-left]{object-position:center left}[data-astro-image-pos=center-right]{object-position:center right}}
+</style></head> <body class="ff-page"> <header class="ff-bar"> <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a> <nav class="ff-bar-nav" aria-label="Main"> <a href="/blog">Blog</a> <a href="/research/ai-fluency-data-index">Research</a> <a href="/#how-it-works">How It Works</a> <a class="ff-bar-cta" href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener">Book a Demo</a> </nav> </header> <main id="main">  <div class="wrap"> <header class="top"> <p class="eyebrow">Fluencyfox · Blog</p> <h1>Notes on hiring for AI fluency</h1> <p class="dek">What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it.</p> </header> <p class="empty">No posts yet. The first one is being written.</p> </div>  </main> <footer class="ff-foot"> <div class="ff-foot-cols"> <div> <h2>Blog</h2>  <a href="/blog">All posts</a> </div> <div> <h2>Research</h2> <a href="/research/ai-fluency-data-index">AI Fluency Data Index</a> </div> <div> <h2>Product</h2> <a href="/#how-it-works">How It Works</a><a href="/#measure">What We Measure</a><a href="/#testimonials">Testimonials</a> </div> <div> <h2>Docs</h2> <a href="/privacy">Privacy Policy</a> <a href="/terms">Terms &amp; Conditions</a> </div> <div> <h2>Fluencyfox</h2> <p>71–75 Shelton Street,<br>London, UK WC2H 9JQ</p> <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener">LinkedIn</a> </div> </div> <p class="ff-foot-legal">Fluencyfox is a product of
 <a href="https://www.calyptus.co/" target="_blank" rel="noopener">Calyptus</a>.</p> </footer> </body> </html>

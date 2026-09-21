@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import { createReadStream, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 
@@ -51,6 +51,46 @@ export default defineConfig({
   outDir: './dist',
   build: { format: 'file', assets: '_astro' },
   compressHTML: true,
+
+  // Self-hosted, preloaded, and served from our own origin. The rest of the
+  // site still pulls these three families from Google, which costs a DNS
+  // lookup, a TLS handshake and a round trip before any text can paint. Astro
+  // also generates a metric-matched fallback for each one, so the page does
+  // not jump when the real font arrives.
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: 'Libre Franklin',
+      cssVariable: '--font-ui',
+      weights: [400, 500, 600, 700, 800],
+      subsets: ['latin'],
+      styles: ['normal'],
+      fallbacks: ['Helvetica Neue', 'Arial', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Source Serif 4',
+      cssVariable: '--font-serif',
+      weights: ['400 600'],
+      subsets: ['latin'],
+      styles: ['normal'],
+      fallbacks: ['Georgia', 'serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Mono',
+      cssVariable: '--font-mono',
+      weights: [400, 500, 600],
+      subsets: ['latin'],
+      styles: ['normal'],
+      fallbacks: ['ui-monospace', 'monospace'],
+    },
+  ],
+
+  // Images in a post get a srcset and intrinsic dimensions without anyone
+  // remembering to write them, which is most of what Core Web Vitals asks
+  // of a blog.
+  image: { layout: 'constrained', responsiveStyles: true },
   integrations: [serveSiteAssets],
   markdown: {
     shikiConfig: {

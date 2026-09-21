@@ -11,13 +11,27 @@ const description = 'What we learn from running real-world AI fluency assessment
 // An empty index is a thin page. Better to keep it out of the index until
 // there is something on it than to have Google's first impression be nothing.
 const schema = posts.length ? [{
+  '@type': 'WebSite',
+  '@id': site.origin + '/#website',
+  url: site.origin + '/',
+  name: site.name,
+  inLanguage: site.lang,
+  publisher: { '@id': site.origin + '/#organization' },
+}, {
+  '@type': 'Organization',
+  '@id': site.origin + '/#organization',
+  name: site.name,
+  url: site.origin + '/',
+  logo: { '@type': 'ImageObject', url: site.origin + site.logo },
+  sameAs: [site.linkedin, site.parent.url],
+}, {
   '@type': 'Blog',
   '@id': site.origin + '/blog#blog',
   name: 'The Fluencyfox blog',
   description,
   url: site.origin + '/blog',
   inLanguage: site.lang,
-  publisher: { '@type': 'Organization', '@id': site.origin + '/#organization', name: site.name, url: site.origin + '/' },
+  publisher: { '@id': site.origin + '/#organization' },
   blogPost: posts.map(post => ({
     '@type': 'BlogPosting',
     '@id': `${site.origin}/blog/${post.id}#article`,
