@@ -990,10 +990,3 @@ footer { padding: 50px 0 40px; }
 .carousel-dots button { position: relative; }
 .carousel-dots button::after { content: ''; position: absolute; inset: -8px; }
 
-/* A footer menu item that is deliberately not a link. Matches the footer link
-   spacing so the column does not look broken with one item missing. */
-footer .footer-cols .footer-muted {
-  display: block;
-  color: var(--grey-300);
-  cursor: default;
-}
