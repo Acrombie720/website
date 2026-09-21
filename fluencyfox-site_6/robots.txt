@@ -1,8 +1,8 @@
 # Fluencyfox robots.txt
 # Search engines: fully allowed.
 # AI crawler blocks below mirror what Cloudflare was already serving.
-# The research programme (/research/, /ai-fluency*, /guides/) is open to all of them
-# on purpose: those pages exist to be quoted and cited.
+# The research programme (/research/, /ai-fluency*, /guides/) and the blog (/blog)
+# are open to all of them on purpose: those pages exist to be quoted and cited.
 # To open the marketing site too, delete the blocks you no longer want.
 
 User-agent: *
@@ -13,54 +13,63 @@ User-agent: Amazonbot
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: Applebot-Extended
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: Bytespider
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: CCBot
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: ClaudeBot
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: CloudflareBrowserRenderingCrawler
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: Google-Extended
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: GPTBot
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 User-agent: meta-externalagent
 Allow: /research/
 Allow: /ai-fluency
 Allow: /guides/
+Allow: /blog
 Disallow: /
 
 Sitemap: https://fluencyfox.ai/sitemap.xml
