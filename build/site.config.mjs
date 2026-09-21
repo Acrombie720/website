@@ -20,6 +20,8 @@ export const staticPages = [
   { url: '/', changefreq: 'weekly', priority: '1.0', lastmod: '2026-09-18' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3', lastmod: '2026-09-02' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3', lastmod: '2026-09-02' },
+  { url: '/grad-schemes', changefreq: 'monthly', priority: '0.9', lastmod: '2026-09-21' },
+  { url: '/employee-development', changefreq: 'monthly', priority: '0.9', lastmod: '2026-09-21' },
 ];
 
 // The research footer. Only lists routes that actually exist, because linking
@@ -29,6 +31,8 @@ export const researchNav = [
 ];
 
 export const productNav = [
+  { url: '/grad-schemes', label: 'Grad Schemes' },
+  { url: '/employee-development', label: 'Employee Development' },
   { url: '/#how-it-works', label: 'How It Works' },
   { url: '/#measure', label: 'What We Measure' },
   { url: '/#testimonials', label: 'Testimonials' },

@@ -990,3 +990,113 @@ footer { padding: 50px 0 40px; }
 .carousel-dots button { position: relative; }
 .carousel-dots button::after { content: ''; position: absolute; inset: -8px; }
 
+
+/* ==========================================================================
+   Landing pages (/grad-schemes, /employee-development)
+   New class names only, so nothing on the homepage or the legal pages moves.
+   ========================================================================== */
+
+/* Numbered three-up steps. The homepage uses tall .how-card rows with embeds;
+   a single-scroll landing page needs the same three beats in a third of the
+   height, so these are text-only. */
+.step-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.step-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 26px 24px 28px;
+}
+.step-num {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+  color: var(--blue-light);
+  margin-bottom: 14px;
+}
+.step-card h3 { font-size: 22px; color: var(--dark); font-weight: 500; margin-bottom: 10px; }
+.step-card p { font-size: 17px; line-height: 1.5; }
+
+/* An attributed customer quote outside the homepage carousel. */
+.pull-quote {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin-top: 12px;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.pull-quote img.pq-logo { width: 56px; height: 56px; border-radius: var(--radius-sm); flex: 0 0 auto; }
+.pull-quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--dark);
+}
+.pull-quote .pq-by { margin-top: 12px; font-size: 15px; color: var(--grey-500); }
+.pull-quote .pq-by strong { font-weight: 500; color: var(--grey-900); }
+
+/* The two real numbers from the SilverTree scheme, side by side. */
+.stat-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+.stat {
+  flex: 1;
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 34px 28px;
+  text-align: center;
+}
+.stat b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1;
+  color: var(--blue-dark);
+  margin-bottom: 10px;
+}
+.stat span { font-size: 17px; line-height: 1.5; }
+
+/* Two-column text block, used for benchmark + privacy on /employee-development. */
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.split-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 30px;
+}
+.split-card h3 { font-size: 22px; color: var(--dark); font-weight: 500; margin-bottom: 10px; }
+.split-card p { font-size: 17px; line-height: 1.5; margin-bottom: 12px; }
+.split-card p:last-child { margin-bottom: 0; }
+.split-card a.inline-link { color: var(--blue-dark); text-decoration: underline; }
+
+/* Source line under a stat row or panel. */
+.source-note {
+  font-size: 14px;
+  color: var(--grey-500);
+  text-align: center;
+  margin-top: 16px;
+}
+
+/* A landing-page hero sits directly under the header with no mockup below it,
+   so it needs the bottom padding the homepage hero gets from .hero-visual. */
+.hero.hero-plain { padding-bottom: 10px; }
+.hero.hero-plain .actions { margin-bottom: 8px; }
+
+@media (max-width: 900px) {
+  .step-grid, .split-grid { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+  .pull-quote { flex-direction: column; align-items: flex-start; padding: 30px; }
+  .pull-quote blockquote { font-size: 21px; }
+  .stat b { font-size: 46px; }
+}
