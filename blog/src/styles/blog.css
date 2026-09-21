@@ -4,16 +4,31 @@
    the footer without knowing anything about this file. */
 
 :root {
-  --paper:     #F4F6F8;
-  --surface:   #FFFFFF;
-  --ink:       #0C1116;
-  --ink-2:     #4C5765;
-  --ink-3:     #7B8797;
-  --rule:      #DCE2E8;
-  --rule-soft: #E8ECF1;
-  --link:      #1B4B8F;
-  --accent-bg: #E3E7F4;
-  --accent:    #33468C;
+  /* The homepage palette, by its own names, so the blog and the marketing
+     site are literally the same colours rather than two greys that nearly
+     match. Source is styles.css at the site root.
+
+       --milk #f0f4f6   page background
+       --white          cards
+       --dark #1e1e1e   headings
+       --grey-600       body text
+       --grey-500       dates, labels, anything secondary
+       --grey-100       hairlines
+       --blue-dark      links and accents
+       --blue-bubble    the tinted blocks
+
+     Only --rule-soft is not from that list. It is a lighter hairline for
+     rows inside a block, mixed between --milk and --grey-100. */
+  --paper:     #f0f4f6;
+  --surface:   #ffffff;
+  --ink:       #1e1e1e;
+  --ink-2:     #606060;
+  --ink-3:     #6e7270;
+  --rule:      #e7e7e7;
+  --rule-soft: #edf1f3;
+  --link:      #5474a1;
+  --accent-bg: #dae9f1;
+  --accent:    #5474a1;
 
   --s--1: 0.8125rem;
   --s-0:  1rem;
@@ -33,16 +48,18 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper:     #0B0F13;
-    --surface:   #131A21;
-    --ink:       #E9EFF4;
-    --ink-2:     #9DAAB8;
-    --ink-3:     #76828F;
-    --rule:      #263039;
-    --rule-soft: #1D262E;
-    --link:      #7FAEEA;
-    --accent-bg: #1B2340;
-    --accent:    #93A6E8;
+    /* The same hues after dark. --dark becomes the page, --milk becomes the
+       text, and the blues lighten enough to stay legible on it. */
+    --paper:     #1a1c1e;
+    --surface:   #232629;
+    --ink:       #f0f4f6;
+    --ink-2:     #b6bcc0;
+    --ink-3:     #8d9396;
+    --rule:      #33373a;
+    --rule-soft: #2a2e31;
+    --link:      #92bad5;
+    --accent-bg: #23323f;
+    --accent:    #92bad5;
   }
 }
 
@@ -51,7 +68,9 @@
 body {
   margin: 0;
   background: var(--paper);
-  color: var(--ink);
+  /* Body copy is the homepage's grey and headings are its near-black, which
+     is the same relationship the marketing pages use. */
+  color: var(--ink-2);
   font-family: var(--ff-serif);
   font-size: var(--s-0);
   line-height: 1.6;
@@ -157,6 +176,8 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 /* ---------- the post ---------- */
 
 .prose { font-size: var(--s-1); line-height: 1.7; }
+
+.prose strong { color: var(--ink); }
 
 .prose > * + * { margin-top: 1.1em; }
 
@@ -424,3 +445,14 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   cursor: pointer;
 }
 .cite-copy:hover { border-color: var(--ink); color: var(--ink); }
+
+/* The wordmark is drawn in the same #1e1e1e as the headings, so after dark
+   it disappears into the page. Inverting lightness while rotating the hue
+   back keeps the blue and the sand recognisable instead of flattening the
+   mark to white. The research pages have the same problem and the same fix
+   would work in shell.css. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ff-bar-logo img {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}

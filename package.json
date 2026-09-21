@@ -5,7 +5,7 @@
   "scripts": {
     "build": "npm --prefix blog run build && node build/make-blog-og.mjs && node build/build.mjs && node build/make-csv.mjs && node build/make-og.mjs",
     "images": "node build/optimise-images.mjs --write",
-    "preview": "python3 -m http.server 4173 --directory fluencyfox-site_6",
+    "preview": "node build/serve.mjs",
     "build:blog": "npm --prefix blog run build",
     "dev:blog": "npm --prefix blog run dev",
     "install:blog": "npm --prefix blog install",

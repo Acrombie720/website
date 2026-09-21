@@ -3,13 +3,10 @@
   "configurations": [
     {
       "name": "fluencyfox-site",
-      "runtimeExecutable": "python3",
+      "runtimeExecutable": "node",
       "runtimeArgs": [
-        "-m",
-        "http.server",
-        "4173",
-        "--directory",
-        "fluencyfox-site_6"
+        "build/serve.mjs",
+        "4173"
       ],
       "port": 4173
     },
