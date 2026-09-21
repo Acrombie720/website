@@ -379,3 +379,48 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   margin-bottom: 6px;
 }
 .faq dd { margin: 0; color: var(--ink-2); }
+
+/* ---------- cite this ---------- */
+
+.cite { margin-top: 56px; }
+.cite h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+.cite-line {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--rule-soft);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.cite-alt {
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  margin: 10px 0 0;
+}
+.cite-alt a { color: var(--ink-2); }
+
+.cite-copy {
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  font-weight: 600;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: 5px 13px;
+  margin-left: 10px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.cite-copy:hover { border-color: var(--ink); color: var(--ink); }

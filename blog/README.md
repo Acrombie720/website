@@ -81,6 +81,27 @@ Building from the root matters. The blog build writes
 sitemap, the blog column in the footer of every other page, and the 1200x630
 social card rendered for each post.
 
+## Markdown for agents
+
+Every post is published twice: as HTML, and as Markdown at
+`/blog/<slug>.md`. There is also `/blog/index.md`, the whole catalogue with
+descriptions, dates and links in a few hundred tokens.
+
+Coding agents send `Accept: text/markdown` and several tools now serve it,
+because HTML spends most of its tokens on markup. Our source is already
+Markdown, so what we serve is the original text rather than a conversion of
+our own HTML back into it. The header of each file carries the claim, the
+canonical URL, the dates and the line to cite, so an agent that reads only
+the top still comes away with something correct.
+
+Each HTML page points at its Markdown copy with
+`<link rel="alternate" type="text/markdown">`, which is how it gets found.
+
+True content negotiation, where `/blog/<slug>` itself returns Markdown when
+asked for it, needs an edge rule rather than a static file. Cloudflare has a
+zone-level "Markdown for Agents" switch that does it without code, if we
+decide we want it.
+
 ## How it fits the rest of the site
 
 - **URLs have no trailing slash.** `emit.mjs` writes the index to
@@ -95,6 +116,11 @@ social card rendered for each post.
   page per tag would be thin and would compete with the posts themselves.
 - **The CSS is inlined** in every page, so nothing but the web fonts blocks
   the first render.
+- **Each post ends with a citation line** that people can copy and agents can
+  read, in the same wording in the HTML and in the Markdown copy. The copy
+  button is the only JavaScript on the page, it is inline and half a
+  kilobyte, and it creates its own button so nothing dead renders where the
+  clipboard is unavailable.
 
 ## Deliberately not done
 

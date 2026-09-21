@@ -48,6 +48,7 @@ const schema = posts.length ? [{
   description={description}
   path="/blog"
   noindex={posts.length === 0}
+  markdown="/blog/index.md"
   schema={schema}
   breadcrumb={[{ name: 'Blog', url: site.origin + '/blog' }]}
 >

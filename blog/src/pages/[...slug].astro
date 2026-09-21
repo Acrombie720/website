@@ -4,6 +4,7 @@ import { render } from 'astro:content';
 import { site } from '../../../build/site.config.mjs';
 import Base from '../layouts/Base.astro';
 import { publishedPosts, relatedTo, longDate, isoDate, readingMinutes } from '../lib/posts';
+import { citation } from '../lib/markdown';
 
 export const getStaticPaths = (async () => {
   const posts = await publishedPosts();
@@ -83,6 +84,7 @@ if (d.faq.length) {
   published={published}
   updated={updated}
   noindex={d.noindex || d.draft}
+  markdown={`/blog/${post.id}.md`}
   schema={schema}
   breadcrumb={[
     { name: 'Blog', url: site.origin + '/blog' },
@@ -141,6 +143,36 @@ if (d.faq.length) {
     {d.tags.length > 0 && (
       <div class="tags">{d.tags.map(tag => <span class="tag">{tag}</span>)}</div>
     )}
+
+    <section class="cite measure" aria-labelledby="cite">
+      <h2 id="cite">Cite this</h2>
+      <p class="cite-line" id="citation">{citation(post)}</p>
+      <p class="cite-alt">
+        Machine-readable copy: <a href={`/blog/${post.id}.md`}>Markdown</a>.
+        Every post: <a href="/blog/index.md">/blog/index.md</a>.
+      </p>
+    </section>
+
+    {/* The button is created by the script, so nothing dead is rendered
+        where clipboard access is unavailable. Half a kilobyte, and the only
+        script on the page. */}
+    <script is:inline>
+      (function () {
+        var line = document.getElementById('citation');
+        if (!line || !navigator.clipboard) return;
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'cite-copy';
+        button.textContent = 'Copy';
+        button.addEventListener('click', function () {
+          navigator.clipboard.writeText(line.textContent.trim()).then(function () {
+            button.textContent = 'Copied';
+            setTimeout(function () { button.textContent = 'Copy'; }, 2000);
+          });
+        });
+        line.parentNode.querySelector('h2').appendChild(button);
+      })();
+    </script>
 
     <section class="cta">
       <h2>See what a real assessment looks like</h2>

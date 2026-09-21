@@ -21,6 +21,8 @@ interface Props {
   published?: string;
   updated?: string;
   noindex?: boolean;
+  /** Site-relative path to this page's Markdown copy, if it has one. */
+  markdown?: string;
   /** schema.org nodes for this page, minus the breadcrumb, which is added here. */
   schema?: Record<string, unknown>[];
   breadcrumb?: { name: string; url: string }[];
@@ -29,7 +31,7 @@ interface Props {
 const {
   title, description, path, canonical, ogType = 'website',
   ogImage = site.defaultOgImage, ogImageAlt = title,
-  published, updated, noindex = false, schema = [], breadcrumb = [],
+  published, updated, noindex = false, markdown, schema = [], breadcrumb = [],
 } = Astro.props;
 
 const abs = (p: string) => (p.startsWith('http') ? p : site.origin + p);
@@ -85,6 +87,7 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 
 <link rel="icon" type="image/png" sizes="512x512" href={site.logo} />
 <link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href={site.origin + '/blog/rss.xml'} />
+{markdown && <link rel="alternate" type="text/markdown" href={abs(markdown)} title="Markdown" />}
 <!-- Self-hosted and preloaded. No third-party connection before text paints,
      and Astro's metric-matched fallbacks keep the swap from shifting the page. -->
 <Font cssVariable="--font-ui" preload />
