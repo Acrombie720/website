@@ -359,13 +359,15 @@ footer.foot {
 /* ---------- closing call to action ---------- */
 
 .ff-cta {
+  /* The margin shorthand has to carry the centring: a later `margin` would
+     reset the left and right back to 0, which is what knocked this block
+     132px out of line with the rest of the page. */
   max-width: var(--ff-max, 1120px);
-  margin-inline: auto;
+  margin: 0 auto 56px;
   background: var(--accent);
   border-radius: var(--radius-lg);
   padding: 56px 40px;
   text-align: center;
-  margin: 0 0 56px;
 }
 .ff-cta h2 {
   font-family: var(--ff-disp);
