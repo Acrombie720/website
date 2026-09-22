@@ -24,16 +24,14 @@ export const staticPages = [
   { url: '/employee-development', changefreq: 'monthly', priority: '0.9', lastmod: '2026-09-21' },
 ];
 
-// The research footer. Only lists routes that actually exist, because linking
-// to a 404 is worse than not linking at all. Add entries as pages ship.
-export const researchNav = [
-  { url: '/research/ai-fluency-data-index', label: 'AI Fluency Data Index' },
-];
-
-export const productNav = [
+// The single Menu column, in the same order as the hand-written footers in
+// fluencyfox-site_6. Keep the two in step: a generated page and a static page
+// showing different menus is the thing this is here to prevent.
+export const menuNav = [
+  { url: '/#testimonials', label: 'Testimonials' },
+  { url: '/#how-it-works', label: 'How It Works' },
+  { url: '/#measure', label: 'What we Measure' },
   { url: '/grad-schemes', label: 'Grad Schemes' },
   { url: '/employee-development', label: 'Employee Development' },
-  { url: '/#how-it-works', label: 'How It Works' },
-  { url: '/#measure', label: 'What We Measure' },
-  { url: '/#testimonials', label: 'Testimonials' },
+  { url: '/research/ai-fluency-data-index', label: 'Research' },
 ];

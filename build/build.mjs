@@ -20,7 +20,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { site, staticPages, researchNav, productNav } from './site.config.mjs';
+import { site, staticPages, menuNav } from './site.config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const PAGES = join(ROOT, 'build', 'pages');
@@ -230,25 +230,38 @@ function cta(shell) {
 
 function footer(shell) {
   if (shell === 'none') return '';
-  const col = (heading, links) => `
-    <div>
-      <h2>${esc(heading)}</h2>
-      ${links.map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join('\n      ')}
-    </div>`;
+  // Same structure, wording and order as the footer in fluencyfox-site_6's
+  // hand-written pages: logo row, rule, then Menu / Docs / Address / Socials.
   return `
 <footer class="ff-foot">
+  <div class="ff-foot-top">
+    <a href="/" class="ff-foot-logo"><img src="${site.wordmark}" alt="${esc(site.name)}" width="208" height="44"></a>
+    <a class="ff-foot-cta" href="${site.demoUrl}" target="_blank" rel="noopener">Book a Demo</a>
+  </div>
+  <div class="ff-foot-divider"></div>
   <div class="ff-foot-cols">
-${col('Research', researchNav)}
-${col('Product', productNav)}
-${col('Docs', [{ url: '/privacy', label: 'Privacy Policy' }, { url: '/terms', label: 'Terms & Conditions' }])}
     <div>
-      <h2>Fluencyfox</h2>
+      <h2>Menu</h2>
+      ${menuNav.map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join('\n      ')}
+    </div>
+    <div>
+      <h2>Docs</h2>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms &amp; Conditions</a>
+    </div>
+    <div>
+      <h2>Address</h2>
       <p>${site.address}</p>
-      <a href="${site.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>
+      <h2>Socials</h2>
+      <div class="ff-foot-socials">
+        <a href="${site.linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="#5474a1"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+      </div>
     </div>
   </div>
-  <p class="ff-foot-legal">Fluencyfox is a product of
-    <a href="${site.parent.url}" target="_blank" rel="noopener">${esc(site.parent.name)}</a>.</p>
 </footer>`;
 }
 

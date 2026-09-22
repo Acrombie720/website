@@ -6,7 +6,10 @@
    and a page that defines nothing still looks right. */
 
 .ff-page {
-  --ff-max: 1120px;
+  /* The hand-written pages use .wrap { max-width: 1238px; padding: 0 24px },
+     so their content column is 1190px. Body supplies the 24px gutter here and
+     every container caps at 1190, which lands this page on the same edges. */
+  --ff-max: 1190px;
 }
 
 .ff-page :focus-visible {
@@ -126,45 +129,85 @@
 }
 
 /* ---------- footer ---------- */
+/* Mirrors the hand-written footer in fluencyfox-site_6/styles.css: same
+   padding, same rule, same four columns, same type sizes and colours. The
+   values are repeated rather than shared because this page inlines its CSS
+   and never loads styles.css. If one changes, change both. */
 
 .ff-foot {
   max-width: var(--ff-max);
   margin-inline: auto;
-  border-top: 1px solid var(--rule, #e7e7e7);
-  padding-block: 36px 52px;
+  padding: 50px 0 40px;
   font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
-  font-size: 15px;
+}
+
+.ff-foot-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ff-foot-logo { display: flex; align-items: center; }
+.ff-foot-logo img { height: 38px; width: auto; display: block; }
+
+.ff-foot-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border-radius: var(--radius-lg, 12px);
+  background: var(--link, #5474a1);
+  color: #fff !important;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 150ms ease;
+}
+.ff-foot-cta:hover { background: var(--ink, #1e1e1e); text-decoration: none !important; }
+
+.ff-foot-divider {
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 .ff-foot-cols {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 28px 32px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .ff-foot-cols h2 {
+  font-size: 15px;
+  color: #a5a7a5;
+  font-weight: 500;
   font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-3, #7B8797);
-  margin: 0 0 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin: 0 0 20px;
   padding: 0;
   border: 0;
+  line-height: 1.6;
 }
 
-.ff-foot-cols a {
+.ff-foot-cols a,
+.ff-foot-cols p {
   display: block;
-  color: var(--ink-2, #4C5765);
+  font-size: 15px;
+  color: #606060;
+  margin: 0 0 16px;
   text-decoration: none;
-  margin-bottom: 8px;
 }
-.ff-foot-cols a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
-.ff-foot-cols p { margin: 0 0 8px; color: var(--ink-2, #4C5765); }
+.ff-foot-cols a:hover { color: var(--ink, #1e1e1e); }
 
-.ff-foot-legal {
-  margin: 28px 0 0;
-  font-size: 0.8125rem;
-  color: var(--ink-3, #7B8797);
+.ff-foot-socials { display: flex; gap: 14px; }
+.ff-foot-socials a { display: block; width: 24px; height: 24px; margin: 0; }
+.ff-foot-socials svg { width: 24px; height: 24px; display: block; }
+
+@media (max-width: 720px) {
+  .ff-foot-cols { grid-template-columns: repeat(2, 1fr); }
 }
