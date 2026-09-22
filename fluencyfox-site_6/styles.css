@@ -178,7 +178,7 @@ h1, h2, h3, p { margin: 0; }
 
 /* ---------- Hero ---------- */
 .hero {
-  padding-top: 70px;
+  padding-top: 112px;
   text-align: center;
 }
 .hero h1 {
@@ -821,6 +821,7 @@ footer { padding: 50px 0 40px; }
 
 @media (max-width: 720px) {
   .footer-cols { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding-top: 72px; }
   .hero h1 { font-size: 38px; }
   .section-head h2 { font-size: 30px; }
   .problem-grid, .measure-grid, .auth-grid { grid-template-columns: 1fr; }

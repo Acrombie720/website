@@ -222,8 +222,8 @@ function cta(shell) {
   if (shell === 'none') return '';
   return `
 <section class="ff-cta">
-  <h2>See what fluency looks like up close.</h2>
-  <p>These are the numbers. A demo is the hour behind them: a real assessment, scored, end to end.</p>
+  <h2>Want to see one of these assessments?</h2>
+  <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
   <a href="${site.demoUrl}?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
 </section>`;
 }

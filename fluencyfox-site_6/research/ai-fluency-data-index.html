@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The AI Fluency Data Index</title>
-<meta name="description" content="Every credible published figure on AI fluency in hiring, in one place, with the sample size and date attached to each one. Free to cite, free to embed.">
+<meta name="description" content="Everything credible published on AI fluency in hiring, collected in one place, each figure with its sample size and fieldwork date. Free to cite, free to embed.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://fluencyfox.ai/research/ai-fluency-data-index">
 
@@ -266,14 +266,14 @@ h1 {
   color: var(--ink);
   margin: 0 0 18px;
   text-wrap: balance;
-  max-width: 16ch;
+  max-width: 24ch;
 }
 
 .dek {
   font-size: var(--s-1);
   line-height: 1.6;
   color: var(--ink-2);
-  max-width: 62ch;
+  max-width: 88ch;
   margin: 0;
 }
 
@@ -419,7 +419,8 @@ h1 {
 
 /* ---------- prose blocks ---------- */
 
-.block { max-width: 66ch; margin-bottom: 52px; }
+.block { max-width: none; margin-bottom: 52px; }
+.block > p, .block > ul { max-width: 92ch; }
 .block:last-child { margin-bottom: 0; }
 
 h2 {
@@ -470,13 +471,13 @@ li::marker { color: var(--accent); }
    line: the page's job is the figures, not the pitch. */
 .ff-whois {
   margin: 22px 0 0;
+  max-width: none;
   padding: 16px 20px;
   background: var(--surface);
   border-radius: var(--radius-lg);
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 78ch;
 }
 .ff-whois b { color: var(--ink); font-weight: 500; }
 .ff-whois a {
@@ -592,7 +593,7 @@ footer.foot {
 <meta property="og:locale" content="en_GB">
 <meta property="og:url" content="https://fluencyfox.ai/research/ai-fluency-data-index">
 <meta property="og:title" content="The AI Fluency Data Index">
-<meta property="og:description" content="Every credible published figure on AI fluency in hiring, in one place, with the sample size and date attached to each one. Free to cite, free to embed.">
+<meta property="og:description" content="Everything credible published on AI fluency in hiring, collected in one place, each figure with its sample size and fieldwork date. Free to cite, free to embed.">
 <meta property="og:image" content="https://fluencyfox.ai/og/ai-fluency-data-index.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -602,7 +603,7 @@ footer.foot {
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The AI Fluency Data Index">
-<meta name="twitter:description" content="Every credible published figure on AI fluency in hiring, in one place, with the sample size and date attached to each one. Free to cite, free to embed.">
+<meta name="twitter:description" content="Everything credible published on AI fluency in hiring, collected in one place, each figure with its sample size and fieldwork date. Free to cite, free to embed.">
 <meta name="twitter:image" content="https://fluencyfox.ai/og/ai-fluency-data-index.png">
 
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png">
@@ -620,7 +621,7 @@ footer.foot {
       "@type": "Article",
       "@id": "https://fluencyfox.ai/research/ai-fluency-data-index#article",
       "headline": "The AI Fluency Data Index",
-      "description": "Every credible published figure on AI fluency in hiring, in one place, with the sample size and date attached to each one. Free to cite, free to embed.",
+      "description": "Everything credible published on AI fluency in hiring, collected in one place, each figure with its sample size and fieldwork date. Free to cite, free to embed.",
       "url": "https://fluencyfox.ai/research/ai-fluency-data-index",
       "datePublished": "2026-09-14",
       "dateModified": "2026-09-18",
@@ -731,7 +732,7 @@ footer.foot {
   <header class="top">
     <p class="eyebrow">Maintained by Fluencyfox · Updated monthly</p>
     <h1>The AI Fluency Data Index</h1>
-    <p class="dek">Every credible published figure on AI fluency in hiring, in one place, with the sample size and date attached to each one. We built it because we kept rebuilding it in our own notes. Free to cite, free to embed.</p>
+    <p class="dek">Everything credible that has been published on AI fluency in hiring, collected in one place. Each figure keeps its sample size and the date the fieldwork happened, because both change what the number actually means. We started this as a working document for ourselves and it got out of hand. Use it however you like.</p>
     <div class="counters">
       <span><b id="total">49</b> figures</span>
       <span><b>9</b> sources</span>
@@ -739,7 +740,7 @@ footer.foot {
       <span><b>Next update</b> Oct 2026</span>
     </div>
 
-    <p class="ff-whois"><b>Fluencyfox</b> builds AI&#8209;fluency assessments for hiring teams: candidates do an hour of the real job with AI, and you see how they actually work. We track these figures because it is our field. <a href="/">See how it works</a></p>
+    <p class="ff-whois"><b>Fluencyfox</b> builds AI&#8209;fluency assessments for hiring teams. Candidates spend an hour doing the actual job with AI while the session records, so you can watch how someone works before you hire them. Which is why we pay attention to numbers like these. <a href="/">See how it works</a></p>
   </header>
 
   <div class="browse">
@@ -1162,30 +1163,30 @@ footer.foot {
 
   <div class="block">
     <h2>How this index works</h2>
-    <p>Five rules, applied to everything on this page.</p>
+    <p>We stuck to five rules.</p>
     <ul>
-      <li><strong>Published figures only.</strong> Every number here comes from a named, publicly available source. Nothing is modelled, extrapolated or estimated by us.</li>
-      <li><strong>Sample size and date attached to every figure.</strong> A 74% from 1,000 hiring managers in June 2026 is a different object from a 74% from an undisclosed sample, and you should be able to see which you are looking at.</li>
-      <li><strong>Secondary sources are labelled as secondary.</strong> Where we could not reach the primary report, the entry says which publication we took it from.</li>
-      <li><strong>No figure is adjusted.</strong> Rounding and phrasing follow the original. Where a publisher gives a split, we show the split.</li>
-      <li><strong>Corrections welcome.</strong> If we have misread your data or you have newer figures, tell us and we will fix it in the next monthly pass.</li>
+      <li><strong>Only published figures.</strong> Every number came from a named source you can go and read yourself. We have not modelled or estimated anything.</li>
+      <li><strong>Sample size and date on all of them.</strong> 74% of a thousand hiring managers surveyed last June means something quite different from 74% of a sample nobody will describe. You should be able to tell which one you are reading.</li>
+      <li><strong>Secondhand numbers are marked.</strong> Now and then we could not get hold of the original report. Where that happened, the entry says who we took it from.</li>
+      <li><strong>Nothing gets adjusted.</strong> We keep whatever rounding and wording the original used. If a publisher broke a number into parts, you get the parts.</li>
+      <li><strong>Tell us when we get it wrong.</strong> If we have misread your data, or you have published something newer, send it over and it gets fixed next month.</li>
     </ul>
-    <p>Figures marked <em>sample not disclosed</em> are included because they are widely cited, not because we consider them equivalent in quality to the surveyed studies. Treat them accordingly.</p>
+    <p>A handful are marked <em>sample not disclosed</em>. Those are here because people quote them constantly, not because we rate them alongside the properly surveyed ones. Worth bearing in mind when you use them.</p>
   </div>
 
   <div class="block">
     <h2>Cite or embed this</h2>
-    <p>Every figure has a copy-citation button. If you want to embed the whole index, use this:</p>
+    <p>Each figure has a button that copies a citation for you. To put the whole index inside a page of your own:</p>
     <p class="embed">&lt;iframe src="https://fluencyfox.ai/research/ai-fluency-data-index?embed=1"
         width="100%" height="720" loading="lazy"
         title="The AI Fluency Data Index"&gt;&lt;/iframe&gt;</p>
-    <p>Or link to it as: The AI Fluency Data Index, Fluencyfox, updated September 2026.</p>
+    <p>Or just cite it: The AI Fluency Data Index, Fluencyfox, updated September 2026.</p>
   </div>
 
   <div class="block">
     <h2>Sources</h2>
     <details class="sourcebox">
-      <summary>Nine publications, each with its sample and fieldwork date</summary>
+      <summary>The nine publications, with sample sizes and fieldwork dates</summary>
     <ul class="sourcelist">
       <li><b><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, The State of Hiring for AI Fluency in 2026</a></b><span>Survey of 1,928 senior hiring leaders, US and UK, 29 industries.</span></li>
       <li><b><a href="https://www.ziprecruiter-research.org/economic-insights-research/ai-employer-report-2026">ZipRecruiter Economic Research, 2026 AI Employer Report</a></b><span>1,000+ verified talent acquisition professionals and hiring managers, online panel, 11–18 June 2026.</span></li>
@@ -1205,10 +1206,10 @@ footer.foot {
   <section class="ff-methodology" aria-labelledby="methodology">
     <h2 id="methodology">Methodology</h2>
     <dl>
-      <div class="ff-meth-row"><dt>Sources</dt><dd><ul><li>Nine named publications: TestGorilla, ZipRecruiter Economic Research, iCIMS Insights, Study.com, ManpowerGroup, Anthropic, CompTIA, Ashby, and IDC and Lightcast via secondary reporting.</li><li>Every figure links to the publication it came from. Full list in the Sources section above.</li></ul></dd></div>
+      <div class="ff-meth-row"><dt>Sources</dt><dd><ul><li>Nine named publications: TestGorilla, ZipRecruiter Economic Research, iCIMS Insights, Study.com, ManpowerGroup, Anthropic, CompTIA, Ashby, and IDC and Lightcast via secondary reporting.</li><li>Every figure links back to wherever it came from. The full list sits in the Sources section above.</li></ul></dd></div>
       <div class="ff-meth-row"><dt>Sample size</dt><dd>49 figures across 9 sources. Underlying samples range from 1,000 respondents to 39,063 employers across 41 countries; three sources do not disclose a sample.</dd></div>
       <div class="ff-meth-row"><dt>Date range</dt><dd>Fieldwork from July 2025 to September 2026. Compiled 14 September 2026.</dd></div>
-      <div class="ff-meth-row"><dt>Limitations</dt><dd><ul><li>This is a compilation, not original research. Fluencyfox collected and labelled these figures; it did not produce any of them.</li><li>Figures marked <em>sample not disclosed</em> are included because they are widely cited, not because they are equivalent in quality to the surveyed studies.</li><li>Two entries come from secondary reporting, where the primary report was not publicly reachable. Those entries name the publication they were taken from.</li><li>Definitions of “AI fluency” differ between sources. Figures are not directly comparable across publishers, and are not combined or averaged anywhere on this page.</li><li>Self-reported survey data throughout. None of these figures observe what people actually do.</li></ul></dd></div>
+      <div class="ff-meth-row"><dt>Limitations</dt><dd><ul><li>This is a compilation, not original research. We gathered and labelled these figures. We did not produce a single one of them.</li><li>Figures marked <em>sample not disclosed</em> are here because they get quoted constantly, not because they stand up as well as the properly surveyed ones.</li><li>Two entries come from secondhand reporting, because we could not get at the original. Both name the publication we took them from.</li><li>Every source means something slightly different by “AI fluency”. You cannot really compare figures across publishers, so we never add them up or average them.</li><li>Nearly all of it is people describing their own behaviour in surveys. Almost nothing here watches what anyone actually does.</li></ul></dd></div>
       <div class="ff-meth-row"><dt>Last updated</dt><dd>18 September 2026. Next pass October 2026.</dd></div>
     </dl>
   </section>
@@ -1222,16 +1223,16 @@ footer.foot {
   </nav>
 
   <footer class="foot">
-    <p>Maintained by Fluencyfox. We build AI fluency assessments for hiring teams, which is why we track this. We have no stake in any figure on this page and we publish the ones that make our own case harder alongside the ones that help.</p>
-    <p>Spotted an error or got newer data? Send it over and it goes into the next monthly update.</p>
+    <p>Fluencyfox looks after this page. We build AI fluency assessments for hiring teams, so this is research we would be reading anyway. A fair bit of what is here does not flatter us, and we have left it in.</p>
+    <p>Spotted a mistake, or got newer numbers? Send them over and they will go in next month.</p>
   </footer>
 
 </div>
 </main>
 
 <section class="ff-cta">
-  <h2>See what fluency looks like up close.</h2>
-  <p>These are the numbers. A demo is the hour behind them: a real assessment, scored, end to end.</p>
+  <h2>Want to see one of these assessments?</h2>
+  <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
   <a href="https://calendly.com/callum-calyptus/30m?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
 </section>
 

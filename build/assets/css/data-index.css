@@ -84,14 +84,14 @@ h1 {
   color: var(--ink);
   margin: 0 0 18px;
   text-wrap: balance;
-  max-width: 16ch;
+  max-width: 24ch;
 }
 
 .dek {
   font-size: var(--s-1);
   line-height: 1.6;
   color: var(--ink-2);
-  max-width: 62ch;
+  max-width: 88ch;
   margin: 0;
 }
 
@@ -237,7 +237,8 @@ h1 {
 
 /* ---------- prose blocks ---------- */
 
-.block { max-width: 66ch; margin-bottom: 52px; }
+.block { max-width: none; margin-bottom: 52px; }
+.block > p, .block > ul { max-width: 92ch; }
 .block:last-child { margin-bottom: 0; }
 
 h2 {
@@ -288,13 +289,13 @@ li::marker { color: var(--accent); }
    line: the page's job is the figures, not the pitch. */
 .ff-whois {
   margin: 22px 0 0;
+  max-width: none;
   padding: 16px 20px;
   background: var(--surface);
   border-radius: var(--radius-lg);
   font-size: 15px;
   line-height: 1.55;
   color: var(--ink-2);
-  max-width: 78ch;
 }
 .ff-whois b { color: var(--ink); font-weight: 500; }
 .ff-whois a {
