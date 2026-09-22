@@ -26,56 +26,64 @@
 }
 
 /* ---------- top bar ---------- */
+/* Mirrors .site-header on the hand-written pages: full wordmark at its real
+   size, Poppins nav, solid blue Book a Demo button. */
 
 .ff-bar {
   max-width: var(--ff-max);
   margin-inline: auto;
-  padding-block: 18px;
+  padding-block: 22px;
   display: flex;
   align-items: center;
   gap: 24px;
-  border-bottom: 1px solid var(--rule, #DCE2E8);
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
-.ff-bar-logo img { height: 30px; width: auto; display: block; }
+.ff-bar-logo img { height: 40px; width: auto; display: block; }
 
 .ff-bar-nav {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 8px 22px;
+  gap: 10px 26px;
   flex-wrap: wrap;
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-size: 0.875rem;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-bar-nav a {
-  color: var(--ink-2, #4C5765);
+  color: var(--ink-2, #606060);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
 }
-.ff-bar-nav a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+.ff-bar-nav a:hover { color: var(--ink, #1e1e1e); }
 
 .ff-bar-cta {
-  border: 1px solid var(--ink, #0C1116);
+  background: var(--link, #5474a1);
   border-radius: 99px;
-  padding: 7px 15px;
-  color: var(--ink, #0C1116) !important;
+  padding: 11px 22px;
+  font-weight: 500;
+  color: #fff !important;
+  transition: background 140ms ease;
 }
 .ff-bar-cta:hover {
-  background: var(--ink, #0C1116);
-  color: var(--paper, #F4F6F8) !important;
+  background: var(--ink, #1e1e1e);
+  color: #fff !important;
   text-decoration: none !important;
+}
+
+@media (max-width: 620px) {
+  .ff-bar { flex-wrap: wrap; gap: 14px; }
+  .ff-bar-nav { width: 100%; margin-left: 0; font-size: 14px; gap: 8px 18px; }
 }
 
 /* ---------- blocks the generator appends ---------- */
 
 .ff-csv {
   max-width: var(--ff-max);
-  margin: 0 auto 36px;
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.8125rem;
+  margin: 0 auto 44px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-methodology,
@@ -87,14 +95,15 @@
 
 .ff-methodology h2,
 .ff-related h2 {
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.15;
-  letter-spacing: -0.022em;
-  margin: 0 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--ink, #0C1116);
+  font-family: var(--ff-disp, "Ovo", Georgia, serif);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--ink, #1e1e1e);
+  margin: 0 0 16px;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .ff-methodology dl { margin: 0; }
@@ -109,12 +118,12 @@
 .ff-meth-row:last-child { border-bottom: 0; }
 
 .ff-methodology dt {
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-3, #7B8797);
+  color: var(--ink-3, #6e7270);
 }
 .ff-methodology dd { margin: 0; color: var(--ink-2, #4C5765); }
 .ff-methodology dd ul { margin: 0; padding-left: 1.1em; }
@@ -132,10 +141,10 @@
 .ff-foot {
   max-width: var(--ff-max);
   margin-inline: auto;
-  border-top: 1px solid var(--rule, #DCE2E8);
-  padding-block: 32px 48px;
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-size: 0.875rem;
+  border-top: 1px solid var(--rule, #e7e7e7);
+  padding-block: 36px 52px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-foot-cols {
@@ -145,8 +154,8 @@
 }
 
 .ff-foot-cols h2 {
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.6875rem;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -171,345 +180,411 @@
   color: var(--ink-3, #7B8797);
 }
 
+/* The Data Index, wearing the main site's clothes.
+
+   The tokens below are the same values as fluencyfox-site_6/styles.css, named
+   the way this page and shell.css already reference them. Restyling therefore
+   happens here, not in the page body or the generator.
+
+   There is deliberately no dark mode. The rest of fluencyfox.ai is light only,
+   so a research page that flipped to dark on a visitor's system setting read as
+   a different site. */
+
 :root {
-    --paper:     #F4F6F8;
-    --surface:   #FFFFFF;
-    --ink:       #0C1116;
-    --ink-2:     #4C5765;
-    --ink-3:     #7B8797;
-    --rule:      #DCE2E8;
-    --rule-soft: #E8ECF1;
-    --link:      #1B4B8F;
+  --paper:     #f0f4f6;   /* --milk    */
+  --surface:   #ffffff;
+  --ink:       #1e1e1e;   /* --dark    */
+  --ink-2:     #606060;   /* --grey-600 */
+  --ink-3:     #6e7270;   /* --grey-500 */
+  --rule:      #e7e7e7;   /* --grey-100 */
+  --rule-soft: #eef1f3;
+  --link:      #5474a1;   /* --blue-dark  */
+  --accent:    #92bad5;   /* --blue-light */
 
-    --c-demand:    #33468C;
-    --c-demand-bg: #E3E7F4;
-    --c-gap:       #9C3520;
-    --c-gap-bg:    #F7E5E0;
-    --c-cap:       #175B50;
-    --c-cap-bg:    #DEEDE9;
-    --c-train:     #6F5410;
-    --c-train-bg:  #F3EBD6;
-    --c-market:    #62346B;
-    --c-market-bg: #F0E4F2;
+  --ff-ui:   "Poppins", system-ui, sans-serif;
+  --ff-disp: "Ovo", Georgia, serif;
 
-    --s--1: 0.8125rem;
-    --s-0:  1rem;
-    --s-1:  1.1875rem;
-    --s-2:  1.5rem;
-    --s-3:  2.125rem;
-    --s-4:  3rem;
-  }
+  /* Category colours drawn from the site palette: site blue, site purple,
+     site green, plus two warm tones in the same muted register. */
+  --c-demand:    #4a6791;
+  --c-demand-bg: #dae9f1;
+  --c-gap:       #8f4a2e;
+  --c-gap-bg:    #f7e9e2;
+  --c-cap:       #4f7a4b;
+  --c-cap-bg:    #eaf2e8;
+  --c-train:     #5d54a1;
+  --c-train-bg:  #f1f0f6;
+  --c-market:    #6f5a3a;
+  --c-market-bg: #f5eee1;
 
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --paper:     #0B0F13;
-      --surface:   #131A21;
-      --ink:       #E9EFF4;
-      --ink-2:     #9DAAB8;
-      --ink-3:     #76828F;
-      --rule:      #263039;
-      --rule-soft: #1D262E;
-      --link:      #7FAEEA;
+  --radius-lg: 12px;
+  --radius-sm: 6px;
 
-      --c-demand:    #93A6E8;
-      --c-demand-bg: #1B2340;
-      --c-gap:       #E28B71;
-      --c-gap-bg:    #331D16;
-      --c-cap:       #5FB8A6;
-      --c-cap-bg:    #12302B;
-      --c-train:     #CBA94F;
-      --c-train-bg:  #2E2712;
-      --c-market:    #C293C9;
-      --c-market-bg: #2C1B30;
-    }
-  }
+  --s--1: 0.8125rem;
+  --s-0:  1rem;
+  --s-1:  1.125rem;
+  --s-2:  1.75rem;
+  --s-3:  2.5rem;
+  --s-4:  3.5rem;
+}
 
-  :root[data-theme="dark"] {
-    --paper:     #0B0F13;
-    --surface:   #131A21;
-    --ink:       #E9EFF4;
-    --ink-2:     #9DAAB8;
-    --ink-3:     #76828F;
-    --rule:      #263039;
-    --rule-soft: #1D262E;
-    --link:      #7FAEEA;
+* { box-sizing: border-box; }
 
-    --c-demand:    #93A6E8;
-    --c-demand-bg: #1B2340;
-    --c-gap:       #E28B71;
-    --c-gap-bg:    #331D16;
-    --c-cap:       #5FB8A6;
-    --c-cap-bg:    #12302B;
-    --c-train:     #CBA94F;
-    --c-train-bg:  #2E2712;
-    --c-market:    #C293C9;
-    --c-market-bg: #2C1B30;
-  }
+body {
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--ff-ui);
+  font-size: var(--s-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-inline: 20px;
+  padding-block: 0;
+}
 
-  * { box-sizing: border-box; }
+.wrap { max-width: 1120px; margin-inline: auto; padding-block: 48px 80px; }
 
-  body {
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "Source Serif 4", Georgia, serif;
-    font-size: var(--s-0);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    padding-inline: 20px;
-    padding-block: 0;
-  }
+/* ---------- header ---------- */
 
-  .wrap { max-width: 1120px; margin-inline: auto; padding-block: 56px 88px; }
+header.top { padding-bottom: 34px; }
 
-  /* ---------- header ---------- */
+.eyebrow {
+  font-family: var(--ff-ui);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--link);
+  margin: 0 0 16px;
+}
 
-  header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; }
+h1 {
+  font-family: var(--ff-disp);
+  font-weight: 400;
+  font-size: var(--s-4);
+  line-height: 1.12;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin: 0 0 18px;
+  text-wrap: balance;
+  max-width: 16ch;
+}
 
-  .eyebrow {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-3);
-    margin: 0 0 14px;
-  }
+.dek {
+  font-size: var(--s-1);
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0;
+}
 
-  h1 {
-    font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-    font-weight: 800;
-    font-size: var(--s-4);
-    line-height: 1.02;
-    letter-spacing: -0.032em;
-    margin: 0 0 14px;
-    text-wrap: balance;
-    max-width: 14ch;
-  }
+.counters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 32px;
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  padding-block: 24px 0;
+}
+.counters b { color: var(--ink); font-weight: 500; font-variant-numeric: tabular-nums; }
 
-  .dek {
-    font-size: var(--s-1);
-    line-height: 1.5;
-    color: var(--ink-2);
-    max-width: 62ch;
-    margin: 0;
-  }
+/* ---------- filter bar ---------- */
+/* .browse is the sticky containing block: the bar follows you down the figures
+   it filters, then releases rather than hovering over the prose and footer. */
+.browse { position: relative; }
 
-  .counters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 32px;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    color: var(--ink-3);
-    padding-block: 18px 0;
-  }
-  .counters b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.filterbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  padding-block: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
 
-  /* ---------- filter bar ---------- */
+.filterbar button {
+  font-family: var(--ff-ui);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  background: var(--surface);
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+.filterbar button:hover { border-color: var(--accent); color: var(--ink); }
+.filterbar button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.filterbar button[aria-pressed="true"] {
+  background: var(--link);
+  color: #fff;
+  border-color: var(--link);
+}
+.showing {
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
 
-  .filterbar {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-    padding-block: 14px;
-    margin-bottom: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-  }
+/* ---------- the figures ---------- */
 
-  .filterbar button {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    padding: 6px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 99px;
-    background: var(--surface);
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
-  }
-  .filterbar button:hover { border-color: var(--ink-3); color: var(--ink); }
-  .filterbar button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
-  .filterbar button[aria-pressed="true"] {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-  }
-  .showing {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    color: var(--ink-3);
-    margin-left: auto;
-    font-variant-numeric: tabular-nums;
-  }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+  margin-bottom: 64px;
+}
 
-  /* ---------- grid ---------- */
+.stat {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 24px 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.stat[hidden] { display: none; }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    margin-bottom: 56px;
-  }
+.cat {
+  font-family: var(--ff-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+  padding: 4px 9px;
+  border-radius: var(--radius-sm);
+  align-self: flex-start;
+}
+.c-demand { color: var(--c-demand); background: var(--c-demand-bg); }
+.c-gap    { color: var(--c-gap);    background: var(--c-gap-bg); }
+.c-cap    { color: var(--c-cap);    background: var(--c-cap-bg); }
+.c-train  { color: var(--c-train);  background: var(--c-train-bg); }
+.c-market { color: var(--c-market); background: var(--c-market-bg); }
 
-  .stat {
-    background: var(--surface);
-    padding: 22px 20px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .stat[hidden] { display: none; }
+.fig {
+  font-family: var(--ff-disp);
+  font-weight: 400;
+  font-size: var(--s-3);
+  line-height: 1;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+  margin: 0 0 12px;
+  color: var(--link);
+}
+.fig.long { font-size: var(--s-2); line-height: 1.2; }
 
-  .cat {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin: 0 0 14px;
-    padding: 3px 7px;
-    border-radius: 3px;
-    align-self: flex-start;
-  }
-  .c-demand { color: var(--c-demand); background: var(--c-demand-bg); }
-  .c-gap    { color: var(--c-gap);    background: var(--c-gap-bg); }
-  .c-cap    { color: var(--c-cap);    background: var(--c-cap-bg); }
-  .c-train  { color: var(--c-train);  background: var(--c-train-bg); }
-  .c-market { color: var(--c-market); background: var(--c-market-bg); }
+.claim {
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
 
-  .fig {
-    font-family: "Libre Franklin", sans-serif;
-    font-weight: 800;
-    font-size: var(--s-3);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    font-variant-numeric: tabular-nums;
-    margin: 0 0 10px;
-    color: var(--ink);
-  }
-  .fig.long { font-size: var(--s-2); letter-spacing: -0.02em; line-height: 1.15; }
+.src {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+  margin-top: auto;
+}
+.src a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
+.src a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
-  .claim {
-    font-size: var(--s-0);
-    line-height: 1.48;
-    margin: 0 0 14px;
-    color: var(--ink);
-  }
+.cite {
+  font-family: var(--ff-ui);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 6px 11px;
+  color: var(--ink-3);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.cite:hover { color: var(--ink); border-color: var(--accent); }
+.cite:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.cite[data-done="1"] { color: var(--c-cap); border-color: var(--c-cap); }
 
-  .src {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    line-height: 1.5;
-    color: var(--ink-3);
-    margin: 0 0 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--rule-soft);
-    margin-top: auto;
-  }
-  .src a { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
-  .src a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+/* ---------- prose blocks ---------- */
 
-  .cite {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: 0.6875rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: none;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 4px 9px;
-    color: var(--ink-3);
-    cursor: pointer;
-    align-self: flex-start;
-    transition: color 120ms ease, border-color 120ms ease;
-  }
-  .cite:hover { color: var(--ink); border-color: var(--ink-3); }
-  .cite:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
-  .cite[data-done="1"] { color: var(--c-cap); border-color: var(--c-cap); }
+.block { max-width: 66ch; margin-bottom: 52px; }
+.block:last-child { margin-bottom: 0; }
 
-  /* ---------- prose blocks ---------- */
+h2 {
+  font-family: var(--ff-disp);
+  font-weight: 400;
+  font-size: var(--s-2);
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--ink);
+  margin: 0 0 16px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  text-wrap: balance;
+}
+h3 {
+  font-family: var(--ff-ui);
+  font-weight: 500;
+  font-size: var(--s-1);
+  color: var(--ink);
+  margin: 28px 0 8px;
+  letter-spacing: 0;
+}
+p { margin: 0 0 16px; }
+p:last-child { margin-bottom: 0; }
+a { color: var(--link); }
 
-  .block { max-width: 66ch; margin-bottom: 44px; }
-  .block:last-child { margin-bottom: 0; }
+ul { margin: 0 0 16px; padding-left: 1.2em; }
+li { margin-bottom: 7px; }
+li::marker { color: var(--accent); }
 
-  h2 {
-    font-family: "Libre Franklin", sans-serif;
-    font-weight: 700;
-    font-size: var(--s-2);
-    line-height: 1.15;
-    letter-spacing: -0.022em;
-    margin: 0 0 14px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--ink);
-    text-wrap: balance;
-  }
-  h3 {
-    font-family: "Libre Franklin", sans-serif;
-    font-weight: 600;
-    font-size: var(--s-1);
-    margin: 26px 0 8px;
-    letter-spacing: -0.012em;
-  }
-  p { margin: 0 0 16px; }
-  p:last-child { margin-bottom: 0; }
-  a { color: var(--link); }
+/* Stays monospace on purpose: it is a snippet to copy, and alignment is the
+   whole point. Uses the system mono so no extra font has to load. */
+.embed {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--s--1);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
 
-  ul { margin: 0 0 16px; padding-left: 1.2em; }
-  li { margin-bottom: 7px; }
-  li::marker { color: var(--ink-3); }
+/* Who we are, for someone arriving cold from a search result. Deliberately one
+   line: the page's job is the figures, not the pitch. */
+.ff-whois {
+  margin: 22px 0 0;
+  padding: 16px 20px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 78ch;
+}
+.ff-whois b { color: var(--ink); font-weight: 500; }
+.ff-whois a {
+  color: var(--link);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
 
-  .embed {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    padding: 14px 16px;
-    overflow-x: auto;
-    white-space: pre;
-    color: var(--ink-2);
-    line-height: 1.6;
-    margin: 0 0 16px;
-  }
+/* Every figure card already names its own source, so the full list is kept for
+   citation and indexing but folded away rather than filling a screen. */
+.sourcebox summary {
+  font-size: 15px;
+  color: var(--link);
+  cursor: pointer;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sourcebox summary::-webkit-details-marker { display: none; }
+.sourcebox summary::before {
+  content: "+";
+  font-size: 17px;
+  line-height: 1;
+  color: var(--ink-3);
+  flex: 0 0 auto;
+}
+.sourcebox[open] summary::before { content: "\2013"; }
+.sourcebox summary:hover { color: var(--ink); }
+.sourcebox summary:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
-  .sourcelist {
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    line-height: 1.6;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .sourcelist li {
-    padding: 12px 0;
-    border-bottom: 1px solid var(--rule-soft);
-    margin: 0;
-  }
-  .sourcelist b { color: var(--ink); font-weight: 600; display: block; }
-  .sourcelist span { color: var(--ink-3); }
+.sourcelist {
+  font-size: 15px;
+  line-height: 1.6;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sourcelist li {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  margin: 0;
+}
+.sourcelist li:last-child { border-bottom: 0; }
+.sourcelist b { color: var(--ink); font-weight: 500; display: block; margin-bottom: 2px; }
+.sourcelist span { color: var(--ink-3); }
 
-  footer.foot {
-    border-top: 3px solid var(--ink);
-    padding-top: 22px;
-    margin-top: 56px;
-    font-family: "IBM Plex Mono", ui-monospace, monospace;
-    font-size: var(--s--1);
-    color: var(--ink-3);
-    line-height: 1.6;
-  }
+footer.foot {
+  border-top: 1px solid var(--rule);
+  padding-top: 26px;
+  margin-top: 56px;
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  line-height: 1.6;
+}
 
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; animation: none !important; }
-  }
+/* ---------- closing call to action ---------- */
+
+.ff-cta {
+  max-width: var(--ff-max, 1120px);
+  margin-inline: auto;
+  background: var(--accent);
+  border-radius: var(--radius-lg);
+  padding: 56px 40px;
+  text-align: center;
+  margin: 0 0 56px;
+}
+.ff-cta h2 {
+  font-family: var(--ff-disp);
+  font-weight: 400;
+  font-size: var(--s-2);
+  color: #fff;
+  margin: 0 auto 14px;
+  max-width: 20ch;
+  border: 0;
+  padding: 0;
+}
+.ff-cta p {
+  color: rgba(255,255,255,0.92);
+  max-width: 54ch;
+  margin: 0 auto 24px;
+}
+.ff-cta a {
+  display: inline-block;
+  background: #fff;
+  color: var(--link) !important;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: background 140ms ease, color 140ms ease;
+}
+.ff-cta a:hover { background: var(--link); color: #fff !important; }
+
+@media (max-width: 640px) {
+  :root { --s-4: 2.4rem; --s-3: 2rem; --s-2: 1.5rem; }
+  .wrap { padding-block: 32px 56px; }
+  .ff-cta { padding: 40px 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
 </style>
 
 <meta property="og:type" content="article">
@@ -533,9 +608,9 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600&display=swap"></noscript>
 
 <script type="application/ld+json">
 {
@@ -644,8 +719,9 @@
 <header class="ff-bar">
   <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a>
   <nav class="ff-bar-nav" aria-label="Main">
-    <a href="/research/ai-fluency-data-index">Research</a>
+    <a href="/#testimonials">Testimonials</a>
     <a href="/#how-it-works">How It Works</a>
+    <a href="/#measure">What we Measure</a>
     <a class="ff-bar-cta" href="https://calendly.com/callum-calyptus/30m" target="_blank" rel="noopener">Book a Demo</a>
   </nav>
 </header>
@@ -662,8 +738,11 @@
       <span><b>Last updated</b> 14 Sept 2026</span>
       <span><b>Next update</b> Oct 2026</span>
     </div>
+
+    <p class="ff-whois"><b>Fluencyfox</b> builds AI&#8209;fluency assessments for hiring teams: candidates do an hour of the real job with AI, and you see how they actually work. We track these figures because it is our field. <a href="/">See how it works</a></p>
   </header>
 
+  <div class="browse">
   <div class="filterbar" role="group" aria-label="Filter figures by category">
     <button type="button" id="f-all" data-filter="all" aria-pressed="true">All</button>
     <button type="button" data-filter="demand" aria-pressed="false">Demand</button>
@@ -1079,6 +1158,7 @@
     </article>
 
   </div>
+  </div><!-- /.browse -->
 
   <div class="block">
     <h2>How this index works</h2>
@@ -1104,6 +1184,8 @@
 
   <div class="block">
     <h2>Sources</h2>
+    <details class="sourcebox">
+      <summary>Nine publications, each with its sample and fieldwork date</summary>
     <ul class="sourcelist">
       <li><b><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, The State of Hiring for AI Fluency in 2026</a></b><span>Survey of 1,928 senior hiring leaders, US and UK, 29 industries.</span></li>
       <li><b><a href="https://www.ziprecruiter-research.org/economic-insights-research/ai-employer-report-2026">ZipRecruiter Economic Research, 2026 AI Employer Report</a></b><span>1,000+ verified talent acquisition professionals and hiring managers, online panel, 11–18 June 2026.</span></li>
@@ -1115,6 +1197,7 @@
       <li><b><a href="https://www.prnewswire.com/news-releases/new-data-from-ashby-reveals-surge-in-applications-rising-selectivity-and-shifting-recruiter-workloads-302765846.html">Ashby</a></b><span>100m+ applications across 200k+ jobs, 2021–2026, presented May 2026.</span></li>
       <li><b>IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a>, and Lightcast <em>Beyond the Buzz</em>, via <a href="https://joberney.com/blog/what-is-ai-fluency">Joberney</a></b><span>Secondary sources. Original sample sizes not disclosed in the versions available to us.</span></li>
     </ul>
+    </details>
   </div>
 
   
@@ -1145,6 +1228,12 @@
 
 </div>
 </main>
+
+<section class="ff-cta">
+  <h2>See what fluency looks like up close.</h2>
+  <p>These are the numbers. A demo is the hour behind them: a real assessment, scored, end to end.</p>
+  <a href="https://calendly.com/callum-calyptus/30m?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+</section>
 
 <footer class="ff-foot">
   <div class="ff-foot-cols">

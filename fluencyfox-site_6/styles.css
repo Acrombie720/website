@@ -991,12 +991,6 @@ footer { padding: 50px 0 40px; }
 .carousel-dots button::after { content: ''; position: absolute; inset: -8px; }
 
 
-/* A footer item that is deliberately not a link yet. */
-.footer-muted {
-  color: var(--grey-300);
-  cursor: default;
-}
-
 /* ==========================================================================
    Landing pages (/grad-schemes, /employee-development)
    New class names only, so nothing on the homepage or the legal pages moves.

@@ -208,11 +208,24 @@ function header(shell) {
 <header class="ff-bar">
   <a class="ff-bar-logo" href="/"><img src="${site.wordmark}" alt="${esc(site.name)}" width="208" height="44"></a>
   <nav class="ff-bar-nav" aria-label="Main">
-    <a href="/research/ai-fluency-data-index">Research</a>
+    <a href="/#testimonials">Testimonials</a>
     <a href="/#how-it-works">How It Works</a>
+    <a href="/#measure">What we Measure</a>
     <a class="ff-bar-cta" href="${site.demoUrl}" target="_blank" rel="noopener">Book a Demo</a>
   </nav>
 </header>`;
+}
+
+// A research page earns attention but has nowhere to send it. This is the one
+// ask, placed after the reading and before the footer.
+function cta(shell) {
+  if (shell === 'none') return '';
+  return `
+<section class="ff-cta">
+  <h2>See what fluency looks like up close.</h2>
+  <p>These are the numbers. A demo is the hour behind them: a real assessment, scored, end to end.</p>
+  <a href="${site.demoUrl}?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+</section>`;
 }
 
 function footer(shell) {
@@ -310,6 +323,7 @@ ${header(shell)}
 <main id="main">
 ${main.trim()}
 </main>
+${cta(shell)}
 ${footer(shell)}
 ${inlineJs ? `<script>\n${inlineJs}\n</script>` : ''}
 </body>

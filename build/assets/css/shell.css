@@ -15,56 +15,64 @@
 }
 
 /* ---------- top bar ---------- */
+/* Mirrors .site-header on the hand-written pages: full wordmark at its real
+   size, Poppins nav, solid blue Book a Demo button. */
 
 .ff-bar {
   max-width: var(--ff-max);
   margin-inline: auto;
-  padding-block: 18px;
+  padding-block: 22px;
   display: flex;
   align-items: center;
   gap: 24px;
-  border-bottom: 1px solid var(--rule, #DCE2E8);
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
-.ff-bar-logo img { height: 30px; width: auto; display: block; }
+.ff-bar-logo img { height: 40px; width: auto; display: block; }
 
 .ff-bar-nav {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 8px 22px;
+  gap: 10px 26px;
   flex-wrap: wrap;
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-size: 0.875rem;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-bar-nav a {
-  color: var(--ink-2, #4C5765);
+  color: var(--ink-2, #606060);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
 }
-.ff-bar-nav a:hover { color: var(--ink, #0C1116); text-decoration: underline; }
+.ff-bar-nav a:hover { color: var(--ink, #1e1e1e); }
 
 .ff-bar-cta {
-  border: 1px solid var(--ink, #0C1116);
+  background: var(--link, #5474a1);
   border-radius: 99px;
-  padding: 7px 15px;
-  color: var(--ink, #0C1116) !important;
+  padding: 11px 22px;
+  font-weight: 500;
+  color: #fff !important;
+  transition: background 140ms ease;
 }
 .ff-bar-cta:hover {
-  background: var(--ink, #0C1116);
-  color: var(--paper, #F4F6F8) !important;
+  background: var(--ink, #1e1e1e);
+  color: #fff !important;
   text-decoration: none !important;
+}
+
+@media (max-width: 620px) {
+  .ff-bar { flex-wrap: wrap; gap: 14px; }
+  .ff-bar-nav { width: 100%; margin-left: 0; font-size: 14px; gap: 8px 18px; }
 }
 
 /* ---------- blocks the generator appends ---------- */
 
 .ff-csv {
   max-width: var(--ff-max);
-  margin: 0 auto 36px;
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.8125rem;
+  margin: 0 auto 44px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-methodology,
@@ -76,14 +84,15 @@
 
 .ff-methodology h2,
 .ff-related h2 {
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.15;
-  letter-spacing: -0.022em;
-  margin: 0 0 14px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--ink, #0C1116);
+  font-family: var(--ff-disp, "Ovo", Georgia, serif);
+  font-weight: 400;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--ink, #1e1e1e);
+  margin: 0 0 16px;
+  padding-bottom: 0;
+  border-bottom: 0;
 }
 
 .ff-methodology dl { margin: 0; }
@@ -98,12 +107,12 @@
 .ff-meth-row:last-child { border-bottom: 0; }
 
 .ff-methodology dt {
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-3, #7B8797);
+  color: var(--ink-3, #6e7270);
 }
 .ff-methodology dd { margin: 0; color: var(--ink-2, #4C5765); }
 .ff-methodology dd ul { margin: 0; padding-left: 1.1em; }
@@ -121,10 +130,10 @@
 .ff-foot {
   max-width: var(--ff-max);
   margin-inline: auto;
-  border-top: 1px solid var(--rule, #DCE2E8);
-  padding-block: 32px 48px;
-  font-family: var(--ff-ui, "Libre Franklin", system-ui, sans-serif);
-  font-size: 0.875rem;
+  border-top: 1px solid var(--rule, #e7e7e7);
+  padding-block: 36px 52px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 15px;
 }
 
 .ff-foot-cols {
@@ -134,8 +143,8 @@
 }
 
 .ff-foot-cols h2 {
-  font-family: var(--ff-mono, "IBM Plex Mono", ui-monospace, monospace);
-  font-size: 0.6875rem;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
