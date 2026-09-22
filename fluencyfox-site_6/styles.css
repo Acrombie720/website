@@ -991,6 +991,12 @@ footer { padding: 50px 0 40px; }
 .carousel-dots button::after { content: ''; position: absolute; inset: -8px; }
 
 
+/* A footer item that is deliberately not a link yet. */
+.footer-muted {
+  color: var(--grey-300);
+  cursor: default;
+}
+
 /* ==========================================================================
    Landing pages (/grad-schemes, /employee-development)
    New class names only, so nothing on the homepage or the legal pages moves.
@@ -1040,29 +1046,46 @@ footer { padding: 50px 0 40px; }
 .pull-quote .pq-by { margin-top: 12px; font-size: 15px; color: var(--grey-500); }
 .pull-quote .pq-by strong { font-weight: 500; color: var(--grey-900); }
 
-/* The two real numbers from the SilverTree scheme, side by side. */
-.stat-row {
-  display: flex;
-  gap: 12px;
-  margin-top: 12px;
-}
-.stat {
-  flex: 1;
+/* The two real numbers from the SilverTree scheme, as one statement rather
+   than two floating cards: the caption belongs inside the panel, not orphaned
+   underneath it. */
+.stat-panel {
   background: white;
   border-radius: var(--radius-lg);
-  padding: 34px 28px;
-  text-align: center;
+  padding: 44px 40px 34px;
+  margin-top: 12px;
 }
-.stat b {
+.stat-figures {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 56px;
+}
+.stat-figure { text-align: center; }
+.stat-figure b {
   display: block;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: 56px;
+  font-size: 68px;
   line-height: 1;
   color: var(--blue-dark);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
-.stat span { font-size: 17px; line-height: 1.5; }
+.stat-figure span { font-size: 17px; line-height: 1.4; }
+.stat-arrow {
+  font-family: var(--font-display);
+  font-size: 34px;
+  color: var(--blue-light);
+  flex: 0 0 auto;
+}
+.stat-panel .stat-source {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--grey-100);
+  font-size: 14px;
+  color: var(--grey-500);
+  text-align: center;
+}
 
 /* Two-column text block, used for benchmark + privacy on /employee-development. */
 .split-grid {
@@ -1095,8 +1118,9 @@ footer { padding: 50px 0 40px; }
 
 @media (max-width: 900px) {
   .step-grid, .split-grid { grid-template-columns: 1fr; }
-  .stat-row { flex-direction: column; }
+  .stat-figures { flex-direction: column; gap: 26px; }
+  .stat-arrow { transform: rotate(90deg); }
   .pull-quote { flex-direction: column; align-items: flex-start; padding: 30px; }
   .pull-quote blockquote { font-size: 21px; }
-  .stat b { font-size: 46px; }
+  .stat-figure b { font-size: 50px; }
 }
