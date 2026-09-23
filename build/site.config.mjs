@@ -10,7 +10,7 @@ export const site = {
   defaultOgImage: '/assets/hero-visual.jpg',
   locale: 'en_GB',
   lang: 'en',
-  demoUrl: 'https://calendly.com/callum-calyptus/30m',
+  demoUrl: 'https://calendly.com/callum-fluencyfox/30min',
   linkedin: 'https://www.linkedin.com/company/fluencyfox/',
   address: '71–75 Shelton Street,<br>London, UK WC2H 9JQ',
 };
