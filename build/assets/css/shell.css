@@ -186,7 +186,7 @@
 
 .ff-foot-cols {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
@@ -213,7 +213,7 @@
 }
 .ff-foot-cols a:hover { color: var(--ink, #1e1e1e); }
 
-.ff-foot-socials { display: flex; gap: 14px; }
+.ff-foot-socials { display: flex; gap: 14px; margin-top: 4px; }
 .ff-foot-socials a { display: block; width: 24px; height: 24px; margin: 0; }
 .ff-foot-socials svg { width: 24px; height: 24px; display: block; }
 

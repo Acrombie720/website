@@ -1,15 +1,15 @@
 ---
-// Mirrors the header build/build.mjs writes onto every generated page. Same
-// markup, same classes, same shell.css, so the blog is visually one site
-// with /research and the homepage.
+// Mirrors the header build/build.mjs writes onto every generated page, and the
+// hand-written pages' own nav: same items, same order. Blog and Research are
+// not in the top nav anywhere; both live in the footer's Insights column.
 import { site } from '../../../build/site.config.mjs';
 ---
 <header class="ff-bar">
   <a class="ff-bar-logo" href="/"><img src={site.wordmark} alt={site.name} width="208" height="44" /></a>
   <nav class="ff-bar-nav" aria-label="Main">
-    <a href="/blog">Blog</a>
-    <a href="/research/ai-fluency-data-index">Research</a>
+    <a href="/#testimonials">Testimonials</a>
     <a href="/#how-it-works">How It Works</a>
+    <a href="/#measure">What we Measure</a>
     <a class="ff-bar-cta" href={site.demoUrl} target="_blank" rel="noopener">Book a Demo</a>
   </nav>
 </header>

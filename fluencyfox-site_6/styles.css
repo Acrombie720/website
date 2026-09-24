@@ -766,12 +766,14 @@ footer { padding: 50px 0 40px; }
 .footer-divider { height: 1px; background: rgba(0,0,0,0.08); width: 100%; margin-bottom: 30px; }
 .footer-cols {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 .footer-cols h5 { font-size: 15px; color: var(--grey-300); font-weight: 500; margin-bottom: 20px; }
 .footer-cols a, .footer-cols p { display: block; font-size: 15px; color: var(--grey-600); margin-bottom: 16px; }
-.footer-socials { display: flex; gap: 14px; }
+/* Sits under the address rather than in a column of its own: five columns
+   crowded the footer and wrapped the last one onto a second row. */
+.footer-socials { display: flex; gap: 14px; margin-top: 4px; }
 .footer-socials a, .footer-socials .footer-social-disabled { display: block; width: 24px; height: 24px; }
 .footer-social-disabled { pointer-events: none; cursor: default; }
 

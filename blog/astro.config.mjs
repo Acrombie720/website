@@ -52,38 +52,29 @@ export default defineConfig({
   build: { format: 'file', assets: '_astro' },
   compressHTML: true,
 
-  // Self-hosted, preloaded, and served from our own origin. The rest of the
-  // site still pulls these three families from Google, which costs a DNS
-  // lookup, a TLS handshake and a round trip before any text can paint. Astro
-  // also generates a metric-matched fallback for each one, so the page does
-  // not jump when the real font arrives.
+  // The same two families the rest of the site uses: Ovo for headings, Poppins
+  // for everything else. Self-hosted and preloaded rather than fetched from
+  // Google, and Astro generates a metric-matched fallback for each, so the page
+  // does not jump when the real font arrives. Code keeps the system monospace,
+  // which is what the research pages do and costs no download.
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Libre Franklin',
+      name: 'Poppins',
       cssVariable: '--font-ui',
-      weights: [400, 500, 600, 700, 800],
-      subsets: ['latin'],
-      styles: ['normal'],
-      fallbacks: ['Helvetica Neue', 'Arial', 'sans-serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Source Serif 4',
-      cssVariable: '--font-serif',
-      weights: ['400 600'],
-      subsets: ['latin'],
-      styles: ['normal'],
-      fallbacks: ['Georgia', 'serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'IBM Plex Mono',
-      cssVariable: '--font-mono',
       weights: [400, 500, 600],
       subsets: ['latin'],
       styles: ['normal'],
-      fallbacks: ['ui-monospace', 'monospace'],
+      fallbacks: ['system-ui', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Ovo',
+      cssVariable: '--font-serif',
+      weights: [400],
+      subsets: ['latin'],
+      styles: ['normal'],
+      fallbacks: ['Georgia', 'serif'],
     },
   ],
 

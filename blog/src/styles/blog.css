@@ -37,13 +37,14 @@
   --s-3:  2.125rem;
   --s-4:  3rem;
 
-  /* --font-* come from the Astro fonts config, which serves them from this
-     origin and supplies a metric-matched fallback for each. The literal
-     names stay as a second fallback so the page is right even if a font
-     file fails. */
-  --ff-ui:    var(--font-ui), "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
-  --ff-mono:  var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
-  --ff-serif: var(--font-serif), "Source Serif 4", Georgia, serif;
+  /* The same pairing as the rest of the site: Ovo sets headings, Poppins does
+     everything else. --font-* come from the Astro fonts config, which serves
+     them from this origin with a metric-matched fallback; the literal names
+     stay as a second fallback so the page is right if a font file fails.
+     Code uses the system monospace, as the research pages do. */
+  --ff-ui:    var(--font-ui), "Poppins", system-ui, sans-serif;
+  --ff-serif: var(--font-serif), "Ovo", Georgia, serif;
+  --ff-mono:  ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,7 +75,7 @@ body {
   /* Body copy is the homepage's grey and headings are its near-black, which
      is the same relationship the marketing pages use. */
   color: var(--ink-2);
-  font-family: var(--ff-serif);
+  font-family: var(--ff-ui);
   font-size: var(--s-0);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -88,7 +89,7 @@ a { color: var(--link); }
 .measure { max-width: 68ch; }
 
 .eyebrow {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -98,11 +99,11 @@ a { color: var(--link); }
 }
 
 h1 {
-  font-family: var(--ff-ui);
-  font-weight: 800;
+  font-family: var(--ff-serif);
+  font-weight: 400;
   font-size: var(--s-4);
-  line-height: 1.04;
-  letter-spacing: -0.032em;
+  line-height: 1.12;
+  letter-spacing: 0;
   margin: 0 0 16px;
   text-wrap: balance;
 }
@@ -116,7 +117,7 @@ h1 {
 }
 
 .byline {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   color: var(--ink-3);
   display: flex;
@@ -144,18 +145,18 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 .post-list a.card:hover h2 { text-decoration: underline; }
 
 .post-list time {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   color: var(--ink-3);
   padding-top: 6px;
 }
 
 .post-list h2 {
-  font-family: var(--ff-ui);
-  font-weight: 700;
+  font-family: var(--ff-serif);
+  font-weight: 400;
   font-size: var(--s-2);
   line-height: 1.2;
-  letter-spacing: -0.022em;
+  letter-spacing: 0;
   margin: 0 0 8px;
   color: var(--ink);
   text-wrap: balance;
@@ -245,7 +246,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
 .tag {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -299,11 +300,11 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 }
 .pager a { color: var(--ink-2); text-decoration: none; max-width: 32ch; }
 .pager a:hover { color: var(--ink); text-decoration: underline; }
-.pager b { display: block; font-family: var(--ff-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 4px; }
+.pager b { display: block; font-family: var(--ff-ui); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 4px; }
 .pager .next { text-align: right; }
 
 .backlink {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -317,7 +318,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 /* ---------- breadcrumbs ---------- */
 
 .crumbs {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -338,7 +339,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   border-radius: 10px;
 }
 .takeaways h2 {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -358,7 +359,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   border-bottom: 1px solid var(--rule);
 }
 .toc h2 {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -408,7 +409,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
 
 .cite { margin-top: 56px; }
 .cite h2 {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -417,7 +418,7 @@ header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-b
   margin: 0 0 10px;
 }
 .cite-line {
-  font-family: var(--ff-mono);
+  font-family: var(--ff-ui);
   font-size: var(--s--1);
   line-height: 1.7;
   color: var(--ink);
