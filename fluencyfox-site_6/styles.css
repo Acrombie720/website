@@ -323,7 +323,7 @@ h1, h2, h3, p { margin: 0; }
   gap: 28px;
   position: relative;
 }
-.testimonial-copy .brand-logo { height: 28px; width: auto; align-self: flex-end; }
+.testimonial-copy .brand-logo { height: 44px; width: auto; max-width: 180px; object-fit: contain; align-self: flex-end; }
 .testimonial-copy .brand-logo.placeholder {
   font-size: 13px;
   letter-spacing: 0.08em;
@@ -356,6 +356,9 @@ h1, h2, h3, p { margin: 0; }
   color: var(--grey-900);
   white-space: nowrap;
 }
+/* A bit bigger for logos that read small at the default lockup size. */
+.testimonial-copy .brand-logo.lockup.brand-logo-lg img { width: 42px; height: 42px; }
+.testimonial-copy .brand-logo.lockup.brand-logo-lg span { font-size: 19px; }
 .testimonial-copy blockquote {
   font-size: 22px;
   color: var(--grey-900);
