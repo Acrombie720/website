@@ -3,6 +3,8 @@
 //   node build/wait-for-deploy.mjs <sha> [minutes]
 //
 // Needs GITHUB_TOKEN and GITHUB_REPOSITORY, which the workflow provides.
+// In the workflow it also sets the step output deployed=true|false, and exits
+// 0 either way. It only fails when Cloudflare never reports on the commit.
 //
 // IndexNow engines fetch a submitted URL within minutes, so submitting
 // before the Worker has deployed is worse than submitting an hour late.
@@ -14,6 +16,7 @@
 // never matched from a GitHub runner at all: it failed both pushes to main on
 // 2026-09-24 while the live sitemap matched main byte for byte.
 
+import { appendFileSync } from 'node:fs';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 const CHECK = 'Workers Builds: fluencyfoxwebsite';
@@ -46,13 +49,16 @@ while (Date.now() < deadline) {
     .sort((a, b) => (b.started_at ?? '').localeCompare(a.started_at ?? ''));
 
   if (run?.status === 'completed') {
-    if (run.conclusion === 'success') {
+    const deployed = run.conclusion === 'success';
+    if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `deployed=${deployed}\n`);
+    if (deployed) {
       console.log(`Cloudflare deployed ${sha.slice(0, 7)}.`);
-      process.exit(0);
+    } else {
+      // A warning, not a failure. Cloudflare's own check on the commit is
+      // already red, and a second red mark for the same event is just noise.
+      console.log(`::warning::Cloudflare's build of ${sha.slice(0, 7)} ended "${run.conclusion}", so nothing new went live and nothing was submitted. ${run.html_url}`);
     }
-    console.error(`Cloudflare's build of ${sha.slice(0, 7)} ended "${run.conclusion}": ${run.html_url}`);
-    console.error('Nothing submitted. The site did not deploy, so there is nothing new to announce.');
-    process.exit(1);
+    process.exit(0);
   }
   if (run) seen = `check run ${run.status}`;
   await sleep(15_000);
