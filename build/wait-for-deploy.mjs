@@ -1,10 +1,10 @@
 // Blocks until Cloudflare has deployed a commit.
 //
-//   node build/wait-for-deploy.mjs <sha> [minutes]
+//   GITHUB_TOKEN=... GITHUB_REPOSITORY=owner/repo GITHUB_SHA=... node build/wait-for-deploy.mjs
 //
-// Needs GITHUB_TOKEN and GITHUB_REPOSITORY, which the workflow provides.
-// In the workflow it also sets the step output deployed=true|false, and exits
-// 0 either way. It only fails when Cloudflare never reports on the commit.
+// The workflow provides all three. There it also sets the step output
+// deployed=true|false and exits 0 either way: a failed Cloudflare build is a
+// warning. It fails only when Cloudflare never reports on the commit.
 //
 // IndexNow engines fetch a submitted URL within minutes, so submitting
 // before the Worker has deployed is worse than submitting an hour late.
@@ -20,19 +20,23 @@ import { appendFileSync } from 'node:fs';
 import { setTimeout as sleep } from 'node:timers/promises';
 
 const CHECK = 'Workers Builds: fluencyfoxwebsite';
+const MINUTES = 10;
 
-const [sha, minutesArg = '10'] = process.argv.slice(2);
-const { GITHUB_TOKEN, GITHUB_REPOSITORY } = process.env;
-if (!sha || !GITHUB_TOKEN || !GITHUB_REPOSITORY) {
-  console.error('Usage: GITHUB_TOKEN=... GITHUB_REPOSITORY=owner/repo node build/wait-for-deploy.mjs <sha> [minutes]');
+const { GITHUB_TOKEN, GITHUB_REPOSITORY, GITHUB_SHA, GITHUB_OUTPUT } = process.env;
+if (!GITHUB_TOKEN || !GITHUB_REPOSITORY || !GITHUB_SHA) {
+  console.error('Needs GITHUB_TOKEN, GITHUB_REPOSITORY and GITHUB_SHA.');
   process.exit(2);
 }
+const short = GITHUB_SHA.slice(0, 7);
 
-const minutes = Number(minutesArg);
-const deadline = Date.now() + minutes * 60_000;
-const url = `https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${sha}/check-runs`
-  + `?check_name=${encodeURIComponent(CHECK)}`;
+// Cloudflare posts two check runs per build: one marked in_progress when the
+// build starts, which it never closes, and a separate completed one when it
+// ends. filter=latest (GitHub's default, spelled out here because this
+// depends on it) returns only the completed one once it exists.
+const url = `https://api.github.com/repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/check-runs`
+  + `?check_name=${encodeURIComponent(CHECK)}&filter=latest`;
 
+const deadline = Date.now() + MINUTES * 60_000;
 let seen = 'no check run yet';
 while (Date.now() < deadline) {
   const res = await fetch(url, {
@@ -43,20 +47,16 @@ while (Date.now() < deadline) {
   });
   if (!res.ok) throw new Error(`GitHub returned ${res.status} ${res.statusText} for ${url}`);
 
-  // A re-run adds a second check run to the same commit. The newest one is
-  // the deploy that counts.
-  const [run] = (await res.json()).check_runs
-    .sort((a, b) => (b.started_at ?? '').localeCompare(a.started_at ?? ''));
-
+  const [run] = (await res.json()).check_runs;
   if (run?.status === 'completed') {
     const deployed = run.conclusion === 'success';
-    if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `deployed=${deployed}\n`);
+    if (GITHUB_OUTPUT) appendFileSync(GITHUB_OUTPUT, `deployed=${deployed}\n`);
     if (deployed) {
-      console.log(`Cloudflare deployed ${sha.slice(0, 7)}.`);
+      console.log(`Cloudflare deployed ${short}.`);
     } else {
       // A warning, not a failure. Cloudflare's own check on the commit is
       // already red, and a second red mark for the same event is just noise.
-      console.log(`::warning::Cloudflare's build of ${sha.slice(0, 7)} ended "${run.conclusion}", so nothing new went live and nothing was submitted. ${run.html_url}`);
+      console.log(`::warning::Cloudflare's build of ${short} ended "${run.conclusion}", so nothing new went live and nothing was submitted. ${run.html_url}`);
     }
     process.exit(0);
   }
@@ -64,6 +64,6 @@ while (Date.now() < deadline) {
   await sleep(15_000);
 }
 
-console.error(`No finished "${CHECK}" check on ${sha.slice(0, 7)} after ${minutes} minutes (${seen}).`);
+console.error(`No finished "${CHECK}" check on ${short} after ${MINUTES} minutes (${seen}).`);
 console.error('Nothing submitted. Check the Worker in the Cloudflare dashboard, then run npm run ping.');
 process.exit(1);

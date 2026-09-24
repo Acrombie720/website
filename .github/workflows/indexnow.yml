@@ -56,7 +56,7 @@ jobs:
         if: steps.changed.outputs.count != '0' && github.event_name == 'push'
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node build/wait-for-deploy.mjs "${{ github.sha }}" 10
+        run: node build/wait-for-deploy.mjs
 
       # deployed is false only when Cloudflare's build failed, which the step
       # above reports as a warning. On a manual run it is empty.
