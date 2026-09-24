@@ -18,10 +18,23 @@ in place.
 
 ## Deploying
 
-Cloudflare Pages is connected to this repo through the Cloudflare dashboard. There is no
-deploy config in the repo (no GitHub Actions, no `wrangler.toml`, no `CNAME`).
+The site is a Cloudflare **Worker** named `fluencyfoxwebsite`, serving static assets, wired
+to this repo through the Cloudflare dashboard. Not Cloudflare Pages, whatever this file said
+before. There is no deploy config in the repo (no GitHub Actions on `main`, no
+`wrangler.toml`, no `CNAME`).
 
 **Pushing to `main` deploys to production.** It goes live in roughly 45 seconds.
+
+**Never run `wrangler deploy` by hand.** A manual deploy uploads whatever is in one working
+copy and replaces the entire live site, without a commit, a merge or anything in git. On
+2026-09-23 three manual deploys from the `blog` branch took `/grad-schemes`,
+`/employee-development` and `/research/ai-fluency-data-index` off the live site for a day:
+that branch was cut before those pages existed, so it had never heard of them. Git pushes
+cannot do this, because git makes you merge first. Every deploy goes through `main`.
+
+Manual deploys show in the Cloudflare dashboard under Versions as "Manually deployed /
+Wrangler"; deploys from a push carry the commit message. If the live site disagrees with
+`main`, check there first.
 
 Always verify after pushing rather than assuming:
 
