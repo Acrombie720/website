@@ -8,3 +8,14 @@
 
 /*.js
   Cache-Control: public, max-age=86400
+
+# The Markdown copies of posts, for the agents that ask for Markdown.
+# Without this they would be offered as a download rather than read.
+/blog/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+# Astro fingerprints these filenames, so a change ships a new name and the
+# old one can be cached forever. Last rule wins where two match.
+/blog/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

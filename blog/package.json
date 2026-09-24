@@ -1,0 +1,17 @@
+{
+  "name": "fluencyfox-blog",
+  "description": "The Astro project behind fluencyfox.ai/blog. Builds into ../fluencyfox-site_6/blog.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node emit.mjs",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "astro": "^7.3.3",
+    "markdown-it": "^15.0.2",
+    "sanitize-html": "^2.17.7"
+  }
+}

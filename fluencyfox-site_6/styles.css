@@ -766,7 +766,7 @@ footer { padding: 50px 0 40px; }
 .footer-divider { height: 1px; background: rgba(0,0,0,0.08); width: 100%; margin-bottom: 30px; }
 .footer-cols {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 .footer-cols h5 { font-size: 15px; color: var(--grey-300); font-weight: 500; margin-bottom: 20px; }

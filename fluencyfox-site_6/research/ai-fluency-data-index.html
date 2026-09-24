@@ -42,7 +42,16 @@
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
-.ff-bar-logo img { height: 40px; width: auto; display: block; }
+/* The wordmark is drawn in #1E1E1E, so on a page with a dark palette it
+   disappears into the background. A page that goes dark sets --logo-filter in
+   its own palette block; a page that does not is left alone. The blog is the
+   only page that goes dark; the research pages no longer do. */
+.ff-bar-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+  filter: var(--logo-filter, none);
+}
 
 .ff-bar-nav {
   margin-left: auto;
@@ -188,7 +197,7 @@
 
 .ff-foot-cols {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
@@ -1295,7 +1304,11 @@ footer.foot {
       <a href="/#measure">What we Measure</a>
       <a href="/grad-schemes">Grad Schemes</a>
       <a href="/employee-development">Employee Development</a>
+    </div>
+    <div>
+      <h2>Insights</h2>
       <a href="/research/ai-fluency-data-index">Research</a>
+      <a href="/blog">Blog</a>
     </div>
     <div>
       <h2>Docs</h2>

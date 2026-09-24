@@ -1,0 +1,80 @@
+---
+import { site } from '../../../build/site.config.mjs';
+import Base from '../layouts/Base.astro';
+import { publishedPosts, longDate, isoDate } from '../lib/posts';
+
+const posts = await publishedPosts();
+
+const title = 'The Fluencyfox blog: AI fluency, assessment and hiring';
+const description = 'What we learn from running real-world AI fluency assessments: how candidates actually use AI tools, what predicts a hire, and how to test for it.';
+
+// An empty index is a thin page. Better to keep it out of the index until
+// there is something on it than to have Google's first impression be nothing.
+const schema = posts.length ? [{
+  '@type': 'WebSite',
+  '@id': site.origin + '/#website',
+  url: site.origin + '/',
+  name: site.name,
+  inLanguage: site.lang,
+  publisher: { '@id': site.origin + '/#organization' },
+}, {
+  '@type': 'Organization',
+  '@id': site.origin + '/#organization',
+  name: site.name,
+  url: site.origin + '/',
+  logo: { '@type': 'ImageObject', url: site.origin + site.logo },
+  sameAs: [site.linkedin, site.parent.url],
+}, {
+  '@type': 'Blog',
+  '@id': site.origin + '/blog#blog',
+  name: 'The Fluencyfox blog',
+  description,
+  url: site.origin + '/blog',
+  inLanguage: site.lang,
+  publisher: { '@id': site.origin + '/#organization' },
+  blogPost: posts.map(post => ({
+    '@type': 'BlogPosting',
+    '@id': `${site.origin}/blog/${post.id}#article`,
+    headline: post.data.title,
+    description: post.data.description,
+    url: `${site.origin}/blog/${post.id}`,
+    datePublished: isoDate(post.data.published),
+    dateModified: isoDate(post.data.updated ?? post.data.published),
+  })),
+}] : [];
+---
+<Base
+  title={title}
+  description={description}
+  path="/blog"
+  noindex={posts.length === 0}
+  markdown="/blog/index.md"
+  schema={schema}
+  breadcrumb={[{ name: 'Blog', url: site.origin + '/blog' }]}
+>
+  <div class="wrap">
+    <header class="top">
+      <p class="eyebrow">Fluencyfox · Blog</p>
+      <h1>Notes on hiring for AI fluency</h1>
+      <p class="dek">{description}</p>
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="empty">No posts yet. The first one is being written.</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map(post => (
+          <li>
+            <a class="card" href={`/blog/${post.id}`}>
+              <time datetime={isoDate(post.data.published)}>{longDate(post.data.published)}</time>
+              <div>
+                <h2>{post.data.title}{post.data.draft && ' [draft]'}</h2>
+                <p>{post.data.description}</p>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</Base>

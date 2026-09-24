@@ -1,0 +1,450 @@
+/* Blog typography. The palette and the type scale are lifted from
+   build/assets/css/data-index.css so the blog and the research pages read as
+   one publication, and shell.css picks these variables up for the bar and
+   the footer without knowing anything about this file. */
+
+:root {
+  /* The homepage palette, by its own names, so the blog and the marketing
+     site are literally the same colours rather than two greys that nearly
+     match. Source is styles.css at the site root.
+
+       --milk #f0f4f6   page background
+       --white          cards
+       --dark #1e1e1e   headings
+       --grey-600       body text
+       --grey-500       dates, labels, anything secondary
+       --grey-100       hairlines
+       --blue-dark      links and accents
+       --blue-bubble    the tinted blocks
+
+     Only --rule-soft is not from that list. It is a lighter hairline for
+     rows inside a block, mixed between --milk and --grey-100. */
+  --paper:     #f0f4f6;
+  --surface:   #ffffff;
+  --ink:       #1e1e1e;
+  --ink-2:     #606060;
+  --ink-3:     #6e7270;
+  --rule:      #e7e7e7;
+  --rule-soft: #edf1f3;
+  --link:      #5474a1;
+  --accent-bg: #dae9f1;
+  --accent:    #5474a1;
+
+  --s--1: 0.8125rem;
+  --s-0:  1rem;
+  --s-1:  1.1875rem;
+  --s-2:  1.5rem;
+  --s-3:  2.125rem;
+  --s-4:  3rem;
+
+  /* --font-* come from the Astro fonts config, which serves them from this
+     origin and supplies a metric-matched fallback for each. The literal
+     names stay as a second fallback so the page is right even if a font
+     file fails. */
+  --ff-ui:    var(--font-ui), "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  --ff-mono:  var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --ff-serif: var(--font-serif), "Source Serif 4", Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* The same hues after dark. --dark becomes the page, --milk becomes the
+       text, and the blues lighten enough to stay legible on it. */
+    --paper:     #1a1c1e;
+    --surface:   #232629;
+    --ink:       #f0f4f6;
+    --ink-2:     #b6bcc0;
+    --ink-3:     #8d9396;
+    --rule:      #33373a;
+    --rule-soft: #2a2e31;
+    --link:      #92bad5;
+    --accent-bg: #23323f;
+    --accent:    #92bad5;
+    /* The wordmark is #1e1e1e, the same as headings, so it needs its
+       lightness inverted here. shell.css reads this. */
+    --logo-filter: invert(1) hue-rotate(180deg);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  /* Body copy is the homepage's grey and headings are its near-black, which
+     is the same relationship the marketing pages use. */
+  color: var(--ink-2);
+  font-family: var(--ff-serif);
+  font-size: var(--s-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-inline: 20px;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--link); }
+
+.wrap { max-width: 1120px; margin-inline: auto; padding-block: 48px 72px; }
+.measure { max-width: 68ch; }
+
+.eyebrow {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 14px;
+}
+
+h1 {
+  font-family: var(--ff-ui);
+  font-weight: 800;
+  font-size: var(--s-4);
+  line-height: 1.04;
+  letter-spacing: -0.032em;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+.dek {
+  font-size: var(--s-1);
+  line-height: 1.5;
+  color: var(--ink-2);
+  max-width: 62ch;
+  margin: 0;
+}
+
+.byline {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin-top: 20px;
+}
+
+header.top { border-bottom: 3px solid var(--ink); padding-bottom: 26px; margin-bottom: 40px; }
+
+/* ---------- the index ---------- */
+
+.post-list { list-style: none; margin: 0; padding: 0; }
+
+.post-list li { border-bottom: 1px solid var(--rule); }
+
+.post-list a.card {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 8px 28px;
+  padding: 26px 0;
+  color: inherit;
+  text-decoration: none;
+}
+.post-list a.card:hover h2 { text-decoration: underline; }
+
+.post-list time {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  padding-top: 6px;
+}
+
+.post-list h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  margin: 0 0 8px;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.post-list p { margin: 0; color: var(--ink-2); max-width: 68ch; }
+
+.empty {
+  border: 1px dashed var(--rule);
+  padding: 28px;
+  color: var(--ink-2);
+  font-family: var(--ff-ui);
+}
+
+@media (max-width: 680px) {
+  .post-list a.card { grid-template-columns: 1fr; gap: 6px; }
+  .post-list time { padding-top: 0; }
+  h1 { font-size: var(--s-3); }
+}
+
+/* ---------- the post ---------- */
+
+.prose { font-size: var(--s-1); line-height: 1.7; }
+
+.prose strong { color: var(--ink); }
+
+.prose > * + * { margin-top: 1.1em; }
+
+.prose h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin-top: 2em;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.prose h3 {
+  font-family: var(--ff-ui);
+  font-weight: 600;
+  font-size: var(--s-1);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 1.8em;
+}
+
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li + li { margin-top: 0.4em; }
+
+.prose blockquote {
+  margin: 1.6em 0;
+  padding: 4px 0 4px 20px;
+  border-left: 3px solid var(--accent);
+  color: var(--ink-2);
+  font-style: italic;
+}
+
+.prose code {
+  font-family: var(--ff-mono);
+  font-size: 0.85em;
+  background: var(--rule-soft);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.prose pre {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.55;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+
+.prose table { width: 100%; border-collapse: collapse; font-size: var(--s-0); }
+.prose th, .prose td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+.prose th { font-family: var(--ff-ui); font-size: var(--s--1); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-3); }
+
+.prose img { border: 1px solid var(--rule); border-radius: 6px; margin-block: 1.6em; }
+
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin-block: 2.4em; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 40px; }
+.tag {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-radius: 99px;
+  padding: 5px 12px;
+}
+
+/* ---------- what follows a post ---------- */
+
+.cta {
+  margin-top: 56px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 28px 30px;
+  max-width: 68ch;
+}
+.cta h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  letter-spacing: -0.022em;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.cta p { margin: 0 0 18px; color: var(--ink-2); }
+.cta a {
+  display: inline-block;
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--ink);
+  border-radius: 99px;
+  padding: 9px 18px;
+  color: var(--ink);
+}
+.cta a:hover { background: var(--ink); color: var(--paper); }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+}
+.pager a { color: var(--ink-2); text-decoration: none; max-width: 32ch; }
+.pager a:hover { color: var(--ink); text-decoration: underline; }
+.pager b { display: block; font-family: var(--ff-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; margin-bottom: 4px; }
+.pager .next { text-align: right; }
+
+.backlink {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 22px;
+}
+.backlink:hover { color: var(--ink); }
+
+/* ---------- breadcrumbs ---------- */
+
+.crumbs {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 22px;
+}
+.crumbs a { color: var(--ink-3); text-decoration: none; }
+.crumbs a:hover { color: var(--ink); text-decoration: underline; }
+.crumbs span { padding-inline: 6px; }
+
+/* ---------- the answer up front ---------- */
+
+.takeaways {
+  max-width: 68ch;
+  margin: 0 0 36px;
+  padding: 22px 26px;
+  background: var(--accent-bg);
+  border-radius: 10px;
+}
+.takeaways h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+.takeaways ul { margin: 0; padding-left: 1.1em; color: var(--ink); }
+.takeaways li + li { margin-top: 8px; }
+
+/* ---------- contents ---------- */
+
+.toc {
+  max-width: 68ch;
+  margin: 0 0 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--rule);
+}
+.toc h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+.toc ol {
+  margin: 0;
+  padding-left: 1.3em;
+  font-family: var(--ff-ui);
+  font-size: var(--s-0);
+}
+.toc li + li { margin-top: 6px; }
+.toc a { color: var(--ink-2); text-decoration: none; }
+.toc a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Every heading has an id, so the contents list and anyone quoting a section
+   can link straight to it. This keeps the target clear of the top edge. */
+.prose h2, .prose h3 { scroll-margin-top: 24px; }
+
+/* ---------- questions ---------- */
+
+.faq { margin-top: 56px; }
+.faq h2 {
+  font-family: var(--ff-ui);
+  font-weight: 700;
+  font-size: var(--s-2);
+  line-height: 1.15;
+  letter-spacing: -0.022em;
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+}
+.faq dl { margin: 0; }
+.faq-row { padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+.faq-row:last-child { border-bottom: 0; }
+.faq dt {
+  font-family: var(--ff-ui);
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.faq dd { margin: 0; color: var(--ink-2); }
+
+/* ---------- cite this ---------- */
+
+.cite { margin-top: 56px; }
+.cite h2 {
+  font-family: var(--ff-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 10px;
+}
+.cite-line {
+  font-family: var(--ff-mono);
+  font-size: var(--s--1);
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--rule-soft);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.cite-alt {
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  color: var(--ink-3);
+  margin: 10px 0 0;
+}
+.cite-alt a { color: var(--ink-2); }
+
+.cite-copy {
+  font-family: var(--ff-ui);
+  font-size: var(--s--1);
+  font-weight: 600;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 99px;
+  padding: 5px 13px;
+  margin-left: 10px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.cite-copy:hover { border-color: var(--ink); color: var(--ink); }
