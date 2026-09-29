@@ -19,7 +19,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap"></noscript>
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
         </thead>
         <tbody>
           <tr>
-            <td class="person-col"><div class="person-cell"><div class="avatar" style="background:var(--blue-dark)">P</div><div class="name-title"><p>Priya K.</p><p>Team Lead</p></div></div></td>
+            <td class="person-col"><div class="person-cell"><img class="avatar avatar-photo" src="assets/avatar-priya.webp" alt="Priya K." width="42" height="42" loading="lazy"><div class="name-title"><p>Priya K.</p><p>Team Lead</p></div></div></td>
             <td class="score-col" data-label="Core Work"><span class="score-pill" style="background:var(--blue-dark)">8.9</span></td>
             <td class="score-col" data-label="Comms"><span class="score-pill" style="background:var(--blue-light)">5.1</span></td>
             <td class="score-col" data-label="Systems"><span class="score-pill" style="background:#7c9cc9">7.2</span></td>
@@ -65,7 +65,7 @@
             <td class="score-col" data-label="Avg"><span class="score-pill avg">7.0</span></td>
           </tr>
           <tr>
-            <td class="person-col"><div class="person-cell"><div class="avatar" style="background:#7c9cc9">M</div><div class="name-title"><p>Marcus D.</p><p>Account exec</p></div></div></td>
+            <td class="person-col"><div class="person-cell"><img class="avatar avatar-photo" src="assets/avatar-marcus.webp" alt="Marcus D." width="42" height="42" loading="lazy"><div class="name-title"><p>Marcus D.</p><p>Account exec</p></div></div></td>
             <td class="score-col" data-label="Core Work"><span class="score-pill" style="background:#7c9cc9">7.4</span></td>
             <td class="score-col" data-label="Comms"><span class="score-pill" style="background:#c6dbe9">3.2</span></td>
             <td class="score-col" data-label="Systems"><span class="score-pill" style="background:var(--blue-light)">5.5</span></td>
@@ -73,7 +73,7 @@
             <td class="score-col" data-label="Avg"><span class="score-pill avg">5.5</span></td>
           </tr>
           <tr>
-            <td class="person-col"><div class="person-cell"><div class="avatar" style="background:var(--blue-light)">H</div><div class="name-title"><p>Hannah W.</p><p>Ops manager</p></div></div></td>
+            <td class="person-col"><div class="person-cell"><img class="avatar avatar-photo" src="assets/avatar-hannah.webp" alt="Hannah W." width="42" height="42" loading="lazy"><div class="name-title"><p>Hannah W.</p><p>Ops manager</p></div></div></td>
             <td class="score-col" data-label="Core Work"><span class="score-pill" style="background:#7c9cc9">6.8</span></td>
             <td class="score-col" data-label="Comms"><span class="score-pill" style="background:var(--blue-dark)">8.6</span></td>
             <td class="score-col" data-label="Systems"><span class="score-pill" style="background:var(--blue-dark)">8.1</span></td>
@@ -81,7 +81,7 @@
             <td class="score-col" data-label="Avg"><span class="score-pill avg">8.1</span></td>
           </tr>
           <tr>
-            <td class="person-col"><div class="person-cell"><div class="avatar" style="background:var(--blue-dark)">T</div><div class="name-title"><p>Tom R.</p><p>Engineer</p></div></div></td>
+            <td class="person-col"><div class="person-cell"><img class="avatar avatar-photo" src="assets/avatar-tom.webp" alt="Tom R." width="42" height="42" loading="lazy"><div class="name-title"><p>Tom R.</p><p>Engineer</p></div></div></td>
             <td class="score-col" data-label="Core Work"><span class="score-pill" style="background:var(--blue-dark)">8.2</span></td>
             <td class="score-col" data-label="Comms"><span class="score-pill" style="background:#c6dbe8">2.9</span></td>
             <td class="score-col" data-label="Systems"><span class="score-pill" style="background:#7c9cc9">4.4</span></td>
@@ -154,7 +154,13 @@
         <h3>Point training at the real gaps</h3>
         <p>Stop buying one course for everyone. The map shows you which capability areas are weak and which teams are already fine, so the budget goes where it moves something.</p>
       </div>
-      <div class="step-card">
+      <div class="step-card step-card-video">
+        <div class="step-visual">
+          <video autoplay muted loop playsinline webkit-playsinline poster="assets/champions-demo-poster.webp">
+            <source src="assets/champions-demo.mp4" type="video/mp4">
+            <source src="assets/champions-demo.webm" type="video/webm">
+          </video>
+        </div>
         <div class="step-num">02</div>
         <h3>Find your internal champions</h3>
         <p>Every organisation already has people quietly doing this well, and they are rarely the ones you would guess. Rollouts led by them land better than rollouts led by a vendor.</p>
