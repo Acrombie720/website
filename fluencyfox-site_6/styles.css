@@ -485,6 +485,13 @@ h1, h2, h3, p { margin: 0; }
 .problem-card.photo h3, .problem-card.photo p { color: #fff; }
 .problem-card.photo p { color: #dfdfdf; }
 
+/* This page's middle Problem card uses its own photo (a chair, not the
+   default person shot). Scoped so the shared .problem-card.photo used
+   elsewhere keeps its original image. */
+.page-employee-development .problem-card.photo {
+  background-image: linear-gradient(180deg, rgba(26,26,26,0) 0%, rgba(26,26,26,1) 73%), url("assets/problem-card-chair.webp");
+}
+
 /* ---------- How it works ---------- */
 .how-card {
   background: white;
@@ -1149,6 +1156,12 @@ footer { padding: 50px 0 40px; }
 .page-employee-development .hero.hero-plain .lede { max-width: 760px; }
 .page-employee-development .hero.hero-plain.wrap { position: relative; z-index: 2; }
 
+/* Keep the three Problem-section card titles lined up at the same height
+   even though their paragraphs run to different lengths (the middle
+   photo card's copy is shorter) — reserve the same vertical space for
+   every card's paragraph so the text block isn't pinned lower. */
+.page-employee-development .problem-card p { min-height: 102px; }
+
 /* Scores table sitting on top of a full-bleed photo behind the hero. */
 .ed-visual {
   position: relative;
@@ -1273,6 +1286,7 @@ footer { padding: 50px 0 40px; }
   margin-left: -50vw;
   margin-right: -50vw;
   margin-top: -160px;
+  margin-bottom: 0;
   padding-top: 220px;
   padding-bottom: 260px;
   display: flex;
