@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Fluency Assessor — capability map animation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap">
+
+<style>
+  :root{
+    --header:#1E1E1E;
+    --text:#383D3A;
+    --button-dark:#5474A1;
+    --border:#E5E7E5;
+    --weak:#911F18;   /* design system's error-800 — used as the "red" end */
+    --mid:#E8B54A;
+    --strong:#5FA873; /* close to the app's existing AI-score green */
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    background:#FFFFFF;
+    display:flex; align-items:center; justify-content:center;
+    padding:40px 20px;
+    font-family:"Poppins", -apple-system, "Segoe UI", sans-serif;
+    color:var(--text);
+  }
+
+  /* nothing but the map itself + the floating tags on top of it */
+  .map-wrap{
+    position:relative;
+    width:1040px; max-width:100%;
+    height:560px;
+    background:#FFFFFF;
+    overflow:hidden;
+  }
+
+  /* the blurred heat field: a handful of sparse, soft color shapes that
+     drift and reshape — mostly white space, like the reference, not a
+     wall-to-wall wash. Each blob fades to transparent within its own
+     bounds (not a hard-filled disc), and all of them stay well clear of
+     the box edge, so nothing ever reads as a filled rectangle. */
+  .heat-field{
+    position:absolute; inset:-40px;
+    opacity:0;
+    transition:opacity 1.3s ease;
+    filter:blur(30px) saturate(120%);
+    animation:fieldPan 34s ease-in-out infinite;
+  }
+  .heat-field.in{ opacity:1; }
+
+  @keyframes fieldPan{
+    0%, 100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(0.6%,-0.6%) scale(1.02); }
+  }
+
+  .blob{
+    position:absolute;
+    opacity:.9;
+  }
+
+  /* ---------------- levitating tags ---------------- */
+  .tag{
+    position:absolute; z-index:6;
+    display:flex; align-items:center; gap:7px;
+    background:#fff; border:1px solid var(--border);
+    border-radius:999px; padding:7px 14px 7px 10px;
+    font-size:12px; font-weight:500; color:var(--header);
+    box-shadow:0 10px 22px rgba(30,30,30,0.16);
+    opacity:0; white-space:nowrap;
+    transition:opacity .5s ease;
+  }
+  .tag.in{ opacity:1; animation:levitate 3.6s ease-in-out infinite; }
+  .tag .dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .tag.weak .dot{ background:var(--weak); }
+  .tag.spend .dot{ background:var(--button-dark); }
+  .tag.strong .dot{ background:var(--strong); }
+
+  /* pin: marks the exact data point a levitating tag refers to */
+  .pin{
+    position:absolute; z-index:5; width:9px; height:9px; margin:-4.5px;
+    border-radius:50%; background:#fff; box-shadow:0 0 0 2px rgba(255,255,255,.9), 0 2px 6px rgba(0,0,0,.25);
+    opacity:0; transition:opacity .5s ease;
+  }
+  .pin.in{ opacity:1; }
+  .pin-line{
+    position:absolute; z-index:4; width:2px;
+    background:rgba(255,255,255,.85);
+    opacity:0; transition:opacity .5s ease;
+  }
+  .pin-line.in{ opacity:1; }
+
+  @keyframes levitate{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-9px); }
+  }
+
+  @media (max-width: 720px){
+    .map-wrap{ height:340px; }
+    .tag{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="map-wrap" id="mapWrap">
+  <div class="heat-field" id="heatField"></div>
+
+  <div class="pin-line" id="lineWeak"></div>
+  <div class="pin-line" id="lineSpend"></div>
+  <div class="pin-line" id="lineStrong"></div>
+  <div class="pin" id="pinWeak"></div>
+  <div class="pin" id="pinSpend"></div>
+  <div class="pin" id="pinStrong"></div>
+
+  <div class="tag weak" id="tagWeak"><span class="dot"></span>Weak spot — People Ops</div>
+  <div class="tag spend" id="tagSpend"><span class="dot"></span>Budget goes here</div>
+  <div class="tag strong" id="tagStrong"><span class="dot"></span>Fluent — Engineering</div>
+</div>
+
+<script>
+(function(){
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---- color ramp: 0 -> weak (red), 5 -> mid (amber), 10 -> strong (green) ----
+  function hexToRgb(hex){
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  const WEAK = hexToRgb('#911F18');
+  const MID  = hexToRgb('#E8B54A');
+  const STRONG = hexToRgb('#5FA873');
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function rgbFor(score){
+    const t = Math.max(0, Math.min(10, score)) / 10;
+    const [a, b] = t < 0.5 ? [WEAK, MID] : [MID, STRONG];
+    const localT = t < 0.5 ? t / 0.5 : (t - 0.5) / 0.5;
+    return [0,1,2].map(i => Math.round(lerp(a[i], b[i], localT)));
+  }
+
+  // The three data points the tags call out by name (still real underlying
+  // scores — just no grid/labels drawn on top anymore). Pulled lower/redder
+  // than the raw score would put them so the problem zones actually read
+  // as red, not just a muddy orange.
+  const weakPoint   = { x:60, y:56, score:1.1, size:190 }; // People Ops — Systems
+  const spendPoint  = { x:26, y:70, score:2.1, size:170 }; // People Ops — Core Work
+  const strongPoint = { x:28, y:32, score:8.9, size:200 }; // Engineering — Core Work
+
+  // A handful of extra soft, SPARSE shapes so the field reads as a loose
+  // weather system with plenty of white showing through — not a solid
+  // wash. Kept toward the middle (roughly 24–76%) with room left over for
+  // the drift animation, so motion never approaches the frame edge.
+  const filler = [
+    { x:48, y:24, score:7.6, size:150 },
+    { x:72, y:32, score:6.2, size:150 },
+    { x:44, y:48, score:5.5, size:160 },
+    { x:66, y:66, score:5.0, size:150 },
+    { x:78, y:54, score:6.4, size:150 },
+    { x:38, y:60, score:4.3, size:140 },
+  ];
+
+  const points = [weakPoint, spendPoint, strongPoint, ...filler];
+
+  const mapWrap = document.getElementById('mapWrap');
+  const heatField = document.getElementById('heatField');
+  const styleTag = document.createElement('style');
+  document.head.appendChild(styleTag);
+
+  let seed = 11;
+  const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+
+  // a random irregular super-ellipse-ish border-radius string, so each
+  // shape reads as a lumpy organic blob rather than a perfect circle
+  function randomRadius(){
+    const v = () => 30 + Math.round(rnd() * 45); // 30–75%
+    return `${v()}% ${v()}% ${v()}% ${v()}% / ${v()}% ${v()}% ${v()}% ${v()}%`;
+  }
+
+  // build one irregular, morphing color shape per data point. Each gets its
+  // own @keyframes (injected into <head>) with several waypoints so the
+  // shape, size and position all change continuously and never repeat in
+  // sync with its neighbors — closer to a real moving weather system.
+  function buildBlobs(){
+    let rules = '';
+
+    points.forEach((p, i) => {
+      const [r,g,b] = rgbFor(p.score);
+      const blob = document.createElement('div');
+      blob.className = 'blob';
+      blob.style.left = p.x + '%';
+      blob.style.top = p.y + '%';
+      blob.style.width = p.size + 'px';
+      blob.style.height = Math.round(p.size * (0.8 + rnd() * 0.3)) + 'px';
+      // fades to transparent WITHIN its own box, instead of a hard-filled
+      // disc — keeps neighboring colors from reading as solidly merged
+      blob.style.background =
+        `radial-gradient(ellipse closest-side, rgba(${r},${g},${b},1) 0%, rgba(${r},${g},${b},0.78) 55%, rgba(${r},${g},${b},0) 100%)`;
+
+      const name = `blobMove${i}`;
+      const steps = [0, 1, 2, 3, 4].map(s => {
+        const dx = Math.round(rnd() * 70 - 35);
+        const dy = Math.round(rnd() * 60 - 30);
+        const scale = (0.85 + rnd() * 0.35).toFixed(2);
+        const rot = Math.round(rnd() * 34 - 17);
+        return { pct: s === 0 || s === 4 ? (s === 0 ? 0 : 100) : s * 25,
+                 dx, dy, scale, rot, radius: randomRadius() };
+      });
+      // keep the loop seamless: last stop mirrors the first
+      steps[4] = { ...steps[4], dx: 0, dy: 0, scale: 1, rot: 0, radius: steps[0].radius };
+      steps[0] = { ...steps[0], dx: 0, dy: 0, scale: 1, rot: 0 };
+
+      const body = steps.map(st =>
+        `${st.pct}%{ transform:translate(-50%,-50%) translate(${st.dx}px,${st.dy}px) scale(${st.scale}) rotate(${st.rot}deg); border-radius:${st.radius}; }`
+      ).join('\n');
+      rules += `@keyframes ${name}{ ${body} }\n`;
+
+      const dur = (7 + rnd() * 5).toFixed(1); // 7–12s per full cycle — energetic, still fluid
+      const delay = (-rnd() * dur).toFixed(1);
+      blob.style.animation = `${name} ${dur}s ease-in-out infinite`;
+      blob.style.animationDelay = delay + 's';
+      blob.style.borderRadius = randomRadius();
+
+      heatField.appendChild(blob);
+    });
+
+    styleTag.textContent = rules;
+  }
+  buildBlobs();
+
+  // the heat field fades in once and then keeps morphing/drifting forever —
+  // it never resets, so the motion reads as a live map, not a looping clip.
+  // Only the tags cycle on top of it.
+  setTimeout(() => heatField.classList.add('in'), 200);
+
+  async function run(){
+    // reset (tags/pins only — the heat field underneath keeps moving)
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('in'));
+    document.querySelectorAll('.pin').forEach(t => t.classList.remove('in'));
+    document.querySelectorAll('.pin-line').forEach(t => t.classList.remove('in'));
+
+    await sleep(900);
+
+    const wrapRect = mapWrap.getBoundingClientRect();
+
+    const tagWeak = document.getElementById('tagWeak');
+    const tagSpend = document.getElementById('tagSpend');
+    const tagStrong = document.getElementById('tagStrong');
+
+    function placeTag(tagEl, pinEl, lineEl, point, dx){
+      const px = wrapRect.width * point.x / 100;
+      const py = wrapRect.height * point.y / 100;
+      const tagLeft = Math.max(0, px - tagEl.offsetWidth/2 + (dx||0));
+      const tagTop = py - tagEl.offsetHeight - 26;
+      tagEl.style.left = tagLeft + 'px';
+      tagEl.style.top = tagTop + 'px';
+
+      pinEl.style.left = px + 'px';
+      pinEl.style.top = py + 'px';
+
+      const lineTop = tagTop + tagEl.offsetHeight;
+      lineEl.style.left = (px - 1) + 'px';
+      lineEl.style.top = lineTop + 'px';
+      lineEl.style.height = Math.max(0, py - lineTop) + 'px';
+    }
+
+    placeTag(tagWeak, document.getElementById('pinWeak'), document.getElementById('lineWeak'), weakPoint, -6);
+    placeTag(tagSpend, document.getElementById('pinSpend'), document.getElementById('lineSpend'), spendPoint, 34);
+    placeTag(tagStrong, document.getElementById('pinStrong'), document.getElementById('lineStrong'), strongPoint, 0);
+
+    tagWeak.classList.add('in');
+    document.getElementById('pinWeak').classList.add('in');
+    document.getElementById('lineWeak').classList.add('in');
+    await sleep(220);
+    tagSpend.classList.add('in');
+    document.getElementById('pinSpend').classList.add('in');
+    document.getElementById('lineSpend').classList.add('in');
+    await sleep(220);
+    tagStrong.classList.add('in');
+    document.getElementById('pinStrong').classList.add('in');
+    document.getElementById('lineStrong').classList.add('in');
+
+    await sleep(6000);
+    run();
+  }
+
+  run();
+})();
+</script>
+
+</body>
+</html>

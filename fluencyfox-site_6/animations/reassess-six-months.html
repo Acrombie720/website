@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Fluency Assessor — re-assessment animation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap">
+
+<style>
+  :root{
+    --header:#1E1E1E;
+    --text:#383D3A;
+    --border:#E5E7E5;
+    --grey-500:#6E7270;
+    --grey-300:#9A968E;
+    --milk:#F3F0E9;
+    --not-yet:#C6DBE8;
+    --basic:#92BAD5;
+    --confident:#7B9CC9;
+    --fluent:#5474A1;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    background:#FFFFFF;
+    display:flex; align-items:center; justify-content:center;
+    padding:40px 20px;
+    font-family:"Poppins", -apple-system, "Segoe UI", sans-serif;
+    color:var(--text);
+  }
+
+  .frame{
+    width:1040px; max-width:100%;
+    background:#FFFFFF;
+    border-radius:18px;
+    overflow:hidden;
+  }
+  .frame-top{
+    display:flex; align-items:center; gap:10px;
+    padding:16px 22px; border-bottom:1px solid var(--border);
+  }
+  .frame-top .dot{ width:9px; height:9px; border-radius:50%; background:#E3E1DC; }
+  .frame-top .crumb{ font-size:12.5px; color:#9A968E; margin-left:6px; }
+  .frame-top .crumb b{ color:var(--text); font-weight:500; }
+
+  .stage{ position:relative; width:100%; min-height:420px; padding:52px 48px; display:flex; align-items:center; justify-content:center; }
+
+  .card{
+    width:100%; max-width:900px; background:#fff; border-radius:16px;
+    padding:30px 34px 26px; box-shadow:0 14px 34px rgba(30,30,30,0.07);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:206px 150px repeat(5, minmax(72px,1fr));
+    column-gap:12px; row-gap:14px; align-items:center;
+  }
+
+  .head-cell{
+    font-family:"Poppins", sans-serif; font-size:12.5px; font-weight:600;
+    letter-spacing:.01em; white-space:nowrap;
+    color:var(--grey-500); text-align:center; padding-bottom:12px;
+    border-bottom:1px solid var(--border);
+  }
+  .head-cell.person{ text-align:left; }
+  .head-blank{
+    font-family:"Poppins", sans-serif; font-size:12.5px; font-weight:600;
+    line-height:normal; visibility:hidden;
+    border-bottom:1px solid var(--border); padding-bottom:12px;
+  }
+
+  .person-cell{
+    grid-column:1; grid-row:2 / span 2;
+    display:flex; align-items:center; gap:12px;
+  }
+  .avatar{
+    width:46px; height:46px; border-radius:50%; flex-shrink:0;
+    object-fit:cover; object-position:center 30%;
+    box-shadow:0 0 0 1px rgba(0,0,0,0.04);
+  }
+  .person-meta{ display:flex; flex-direction:column; }
+  .person-name{ font-size:19px; font-weight:500; color:var(--header); line-height:1.25; }
+  .person-role{ font-size:13.5px; color:var(--grey-300); }
+
+  .time-tag{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:12px; font-weight:500; color:var(--grey-500);
+  }
+  .time-tag .ring{ width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .time-tag.today .ring{ background:#9A968E; }
+  .time-tag.later .ring{ background:var(--fluent); }
+
+  .score{
+    height:52px; border-radius:11px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:17px; font-weight:600; color:#fff;
+    background:var(--not-yet);
+    transition:background-color .25s linear;
+  }
+  .score.avg{ color:var(--header); background:var(--milk) !important; }
+
+  .legend{ display:flex; flex-wrap:wrap; justify-content:center; gap:9px 22px; margin:22px 0 0; padding:0; }
+  .legend li{ list-style:none; display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--grey-500); }
+  .legend span.swatch{ width:14px; height:14px; border-radius:5px; flex-shrink:0; }
+
+  @media (max-width: 760px){
+    .grid{ grid-template-columns:150px 110px repeat(5, minmax(56px,1fr)); column-gap:8px; }
+    .person-name{ font-size:16px; }
+    .score{ font-size:14px; height:44px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="frame">
+  <div class="frame-top">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="crumb">fluencyfox.ai / <b>Re-Assessment</b></div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="card">
+      <div class="grid">
+        <div class="head-cell person">PERSON</div>
+        <div class="head-blank">WHEN</div>
+        <div class="head-cell">CORE WORK</div>
+        <div class="head-cell">COMMS</div>
+        <div class="head-cell">SYSTEMS</div>
+        <div class="head-cell">ADMIN</div>
+        <div class="head-cell">AVG</div>
+
+        <div class="person-cell">
+          <img class="avatar" src="../assets/avatar-priya.webp" alt="">
+          <div class="person-meta">
+            <span class="person-name">Priya K.</span>
+            <span class="person-role">Team Lead</span>
+          </div>
+        </div>
+
+        <div class="time-tag today"><span class="ring"></span>Today</div>
+        <div class="score" id="t0-0">0.0</div>
+        <div class="score" id="t0-1">0.0</div>
+        <div class="score" id="t0-2">0.0</div>
+        <div class="score" id="t0-3">0.0</div>
+        <div class="score avg" id="t0-avg">0.0</div>
+
+        <div class="time-tag later"><span class="ring"></span>Six months later</div>
+        <div class="score" id="t1-0">0.0</div>
+        <div class="score" id="t1-1">0.0</div>
+        <div class="score" id="t1-2">0.0</div>
+        <div class="score" id="t1-3">0.0</div>
+        <div class="score avg" id="t1-avg">0.0</div>
+      </div>
+
+      <ul class="legend">
+        <li><span class="swatch" style="background:var(--not-yet)"></span>Not yet using AI</li>
+        <li><span class="swatch" style="background:var(--basic)"></span>Basic use</li>
+        <li><span class="swatch" style="background:var(--confident)"></span>Confident</li>
+        <li><span class="swatch" style="background:var(--fluent)"></span>Fluent</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // real numbers from the live "Find out how AI-fluent your company really
+  // is" table — Priya K.'s row today, plus a plausible re-score 6 months on.
+  const TODAY = [8.9, 5.1, 7.2, 7.0];
+  const LATER = [9.3, 7.6, 8.5, 8.2];
+
+  const TIERS = [
+    { max:4,  color:[198,219,232] }, // not yet using AI
+    { max:6,  color:[146,186,213] }, // basic use
+    { max:8,  color:[123,156,201] }, // confident
+    { max:11, color:[84,116,161]  }, // fluent
+  ];
+  function lerp(a, b, t){ return a + (b - a) * t; }
+  function colorAt(v){
+    const idx = TIERS.findIndex(t => v < t.max);
+    const i = idx === -1 ? TIERS.length - 1 : idx;
+    const prev = TIERS[Math.max(0, i - 1)].color;
+    const cur = TIERS[i].color;
+    const lo = i === 0 ? 0 : TIERS[i - 1].max;
+    const hi = TIERS[i].max;
+    const t = Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+    return [0,1,2].map(k => Math.round(lerp(prev[k], cur[k], t)));
+  }
+
+  function cellsFor(row){ return [0,1,2,3].map(i => document.getElementById(`t${row}-${i}`)); }
+  const cells0 = cellsFor(0);
+  const cells1 = cellsFor(1);
+  const avg0 = document.getElementById('t0-avg');
+  const avg1 = document.getElementById('t1-avg');
+
+  function paintRow(cells, avgEl, values){
+    values.forEach((v, i) => {
+      cells[i].textContent = v.toFixed(1);
+      const [r,g,b] = colorAt(v);
+      cells[i].style.background = `rgb(${r},${g},${b})`;
+    });
+    const avg = values.reduce((a,b) => a+b, 0) / values.length;
+    avgEl.textContent = avg.toFixed(1);
+  }
+
+  async function countUpRow(cells, avgEl, target, duration){
+    const steps = Math.round(duration / 35);
+    for(let i=1;i<=steps;i++){
+      const t = i / steps;
+      const eased = 1 - Math.pow(1 - t, 3); // ease-out
+      paintRow(cells, avgEl, target.map(v => v * eased));
+      await sleep(35);
+    }
+    paintRow(cells, avgEl, target);
+  }
+
+  function resetRow(cells, avgEl){
+    paintRow(cells, avgEl, [0,0,0,0]);
+  }
+
+  async function run(){
+    resetRow(cells0, avg0);
+    resetRow(cells1, avg1);
+    await sleep(500);
+
+    await countUpRow(cells0, avg0, TODAY, 1300);
+    await sleep(600);
+    await countUpRow(cells1, avg1, LATER, 1300);
+
+    await sleep(3200);
+    run();
+  }
+
+  run();
+})();
+</script>
+
+</body>
+</html>
