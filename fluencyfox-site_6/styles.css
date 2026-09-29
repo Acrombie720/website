@@ -1134,3 +1134,226 @@ footer { padding: 50px 0 40px; }
   .pull-quote blockquote { font-size: 21px; }
   .stat-figure b { font-size: 50px; }
 }
+
+/* ==========================================================================
+   Employee Development page - custom redesign
+   Everything below is scoped under body.page-employee-development so it
+   cannot change how .how-card / .cta-banner / .split-card look on any
+   other page that reuses those shared class names.
+   ========================================================================== */
+
+.mark-group-svg { align-items: center; }
+.mark-group-svg .mark-svg { height: 32px; width: auto; }
+.mark-group-money .mark-svg { height: 22px; width: auto; }
+
+.page-employee-development .hero.hero-plain .lede { max-width: 760px; }
+.page-employee-development .hero.hero-plain.wrap { position: relative; z-index: 2; }
+
+/* Scores table sitting on top of a full-bleed photo behind the hero. */
+.ed-visual {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -105px;
+  z-index: 1;
+}
+.ed-visual .ed-visual-bg { width: 100%; display: block; }
+.ed-visual-table {
+  position: absolute;
+  left: 50%;
+  top: 19%;
+  transform: translateX(-50%);
+  width: min(83.47%, 1238px);
+  z-index: 1;
+}
+.ed-visual-caption {
+  margin-top: 20px;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .ed-visual-table { position: static; transform: none; width: auto; margin: 24px 24px 0; }
+  .ed-visual { padding-bottom: 24px; }
+  .ed-visual-caption { color: var(--grey-500); }
+}
+
+/* "A map, then a plan." - same tall .how-card / .how-embed pattern the
+   homepage uses, reused here at a smaller fixed size. Scoped to this page
+   only, so the homepage's own .how-card rows are untouched. */
+.page-employee-development .how-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 42px;
+}
+.page-employee-development .how-wrap .section-head { margin-bottom: 0; }
+.page-employee-development .how-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  width: 100%;
+}
+.page-employee-development .how-card {
+  background: transparent;
+  border: 1.5px dashed var(--blue-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 0;
+}
+.page-employee-development .how-card.reverse { flex-direction: row-reverse; }
+.page-employee-development .how-text { flex: 0 0 44%; }
+.page-employee-development .how-visual {
+  position: relative;
+  flex: 1;
+  height: 352px;
+  max-width: 546px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-employee-development .how-embed iframe {
+  position: static;
+  transform-origin: center center;
+  flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .page-employee-development .how-card, .page-employee-development .how-card.reverse { flex-direction: column; }
+  .page-employee-development .how-text { flex: none; }
+  .page-employee-development .how-visual { max-width: 100%; flex: none; width: 100%; }
+}
+
+/* "Compared to what, and who sees it." - one card highlighted in blue with
+   a small slider vector, both cards a fixed matching height. */
+.page-employee-development .split-card {
+  height: 395px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.page-employee-development .split-card.highlight {
+  background: var(--blue-light);
+  justify-content: space-between;
+}
+.page-employee-development .split-card.highlight .split-slider { flex-shrink: 0; }
+.page-employee-development .split-card.highlight h3,
+.page-employee-development .split-card.highlight p { color: #fff; }
+.page-employee-development .split-card.highlight a.inline-link { color: #fff; }
+.page-employee-development .split-card:not(.highlight) {
+  justify-content: center;
+  align-items: flex-start;
+}
+@media (max-width: 900px) {
+  .page-employee-development .split-card { height: auto; min-height: 280px; }
+}
+
+/* CTA banner - full-bleed photo behind a centred blue panel, flowers along
+   the bottom edge. Scoped so the shared .cta-banner used elsewhere keeps
+   its own grass-mask design. */
+.page-employee-development .cta-banner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -160px;
+  padding-top: 220px;
+  padding-bottom: 260px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+.page-employee-development .cta-banner .bg {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  z-index: 0;
+}
+.page-employee-development .cta-banner .panel {
+  position: relative;
+  z-index: 10;
+  margin: 0 20px;
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--blue-light);
+  padding: 88px 40px;
+}
+.page-employee-development .cta-banner .panel-inner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-align: center;
+}
+.page-employee-development .cta-banner h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: normal;
+  color: white;
+  font-size: 44px;
+}
+.page-employee-development .cta-banner p { max-width: 717px; color: white; font-size: 18px; line-height: normal; }
+.page-employee-development .cta-banner .btn {
+  position: relative;
+  z-index: 3;
+  width: 164px;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  color: var(--blue-light);
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.page-employee-development .cta-banner .btn:hover { background: rgba(255,255,255,0.9); }
+.page-employee-development .cta-banner .fg {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: block;
+  width: 100vw;
+  height: 320px;
+  object-fit: cover;
+  object-position: bottom;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+@media (min-width: 640px) {
+  .page-employee-development .cta-banner .panel { margin: 0; }
+  .page-employee-development .cta-banner h2 { font-size: 62px; }
+  .page-employee-development .cta-banner .fg { height: 380px; }
+}
+@media (max-width: 720px) {
+  .page-employee-development .cta-banner { padding-top: 120px; padding-bottom: 180px; }
+  .page-employee-development .cta-banner .panel { padding: 60px 24px; }
+  .page-employee-development .cta-banner h2 { font-size: 32px; }
+  .page-employee-development .cta-banner .fg { height: 220px; }
+}
