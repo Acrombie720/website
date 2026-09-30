@@ -1,0 +1,9 @@
+# Angus reviews everything that lands on main.
+#
+# Paired with branch protection on main: a pull request needs an approving
+# review from a code owner, and this file makes that Angus specifically.
+# Without it, collaborators could approve each other's PRs and merge.
+#
+# Admins are not included in the rule, so Angus can still push to main directly.
+
+* @Acrombie720
