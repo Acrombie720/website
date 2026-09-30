@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect Ashby to FluencyFox</title>
+<meta name="description" content="Connect your Ashby workspace to FluencyFox so assessments trigger from your pipeline and scores sync back to Ashby Notes.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fluencyfox.ai/integrations/ashby">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FluencyFox">
+<meta property="og:url" content="https://fluencyfox.ai/integrations/ashby">
+<meta property="og:title" content="Connect Ashby to FluencyFox">
+<meta property="og:description" content="Connect your Ashby workspace to FluencyFox so assessments trigger from your pipeline and scores sync back to Ashby Notes.">
+<meta property="og:image" content="https://fluencyfox.ai/assets/logo-mark.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css?v=4">
+<style>
+  .doc-figure {
+    margin: 28px 0 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(30,30,30,0.06);
+  }
+  .doc-figure img { width: 100%; height: auto; display: block; }
+  .doc-caption {
+    font-size: 14px;
+    color: var(--grey-500);
+    margin-top: 10px;
+  }
+  .doc-steps { counter-reset: step; list-style: none; padding-left: 0; margin: 18px 0 0; }
+  .doc-steps > li {
+    position: relative;
+    padding-left: 44px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--grey-600);
+  }
+  .doc-steps > li::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--blue-dark);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .doc-steps ul {
+    list-style: disc;
+    padding-left: 1.25em;
+    margin: 10px 0 6px;
+  }
+  .doc-steps ul li {
+    position: static;
+    padding-left: 0;
+    margin-bottom: 6px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--grey-600);
+  }
+  .doc-steps ul li::before { content: none; display: none; }
+  .doc-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.95em;
+    background: var(--blue-bubble);
+    color: var(--dark);
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 22px;
+    font-size: 15px;
+  }
+  .doc-table th, .doc-table td {
+    text-align: left;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--grey-100);
+    vertical-align: top;
+  }
+  .doc-table th {
+    color: var(--dark);
+    font-weight: 600;
+    background: #fff;
+  }
+  .doc-table td { color: var(--grey-600); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="/" class="logo">
+        <img class="logo-full" src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
+      </a>
+    <nav class="nav-links" id="navLinks">
+      <a class="navlink" href="/#testimonials">Testimonials</a>
+      <a class="navlink" href="/#how-it-works">How It Works</a>
+      <a class="navlink" href="/#measure">What We Measure</a>
+      <a class="btn btn-solid-dark" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a Demo</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</header>
+
+<main>
+  <section class="section wrap legal-page">
+    <p class="eyebrow">Ashby integration</p>
+    <h1>Connect Ashby to FluencyFox</h1>
+    <p class="legal-updated">Setup guide for hiring teams using Ashby</p>
+
+    <p><strong>FluencyFox</strong> is an AI fluency assessor for hiring. Candidates complete a real task on the tools they would use on the job. You see how they think, narrate their work, and collaborate with AI.</p>
+    <p>Connect Ashby so assessments trigger from your pipeline and results write back to the candidate. Invite from Ashby or FluencyFox; activity syncs either way. When a candidate finishes, FluencyFox posts their <strong>score</strong>, <strong>notes</strong>, and an <strong>assessment link</strong> into Ashby Notes.</p>
+
+    <figure class="doc-figure">
+      <img src="assets/select-tests.png" alt="FluencyFox Select and Customize Tests screen with AI-generated assessment options">
+    </figure>
+    <p class="doc-caption">FluencyFox generates assessment options for a role. After you connect Ashby, jobs can seed job details before this step.</p>
+
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>You must be an <strong>Organization Admin</strong> in Ashby (you can see the Admin tab).</li>
+      <li>You need a FluencyFox account at <a href="https://app.fluencyfox.ai" target="_blank" rel="noopener">app.fluencyfox.ai</a> (Google SSO).</li>
+    </ul>
+
+    <h2>1. Create an Ashby API key</h2>
+    <ol class="doc-steps">
+      <li>In Ashby, go to <strong>Admin → Integrations → API Keys</strong>.</li>
+      <li>Click <strong>+ New</strong> and name it something clear, for example <span class="doc-code">FluencyFox</span>.</li>
+      <li>Enable only these permissions:
+        <ul>
+          <li><strong>Jobs</strong>: Read</li>
+          <li><strong>Candidates</strong>: Read and Write</li>
+          <li><strong>Api Keys</strong>: Read</li>
+        </ul>
+        Leave every other module off.
+      </li>
+      <li>Create the key, copy it, and store it safely, because Ashby only shows it once.</li>
+    </ol>
+
+    <figure class="doc-figure">
+      <img src="assets/api-key-create.png" alt="Ashby Create an API key dialog on the Integration Partner step">
+    </figure>
+    <p class="doc-caption">Admin → Integrations → API Keys → + New. Name the key, then continue to scopes.</p>
+
+    <figure class="doc-figure">
+      <img src="assets/api-key-scopes.png" alt="Ashby API key scopes table for selecting module Read and Write permissions">
+    </figure>
+    <p class="doc-caption">On API Scopes, enable <strong>Jobs</strong> Read, <strong>Candidates</strong> Read + Write, and <strong>Api Keys</strong> Read. Leave other modules off (screenshot shows the blank scopes list before those checks).</p>
+
+    <p>Candidates write lets FluencyFox post invite links and scored results. Jobs read supports job autofill. Api Keys read is required for the connection.</p>
+
+    <h2>2. Connect Ashby in FluencyFox</h2>
+    <ol class="doc-steps">
+      <li>Sign in to FluencyFox and open <a href="https://app.fluencyfox.ai/admin/settings" target="_blank" rel="noopener">Settings</a>.</li>
+      <li>Under <strong>Ashby integration</strong>, click <strong>+ Connect Ashby</strong>.</li>
+      <li>Paste your Ashby API key into <strong>ASHBY API KEY</strong>.</li>
+      <li>Click <strong>Connect workspace</strong>.</li>
+    </ol>
+
+    <figure class="doc-figure">
+      <img src="assets/connect-ashby.png" alt="FluencyFox Ashby connection card with API key field and Connect workspace button">
+    </figure>
+    <p class="doc-caption">Paste the key and click <strong>Connect workspace</strong>. FluencyFox validates the key before saving and stores it encrypted.</p>
+
+    <p>Once connected, Ashby jobs can autofill the role and job description when you create a test. You can still paste a custom JD.</p>
+
+    <h2>3. Add the trigger stage in Ashby</h2>
+    <p>FluencyFox listens for a <strong>stage change into</strong> a stage named exactly:</p>
+    <p><span class="doc-code">Fluencyfox AI Assessment</span></p>
+    <p>Match it character for character (capital <strong>A</strong> in Assessment). Stages live on an <strong>interview plan</strong>, not under Admin → Organizational settings → Custom fields.</p>
+    <ol class="doc-steps">
+      <li>Go to <strong>Admin → Interviews &amp; Scheduling → Interview Plans</strong>, then open the shared plan used by your jobs (or the job’s custom interview plan).</li>
+      <li>Under <strong>Active stages</strong>, click <strong>Add Active Stage</strong> (Ashby may show “Add active stage”).</li>
+      <li>Type <span class="doc-code">Fluencyfox AI Assessment</span> exactly and save.</li>
+      <li><strong>Alternative:</strong> open the job → its interview plan → same <strong>Add Active Stage</strong> (or rename an existing stage) → <strong>Save Edits</strong>.</li>
+      <li>Move candidates into that stage when you want them assessed.</li>
+    </ol>
+
+    <figure class="doc-figure">
+      <img src="assets/interview-plan-stage.png" alt="Ashby Interview Plans with Add active stage field and Fluencyfox AI Assessment stage">
+    </figure>
+    <p class="doc-caption">Admin → Interviews &amp; Scheduling → Interview Plans → open a plan → <strong>Add active stage</strong>. Name it exactly <span class="doc-code">Fluencyfox AI Assessment</span>.</p>
+
+    <p class="legal-note">The trigger needs a stage change. If a candidate is created already in that stage, move them out and then back in so the event fires.</p>
+
+    <h2>What posts back to Ashby</h2>
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th>When</th>
+          <th>What appears in Ashby</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Candidate moves into <span class="doc-code">Fluencyfox AI Assessment</span></td>
+          <td>Assessment <strong>invite link</strong> in the candidate’s <strong>Notes</strong> (near-immediate)</td>
+        </tr>
+        <tr>
+          <td>Candidate completes the assessment</td>
+          <td><strong>Score</strong>, <strong>notes</strong>, and <strong>assessment link</strong> in the same Notes feed</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>FluencyFox does not auto-email the candidate. Copy the invite from Notes into your own Ashby message or email if you want to send it.</p>
+
+    <h2>Need help?</h2>
+    <p>If the key fails validation, the stage name does not trigger, or Notes are not updating, contact your FluencyFox CSM or support via your usual FluencyFox channel.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div>
+        <h5>Menu</h5>
+        <a href="/#testimonials">Testimonials</a>
+        <a href="/#how-it-works">How It Works</a>
+        <a href="/#measure">What we Measure</a>
+        <a href="/grad-schemes">Grad Schemes</a>
+        <a href="/employee-development">Employee Development</a>
+      </div>
+      <div>
+        <h5>Insights</h5>
+        <a href="/research/ai-fluency-data-index">Research</a>
+        <a href="/blog">Blog</a>
+      </div>
+      <div>
+        <h5>Docs</h5>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms &amp; Conditions</a>
+      </div>
+      <div>
+        <h5>Address</h5>
+        <p>71&ndash;75 Shelton Street,<br>London, UK WC2H 9JQ</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="#5474a1"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+</script>
+<script src="/cookie-consent.js"></script>
+</body>
+</html>
