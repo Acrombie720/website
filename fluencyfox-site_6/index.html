@@ -166,10 +166,100 @@
     .ff-consent-actions { width: 100%; }
     .ff-consent-actions .btn { flex: 1; }
   }
+
+  /* ---------- Unified static header (matches employee-development / grad-schemes) ---------- */
+  .ff-static-header { position: sticky; top: 0; z-index: 50; background: rgba(240,244,246,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,0.05); font-family: "Poppins", sans-serif; }
+  .ff-static-header .wrap { max-width: 1238px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .ff-static-header .logo { display: flex; align-items: center; gap: 10px; }
+  .ff-static-header .logo img { height: 38px; width: auto; display: block; }
+  .ff-static-header .nav-links { display: flex; align-items: center; gap: 28px; }
+  .ff-static-header .nav-links a.navlink { font-size: 16px; color: #606060; text-decoration: none; font-family: "Poppins", sans-serif; }
+  .ff-static-header .nav-links a.navlink:hover { color: #1e1e1e; }
+  .ff-static-header .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 12px 22px; border-radius: 12px; font-weight: 500; font-size: 14px; border: none; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+  .ff-static-header .btn:hover { transform: translateY(-1px); }
+  .ff-static-header .btn-solid-dark { background: #5474a1; color: #fff; }
+  .ff-static-header .btn-solid-dark:hover { background: #1e1e1e; }
+  .ff-static-header .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: #1e1e1e; cursor: pointer; }
+  @media (max-width: 860px) {
+    .ff-static-header .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #f0f4f6; flex-direction: column; align-items: flex-start; padding: 20px 24px 28px; gap: 18px; border-bottom: 1px solid rgba(0,0,0,.06); display: none; }
+    .ff-static-header .nav-links.open { display: flex; }
+    .ff-static-header .nav-toggle { display: block; }
+  }
+  header:has(button[aria-label="Open menu"], button[aria-label="Close menu"]) { display: none !important; }
+
+  /* ---------- Unified static footer (matches employee-development / grad-schemes) ---------- */
+  footer.ff-static-footer { padding: 50px 24px 40px; max-width: 1238px; margin: 0 auto; font-family: "Poppins", sans-serif; }
+  footer.ff-static-footer .footer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; }
+  footer.ff-static-footer .footer-top img { height: 38px; width: auto; }
+  footer.ff-static-footer .btn-solid-dark { background: #5474a1; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 12px 22px; border-radius: 12px; font-weight: 500; font-size: 14px; border: none; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+  footer.ff-static-footer .btn-solid-dark:hover { background: #1e1e1e; }
+  footer.ff-static-footer .footer-divider { height: 1px; background: rgba(0,0,0,0.08); width: 100%; margin-bottom: 30px; }
+  footer.ff-static-footer .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  footer.ff-static-footer .footer-cols h5 { font-size: 15px; color: #a5a7a5; font-weight: 500; margin-bottom: 20px; margin-top: 0; }
+  footer.ff-static-footer .footer-cols a, footer.ff-static-footer .footer-cols p { display: block; font-size: 15px; color: #606060; margin-bottom: 16px; text-decoration: none; margin-top: 0; }
+  footer.ff-static-footer .footer-socials { display: flex; gap: 14px; margin-top: 4px; }
+  footer.ff-static-footer .footer-socials a { display: block; width: 24px; height: 24px; }
+  @media (max-width: 720px) {
+    footer.ff-static-footer .footer-cols { grid-template-columns: repeat(2, 1fr); }
+  }
+  footer:has(nav[aria-label="Menu"]) { display: none !important; }
 </style>
 </head>
 <body>
+<header class="ff-static-header">
+  <div class="wrap">
+    <a href="/" class="logo">
+      <img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
+    </a>
+    <nav class="nav-links" id="navLinksStatic">
+      <a class="navlink" href="#testimonials">Testimonials</a>
+      <a class="navlink" href="#how-it-works">How It Works</a>
+      <a class="navlink" href="#what-we-measure">What we Measure</a>
+      <a class="btn btn-solid-dark" href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&utm_medium=site&utm_campaign=home" target="_blank" rel="noopener">Book a Demo</a>
+    </nav>
+    <button class="nav-toggle" id="navToggleStatic" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</header>
+<script>
+document.getElementById('navToggleStatic').addEventListener('click', () => document.getElementById('navLinksStatic').classList.toggle('open'));
+</script>
 <div id="app"></div>
+<footer class="ff-static-footer">
+  <div class="footer-top">
+    <a href="/" aria-label="Fluencyfox"><img src="/assets/logo-full.svg" alt="Fluencyfox"></a>
+    <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&utm_medium=site&utm_campaign=home" target="_blank" rel="noopener" class="btn-solid-dark">Book a Demo</a>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-cols">
+    <div>
+      <h5>Menu</h5>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#what-we-measure">What we Measure</a>
+      <a href="/grad-schemes">Grad Schemes</a>
+      <a href="/employee-development">Employee Development</a>
+    </div>
+    <div>
+      <h5>Insights</h5>
+      <a href="/research/ai-fluency-data-index">Research</a>
+      <a href="/blog">Blog</a>
+    </div>
+    <div>
+      <h5>Docs</h5>
+      <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+    </div>
+    <div>
+      <h5>Address</h5>
+      <p>71&ndash;75 Shelton Street,<br>London, UK WC2H 9JQ</p>
+      <div class="footer-socials">
+        <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="#5474a1"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
 <script src="cookie-consent.js"></script>
 </body>
 </html>
