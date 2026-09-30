@@ -19,9 +19,9 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@600&display=swap"></noscript>
-<link rel="stylesheet" href="styles.css?v=4">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
-<body>
+<body class="page-grad-schemes">
 
 <header class="site-header">
   <div class="wrap">
@@ -42,6 +42,9 @@
 
   <!-- 1. Hero -->
   <section class="hero wrap">
+    <div class="hero-bg-fill">
+      <img src="assets/grad-hero-bg.webp" sizes="100vw" alt="" width="1440" height="954" fetchpriority="high" decoding="async">
+    </div>
     <h1>Hundreds of applications.<br>Six hires you'd bet on.</h1>
     <p class="lede">Fluencyfox sits at the top of your graduate funnel. Every applicant does an hour of the real job using the AI tools they'd have on day one, and you get a ranked shortlist backed by the session recording, the work they shipped, and three scores you weight yourself.</p>
     <div class="actions">
@@ -49,17 +52,14 @@
       <a href="#how" class="btn btn-outline">See How It Works</a>
     </div>
     <div class="hero-visual">
-      <img class="hero-bg" src="assets/hero-mountains.webp" srcset="assets/hero-mountains-768.webp 768w, assets/hero-mountains-1280.webp 1280w, assets/hero-mountains.webp 2048w" sizes="100vw" alt="" width="2048" height="1526" fetchpriority="high" decoding="async">
       <div class="hero-mockup-wrap">
-        <img src="assets/hero-mockup-2404.webp?v=2"
-             srcset="assets/hero-mockup-768.webp?v=2 768w, assets/hero-mockup-1280.webp?v=2 1280w, assets/hero-mockup-2404.webp?v=2 2404w"
+        <img src="assets/grad-ai-test-mockup.webp"
              sizes="(max-width: 900px) 85vw, 1202px"
-             alt="A live Fluencyfox assessment: candidate screenshare, AI team-leader chat, and a scored task result" width="1202" height="682" decoding="async">
+             alt="A live Fluencyfox assessment: candidate screenshare and a scored task result" width="1987" height="1030" decoding="async">
         <video autoplay muted loop playsinline poster="assets/hero-candidate-screenshare-poster.jpg">
           <source src="assets/hero-candidate-screenshare.mp4" type="video/mp4">
         </video>
       </div>
-      <img class="hero-fg" src="assets/hero-flowers-overlap.webp" srcset="assets/hero-flowers-overlap-768.webp 768w, assets/hero-flowers-overlap-1280.webp 1280w, assets/hero-flowers-overlap.webp 1920w" sizes="100vw" alt="" aria-hidden="true" width="1920" height="1116" decoding="async">
     </div>
   </section>
 
@@ -74,66 +74,71 @@
 
     <div class="problem-grid">
       <div class="problem-card">
-        <div class="mark-group">
-          <span class="mark">AI</span>
-          <span class="mark script">AI</span>
-        </div>
-        <div>
-          <h3>Every application reads brilliantly</h3>
-          <p>The same tool wrote thousands of them. The written signal you used to screen on has gone, and the pile still has to get from hundreds down to a handful.</p>
-        </div>
-      </div>
-
-      <div class="problem-card photo">
-        <div>
-          <h3>Aptitude tests measure the wrong thing</h3>
-          <p>Numerical and logical reasoning tell you how someone performs alone, against a clock, with the tools taken away. That is not the job any graduate is walking into.</p>
-        </div>
+        <h3>Every application reads brilliantly</h3>
+        <p>The same tool wrote thousands of them. The written signal you used to screen on has gone, and the pile still has to get from hundreds down to a handful.</p>
       </div>
 
       <div class="problem-card">
-        <div class="mark">&#10005;</div>
-        <div>
-          <h3>You find out in month three</h3>
-          <p>The ones who interview well and work slowly look identical on day one. Month three is when the gap shows, and by then the seat, the salary and the scheme place have all gone.</p>
-        </div>
+        <h3>Aptitude tests measure the wrong thing</h3>
+        <p>Numerical and logical reasoning tell you how someone performs alone, against a clock, with the tools taken away. That is not the job any graduate is walking into.</p>
+      </div>
+
+      <div class="problem-card">
+        <h3>You find out<br>in month three</h3>
+        <p>The ones who interview well and work slowly look identical on day one. Month three is when the gap shows, and by then the seat, the salary and the scheme place have all gone.</p>
       </div>
     </div>
   </section>
 
   <!-- 3. How it works + proof -->
   <section class="section wrap" id="how">
-    <div class="section-head">
-      <div>
-        <h2>Design. Deploy. Decide.</h2>
-        <p>One build with our team, then it runs itself at any volume, whether that is fifty applicants or five thousand.</p>
+    <div class="how-wrap">
+      <div class="section-head">
+        <div>
+          <h2>Design. Deploy. Decide.</h2>
+          <p>One build with our team, then it runs itself at any volume, whether that is fifty applicants or five thousand.</p>
+        </div>
+        <span class="eyebrow">HOW IT WORKS</span>
       </div>
-      <span class="eyebrow">HOW IT WORKS</span>
-    </div>
 
-    <div class="step-grid">
-      <div class="step-card">
-        <div class="step-num">01</div>
-        <h3>Design it with us</h3>
-        <p>We build the task around the graduate role you are actually hiring for: the brief, the objective, and the weightings that reflect what a good first six months looks like at your company.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">02</div>
-        <h3>Deploy from your ATS</h3>
-        <p>Move applicants into the assessment stage and each one gets a single-use link. Scores and feedback come straight back into the ATS. No invigilators, no scheduling, no ceiling on numbers.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-num">03</div>
-        <h3>Decide with evidence</h3>
-        <p>Everyone lands in one dashboard, ranked by three scores weighted your way. Jump the chaptered video straight to the moments that matter instead of reading another cover letter.</p>
-      </div>
-    </div>
+      <div class="how-cards">
+        <div class="how-card">
+          <div class="how-text">
+            <h3>Design it with us</h3>
+            <p>We build the task around the graduate role you are actually hiring for: the brief, the objective, and the weightings that reflect what a good first six months looks like at your company.</p>
+          </div>
+          <div class="how-visual how-embed" data-embed-w="1040" data-embed-h="731">
+            <iframe title="Design it with us" scrolling="no" tabindex="-1" allow="autoplay" src="animations/design-it-with-us.html"></iframe>
+          </div>
+        </div>
 
-    <div class="pull-quote">
-      <img class="pq-logo" src="assets/silvertree-logo.jpg" alt="" width="200" height="200" loading="lazy" decoding="async">
-      <div>
-        <blockquote>&ldquo;We used the fluency assessor to screen candidates for our graduate forward deployed engineering scheme, helping us find 6 tier 1 hires out of an initial pool of 700.&rdquo;</blockquote>
-        <p class="pq-by"><strong>Romil Depala</strong> &nbsp;&middot;&nbsp; SilverTree Equity</p>
+        <div class="how-card reverse">
+          <div class="how-text">
+            <h3>Deploy from your ATS</h3>
+            <p>Move applicants into the assessment stage and each one gets a single-use link. Scores and feedback come straight back into the ATS. No invigilators, no scheduling, no ceiling on numbers.</p>
+          </div>
+          <div class="how-visual how-embed" data-embed-w="1100" data-embed-h="216">
+            <iframe title="Deploy from your ATS" scrolling="no" tabindex="-1" allow="autoplay" src="animations/deploy-from-ats.html"></iframe>
+          </div>
+        </div>
+
+        <div class="how-card">
+          <div class="how-text">
+            <h3>Decide with evidence</h3>
+            <p>Everyone lands in one dashboard, ranked by three scores weighted your way. Jump the chaptered video straight to the moments that matter instead of reading another cover letter.</p>
+          </div>
+          <div class="how-visual how-embed" data-embed-w="1260" data-embed-h="900">
+            <iframe title="Decide with evidence" scrolling="no" tabindex="-1" allow="autoplay" src="animations/decide-with-evidence.html"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="pull-quote">
+        <img class="pq-logo" src="assets/silvertree-logo.png" alt="SilverTree" width="331" height="187" loading="lazy" decoding="async">
+        <div>
+          <blockquote>&ldquo;We used the fluency assessor to screen candidates for our graduate forward deployed engineering scheme, helping us find 6 tier 1 hires out of an initial pool of 700.&rdquo;</blockquote>
+          <p class="pq-by"><strong>Romil Depala</strong><br>SilverTree Equity</p>
+        </div>
       </div>
     </div>
   </section>
@@ -163,25 +168,42 @@
       <p class="stat-source">SilverTree Equity&rsquo;s graduate forward deployed engineering scheme.</p>
     </div>
 
-    <div class="step-grid" style="margin-top:12px">
-      <div class="step-card">
-        <h3>The full session, on the record</h3>
-        <p>Whole-screen capture with no sandbox, camera on, voice transcribed throughout. Every tool and every tab they used, chaptered so you can go straight to the decisions.</p>
+    <div class="get-grid">
+      <div class="get-card">
+        <div>
+          <h3>The full session, on the record</h3>
+          <p>Whole-screen capture with no sandbox, camera on, voice transcribed throughout. Every tool and every tab they used, chaptered so you can go straight to the decisions.</p>
+        </div>
+        <div class="get-card-meta">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          41:20
+        </div>
       </div>
-      <div class="step-card">
-        <h3>The work they actually shipped</h3>
-        <p>The finished output, not a description of it. You are reading the thing a graduate would have handed you in their first week.</p>
+      <div class="get-card">
+        <div>
+          <h3>The work they actually shipped</h3>
+          <p>The finished output, not a description of it. You are reading the thing a graduate would have handed you in their first week.</p>
+        </div>
+        <div class="get-card-files">
+          <span>XLS &nbsp;outputfile.xlsx</span>
+          <span>PDF &nbsp;referencenotes.pdf</span>
+        </div>
       </div>
-      <div class="step-card">
-        <h3>Three scores, weighted your way</h3>
-        <p>How they solved it, how they communicated, and how they worked with AI. You set the weights before a single applicant sits it, and they apply identically to all of them.</p>
+      <div class="get-card">
+        <div>
+          <h3>Three scores, weighted your way</h3>
+          <p>How they solved it, how they communicated, and how they worked with AI. You set the weights before a single applicant sits it, and they apply identically to all of them.</p>
+        </div>
+        <div class="get-card-bar">
+          <span class="w1"></span><span class="w2"></span><span class="w3"></span>
+        </div>
       </div>
     </div>
 
     <div class="pull-quote">
       <div>
         <blockquote>&ldquo;The test was unique and unlike anything I have ever had to do for job applications. I really liked how it gave us the freedom to approach a problem as we wished using whatever AI tool we want. I like how it was recorded, and we got to show our personality rather than just the results. It was a very fun experience.&rdquo;</blockquote>
-        <p class="pq-by"><strong>Jay Cushen</strong> &nbsp;&middot;&nbsp; Candidate</p>
+        <p class="pq-by"><strong>Jay Cushen</strong><br>Candidate</p>
       </div>
     </div>
   </section>
@@ -189,13 +211,15 @@
   <!-- 5. CTA -->
   <div class="wrap">
     <div class="cta-banner">
-      <img class="bg" src="assets/hero-mountains.webp" srcset="assets/hero-mountains-768.webp 768w, assets/hero-mountains-1280.webp 1280w, assets/hero-mountains.webp 2048w" sizes="100vw" alt="" width="2048" height="1526" loading="lazy" decoding="async">
+      <img class="bg" src="assets/grad-cta-bg.webp" sizes="100vw" alt="" width="1440" height="988" loading="lazy" decoding="async">
       <div class="panel">
-        <h2>See a graduate assessment end to end.</h2>
-        <p>Watch a real session and the dashboard your early careers team would review it in. Half an hour, no slides.</p>
-        <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=grad-schemes" target="_blank" rel="noopener" class="btn btn-white">Book a Demo</a>
+        <div class="panel-inner">
+          <h2>See a graduate assessment end to end.</h2>
+          <p>Watch a real session and the dashboard your early careers team would review it in. Half an hour, no slides.</p>
+          <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=grad-schemes" target="_blank" rel="noopener" class="btn btn-white">Book a Demo</a>
+        </div>
       </div>
-      <img class="fg" src="assets/hero-flowers-overlap.webp" srcset="assets/hero-flowers-overlap-768.webp 768w, assets/hero-flowers-overlap-1280.webp 1280w, assets/hero-flowers-overlap.webp 1920w" sizes="100vw" alt="" aria-hidden="true" width="1920" height="1116" loading="lazy" decoding="async">
+      <img class="fg" src="assets/grad-cta-flowers.webp" sizes="100vw" alt="" aria-hidden="true" width="1440" height="810" loading="lazy" decoding="async">
     </div>
   </div>
 
@@ -244,6 +268,25 @@
 
 <script>
 document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+</script>
+
+<script>
+document.querySelectorAll('.how-embed').forEach(wrap => {
+  const iframe = wrap.querySelector('iframe');
+  const w = parseFloat(wrap.dataset.embedW);
+  const h = parseFloat(wrap.dataset.embedH);
+  iframe.style.width = w + 'px';
+  iframe.style.height = h + 'px';
+  function resize(){
+    const cw = wrap.clientWidth;
+    const ch = wrap.clientHeight;
+    if (!cw || !ch) return;
+    const scale = Math.min(cw / w, ch / h);
+    iframe.style.transform = `scale(${scale})`;
+  }
+  resize();
+  new ResizeObserver(resize).observe(wrap);
+});
 </script>
 <script src="cookie-consent.js"></script>
 </body>
