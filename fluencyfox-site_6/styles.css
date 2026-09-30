@@ -1359,12 +1359,25 @@ footer { padding: 50px 0 40px; }
   object-fit: cover;
   object-position: bottom;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  /* Cancel the grass-mask that the shared (unscoped) .cta-banner .fg rule
+     applies elsewhere on the site — this page's flower photo already has
+     its own soft transparent edge baked in and doesn't need it, and with
+     height:auto below that stretched mask would crop the photo in the
+     wrong places. */
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 @media (min-width: 640px) {
   .page-employee-development .cta-banner .panel { margin: 0; }
   .page-employee-development .cta-banner h2 { font-size: 62px; }
   .page-employee-development .cta-banner .fg { height: 380px; }
 }
+/* The flower photo itself already has a soft, irregular transparent edge
+   baked into it (same file the homepage reuses for its own CTA) — it
+   only looks like it "lays" naturally when the full photo is shown.
+   From tablet width up, match the homepage: let the image sit at its
+   own natural height instead of being cropped to a fixed box, so that
+   soft top edge is never cut off. */
 @media (min-width: 768px) {
   .page-employee-development .cta-banner .fg { height: auto; }
 }
