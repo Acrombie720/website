@@ -1359,6 +1359,14 @@ footer { padding: 50px 0 40px; }
   object-fit: cover;
   object-position: bottom;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  -webkit-mask-image: url('assets/cta-grass-mask.png');
+  mask-image: url('assets/cta-grass-mask.png');
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-position: bottom;
+  mask-position: bottom;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 @media (min-width: 640px) {
   .page-employee-development .cta-banner .panel { margin: 0; }
@@ -1369,5 +1377,8 @@ footer { padding: 50px 0 40px; }
   .page-employee-development .cta-banner { padding-top: 120px; padding-bottom: 180px; }
   .page-employee-development .cta-banner .panel { padding: 60px 24px; }
   .page-employee-development .cta-banner h2 { font-size: 32px; }
-  .page-employee-development .cta-banner .fg { height: 220px; }
-}
+ .page-employee-development .cta-banner .fg {
+    height: 220px;
+    -webkit-mask-image: url('assets/cta-grass-mask-mobile.png');
+    mask-image: url('assets/cta-grass-mask-mobile.png');
+  }
