@@ -1413,7 +1413,7 @@ footer { padding: 50px 0 40px; }
      desktop) would leave nothing but empty space above the mockup. Keep
      it at its natural top position here instead. */
   .page-grad-schemes .hero-bg-fill {
-    top: 0;
+    top: 500px;
   }
 }
 .page-grad-schemes .hero-visual .hero-mockup-wrap {
