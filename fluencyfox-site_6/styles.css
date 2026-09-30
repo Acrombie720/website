@@ -1359,31 +1359,345 @@ footer { padding: 50px 0 40px; }
   object-fit: cover;
   object-position: bottom;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  /* Cancel the grass-mask that the shared (unscoped) .cta-banner .fg rule
-     applies elsewhere on the site — this page's flower photo already has
-     its own soft transparent edge baked in and doesn't need it, and with
-     height:auto below that stretched mask would crop the photo in the
-     wrong places. */
-  -webkit-mask-image: none;
-  mask-image: none;
 }
 @media (min-width: 640px) {
   .page-employee-development .cta-banner .panel { margin: 0; }
   .page-employee-development .cta-banner h2 { font-size: 62px; }
   .page-employee-development .cta-banner .fg { height: 380px; }
 }
-/* The flower photo itself already has a soft, irregular transparent edge
-   baked into it (same file the homepage reuses for its own CTA) — it
-   only looks like it "lays" naturally when the full photo is shown.
-   From tablet width up, match the homepage: let the image sit at its
-   own natural height instead of being cropped to a fixed box, so that
-   soft top edge is never cut off. */
-@media (min-width: 768px) {
-  .page-employee-development .cta-banner .fg { height: auto; }
-}
 @media (max-width: 720px) {
   .page-employee-development .cta-banner { padding-top: 120px; padding-bottom: 180px; }
   .page-employee-development .cta-banner .panel { padding: 60px 24px; }
   .page-employee-development .cta-banner h2 { font-size: 32px; }
   .page-employee-development .cta-banner .fg { height: 220px; }
+}
+
+/* ==========================================================================
+   Grad Schemes page - redesign
+   ========================================================================== */
+
+/* Hero background is a full-bleed photo behind ALL hero content (heading,
+   copy, buttons, mockup) rather than a separate framed block, so it never
+   crops or masks oddly against them. Bottom corners only, matching the
+   site's other full-bleed images. */
+.page-grad-schemes .hero {
+  position: relative;
+  z-index: 0;
+}
+.page-grad-schemes .hero-visual {
+  aspect-ratio: 1440 / 954;
+}
+.page-grad-schemes .hero-bg-fill {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  z-index: -1;
+  overflow: hidden;
+}
+.page-grad-schemes .hero-bg-fill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.page-grad-schemes .hero-visual .hero-mockup-wrap {
+  border-radius: 12.8px;
+  overflow: hidden;
+}
+.page-grad-schemes .hero-visual .hero-mockup-wrap img { border-radius: 12.8px; }
+/* This page's mockup render has its own layout (no chat panel), so the
+   video's corner position is recalculated for it - overrides the shared
+   .hero-visual .hero-mockup-wrap video rule above, which is tuned for the
+   homepage's mockup. */
+.page-grad-schemes .hero-visual .hero-mockup-wrap video {
+  left: 57.24%;
+  top: 29.21%;
+  width: 10.32%;
+  height: 12.84%;
+}
+
+/* Problem cards: left-aligned text, vertically centered as a block, equal
+   heading/paragraph heights across all three cards regardless of how long
+   each one's copy runs. */
+.page-grad-schemes .problem-card {
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+.page-grad-schemes .problem-card h3 { line-height: 1.3; min-height: 58px; }
+.page-grad-schemes .problem-card p { min-height: 130px; }
+
+/* How it works + proof: the three step cards and the SilverTree quote
+   merged into one continuous white container - same tall .how-card /
+   .how-embed pattern the homepage and employee-development.html use,
+   reused here with this page's own three animations. */
+.page-grad-schemes .how-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 42px;
+}
+.page-grad-schemes .how-wrap .section-head { margin-bottom: 0; }
+.page-grad-schemes .how-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  width: 100%;
+}
+.page-grad-schemes .how-card {
+  background: transparent;
+  border: 1.5px dashed var(--blue-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  min-height: 0;
+  margin-bottom: 0;
+}
+.page-grad-schemes .how-card.reverse { flex-direction: row-reverse; }
+.page-grad-schemes .how-text { flex: 0 0 44%; }
+.page-grad-schemes .how-visual {
+  position: relative;
+  flex: 1;
+  height: 352px;
+  max-width: 546px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-grad-schemes .how-embed iframe {
+  position: static;
+  transform-origin: center center;
+  flex-shrink: 0;
+}
+@media (max-width: 900px) {
+  .page-grad-schemes .how-card, .page-grad-schemes .how-card.reverse { flex-direction: column; }
+  .page-grad-schemes .how-text { flex: none; }
+  .page-grad-schemes .how-visual { max-width: 100%; flex: none; width: 100%; }
+}
+
+/* Both quotes on this page (the merged SilverTree one inside .how-wrap,
+   and Jay Cushen's standalone one further down) get the same centred
+   treatment: centred name in Ovo, blue-dark quote text. The merged one
+   additionally drops its own background/shadow since .how-wrap already
+   provides the white card around it. */
+.page-grad-schemes .pull-quote {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 40px;
+  gap: 0;
+}
+.page-grad-schemes .how-wrap .pull-quote {
+  background: transparent;
+  margin-top: 0;
+  box-shadow: none;
+}
+.page-grad-schemes .pull-quote .pq-logo {
+  width: auto;
+  height: 68px;
+  border-radius: 0;
+  margin-bottom: 26px;
+  align-self: center;
+}
+.page-grad-schemes .pull-quote blockquote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.4;
+  color: var(--blue-dark);
+  max-width: 900px;
+}
+.page-grad-schemes .pull-quote .pq-by { margin-top: 22px; line-height: 1.7; }
+.page-grad-schemes .pull-quote .pq-by strong { font-family: var(--font-display); font-weight: 400; font-size: 17px; }
+@media (max-width: 720px) {
+  .page-grad-schemes .pull-quote blockquote { font-size: 24px; }
+}
+
+.page-grad-schemes .stat-panel {
+  background: var(--milk);
+  padding: 48px 40px 40px;
+}
+.page-grad-schemes .stat-figure {
+  background: #fff;
+  border: 1.5px dashed var(--blue-light);
+  border-radius: var(--radius-lg);
+  padding: 40px 60px;
+}
+.page-grad-schemes .stat-figure b { font-size: 64px; }
+@media (max-width: 720px) {
+  .page-grad-schemes .stat-figure { padding: 28px 32px; }
+  .page-grad-schemes .stat-figure b { font-size: 46px; }
+}
+
+/* "What you get back" - replaces the plain step cards with a filled blue
+   card per proof point: session length, output files, or the scoring
+   weights, each shown as its own small visual instead of only text. */
+.page-grad-schemes .get-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+.page-grad-schemes .get-card {
+  background: var(--blue-light);
+  border-radius: var(--radius-lg);
+  padding: 28px 26px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.page-grad-schemes .get-card h3 { font-size: 21px; font-weight: 500; line-height: 1.3; color: #fff; margin-bottom: 12px; }
+.page-grad-schemes .get-card p { font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.92); }
+.page-grad-schemes .get-card-meta {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+.page-grad-schemes .get-card-meta svg { width: 14px; height: 14px; flex: none; }
+.page-grad-schemes .get-card-files { margin-top: 24px; display: flex; gap: 8px; flex-wrap: wrap; }
+.page-grad-schemes .get-card-files span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  color: var(--grey-600);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 7px 12px;
+}
+.page-grad-schemes .get-card-bar { margin-top: 24px; display: flex; gap: 4px; height: 8px; }
+.page-grad-schemes .get-card-bar span { display: block; height: 8px; border-radius: 6px; background: rgba(255,255,255,0.5); }
+.page-grad-schemes .get-card-bar span.w1 { flex: 5; background: #fff; }
+.page-grad-schemes .get-card-bar span.w2 { flex: 3; }
+.page-grad-schemes .get-card-bar span.w3 { flex: 2; }
+@media (max-width: 900px) {
+  .page-grad-schemes .get-grid { grid-template-columns: 1fr; }
+}
+
+/* CTA banner - copied 1:1 from the live homepage's own CTA, same pattern as
+   .page-employee-development .cta-banner above. Scoped so the shared
+   .cta-banner used elsewhere keeps its own grass-mask design. */
+.page-grad-schemes .cta-banner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  transform: none;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -80px;
+  margin-bottom: 0;
+  padding-top: 208px;
+  padding-bottom: 260px;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+.page-grad-schemes .cta-banner .bg {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  z-index: 0;
+}
+.page-grad-schemes .cta-banner .panel {
+  position: relative;
+  z-index: 10;
+  margin: 0 20px;
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  background: var(--blue-light);
+  padding: 88px 20px;
+}
+.page-grad-schemes .cta-banner .panel-inner {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  text-align: center;
+}
+.page-grad-schemes .cta-banner h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: normal;
+  color: white;
+  font-size: 44px;
+  max-width: none;
+}
+.page-grad-schemes .cta-banner p { max-width: 717px; color: white; font-size: 18px; line-height: normal; margin: 0; }
+.page-grad-schemes .cta-banner .btn {
+  position: relative;
+  z-index: 3;
+  width: 164px;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  color: var(--blue-light);
+  padding: 12px 22px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.page-grad-schemes .cta-banner .btn:hover { background: rgba(255,255,255,0.9); }
+.page-grad-schemes .cta-banner .fg {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: block;
+  width: 100vw;
+  height: 320px;
+  object-fit: cover;
+  object-position: bottom;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+@media (min-width: 640px) {
+  .page-grad-schemes .cta-banner .panel { margin: 0; padding: 88px 40px; }
+  .page-grad-schemes .cta-banner h2 { font-size: 62px; }
+  .page-grad-schemes .cta-banner .fg { height: 380px; }
+}
+@media (min-width: 768px) {
+  .page-grad-schemes .cta-banner .fg { height: auto; }
+}
+@media (max-width: 720px) {
+  .page-grad-schemes .cta-banner { margin-top: 0; padding-top: 120px; padding-bottom: 180px; }
+  .page-grad-schemes .cta-banner .panel { padding: 60px 24px; }
+  .page-grad-schemes .cta-banner h2 { font-size: 32px; }
+  .page-grad-schemes .cta-banner .fg { height: 220px; }
 }
