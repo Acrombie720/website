@@ -1406,6 +1406,16 @@ footer { padding: 50px 0 40px; }
   object-position: top center;
   display: block;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  transform: translateY(29%);
+}
+@media (max-width: 720px) {
+  /* At mobile the heading + copy run much taller relative to this short,
+     aspect-ratio-locked strip, so shifting the flowers down (as on desktop)
+     would only push them further under the paragraph text instead of
+     clear of it. Keep them at their natural top position here instead. */
+  .page-grad-schemes .hero-bg-fill img {
+    transform: none;
+  }
 }
 .page-grad-schemes .hero-visual .hero-mockup-wrap {
   border-radius: 12.8px;
@@ -1532,7 +1542,7 @@ footer { padding: 50px 0 40px; }
 }
 
 .page-grad-schemes .stat-panel {
-  background: var(--milk);
+  background: var(--blue-bubble);
   padding: 48px 40px 40px;
 }
 .page-grad-schemes .stat-figure {
