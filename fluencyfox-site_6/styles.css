@@ -1363,7 +1363,7 @@ footer { padding: 50px 0 40px; }
 @media (min-width: 640px) {
   .page-employee-development .cta-banner .panel { margin: 0; }
   .page-employee-development .cta-banner h2 { font-size: 62px; }
-  .page-employee-development .cta-banner .fg { height: 380px; }
+  .page-employee-development .cta-banner .fg { height: auto; aspect-ratio: 1440 / 837; }
 }
 @media (max-width: 720px) {
   .page-employee-development .cta-banner { padding-top: 120px; padding-bottom: 180px; }
