@@ -165,7 +165,10 @@
     .ff-consent-bar { left: 12px; right: 12px; padding: 18px; }
     .ff-consent-actions { width: 100%; }
     .ff-consent-actions .btn { flex: 1; }
-  }
+  header:has(button[aria-label="Open menu"], button[aria-label="Close menu"]) {
+  position: sticky;
+  top: 0;
+}
 </style>
 </head>
 <body>
