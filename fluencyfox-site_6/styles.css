@@ -1389,7 +1389,7 @@ footer { padding: 50px 0 40px; }
 }
 .page-grad-schemes .hero-bg-fill {
   position: absolute;
-  top: 0;
+  top: 300px;
   left: 50%;
   right: 50%;
   width: 100vw;
@@ -1406,15 +1406,14 @@ footer { padding: 50px 0 40px; }
   object-position: top center;
   display: block;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  transform: translateY(29%);
 }
 @media (max-width: 720px) {
   /* At mobile the heading + copy run much taller relative to this short,
-     aspect-ratio-locked strip, so shifting the flowers down (as on desktop)
-     would only push them further under the paragraph text instead of
-     clear of it. Keep them at their natural top position here instead. */
-  .page-grad-schemes .hero-bg-fill img {
-    transform: none;
+     aspect-ratio-locked strip, so shifting the whole band down (as on
+     desktop) would leave nothing but empty space above the mockup. Keep
+     it at its natural top position here instead. */
+  .page-grad-schemes .hero-bg-fill {
+    top: 0;
   }
 }
 .page-grad-schemes .hero-visual .hero-mockup-wrap {
