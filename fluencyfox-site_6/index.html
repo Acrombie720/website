@@ -165,10 +165,45 @@
     .ff-consent-bar { left: 12px; right: 12px; padding: 18px; }
     .ff-consent-actions { width: 100%; }
     .ff-consent-actions .btn { flex: 1; }
+    .ff-static-header { position: sticky; top: 0; z-index: 50; background: rgba(240,244,246,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,0.05); font-family: "Poppins", sans-serif; }
+.ff-static-header .wrap { max-width: 1238px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+.ff-static-header .logo { display: flex; align-items: center; gap: 10px; }
+.ff-static-header .logo img { height: 38px; width: auto; display: block; }
+.ff-static-header .nav-links { display: flex; align-items: center; gap: 28px; }
+.ff-static-header .nav-links a.navlink { font-size: 16px; color: #606060; text-decoration: none; font-family: "Poppins", sans-serif; }
+.ff-static-header .nav-links a.navlink:hover { color: #1e1e1e; }
+.ff-static-header .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 12px 22px; border-radius: 12px; font-weight: 500; font-size: 14px; border: none; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+.ff-static-header .btn:hover { transform: translateY(-1px); }
+.ff-static-header .btn-solid-dark { background: #5474a1; color: #fff; }
+.ff-static-header .btn-solid-dark:hover { background: #1e1e1e; }
+.ff-static-header .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: #1e1e1e; cursor: pointer; }
+@media (max-width: 860px) {
+  .ff-static-header .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #f0f4f6; flex-direction: column; align-items: flex-start; padding: 20px 24px 28px; gap: 18px; border-bottom: 1px solid rgba(0,0,0,.06); display: none; }
+  .ff-static-header .nav-links.open { display: flex; }
+  .ff-static-header .nav-toggle { display: block; }
+}
+header:has(button[aria-label="Open menu"], button[aria-label="Close menu"]) { display: none !important; }
   }
 </style>
 </head>
 <body>
+  <header class="ff-static-header">
+  <div class="wrap">
+    <a href="/" class="logo">
+      <img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
+    </a>
+    <nav class="nav-links" id="navLinksStatic">
+      <a class="navlink" href="#testimonials">Testimonials</a>
+      <a class="navlink" href="#how-it-works">How It Works</a>
+      <a class="navlink" href="#what-we-measure">What we Measure</a>
+      <a class="btn btn-solid-dark" href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&utm_medium=site&utm_campaign=home" target="_blank" rel="noopener">Book a Demo</a>
+    </nav>
+    <button class="nav-toggle" id="navToggleStatic" aria-label="Toggle menu">&#9776;</button>
+  </div>
+</header>
+<script>
+document.getElementById('navToggleStatic').addEventListener('click', () => document.getElementById('navLinksStatic').classList.toggle('open'));
+</script>
 <div id="app"></div>
 <script src="cookie-consent.js"></script>
 </body>
