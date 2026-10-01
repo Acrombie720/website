@@ -100,7 +100,7 @@
     if (!revealing) return;
     document.addEventListener('click', e => {
       const a = e.target.closest && e.target.closest('a[href^="#"]');
-      if (!a || a.hasAttribute('data-top')) return;
+      if (!a) return;
       const target = document.getElementById(a.getAttribute('href').slice(1));
       if (!target) return;
       const targetTop = target.getBoundingClientRect().top + scrollY;
@@ -173,49 +173,26 @@
 
   const header = $('#siteHeader');
 
-  feature('scrollspy', () => {
-    const navLinks = $$('.ff-navlink', header);
-    const spy = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        navLinks.forEach(a => a.classList.toggle('is-current', a.getAttribute('href') === '#' + e.target.id));
-      });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    $$('section[data-section]').forEach(s => spy.observe(s));
-  });
-
-  // Logo links scroll to the top without leaving "#" in the address bar.
-  feature('to top', () => {
-    $$('[data-top]').forEach(a => a.addEventListener('click', e => {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: motion ? 'smooth' : 'auto' });
-    }));
-  });
-
+  // Phone menu. At 860px and below the designer's header folds its links and
+  // Book a Demo into this menu; without JS the button stays hidden instead.
   feature('mobile menu', () => {
-    const toggle = $('#navToggle');
-    const nav = $('#mobileNav');
+    const toggle = $('#navToggleStatic');
+    const nav = $('#navLinksStatic');
     if (!toggle || !nav) return;
-    let timer = 0;
     const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
     function setMenu(open) {
-      clearTimeout(timer);
+      nav.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      toggle.classList.toggle('was-open', !open);
-      if (open) {
-        nav.hidden = false;
-        nav.getBoundingClientRect(); // commit the closed state so it transitions
-        nav.classList.add('is-open');
-      } else {
-        nav.classList.remove('is-open');
-        timer = setTimeout(() => { nav.hidden = true; }, motion ? 380 : 0);
-      }
     }
     toggle.addEventListener('click', () => setMenu(!isOpen()));
     $$('a', nav).forEach(a => a.addEventListener('click', () => setMenu(false)));
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && isOpen()) { setMenu(false); toggle.focus(); }
+      if (e.key !== 'Escape' || !isOpen()) return;
+      // Focus inside the menu would vanish with it, so it goes back to the button.
+      const inMenu = nav.contains(document.activeElement);
+      setMenu(false);
+      if (inMenu) toggle.focus();
     });
     document.addEventListener('click', e => {
       if (isOpen() && !header.contains(e.target)) setMenu(false);

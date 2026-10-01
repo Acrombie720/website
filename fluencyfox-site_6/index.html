@@ -58,8 +58,8 @@
 </noscript>
 
 <link rel="stylesheet" href="home-base.css?v=20260930b">
-<link rel="stylesheet" href="home.css?v=20260930b">
-<script src="home.js?v=20260930c" defer></script>
+<link rel="stylesheet" href="home.css?v=20261001a">
+<script src="home.js?v=20261001a" defer></script>
 
 <script type="application/ld+json">
 {
@@ -195,27 +195,65 @@
     .ff-consent-actions .btn { flex: 1; }
   }
 </style>
+
+<!-- The site-wide header and footer, as on grad-schemes and employee-development
+     (the designer's version of 30 Sep). Its menu button is run by home.js. -->
+<style>
+  /* ---------- Unified static header (matches employee-development / grad-schemes) ---------- */
+  .ff-static-header { position: sticky; top: 0; z-index: 50; background: rgba(240,244,246,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,0.05); font-family: "Poppins", sans-serif; }
+  .ff-static-header .wrap { max-width: 1238px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .ff-static-header .logo { display: flex; align-items: center; gap: 10px; }
+  .ff-static-header .logo img { height: 38px; width: auto; display: block; }
+  .ff-static-header .nav-links { display: flex; align-items: center; gap: 28px; }
+  .ff-static-header .nav-links a.navlink { font-size: 16px; color: #606060; text-decoration: none; font-family: "Poppins", sans-serif; }
+  .ff-static-header .nav-links a.navlink:hover { color: #1e1e1e; }
+  .ff-static-header .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 12px 22px; border-radius: 12px; font-weight: 500; font-size: 14px; border: none; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+  .ff-static-header .btn:hover { transform: translateY(-1px); }
+  .ff-static-header .btn-solid-dark { background: #5474a1; color: #fff; }
+  .ff-static-header .btn-solid-dark:hover { background: #1e1e1e; }
+  .ff-static-header .nav-toggle { display: none; background: none; border: none; font-size: 26px; color: #1e1e1e; cursor: pointer; }
+  @media (max-width: 860px) {
+    .ff-static-header .nav-links { position: absolute; top: 100%; left: 0; right: 0; background: #f0f4f6; flex-direction: column; align-items: flex-start; padding: 20px 24px 28px; gap: 18px; border-bottom: 1px solid rgba(0,0,0,.06); display: none; }
+    .ff-static-header .nav-links.open { display: flex; }
+    /* Shown only when JS is on (home.js runs it). 44px square to tap; the
+       negative margins keep the glyph and the header height unchanged. */
+    .ff-js .ff-static-header .nav-toggle { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin: -2.5px -10.5px -2.5px 0; }
+  }
+
+  /* ---------- Unified static footer (matches employee-development / grad-schemes) ---------- */
+  footer.ff-static-footer { padding: 50px 24px 40px; max-width: 1238px; margin: 0 auto; font-family: "Poppins", sans-serif; }
+  footer.ff-static-footer .footer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 24px; }
+  footer.ff-static-footer .footer-top img { height: 38px; width: auto; }
+  footer.ff-static-footer .btn-solid-dark { background: #5474a1; color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 12px 22px; border-radius: 12px; font-weight: 500; font-size: 14px; border: none; text-decoration: none; transition: transform .15s ease, background .15s ease; }
+  footer.ff-static-footer .btn-solid-dark:hover { background: #1e1e1e; }
+  footer.ff-static-footer .footer-divider { height: 1px; background: rgba(0,0,0,0.08); width: 100%; margin-bottom: 30px; }
+  footer.ff-static-footer .footer-cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  footer.ff-static-footer .footer-cols h2 { font-size: 15px; color: #a5a7a5; font-weight: 500; margin-bottom: 20px; margin-top: 0; }
+  footer.ff-static-footer .footer-cols a, footer.ff-static-footer .footer-cols p { display: block; font-size: 15px; color: #606060; margin-bottom: 16px; text-decoration: none; margin-top: 0; }
+  footer.ff-static-footer .footer-socials { display: flex; gap: 14px; margin-top: 4px; }
+  footer.ff-static-footer .footer-socials a { display: block; width: 24px; height: 24px; }
+  @media (max-width: 720px) {
+    footer.ff-static-footer .footer-cols { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
 <body>
 <div class="min-h-screen w-full bg-[#f0f4f6] ff-page">
-  <header class="sticky top-0 z-30 bg-[#f0f4f6] mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-8 lg:px-[100px] ff-header" id="siteHeader">
-    <a href="#" aria-label="Fluencyfox home" class="shrink-0" data-top="">
-      <img class="h-8 w-[151px] sm:h-11 sm:w-[207.57px]" alt="" src="assets/logo-DK91_vQ0.svg" width="208" height="44">
-    </a>
-    <div class="flex items-center gap-3 sm:gap-[22px]">
-      <nav aria-label="Main" class="relative z-10 max-w-max flex-1 items-center justify-center hidden md:flex">
-        <div style="position: relative;">
-          <ul class="group flex flex-1 list-none items-center justify-center space-x-1 gap-[22px]">
-            <li><a href="#testimonials" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">Testimonials</a></li>
-            <li><a href="#how-it-works" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">How It Works</a></li>
-            <li><a href="#what-we-measure" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">What we Measure</a></li>
-          </ul>
-        </div>
+  <header class="ff-static-header" id="siteHeader">
+    <div class="wrap">
+      <a href="/" class="logo">
+        <img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44">
+      </a>
+      <button class="nav-toggle" id="navToggleStatic" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinksStatic">&#9776;</button>
+      <nav class="nav-links" id="navLinksStatic" aria-label="Main">
+        <a class="navlink" href="#testimonials">Testimonials</a>
+        <a class="navlink" href="#how-it-works">How It Works</a>
+        <a class="navlink" href="#what-we-measure">What we Measure</a>
+        <a class="btn btn-solid-dark" href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&utm_medium=site&utm_campaign=home" target="_blank" rel="noopener">Book a Demo</a>
       </nav>
-      <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-auto rounded-xl bg-[#5474a1] px-[18px] py-2.5 sm:px-[22px] sm:py-3 [font-family:'Poppins',Helvetica] text-sm font-medium leading-normal text-white hover:bg-[#46618a] ff-cta">Book a Demo</a>
-      <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 shrink-0 text-[#1e1e1e] hover:bg-[#dae9f1] md:hidden" type="button" aria-label="Open menu" aria-expanded="false" id="navToggle" aria-controls="mobileNav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6 ff-icon-menu" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6 ff-icon-close" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
     </div>
-    <nav id="mobileNav" aria-label="Mobile" hidden="" class="ff-mobile-nav absolute left-4 right-4 top-full z-30 mt-2 flex flex-col gap-1 rounded-xl border border-[#dae9f1] bg-white p-3 shadow-lg sm:left-8 sm:right-8 md:hidden"><a href="#testimonials" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">Testimonials</a><a href="#how-it-works" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">How It Works</a><a href="#what-we-measure" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">What we Measure</a><a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="ff-menu-cta rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-medium text-[#5474a1] transition-colors hover:bg-[#f0f4f6] ff-cta">Book a Demo</a></nav><span class="ff-progress" aria-hidden="true"></span></header>
+    <span class="ff-progress" aria-hidden="true"></span>
+  </header>
   <main class="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[190px] px-4 pt-16 sm:px-8 sm:pt-[190px] lg:px-[100px]">
     <section id="hero" class="w-full" data-section="hero">
       <section class="w-full">
@@ -672,53 +710,40 @@
       </section>
     </section>
   </main>
-  <footer class="mt-[190px] flex w-full flex-col items-center justify-center gap-[21px] px-4 pb-8 pt-10 sm:px-6 lg:px-0 ff-footer">
-    <div class="flex w-full max-w-[1238px] items-start justify-between gap-6">
-      <a href="#" aria-label="Back to top" class="flex h-11 items-center gap-[7px]" data-top="">
-        <img class="h-8 w-auto shrink-0 sm:h-11" alt="Fluencyfox" src="assets/footer-logo-mark-Bh9WfdCK.svg" loading="lazy" decoding="async">
-      </a>
-      <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-auto rounded-xl bg-[#5474a1] px-[22px] py-3 [font-family:'Poppins',Helvetica] text-sm font-medium leading-normal text-white hover:bg-[#5474a1]/90 ff-cta">Book a Demo</a>
+  <footer class="ff-static-footer">
+    <div class="footer-top">
+      <a href="/" aria-label="Fluencyfox"><img src="/assets/logo-full.svg" alt="Fluencyfox"></a>
+      <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&utm_medium=site&utm_campaign=home" target="_blank" rel="noopener" class="btn-solid-dark">Book a Demo</a>
     </div>
-    <img class="h-px w-full max-w-[1310px] ff-rule" alt="" src="data:image/svg+xml,%3csvg%20width='1310'%20height='1'%20viewBox='0%200%201310%201'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%200.5H1310'%20stroke='%23E7E7E7'/%3e%3c/svg%3e">
-    <div class="flex w-full max-w-[1238px] flex-wrap items-start justify-between gap-x-8 gap-y-10 rounded-xl py-4" data-stagger="70">
-      <nav aria-label="Menu" class="flex flex-col items-start gap-[22px]" data-reveal="fade">
-        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Menu</h2>
-        <ul class="flex flex-col items-start gap-[22px]">
-          <li><a href="#testimonials" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Testimonials</a></li>
-          <li><a href="#how-it-works" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">How It Works</a></li>
-          <li><a href="#what-we-measure" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">What we Measure</a></li>
-          <li><a href="/grad-schemes" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Grad Schemes</a></li>
-          <li><a href="/employee-development" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Employee Development</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="Insights" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
-        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Insights</h2>
-        <ul class="flex flex-col items-start gap-[22px]">
-          <li><a href="/research/ai-fluency-data-index" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Research</a></li>
-          <li><a href="/blog" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Blog</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="Docs" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
-        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Docs</h2>
-        <ul class="flex flex-col items-start gap-[22px]">
-          <li><a href="/privacy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Privacy Policy</a></li>
-          <li><a href="/terms" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Terms & Conditions</a></li>
-        </ul>
-      </nav>
-      <nav aria-label="Address" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
-        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Address</h2>
-        <ul class="flex flex-col items-start gap-[22px]">
-          <li class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#606060]">71-75 Shelton Street, London, UK WC2H 9JQ</li>
-        </ul>
-      </nav>
-      <section class="flex flex-col items-start gap-[22px]" aria-labelledby="socials-heading" data-reveal="fade">
-        <h2 id="socials-heading" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Socials</h2>
-        <div class="flex items-center gap-4">
-          <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-auto p-0 hover:bg-transparent ff-link">
-            <img class="h-6 w-6" alt="" src="data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='1.5'%20y='1.5'%20width='21'%20height='21'%20rx='10.5'%20fill='%231275B1'/%3e%3cpath%20d='M9.46392%207.26911C9.46392%207.97002%208.85639%208.53822%208.10696%208.53822C7.35753%208.53822%206.75%207.97002%206.75%207.26911C6.75%206.5682%207.35753%206%208.10696%206C8.85639%206%209.46392%206.5682%209.46392%207.26911Z'%20fill='white'/%3e%3cpath%20d='M6.93557%209.47107H9.25515V16.5H6.93557V9.47107Z'%20fill='white'/%3e%3cpath%20d='M12.9897%209.47107H10.6701V16.5H12.9897C12.9897%2016.5%2012.9897%2014.2872%2012.9897%2012.9036C12.9897%2012.0732%2013.2732%2011.2392%2014.4046%2011.2392C15.6833%2011.2392%2015.6756%2012.3259%2015.6696%2013.1678C15.6618%2014.2683%2015.6804%2015.3914%2015.6804%2016.5H18V12.7903C17.9804%2010.4215%2017.3631%209.33006%2015.3325%209.33006C14.1265%209.33006%2013.379%209.87754%2012.9897%2010.3729V9.47107Z'%20fill='white'/%3e%3c/svg%3e">
+    <div class="footer-divider"></div>
+    <div class="footer-cols" data-stagger="70">
+      <div data-reveal="fade">
+        <h2>Menu</h2>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#what-we-measure">What we Measure</a>
+        <a href="/grad-schemes">Grad Schemes</a>
+        <a href="/employee-development">Employee Development</a>
+      </div>
+      <div data-reveal="fade">
+        <h2>Insights</h2>
+        <a href="/research/ai-fluency-data-index">Research</a>
+        <a href="/blog">Blog</a>
+      </div>
+      <div data-reveal="fade">
+        <h2>Docs</h2>
+        <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+      </div>
+      <div data-reveal="fade">
+        <h2>Address</h2>
+        <p>71&ndash;75 Shelton Street,<br>London, UK WC2H 9JQ</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="#5474a1"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.85 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
           </a>
         </div>
-      </section>
+      </div>
     </div>
   </footer>
 </div>
