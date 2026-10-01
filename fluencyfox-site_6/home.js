@@ -599,6 +599,9 @@
     // hero image.
     onLoaded(() => once(carousel, () => {
       $$('img[data-src]', carousel).forEach(img => {
+        // A photo with an AVIF copy holds it back in its <source> too.
+        const source = img.parentElement.matches('picture') && $('source[data-srcset]', img.parentElement);
+        if (source) { source.srcset = source.dataset.srcset; source.removeAttribute('data-srcset'); }
         img.src = img.dataset.src;
         img.removeAttribute('data-src');
         if (img.decode) img.decode().catch(() => {});

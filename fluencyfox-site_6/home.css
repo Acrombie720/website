@@ -37,6 +37,10 @@ section[data-section] { scroll-margin-top: 84px; }
    the sticky header sticky. */
 .ff-page { overflow-x: clip; }
 
+/* Photos with an AVIF copy sit in a <picture> (index.html). It draws no box
+   of its own, so each <img> keeps its place in the grid or flex around it. */
+picture { display: contents; }
+
 /* Keyboard focus that reads on the pale background and survives hover
    (the designer's 1px ring was 2.3:1 and the hover shadow replaced it). */
 .ff-cta:focus-visible,
