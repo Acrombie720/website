@@ -17,7 +17,6 @@
   --ff-ease-spring: cubic-bezier(.34, 1.4, .64, 1);
   --ff-blue-light: #92bad5;
   --ff-blue: #5474a1;
-  --ff-blue-dark: #46618a;
   --ff-bg: #f0f4f6;
   /* Headroom for the pointer parallax: only desktops with a mouse get it,
      and only sideways, so the designer's vertical framing is untouched. */
@@ -41,35 +40,20 @@ section[data-section] { scroll-margin-top: 84px; }
    (the designer's 1px ring was 2.3:1 and the hover shadow replaced it). */
 .ff-cta:focus-visible,
 .ff-ghost:focus-visible,
-.ff-link:focus-visible,
-.ff-navlink:focus-visible,
-.ff-t-btn:focus-visible,
-#navToggle:focus-visible {
+.ff-t-btn:focus-visible {
   outline: 2px solid var(--ff-blue);
   outline-offset: 3px;
 }
 
 /* -------------------------------------------------------------- header */
 
-.ff-header { background: transparent; isolation: isolate; }
-.ff-header::before {
-  content: "";
-  position: absolute;
-  inset: 0 calc(50% - 50vw);
-  z-index: -1;
-  background: var(--ff-bg);
-  transition: background-color .4s ease, box-shadow .4s ease;
-}
-.ff-header.is-scrolled::before {
-  background: rgba(240, 244, 246, .78);
-  -webkit-backdrop-filter: saturate(1.5) blur(14px);
-  backdrop-filter: saturate(1.5) blur(14px);
-  box-shadow: 0 1px 0 rgba(84, 116, 161, .10), 0 10px 30px -18px rgba(30, 30, 30, .28);
-}
+/* The header is the designer's site-wide one, styled in index.html with its
+   own frosted background. On top of it, only a line along its bottom edge
+   that fills as you scroll, and a short entrance on load. */
 .ff-progress {
   position: absolute;
-  left: calc(50% - 50vw);
-  width: 100vw;
+  left: 0;
+  right: 0;
   bottom: 0;
   height: 2px;
   transform-origin: 0 50%;
@@ -79,66 +63,11 @@ section[data-section] { scroll-margin-top: 84px; }
   transition: opacity .3s ease;
   pointer-events: none;
 }
-.ff-header.is-scrolled .ff-progress { opacity: 1; }
+.ff-static-header.is-scrolled .ff-progress { opacity: 1; }
 
-/* "backwards", not "both": a finished animation left in effect makes the
-   header a backdrop root in Chrome and the frosted blur never shows. */
-.ff-motion .ff-header { animation: ff-header-in .9s var(--ff-ease-out) backwards; }
+/* "backwards", not "both", so nothing is left applied once it has played. */
+.ff-motion .ff-static-header { animation: ff-header-in .9s var(--ff-ease-out) backwards; }
 @keyframes ff-header-in { from { opacity: 0; transform: translate3d(0, -24px, 0); } }
-
-.ff-navlink { position: relative; }
-.ff-navlink::after,
-.ff-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -5px;
-  height: 1.5px;
-  border-radius: 2px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: 100% 50%;
-}
-.ff-motion .ff-navlink::after,
-.ff-motion .ff-link::after { transition: transform .5s var(--ff-ease-out); }
-.ff-navlink:hover::after,
-.ff-navlink.is-current::after,
-.ff-link:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
-/* The designer's #5474a1 is 4.3:1 here; fine for a hover flash, too light
-   for a state that stays on while you read. */
-.ff-navlink.is-current { color: var(--ff-blue-dark); }
-.ff-link { position: relative; }
-
-/* Mobile menu: the button swaps icons, the panel drops in. */
-#navToggle .ff-icon-close { display: none; }
-#navToggle[aria-expanded="true"] .ff-icon-menu { display: none; }
-#navToggle[aria-expanded="true"] .ff-icon-close { display: block; }
-.ff-motion #navToggle[aria-expanded="true"] .ff-icon-close,
-.ff-motion #navToggle.was-open[aria-expanded="false"] .ff-icon-menu { animation: ff-spin-in .35s var(--ff-ease-out); }
-@keyframes ff-spin-in { from { transform: rotate(-90deg) scale(.6); opacity: 0; } }
-
-.ff-mobile-nav[hidden] { display: none !important; }
-.ff-motion .ff-mobile-nav {
-  opacity: 0;
-  transform: translate3d(0, -8px, 0) scale(.98);
-  transform-origin: 100% 0;
-  transition: opacity .22s ease, transform .4s var(--ff-ease-out);
-}
-.ff-motion .ff-mobile-nav.is-open { opacity: 1; transform: none; }
-.ff-motion .ff-mobile-nav a { opacity: 0; transform: translate3d(0, -6px, 0); transition: opacity .3s ease, transform .45s var(--ff-ease-out), background-color .15s, color .15s; }
-.ff-motion .ff-mobile-nav.is-open a { opacity: 1; transform: none; }
-.ff-motion .ff-mobile-nav.is-open a:nth-child(2) { transition-delay: 45ms; }
-.ff-motion .ff-mobile-nav.is-open a:nth-child(3) { transition-delay: 90ms; }
-.ff-motion .ff-mobile-nav.is-open a:nth-child(4) { transition-delay: 135ms; }
-
-/* Below 360px the header's Book a Demo pushes the menu button off screen,
-   so it moves into the menu instead. */
-.ff-menu-cta { display: none !important; }
-@media (max-width: 359px) {
-  #siteHeader > div > .ff-cta { display: none; }
-  .ff-menu-cta { display: block !important; }
-}
 
 /* -------------------------------------------------------------- buttons */
 
