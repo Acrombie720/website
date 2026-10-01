@@ -21,6 +21,14 @@
   const onLoaded = fn => (document.readyState === 'complete' ? fn() : addEventListener('load', fn, { once: true }));
   const docTop = el => { let y = 0; for (let n = el; n; n = n.offsetParent) y += n.offsetTop; return y; };
   const watch = (el, fn, margin = '0px') => new IntersectionObserver(([e]) => fn(e.isIntersecting), { rootMargin: margin }).observe(el);
+  // For loops: fn(true) while el is on screen in a visible tab, fn(false)
+  // once it scrolls away or the tab is hidden.
+  const watchSeen = (el, fn, margin) => {
+    let on = false, seen;
+    const update = () => { const v = on && !document.hidden; if (v !== seen) fn((seen = v)); };
+    watch(el, v => { on = v; update(); }, margin);
+    document.addEventListener('visibilitychange', update);
+  };
   const once = (el, fn, margin = '0px') => {
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); fn(); } }, { rootMargin: margin });
     io.observe(el);
@@ -42,6 +50,13 @@
   addEventListener('scroll', request, { passive: true });
   addEventListener('resize', measure);
   onLoaded(() => { measure(); requestAnimationFrame(() => root.classList.add('smooth')); });
+
+  // In a hidden tab the CSS loops pause too (concept.css, .tab-hidden).
+  feature('hidden tab', () => {
+    const sync = () => root.classList.toggle('tab-hidden', document.hidden);
+    document.addEventListener('visibilitychange', sync);
+    sync();
+  });
 
   // ---------------------------------------------------------------- reveals
 
@@ -507,6 +522,13 @@
       if (v && !userPaused && mk >= 0 && u < endU(mk)) setPlaying(true);
       else if (!v && playing) setPlaying(false);
     }, '-15% 0px -15% 0px');
+    // A hidden tab pauses the webcam clip too. The recording needs nothing:
+    // browsers run no animation frames in a hidden tab, and its loop caps the
+    // first step back, so it carries on from the same moment.
+    if (cam) document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cam.pause();
+      else if (visible && motion) cam.play().catch(() => {});
+    });
   });
 
   // ---------------------------------------------------------------- weights editor and results table
@@ -631,10 +653,11 @@
       screenTile.addEventListener('pointerleave', () => { desktop.style.setProperty('--px', '0'); desktop.style.setProperty('--py', '0'); });
     }
 
-    // Camera: the recorder preview plays while the tile is on screen.
+    // Camera: the recorder preview plays while the tile is on screen and the
+    // tab is showing.
     const vid = $('#tileVideo');
     if (vid && !motion) vid.preload = 'metadata';
-    if (vid) watch(vid, v => { if (v && motion) { vid.preload = 'auto'; vid.play().catch(() => {}); } else vid.pause(); });
+    if (vid) watchSeen(vid, v => { if (v && motion) { vid.preload = 'auto'; vid.play().catch(() => {}); } else vid.pause(); });
 
     // Voice: scrub the waveform and the transcript lights up to that point.
     const voice = $('#voice');

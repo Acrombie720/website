@@ -172,6 +172,9 @@
   .cursor svg{ display:block; }
   .cursor.click svg .ring{ animation:clickring .45s ease-out; }
   @keyframes clickring{ 0%{ r:2; opacity:.9; } 100%{ r:13; opacity:0; } }
+
+  /* Off screen or in a hidden tab the demo holds its place (see sleep below). */
+  .is-paused .caret, .is-paused .loading .dots span{ animation-play-state:paused; }
 </style>
 </head>
 <body>
@@ -285,7 +288,28 @@
 
 <script>
 (function(){
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  // The loop only ever waits in sleep(). Off screen or in a hidden tab it
+  // holds there, and each wait keeps the time it had left, so the demo
+  // carries on from the same moment when it is back in sight.
+  let paused = false, onScreen = true;
+  const waits = new Set();
+  const sleep = ms => new Promise(done => {
+    const w = { left: ms };
+    w.go = () => { w.t = performance.now(); w.id = setTimeout(() => { waits.delete(w); done(); }, w.left); };
+    w.hold = () => { clearTimeout(w.id); w.left -= performance.now() - w.t; };
+    waits.add(w);
+    if (!paused) w.go();
+  });
+  const sync = () => {
+    const p = !onScreen || document.hidden;
+    if (p === paused) return;
+    paused = p;
+    document.documentElement.classList.toggle('is-paused', p);
+    waits.forEach(w => (p ? w.hold() : w.go()));
+  };
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(document.documentElement);
+  document.addEventListener('visibilitychange', sync);
+
   const stage = document.getElementById('stage');
   const cursor = document.getElementById('cursor');
   const screenA = document.getElementById('screenA');

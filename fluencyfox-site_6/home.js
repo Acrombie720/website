@@ -33,6 +33,15 @@
     const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { io.disconnect(); fn(); } }, { rootMargin: margin });
     io.observe(el);
   };
+  // For loops: fn(true) while el is on screen in a visible tab, fn(false)
+  // once it scrolls away or the tab is hidden. A loop stops on false and
+  // carries on from where it was on true.
+  const whileSeen = (el, fn, margin) => {
+    let onScreen = false, seen;
+    const update = () => { const v = onScreen && !document.hidden; if (v !== seen) fn((seen = v)); };
+    whenVisible(el, v => { onScreen = v; update(); }, margin);
+    document.addEventListener('visibilitychange', update);
+  };
   // Each feature runs on its own, so one failing cannot take the rest down.
   const feature = (name, fn) => { try { fn(); } catch (err) { console.error('[home.js] ' + name, err); } };
 
@@ -120,6 +129,13 @@
     root.classList.remove('ff-reveal');
     $$('[data-count]').forEach(el => { el.textContent = el.dataset.count; });
     $$('.ff-tw-ch').forEach(el => el.classList.add('on'));
+  });
+
+  // In a hidden tab the CSS loops pause as well (home.css, "out of sight").
+  feature('hidden tab', () => {
+    const sync = () => root.classList.toggle('ff-tab-hidden', document.hidden);
+    document.addEventListener('visibilitychange', sync);
+    sync();
   });
 
   // ---------------------------------------------------------------- counters
@@ -506,8 +522,9 @@
   // ---------------------------------------------------------------- hero video
 
   // The screenshare clip inside the mockup waits until the page has loaded so
-  // it never competes with the hero images, and pauses when scrolled away.
-  // With reduced motion it shows its first frame and stays still.
+  // it never competes with the hero images, and pauses when scrolled away or
+  // the tab is hidden. With reduced motion it shows its first frame and stays
+  // still.
   feature('hero video', () => {
     const video = $('video[data-autoplay]');
     if (!video) return;
@@ -515,7 +532,7 @@
     if (!motion) { video.preload = 'metadata'; return; }
     let visible = false;
     const play = () => { if (!visible) return; video.preload = 'auto'; video.play().catch(() => {}); };
-    whenVisible(video, v => {
+    whileSeen(video, v => {
       visible = v;
       if (v) onLoaded(play); else video.pause();
     });
@@ -687,24 +704,33 @@
     caret.className = 'ff-caret';
     vis.insertBefore(caret, vis.firstChild);
     const spans = chars.filter(c => c.nodeType === 1);
-    let started = false;
-    const type = () => {
-      let i = 0, acc = 0, last = performance.now();
-      const tick = now => {
-        acc += now - last; last = now;
-        // Slightly human rhythm: a beat longer after punctuation.
-        while (i < spans.length && acc >= 0) {
-          const ch = spans[i].textContent;
-          spans[i].classList.add('on');
-          vis.insertBefore(caret, spans[i].nextSibling);
-          i++;
-          acc -= /[.,'“”]/.test(ch) ? 110 : 34;
-        }
-        if (i < spans.length) requestAnimationFrame(tick);
-        else setTimeout(() => caret.classList.add('is-gone'), 1400);
-      };
-      requestAnimationFrame(tick);
+    // Out of sight, the typing and the caret's blink (.ff-away) hold, and
+    // pick up at the same letter when the quote is back.
+    let started = false, seen = false, i = 0, acc = 0, last = 0, id = 0;
+    const tick = now => {
+      acc += now - last; last = now;
+      // Slightly human rhythm: a beat longer after punctuation.
+      while (i < spans.length && acc >= 0) {
+        const ch = spans[i].textContent;
+        spans[i].classList.add('on');
+        vis.insertBefore(caret, spans[i].nextSibling);
+        i++;
+        acc -= /[.,'“”]/.test(ch) ? 110 : 34;
+      }
+      if (i < spans.length) id = requestAnimationFrame(tick);
+      else { id = 0; setTimeout(() => caret.classList.add('is-gone'), 1400); }
     };
+    const type = () => {
+      if (!started || !seen || id || i >= spans.length) return;
+      last = performance.now();
+      id = requestAnimationFrame(tick);
+    };
+    whileSeen(tw, v => {
+      seen = v;
+      tw.classList.toggle('ff-away', !v);
+      if (v) type();
+      else { cancelAnimationFrame(id); id = 0; }
+    });
     // Mostly in view, or filling half the screen when it is taller than the
     // viewport (small windows, heavy zoom), whichever comes first.
     const io = new IntersectionObserver(([e]) => {
@@ -723,13 +749,14 @@
     const grid = $('#assessment-evidence .grid');
     if (grid) whenVisible(grid, v => grid.classList.toggle('in-view', v));
 
-    // "41:20" ticks on while the card is on screen: every minute replayable.
+    // "41:20" ticks on while the card is in sight: every minute replayable.
+    // It stops off screen or in a hidden tab and goes on from the same second.
     const clock = $('[data-timer]');
     if (!clock || !motion) return;
     let secs = parseInt(clock.dataset.timer, 10);
     let timer = 0;
     clock.style.fontVariantNumeric = 'tabular-nums';
-    whenVisible(clock, v => {
+    whileSeen(clock, v => {
       clearInterval(timer);
       if (v) timer = setInterval(() => {
         secs++;

@@ -40,6 +40,8 @@
     animation:scroll 17s linear infinite;
   }
   .marquee:hover .marquee-track{ animation-play-state:paused; }
+  /* Off screen or in a hidden tab it holds its place (script at the end). */
+  .is-paused .marquee-track{ animation-play-state:paused; }
 
   .logo-item{
     display:flex; align-items:center; justify-content:center;
@@ -356,6 +358,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  // The marquee holds its place while off screen or in a hidden tab.
+  (function(){
+    const root = document.documentElement;
+    let onScreen = true;
+    const sync = () => root.classList.toggle('is-paused', !onScreen || document.hidden);
+    if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(); }).observe(root);
+    document.addEventListener('visibilitychange', sync);
+  })();
+</script>
 
 </body>
 </html>
