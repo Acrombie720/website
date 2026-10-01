@@ -36,6 +36,10 @@ section[data-section] { scroll-margin-top: 84px; }
    the sticky header sticky. */
 .ff-page { overflow-x: clip; }
 
+/* Photos with an AVIF copy sit in a <picture> (index.html). It draws no box
+   of its own, so each <img> keeps its place in the grid or flex around it. */
+picture { display: contents; }
+
 /* Keyboard focus that reads on the pale background and survives hover
    (the designer's 1px ring was 2.3:1 and the hover shadow replaced it). */
 .ff-cta:focus-visible,
@@ -542,6 +546,22 @@ section[data-section] { scroll-margin-top: 84px; }
 .ff-cta-land { transform-origin: 50% 40%; }
 .ff-live-cta .ff-cta-land,
 .ff-live-cta .ff-cta-flowers { will-change: transform; }
+
+/* -------------------------------------------------------------- out of sight */
+
+/* Loops pause while nobody can see them and carry on from the same frame
+   when they are back. Off screen, the aurora pauses under .ff-hero-away and
+   the evidence loops stop with .in-view (both above); the caret pauses here.
+   In a hidden tab (.ff-tab-hidden, set by home.js) they all pause. Each
+   selector repeats the one that starts its loop, so it outranks that rule's
+   animation shorthand. One-shot entrances finish as normal. A new loop
+   belongs in this list. */
+.ff-away .ff-caret::after,
+.ff-tab-hidden .ff-aurora span,
+.ff-tab-hidden .in-view .ff-screenbar,
+.ff-tab-hidden .in-view .ff-wave img,
+.ff-tab-hidden .in-view .ff-play,
+.ff-tab-hidden .in-view .ff-rec i::after { animation-play-state: paused; }
 
 /* -------------------------------------------------------------- print, reduced motion */
 

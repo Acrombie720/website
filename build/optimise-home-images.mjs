@@ -1,5 +1,6 @@
 // Smaller copies of the images the new homepage shows, so a phone or laptop
-// does not download the designer's 2048px originals.
+// does not download the designer's 2048px originals: WebP for all of them,
+// plus AVIF for the photos where it is clearly smaller (see AVIF_BASE).
 //   node build/optimise-home-images.mjs          report only, changes nothing
 //   node build/optimise-home-images.mjs --write  actually write the files
 //
@@ -16,20 +17,38 @@ const kb = n => (n / 1024).toFixed(0) + 'KB';
 // A recompressed copy is only worth a new URL if it saves at least this much.
 const MIN_SAVING = 0.10;
 
+// AVIF copies of the photos, which index.html offers first in a <picture>
+// with the WebP as the fallback. A job's avif settings are the lowest quality
+// at which every width is at least as close to the designer's original as
+// its WebP (SSIM on luma; measured 1 Oct 2026 with sharp 0.35.5). Bit depth
+// is per job: 10-bit is smaller for some photos, 8-bit for others. Chroma is
+// 4:2:0 like WebP's; effort 9 saved only about 1% more for 4x the time.
+// AVIF is only worth it where it is at least about 15% smaller than the
+// WebP beside it: every width must save 14% or more. A srcset takes all its
+// widths from one format, so a set is written whole or not at all.
+const AVIF_BASE = { effort: 6, chromaSubsampling: '4:2:0' };
+const AVIF_MIN_SAVING = 0.14;
+
 // Full-bleed at 100vw in the hero and the closing CTA. Both have real
 // transparency (the mountains' sky, everything around the flowers), so the
 // alpha plane is kept lossless (alphaQuality 100).
 const WIDTHS = [
-  { file: 'hero-mountains-BD-V2s5g.webp',       stem: 'hero-mountains-d', widths: [768, 1280, 1440, 1600, 1920, 2048], quality: 72 },
-  { file: 'hero-flowers-overlap-5zR-FvQe.webp', stem: 'hero-flowers-d',   widths: [768, 1280, 1440, 1600, 1920, 2216], quality: 75 },
+  { file: 'hero-mountains-BD-V2s5g.webp',       stem: 'hero-mountains-d', widths: [768, 1280, 1440, 1600, 1920, 2048], quality: 72,
+    avif: { quality: 58, bitdepth: 10 } },
+  { file: 'hero-flowers-overlap-5zR-FvQe.webp', stem: 'hero-flowers-d',   widths: [768, 1280, 1440, 1600, 1920, 2216], quality: 75,
+    avif: { quality: 60 } },
 ];
 
 // One recompressed copy each. maxWidth is the widest it is shown, doubled for retina.
+// No AVIF for Eleonora, Romil or Tess: as close to the original, it is only
+// 13%, 7% and 6% smaller. The camera photo would save 32%, but it is a CSS
+// background set in index.html, which a <picture> cannot reach.
 const RECOMPRESS = [
   { file: 'testimonial-eleonora-BU8lwlWD.webp',   out: 'testimonial-eleonora-d.webp', maxWidth: 940, quality: 76 },
   { file: 'testimonial-romil-photo-Cb0H6cwe.webp', out: 'testimonial-romil-d.webp',   maxWidth: 940, quality: 76 },
   { file: 'testimonial-tess-photo-COCQv1Ze.webp',  out: 'testimonial-tess-d.webp',    maxWidth: 940, quality: 76 },
-  { file: 'testimonial-jay-photo-DCc6BvwN.webp',   out: 'testimonial-jay-d.webp',     maxWidth: 940, quality: 76 },
+  { file: 'testimonial-jay-photo-DCc6BvwN.webp',   out: 'testimonial-jay-d.webp',     maxWidth: 940, quality: 76,
+    avif: { quality: 54, bitdepth: 10 } },
   { file: 'assessment-camera-Dh5KHne1.webp',       out: 'assessment-camera-d.webp',   maxWidth: 640, quality: 76 },
 ];
 
@@ -56,6 +75,18 @@ async function line(name, buf, srcName, srcBytes, note = '') {
   const m = await sharp(buf).metadata();
   console.log(`${name.padEnd(28)} ${`${m.width}x${m.height}`.padEnd(10)} ${kb(buf.length).padStart(6)}` +
               `${m.hasAlpha ? ' alpha' : '      '}  from ${srcName} ${kb(srcBytes)}${note}`);
+}
+
+// set: [{ name, buf, webp: bytes of the WebP it sits beside }], one per width.
+async function avifSet(set, srcName, srcBytes) {
+  const worst = Math.min(...set.map(a => 1 - a.buf.length / a.webp));
+  for (const a of set) {
+    const saving = 1 - a.buf.length / a.webp;
+    await line(a.name, a.buf, srcName, srcBytes, worst < AVIF_MIN_SAVING
+      ? `  SKIPPED, the set's worst width is only ${(worst * 100).toFixed(0)}% smaller than WebP` +
+        (existsSync(new URL(a.name, DIR)) ? ' (an old copy exists: delete it and its <source>)' : '')
+      : `  -${(saving * 100).toFixed(0)}% vs WebP` + save(a.name, a.buf));
+  }
 }
 
 // librsvg (inside sharp) cannot decode a WebP data URI in an SVG and silently
@@ -90,12 +121,17 @@ async function exactSize(buf, w, h) {
 
 for (const job of WIDTHS) {
   const src = readFileSync(new URL(job.file, DIR));
+  const avifs = [];
   for (const w of job.widths) {
-    const out = await sharp(src).resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: job.quality, alphaQuality: 100, effort: 6 }).toBuffer();
+    const resized = () => sharp(src).resize({ width: w, withoutEnlargement: true });
+    const out = await resized().webp({ quality: job.quality, alphaQuality: 100, effort: 6 }).toBuffer();
     const name = `${job.stem}-${w}.webp`;
     await line(name, out, job.file, src.length, save(name, out));
+    if (job.avif) {
+      avifs.push({ name: `${job.stem}-${w}.avif`, buf: await resized().avif({ ...AVIF_BASE, ...job.avif }).toBuffer(), webp: out.length });
+    }
   }
+  if (avifs.length) await avifSet(avifs, job.file, src.length);
   console.log('');
 }
 
@@ -116,8 +152,8 @@ for (const job of RASTER) {
 
 for (const job of RECOMPRESS) {
   const src = readFileSync(new URL(job.file, DIR));
-  const out = await sharp(src).resize({ width: job.maxWidth, withoutEnlargement: true })
-    .webp({ quality: job.quality, effort: 6 }).toBuffer();
+  const resized = () => sharp(src).resize({ width: job.maxWidth, withoutEnlargement: true });
+  const out = await resized().webp({ quality: job.quality, effort: 6 }).toBuffer();
   const saving = 1 - out.length / src.length;
   if (saving < MIN_SAVING) {
     await line(job.out, out, job.file, src.length,
@@ -126,6 +162,10 @@ for (const job of RECOMPRESS) {
     continue;
   }
   await line(job.out, out, job.file, src.length, `  -${(saving * 100).toFixed(0)}%` + save(job.out, out));
+  if (job.avif) {
+    const avif = await resized().avif({ ...AVIF_BASE, ...job.avif }).toBuffer();
+    await avifSet([{ name: job.out.replace(/\.webp$/, '.avif'), buf: avif, webp: out.length }], job.file, src.length);
+  }
 }
 
 // The only favicon was the 42KB 512px logo, fetched by every first visit.

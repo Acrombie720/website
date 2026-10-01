@@ -783,6 +783,8 @@ body[data-nav="night"] .nav .brand-word i, .foot .brand-word i { color: var(--bl
 .rec-pill { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border-radius: 999px; background: var(--green-l); color: var(--green-d); font-size: 12px; font-weight: 500; }
 .rec-pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--green-d); }
 .motion .in-view .rec-pill i { animation: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite; }
+/* Off screen the pulse stops with .in-view; in a hidden tab it pauses. */
+.tab-hidden .in-view .rec-pill i { animation-play-state: paused; }
 @keyframes pulse { 50% { opacity: .5; } }
 .rec-pill-float { position: absolute; left: 12px; bottom: 12px; }
 
