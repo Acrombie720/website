@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluencyfox · concept: On paper, everyone is fluent in AI</title>
+<!-- A design concept, not the live page. Never index it. -->
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Fluencyfox gives candidates a task from the job, with the AI tools they would use on day one, and records and scores the whole hour.">
+<meta name="theme-color" content="#F3F6FF">
+<link rel="icon" type="image/png" sizes="32x32" href="../../fluencyfox-site_6/assets/favicon-32.png">
+
+<script>
+  (function (d) {
+    d.classList.add('js');
+    if (window.matchMedia && !matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('motion');
+  })(document.documentElement);
+</script>
+
+<!-- The platform's own type: Ovo for display, Poppins for text, Manrope for
+     section titles and figures. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&amp;family=Ovo&amp;family=Poppins:ital,wght@0,400;0,500;0,600;1,400&amp;display=swap">
+<link rel="stylesheet" href="concept.css">
+<script src="concept.js" defer></script>
+</head>
+<body data-nav="paper">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="ff-mark" viewBox="0 0 44 44"><rect width="44" height="44" rx="8.8066" fill="#5474A1"/><path d="M31.7583 28.462C33.0332 26.839 34.9193 24.1406 34.9193 24.1406C34.9193 24.1406 30.1368 26.2003 27.6774 28.462C24.0022 31.8419 21.7456 39.6223 21.7456 39.6223C21.7456 39.6223 28.1463 33.0602 31.7583 28.462Z" fill="#F0F4F6" stroke="#F0F4F6" stroke-width="0.733884"/><path d="M11.912 28.462C10.6611 26.839 8.81055 24.1406 8.81055 24.1406C8.81055 24.1406 13.642 26.2003 16.0551 28.462C19.6611 31.8419 21.7464 39.6223 21.7464 39.6223C21.7464 39.6223 15.456 33.0602 11.912 28.462Z" fill="#F0F4F6" stroke="#F0F4F6" stroke-width="0.733884"/><path d="M8.90957 7.86209C9.08758 9.1479 9.49076 11.1348 9.49076 11.1348L9.28743 5.72572L15.2579 9.22193C15.2579 9.22193 13.2905 7.75207 12.0051 6.84477C10.6821 5.91088 8.57715 4.51115 8.57715 4.51115C8.57715 4.51115 8.72923 6.55947 8.90957 7.86209Z" fill="#F0F4F6" stroke="#F0F4F6" stroke-width="0.978512" stroke-linejoin="bevel"/><path d="M34.9246 7.86208C34.7359 9.14788 34.1238 11.0422 34.1238 11.0422L34.524 5.7257L28.2534 9.1064C28.2534 9.1064 30.1219 7.67143 31.5487 6.72151C33.0711 5.7079 35.3547 4.44588 35.3547 4.44588C35.3547 4.44588 35.1158 6.55945 34.9246 7.86208Z" fill="#F0F4F6" stroke="#F0F4F6" stroke-width="0.978512" stroke-linejoin="bevel"/><path d="M21.7456 39.2625L23.158 36.8162L20.3332 36.8162L21.7456 39.2625ZM21.7456 25.1849L20.3332 26.5973L21.7456 28.0097L23.158 26.5973L21.7456 25.1849ZM21.9902 38.7348L21.9902 38.4902L21.501 38.4902L21.501 38.7348L21.7456 38.7348L21.9902 38.7348ZM21.501 37.6794L21.501 37.924L21.9902 37.924L21.9902 37.6794L21.7456 37.6794L21.501 37.6794ZM21.9902 36.6239L21.9902 36.3793L21.501 36.3793L21.501 36.6239L21.7456 36.6239L21.9902 36.6239ZM21.501 35.5685L21.501 35.8131L21.9902 35.8131L21.9902 35.5685L21.7456 35.5685L21.501 35.5685ZM21.9902 34.5131L21.9902 34.2684L21.501 34.2684L21.501 34.5131L21.7456 34.5131L21.9902 34.5131ZM21.501 33.4576L21.501 33.7023L21.9902 33.7023L21.9902 33.4576L21.7456 33.4576L21.501 33.4576ZM21.9902 32.4022L21.9902 32.1576L21.501 32.1576L21.501 32.4022L21.7456 32.4022L21.9902 32.4022ZM21.501 31.3468L21.501 31.5914L21.9902 31.5914L21.9902 31.3468L21.7456 31.3468L21.501 31.3468ZM21.9902 30.2913L21.9902 30.0467L21.501 30.0467L21.501 30.2913L21.7456 30.2913L21.9902 30.2913ZM21.501 29.2359L21.501 29.4805L21.9902 29.4805L21.9902 29.2359L21.7456 29.2359L21.501 29.2359ZM21.9902 28.1805L21.9902 27.9358L21.501 27.9358L21.501 28.1805L21.7456 28.1805L21.9902 28.1805ZM21.501 27.125L21.501 27.3696L21.9902 27.3696L21.9902 27.125L21.7456 27.125L21.501 27.125ZM21.7456 37.6794L21.9902 37.6794L21.9902 36.6239L21.7456 36.6239L21.501 36.6239L21.501 37.6794L21.7456 37.6794ZM21.7456 35.5685L21.9902 35.5685L21.9902 34.5131L21.7456 34.5131L21.501 34.5131L21.501 35.5685L21.7456 35.5685ZM21.7456 33.4576L21.9902 33.4576L21.9902 32.4022L21.7456 32.4022L21.501 32.4022L21.501 33.4576L21.7456 33.4576ZM21.7456 31.3468L21.9902 31.3468L21.9902 30.2913L21.7456 30.2913L21.501 30.2913L21.501 31.3468L21.7456 31.3468ZM21.7456 29.2359L21.9902 29.2359L21.9902 28.1805L21.7456 28.1805L21.501 28.1805L21.501 29.2359L21.7456 29.2359ZM21.7456 27.125L21.9902 27.125L21.9902 26.5973L21.7456 26.5973L21.501 26.5973L21.501 27.125L21.7456 27.125Z" fill="#F0F4F6"/><path d="M19.8994 36.3817L21.6351 39.3879H21.8561L23.5917 36.3817H19.8994Z" fill="#1E1E1E"/><path d="M28.4908 14.4885L27.7283 14.5764C24.6329 14.9332 22.191 17.3751 21.8342 20.4706L21.7463 21.233L21.6584 20.4706C21.3017 17.3751 18.8598 14.9332 15.7643 14.5764L15.0018 14.4885L15.7643 14.4007C18.8597 14.0439 21.3017 11.602 21.6584 8.50651L21.7463 7.74405L21.8342 8.50652C22.191 11.602 24.6329 14.0439 27.7283 14.4007L28.4908 14.4885Z" fill="#E6C9A8"/></symbol>
+  <!-- The spark from the mark: the moment someone does something brilliant. -->
+  <symbol id="ff-spark" viewBox="15 7.74 13.49 13.49"><path d="M28.4908 14.4885L27.7283 14.5764C24.6329 14.9332 22.191 17.3751 21.8342 20.4706L21.7463 21.233L21.6584 20.4706C21.3017 17.3751 18.8598 14.9332 15.7643 14.5764L15.0018 14.4885L15.7643 14.4007C18.8597 14.0439 21.3017 11.602 21.6584 8.50651L21.7463 7.74405L21.8342 8.50652C22.191 11.602 24.6329 14.0439 27.7283 14.4007L28.4908 14.4885Z" fill="currentColor"/></symbol>
+  <!-- Icons in the platform's line style. -->
+  <symbol id="i-send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></g></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/><rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.4-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></g></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></g></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></g></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></g></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></g></symbol>
+</svg>
+
+<a class="skip" href="#session">Skip to the example session</a>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Fluencyfox, back to top">
+    <svg class="brand-mark" aria-hidden="true"><use href="#ff-mark"/></svg>
+    <span class="brand-word" aria-hidden="true">Fluency<i>fox</i></span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="#session">The session</a>
+    <a href="#scores">Scoring</a>
+    <a href="#evidence">Evidence</a>
+    <a href="#teams">Your team</a>
+  </nav>
+  <a class="btn btn-primary btn-nav" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a demo</a>
+</header>
+
+<main>
+
+  <!-- ================================================================ HERO: paper -->
+  <section class="hero" id="top" data-nav="paper" aria-labelledby="hero-title">
+    <div class="hero-pin" id="heroPin">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">AI fluency assessment for hiring</p>
+          <h1 class="hero-title" id="hero-title">
+            <span class="ln"><span>On paper,</span></span>
+            <span class="ln"><span>everyone is</span></span>
+            <span class="ln"><span><em>fluent</em> in AI.</span></span>
+          </h1>
+          <p class="hero-lede">Fluencyfox gives candidates a task from the job, with the AI tools they would use on day one, and records and scores the whole hour. You see who can do the work, whatever their CV says.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary btn-xl" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a 30-minute demo</a>
+            <a class="link-arrow" href="#session">Scroll through a session <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="desk" id="desk">
+          <p class="desk-hint" id="deskHint"><span class="hint-dot" aria-hidden="true"></span><span class="hint-fine">Move over a CV to see the report behind it</span><span class="hint-touch">Tap a CV to see the report behind it</span></p>
+
+          <article class="cv cv-a" data-cv="a" aria-label="Candidate A's CV">
+            <div class="cv-paper">
+              <header class="cv-head"><span class="cv-avatar" aria-hidden="true">A</span><div><strong>Candidate A</strong><span>Operations Analyst · 3 years</span></div></header>
+              <h3>Skills</h3>
+              <ul>
+                <li class="same">Advanced AI skills: ChatGPT, Claude, Copilot</li>
+                <li>Data analysis in Excel and SQL</li>
+                <li class="same">Automates workflows with n8n and Zapier</li>
+                <li>Clear, confident communicator</li>
+              </ul>
+              <h3>Recent</h3>
+              <p>Built reporting for a 40-store retail group.</p>
+            </div>
+            <div class="cv-live" aria-hidden="true">
+              <div class="lv-top">
+                <span class="lv-av">A</span>
+                <p><strong>Candidate A</strong><span>41 / 60 mins · 1 attempt</span></p>
+                <span class="pill pill-lg tone-high">8.6/10</span>
+              </div>
+              <div class="lv-chat">
+                <p class="lv-me">Is stores.xlsx the source of truth for postcodes?</p>
+                <p class="lv-maya"><img src="assets/maya-avatar.webp" alt="" width="26" height="26"><span>Yes. Where the two disagree, trust stores.xlsx.</span></p>
+              </div>
+              <p class="lv-quote"><span class="lv-label">Transcript · 24:05</span>"That column doesn't exist in either file, so it's not going in the dashboard."</p>
+              <div class="lv-chips"><span class="chip chip-green">Caught a hallucinated column</span><span class="chip chip-green">Fixed a broken join</span></div>
+              <div class="lv-scores">
+                <span><i class="sd sd-s"></i>Solution <b>8.8</b></span>
+                <span><i class="sd sd-c"></i>Comms <b>7.8</b></span>
+                <span><i class="sd sd-a"></i>Diagnostic <b>9.0</b></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="cv cv-b" data-cv="b" aria-label="Candidate B's CV">
+            <div class="cv-paper">
+              <header class="cv-head"><span class="cv-avatar" aria-hidden="true">B</span><div><strong>Candidate B</strong><span>Operations Analyst · 3 years</span></div></header>
+              <h3>Skills</h3>
+              <ul>
+                <li class="same">Advanced AI skills: ChatGPT, Claude, Copilot</li>
+                <li>Data analysis in Excel and SQL</li>
+                <li class="same">Automates workflows with n8n and Zapier</li>
+                <li>Clear, confident communicator</li>
+              </ul>
+              <h3>Recent</h3>
+              <p>Built reporting for a 40-store retail group.</p>
+            </div>
+            <div class="cv-live" aria-hidden="true">
+              <div class="lv-top">
+                <span class="lv-av">B</span>
+                <p><strong>Candidate B</strong><span>19 / 60 mins · 1 attempt</span></p>
+                <span class="pill pill-lg tone-low">4.0/10</span>
+              </div>
+              <div class="lv-chat">
+                <p class="lv-empty">No questions asked</p>
+              </div>
+              <p class="lv-quote"><span class="lv-label">Transcript · 17:40</span>"Looks fine. I'll just send it."</p>
+              <div class="lv-chips"><span class="chip chip-red">Charted a column that doesn't exist</span><span class="chip chip-red">1,204 rows silently dropped</span></div>
+              <div class="lv-scores">
+                <span><i class="sd sd-s"></i>Solution <b>3.9</b></span>
+                <span><i class="sd sd-c"></i>Comms <b>4.6</b></span>
+                <span><i class="sd sd-a"></i>Diagnostic <b>3.8</b></span>
+              </div>
+            </div>
+          </article>
+
+          <p class="pen-note" aria-hidden="true">identical
+            <svg viewBox="0 0 120 60"><path pathLength="1" d="M8 10c30 2 58 14 76 34m0 0-2-13m2 13-12-3"/></svg>
+          </p>
+
+          <div class="lens" id="lens" aria-hidden="true"><span class="lens-ring"></span><span class="lens-tag">the report</span></div>
+
+          <button class="reveal-all" id="revealAll" type="button" aria-pressed="false">Show both reports</button>
+          <p class="desk-note">Example candidates.</p>
+        </div>
+      </div>
+
+      <div class="problems" id="problems">
+        <p><span class="strike">CVs can't show fluency.</span></p>
+        <p><span class="strike">Interviews only test the talk.</span></p>
+        <p><span class="strike">Many assessments ban AI.</span></p>
+        <p class="answer">So watch the work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================================ NIGHT: the recording -->
+  <div class="sheet sheet-night" data-nav="night">
+
+    <!-- ------------------------------------------------ the session -->
+    <section class="session" id="session" aria-labelledby="session-title">
+      <div class="wrap session-intro" data-reveal>
+        <p class="eyebrow">An example report</p>
+        <h2 id="session-title">One candidate's hour, <em>decision</em> by decision.</h2>
+        <p class="lede">Amara is applying for an operations role. Her brief is to find what's driving customer complaints and ship a dashboard the ops team can use on Monday. She can use any AI tool she likes, and Maya, an AI playing the project stakeholder, answers her questions in chat. This is the report your team would review. Scroll to play through her hour, then keep going for her scores and the evidence behind them.</p>
+      </div>
+
+      <div class="session-track" id="sessionTrack">
+        <div class="session-stage">
+          <aside class="narr" aria-label="Moments in the session">
+            <p class="narr-clock"><span id="clock">00:00</span><span class="of">/ 41:20</span></p>
+            <p class="narr-now" id="chapterNow" aria-live="polite">Reads the brief</p>
+            <!-- data-t: when the moment starts. data-scene: what her screen shows.
+                 data-steps: when the screen changes within the moment. -->
+            <ol class="moments" id="chapters">
+              <li data-t="0" data-scene="0"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>00:00</time><span>Reads the brief</span></button></li>
+              <li data-t="134" data-scene="1" data-steps="160,182"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>02:14</time><span>Finds the data gap</span></button></li>
+              <li data-t="370" data-scene="1" data-steps="370,370"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>06:10</time><span>Checks the source with Maya</span></button></li>
+              <li data-t="692" data-scene="2" data-steps="740,785"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>11:32</time><span>Briefs her AI on the fix</span></button></li>
+              <li data-t="1445" data-scene="3" data-steps="1445,1460"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>24:05</time><span>Catches an invented column</span></button></li>
+              <li data-t="2250" data-scene="4" data-steps="2250,2250"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>37:30</time><span>Checks the draft with Maya</span></button></li>
+              <li data-t="2412" data-scene="5"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>40:12</time><span>Submits her work</span></button></li>
+              <li data-t="2480" data-scene="5"><button type="button"><svg aria-hidden="true"><use href="#ff-spark"/></svg><time>41:20</time><span>Session ends</span></button></li>
+            </ol>
+          </aside>
+
+          <!-- The employer's report, as the platform draws it: the recording at
+               the top, the written report below it. The page scroll moves both. -->
+          <div class="ffr report" id="player">
+            <div class="rp-top">
+              <img class="rp-av" src="assets/amara-headshot.webp" alt="" width="48" height="48">
+              <p class="rp-who"><strong>Amara O.</strong><span>Operations Analyst<span class="rp-task"> · Customer complaints, Q3</span></span></p>
+              <p class="rp-facts"><span class="chip-outline">41 / 60 mins</span><span class="chip chip-blue">1 attempt</span></p>
+              <p class="rp-overall"><span class="pill pill-lg tone-high">8.6/10</span></p>
+            </div>
+
+            <div class="rp-frame" role="region" aria-label="Amara's report">
+              <div class="rp-page" id="rpPage">
+                <section class="rp-view" data-part="player">
+                  <div class="rp-player">
+                    <div class="rp-screen">
+
+                      <div class="scene is-on" data-scene="0">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">Operations Analyst assessment | FluencyFox</span></p>
+                          <div class="app-body app-page">
+                            <div class="task-box">
+                              <div class="task-row">
+                                <h4>Assessment Task:</h4>
+                                <p class="task-text">Find what's driving customer complaints and ship a dashboard the ops team can use on Monday.</p>
+                              </div>
+                              <div class="task-instr">
+                                <p class="task-eyebrow">Instructions</p>
+                                <p>Use any AI tool you like. The files are complaints_q3.csv and stores.xlsx. Talk through your thinking as you go, and ask Maya anything about the brief.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scene" data-scene="1">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">complaints_q3.csv</span><span class="app-tab">stores.xlsx</span></p>
+                          <div class="app-body sheet-ui">
+                            <table>
+                              <thead><tr><th>ticket</th><th>store</th><th>postcode</th><th>stars</th><th>category</th></tr></thead>
+                              <tbody>
+                                <tr><td>48121</td><td>Leeds 04</td><td class="bad">LS1 4AP</td><td>2</td><td>Delivery</td></tr>
+                                <tr><td>48122</td><td>Bristol 01</td><td class="bad">BS1 5TR</td><td>1</td><td>Refund</td></tr>
+                                <tr><td>48123</td><td>Leeds 02</td><td class="bad">LS2 7HY</td><td>4</td><td>Staff</td></tr>
+                                <tr><td>48124</td><td>York 01</td><td class="bad">YO1 7JN</td><td>1</td><td>Delivery</td></tr>
+                              </tbody>
+                            </table>
+                            <p class="sheet-vs">stores.xlsx writes them as <b>LS14AP</b>, <b>BS15TR</b>…</p>
+                            <p class="chip chip-red chip-step">1,204 of 5,880 rows don't match</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scene" data-scene="2">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">ChatGPT</span></p>
+                          <div class="app-body ai-ui">
+                            <p class="ai-me">Before you build anything: normalise postcodes in both files (uppercase, no spaces), re-run the join, and show me the unmatched rows at each step.</p>
+                            <p class="ai-reply">Normalised 2 columns. Unmatched rows: <b>1,204</b> → <b>0</b>. Pivot rebuilt by store and category.</p>
+                            <div class="pivot" aria-hidden="true"><i style="--v:.92"></i><i style="--v:.64"></i><i style="--v:.81"></i><i style="--v:.38"></i><i style="--v:.55"></i><i style="--v:.27"></i></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scene" data-scene="3">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">ChatGPT</span></p>
+                          <div class="app-body sheet-ui">
+                            <table class="catch-table">
+                              <thead><tr><th>store</th><th>complaints</th><th class="ghost-col">region_tier</th><th>avg stars</th></tr></thead>
+                              <tbody>
+                                <tr><td>Leeds 04</td><td>312</td><td class="ghost-col">Tier 1</td><td>2.1</td></tr>
+                                <tr><td>Bristol 01</td><td>288</td><td class="ghost-col">Tier 2</td><td>1.9</td></tr>
+                                <tr><td>York 01</td><td>241</td><td class="ghost-col">Tier 1</td><td>2.4</td></tr>
+                              </tbody>
+                            </table>
+                            <p class="ai-me small">region_tier isn't in either file. Where did it come from?</p>
+                            <p class="ai-reply small">It isn't in the source. I inferred it from store names. Removing it.</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scene" data-scene="4">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">complaints_dashboard.xlsx</span></p>
+                          <div class="app-body dash-ui">
+                            <div class="dash-card dash-line">
+                              <p>Complaints per week, Q3</p>
+                              <svg viewBox="0 0 200 70" preserveAspectRatio="none" aria-hidden="true"><path class="dash-area" d="M0 52 L15 48 L31 50 L46 41 L62 44 L77 33 L92 36 L108 24 L123 28 L138 17 L154 21 L169 12 L185 15 L200 9 L200 70 L0 70 Z"/><path class="dash-stroke" pathLength="1" d="M0 52 L15 48 L31 50 L46 41 L62 44 L77 33 L92 36 L108 24 L123 28 L138 17 L154 21 L169 12 L185 15 L200 9"/></svg>
+                            </div>
+                            <div class="dash-card dash-pie">
+                              <p>Star ratings</p>
+                              <span class="pie" aria-hidden="true"></span>
+                              <ul><li><i style="background:var(--red-d)"></i>1-2 stars 58%</li><li><i style="background:var(--yellow-d)"></i>3 stars 17%</li><li><i style="background:var(--green-d)"></i>4-5 stars 25%</li></ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="scene" data-scene="5">
+                        <div class="app">
+                          <p class="app-bar"><span class="app-dots"><i></i><i></i><i></i></span><span class="app-tab on">Operations Analyst assessment | FluencyFox</span></p>
+                          <div class="app-body app-page app-dim">
+                            <div class="modal" role="presentation">
+                              <p class="modal-title">Submit Your Work</p>
+                              <p class="modal-lead">Attach the files you made. Your work is submitted when you press Submit.</p>
+                              <ul class="files">
+                                <li><svg aria-hidden="true"><use href="#i-file"/></svg><span>complaints_dashboard.xlsx<small>84 KB</small></span></li>
+                                <li><svg aria-hidden="true"><use href="#i-file"/></svg><span>summary_for_ops.md<small>3 KB</small></span></li>
+                              </ul>
+                              <p class="modal-foot"><span class="btn btn-tonal btn-md">Record again</span><span class="btn btn-primary btn-md">Submit</span></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="rp-end" id="rpEnd">
+                        <p>Session ended at 41:20</p>
+                        <p class="rp-end-actions"><button type="button" class="btn btn-tonal btn-md" data-end="replay">Replay</button><button type="button" class="btn btn-primary btn-md" data-end="scores">See her scores</button></p>
+                      </div>
+
+                      <figure class="pip" aria-hidden="true">
+                        <video id="camVideo" src="../../fluencyfox-site_6/assets/candidate-screenshare-TLIHC6EP.mp4" muted loop playsinline preload="none"></video>
+                      </figure>
+                    </div>
+                    <div class="rp-controls">
+                      <button type="button" class="rp-play" id="rpPlay" aria-label="Play"><svg class="i-play" aria-hidden="true"><use href="#i-play"/></svg><svg class="i-pause" aria-hidden="true"><use href="#i-pause"/></svg></button>
+                      <span class="rp-time"><b id="playerClock">00:00</b> / 41:20</span>
+                      <span class="rp-track" id="rpTrack" aria-hidden="true"><i class="rp-fill"></i><span class="rp-head"></span></span>
+                    </div>
+                  </div>
+
+                  <div class="rp-rail">
+                    <div class="segmented" role="tablist" aria-label="Session record">
+                      <button type="button" role="tab" aria-selected="true" data-pane="transcript">Transcript</button>
+                      <button type="button" role="tab" aria-selected="false" data-pane="chat">Chat<i class="unread" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="rp-pane rp-transcript" data-pane="transcript" id="transcriptPane"></div>
+                    <div class="rp-pane rp-chat" data-pane="chat" id="chatPane" hidden>
+                      <div class="msg msg-maya" data-at="41"><img src="assets/maya-avatar.webp" alt="" width="26" height="26"><p>Hi Amara, I'm Maya, the ops lead who asked for this. The team reads it first thing Monday, so one clear view beats five charts.</p></div>
+                      <div class="msg msg-me" data-at="370"><p>Is stores.xlsx the source of truth for postcodes?</p><img src="assets/amara-headshot.webp" alt="" width="26" height="26"></div>
+                      <div class="msg msg-maya" data-at="395"><img src="assets/maya-avatar.webp" alt="" width="26" height="26"><p>Yes. Where the two disagree, trust stores.xlsx.</p></div>
+                      <div class="msg msg-me" data-at="2250"><p>Draft is ready: complaints over time as a line chart, star ratings as a pie. Does that work for Monday?</p><img src="assets/amara-headshot.webp" alt="" width="26" height="26"></div>
+                      <div class="msg msg-maya" data-at="2290"><img src="assets/maya-avatar.webp" alt="" width="26" height="26"><p>That data analysis looks great. Line chart on customer complaints, pie chart on 1-5 star reviews is perfect :)</p></div>
+                      <div class="msg msg-me" data-at="2310"><p>Okay brill, on it!</p><img src="assets/amara-headshot.webp" alt="" width="26" height="26"></div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="rp-card" data-part="Scores Table">
+                  <p class="rp-card-title">Scores Table</p>
+                  <p class="rp-files"><span class="file-pill"><svg><use href="#i-file"/></svg>complaints_dashboard.xlsx</span><span class="file-pill"><svg><use href="#i-file"/></svg>summary_for_ops.md</span></p>
+                  <div class="scorecards">
+                    <article class="scorecard tone-high-soft" style="--v:.88;--peer:.64">
+                      <p class="sc-head"><span class="sc-title">Solution Score <span>70%</span></span><span class="pill pill-lg tone-high">8.8/10</span></p>
+                      <p class="sc-bar"><i></i><b></b></p>
+                      <p class="sc-peer"><span>Peer Avg</span> 6.4</p>
+                    </article>
+                    <article class="scorecard tone-high-soft" style="--v:.78;--peer:.61">
+                      <p class="sc-head"><span class="sc-title">Communication Score <span>20%</span></span><span class="pill pill-lg tone-high">7.8/10</span></p>
+                      <p class="sc-bar"><i></i><b></b></p>
+                      <p class="sc-peer"><span>Peer Avg</span> 6.1</p>
+                    </article>
+                    <article class="scorecard tone-high-soft" style="--v:.90;--peer:.55">
+                      <p class="sc-head"><span class="sc-title">Diagnostic Score <span>10%</span></span><span class="pill pill-lg tone-high">9.0/10</span></p>
+                      <p class="sc-bar"><i></i><b></b></p>
+                      <p class="sc-peer"><span>Peer Avg</span> 5.5</p>
+                    </article>
+                  </div>
+                </section>
+
+                <!-- Timestamps in square brackets become play-from chips, as on the report. -->
+                <div class="rp-pair" data-part="Strengths and areas to improve">
+                  <section class="rp-card">
+                    <p class="rp-card-title">Strengths</p>
+                    <ul class="rp-list rp-list-pos">
+                      <li>Spotted the postcode mismatch before building anything, and sized it: 1,204 of 5,880 complaints had no store [02:14].</li>
+                      <li>Checked the source of truth with the stakeholder rather than guessing [06:10].</li>
+                      <li>Briefed the AI in steps and asked to see unmatched rows at each one, so every step could be checked [11:32].</li>
+                      <li>Caught a column the AI had made up and removed it before it reached the dashboard [24:05].</li>
+                    </ul>
+                  </section>
+                  <section class="rp-card">
+                    <p class="rp-card-title">Areas of Improvement</p>
+                    <ul class="rp-list">
+                      <li>Spent about 11 minutes on pivot layout that did not change the final view [13:05].</li>
+                      <li>The summary for ops does not say how the unmatched rows were fixed, so a reader cannot check the totals.</li>
+                      <li>Did not re-check the final numbers against the raw file before submitting [40:12].</li>
+                    </ul>
+                  </section>
+                </div>
+
+                <section class="rp-card" data-part="AI collaboration">
+                  <p class="rp-card-title">AI Collaboration</p>
+                  <div class="rp-ai">
+                    <div>
+                      <p class="rp-eyebrow">Tools</p>
+                      <ul class="rp-tools"><li>ChatGPT <span>[02:30] to [38:40]</span></li><li>Copilot in Excel <span>[14:20] to [22:05]</span></li></ul>
+                    </div>
+                    <div>
+                      <p class="rp-eyebrow">Timeline</p>
+                      <ol class="rp-timeline">
+                        <li>[02:30] Pasted both file headers into ChatGPT and asked what could break a join.</li>
+                        <li>[11:32] Gave step-by-step instructions to normalise postcodes, with a check after each step.</li>
+                        <li>[14:20] Used Copilot to draft the pivot formulas, then rewrote two by hand.</li>
+                        <li>[24:05] Questioned a column that wasn't in the source and had it removed.</li>
+                        <li>[36:10] Asked for a one-page summary for ops, then cut it down herself.</li>
+                      </ol>
+                    </div>
+                    <div>
+                      <p class="rp-eyebrow">Prompting style</p>
+                      <p class="rp-prose">Specific and staged. States the goal, the constraint and the check she wants to see, rather than asking for a finished answer.</p>
+                    </div>
+                    <div>
+                      <p class="rp-eyebrow">Verification</p>
+                      <p class="rp-prose">Checked row counts after every transformation, and confirmed the one unexpected column was not in the source files.</p>
+                    </div>
+                    <div>
+                      <p class="rp-eyebrow">Time split</p>
+                      <p class="rp-split" role="img" aria-label="About 34% of the session in AI tools, 52% in the deliverable, and 14% elsewhere."><i style="width:34%;background:var(--blue)"></i><i style="width:52%;background:var(--purple)"></i><i style="width:14%;background:var(--blue-100)"></i></p>
+                      <p class="rp-legend"><span><i style="background:var(--blue)"></i>AI tools 34%</span><span><i style="background:var(--purple)"></i>Deliverable 52%</span><span><i style="background:var(--blue-100)"></i>Other 14%</span></p>
+                    </div>
+                  </div>
+                  <p class="rp-presence">On camera for most of the session. Away 1 time, roughly 1 min total.</p>
+                </section>
+              </div>
+            </div>
+            <button type="button" class="btn btn-primary btn-md rp-back" id="rpBack">Back to the report <span aria-hidden="true">↓</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- What Amara says, with the time she says it. -->
+      <template id="lines">
+        <p data-at="4">Okay, reading the brief. Complaints for Q3, plus the store list. A dashboard by Monday.</p>
+        <p data-at="134">The join is dropping rows. One file writes postcodes with a space, the other without.</p>
+        <p data-at="182">That's 1,204 of 5,880 complaints with no store. Any total built on this is wrong.</p>
+        <p data-at="692">I'll have it normalise both columns first, then rebuild the pivot. And show me the unmatched rows at each step.</p>
+        <p data-at="785">Zero unmatched. Good. Now the pivot's worth looking at.</p>
+        <p data-at="1445">That column doesn't exist in either file, so it's not going in the dashboard.</p>
+        <p data-at="1475">It guessed it from the store names. Glad I checked.</p>
+        <p data-at="2412">Line chart for complaints over time, pie for the star ratings, and a one-page summary for ops. Submitting both files.</p>
+      </template>
+    </section>
+
+    <!-- ------------------------------------------------ scores -->
+    <section class="scores wrap" id="scores" aria-labelledby="scores-title">
+      <div class="scores-copy" data-reveal>
+        <p class="eyebrow">Scoring</p>
+        <h2 id="scores-title">Three scores. <em>Your</em> weights.</h2>
+        <p class="lede">Each score is out of 10, and you choose how much each one counts when the test is set up. Try other weights on these example candidates and watch the order change.</p>
+        <dl class="defs">
+          <div><dt><i class="sd sd-s"></i>Solution</dt><dd>What they shipped: correctness, completeness and polish of the deliverable, judged against the objective you set.</dd></div>
+          <div><dt><i class="sd sd-c"></i>Communication</dt><dd>How clearly they explain what they are doing and why. Every word they say is transcribed, so you are sitting in on the work.</dd></div>
+          <div><dt><i class="sd sd-a"></i>AI collaboration</dt><dd>How they work with Maya, the AI stakeholder: what they ask her, and how they check and use her answers. Their own AI tools are welcome and appear in the report, but are not scored here.</dd></div>
+        </dl>
+      </div>
+
+      <div class="ffr card weigher" id="weigher" data-reveal>
+        <div class="wg-head">
+          <h3 class="section-title">Scoring weights</h3>
+          <div class="segmented" role="group" aria-label="Weighting presets">
+            <button type="button" data-w="50,30,20" aria-pressed="true">Default</button>
+            <button type="button" data-w="70,20,10" aria-pressed="false">Delivery-first</button>
+            <button type="button" data-w="50,40,10" aria-pressed="false">Client-facing</button>
+          </div>
+        </div>
+        <div class="wbar" id="wbar" aria-hidden="true"><i></i><i></i><i></i><i class="short"></i><span class="wghost" id="wghost"><b></b><b></b></span></div>
+        <div class="wfields">
+          <label class="wfield"><span class="wlabel t-s"><i class="sd sd-s"></i>Solution <span>(Output Quality)</span></span><input type="number" min="0" max="100" step="1" inputmode="numeric" value="50" data-k="0"></label>
+          <label class="wfield"><span class="wlabel t-c"><i class="sd sd-c"></i>Communication <span>(Verbal Narration)</span></span><input type="number" min="0" max="100" step="1" inputmode="numeric" value="30" data-k="1"></label>
+          <label class="wfield"><span class="wlabel t-a"><i class="sd sd-a"></i>AI Collaboration <span>(Diagnostic)</span></span><input type="number" min="0" max="100" step="1" inputmode="numeric" value="20" data-k="2"></label>
+        </div>
+        <p class="notice notice-warning" id="wNotice" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+
+        <div class="results">
+          <h3 class="section-title">Latest Results</h3>
+          <div class="rtable" role="table" aria-label="Example results">
+            <div class="rrow rhead" role="row"><span role="columnheader">Candidate</span><span role="columnheader">Overall Score</span><span role="columnheader">Solution</span><span role="columnheader">Comms</span><span role="columnheader">Diagnostic</span></div>
+            <div class="rbody" id="ranking" aria-live="polite">
+              <div class="rrow" role="row" data-name="Amara O." data-email="amara.o@example.com" data-s="8.8" data-c="7.8" data-a="9.0" data-note="from the session above"></div>
+              <div class="rrow" role="row" data-name="Jonah P." data-email="jonah.p@example.com" data-s="9.1" data-c="6.2" data-a="7.0"></div>
+              <div class="rrow" role="row" data-name="Lena V." data-email="lena.v@example.com" data-s="7.6" data-c="9.5" data-a="8.6"></div>
+              <div class="rrow" role="row" data-name="Rafael M." data-email="rafael.m@example.com" data-s="8.0" data-c="8.6" data-a="5.8"></div>
+              <div class="rrow" role="row" data-name="Sam K." data-email="sam.k@example.com" data-s="6.5" data-c="7.0" data-a="9.7"></div>
+            </div>
+          </div>
+        </div>
+        <p class="note">Example candidates. Scores out of 10.</p>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------ evidence -->
+    <section class="evidence wrap" id="evidence" aria-labelledby="evidence-title">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow">Authenticity</p>
+        <h2 id="evidence-title">How you know it's <em>their</em> work.</h2>
+      </header>
+      <div class="bento">
+        <article class="tile tile-screen" data-reveal>
+          <div class="tile-art desktop" id="desktop" aria-hidden="true">
+            <span class="win w1"><b>AI assistant</b><i></i></span>
+            <span class="win w2"><b>complaints_q3.csv</b><i></i></span>
+            <span class="win w3"><b>n8n</b><i></i></span>
+            <span class="cursor"></span>
+            <span class="rec-pill rec-pill-float"><i></i>Recording</span>
+          </div>
+          <h3>Their whole screen, their own tools.</h3>
+          <p>Candidates share their whole screen, so every app and tab they use is on the recording. They work on their own computer, not in a locked-down test.</p>
+        </article>
+
+        <article class="tile tile-cam" data-reveal>
+          <div class="tile-art ffr recui" aria-hidden="true">
+            <div class="rec-preview">
+              <video id="tileVideo" src="../../fluencyfox-site_6/assets/candidate-screenshare-TLIHC6EP.mp4" muted loop playsinline preload="none"></video>
+            </div>
+            <div class="rec-strip">
+              <p class="rec-line"><span class="rec-pill"><i></i>Recording</span><span class="btn btn-destructive btn-md">End and Upload</span></p>
+              <p class="rec-line2"><span class="rec-left">Time Left - 18:40</span><span class="rec-drain"><i></i></span><span class="rec-mic"><svg><use href="#i-mic"/></svg><span><i></i></span></span></p>
+            </div>
+          </div>
+          <h3>Camera on the whole time.</h3>
+          <p>You see the person doing the work, and the report notes any time they step away from the camera.</p>
+        </article>
+
+        <article class="tile tile-voice" data-reveal>
+          <div class="tile-art voicebox" id="voice" aria-hidden="true">
+            <div class="wave" id="wave"></div>
+            <p class="voice-words" id="voiceWords">The join is dropping rows. One file writes postcodes with a space, the other without.</p>
+          </div>
+          <h3>Voice throughout, transcribed.</h3>
+          <p>Candidates narrate their thinking as they work, and the transcript follows along beside the video.</p>
+        </article>
+
+        <article class="tile tile-replay" data-reveal>
+          <div class="tile-art replay" id="replay" aria-hidden="true">
+            <div class="ffr rp-controls rp-controls-lg">
+              <svg class="rp-play"><use href="#i-play"/></svg>
+              <span class="rp-time"><b id="scrubTime">24:05</b> / 41:20</span>
+              <span class="rp-track scrub"><i class="rp-fill"></i><span class="rp-head"></span></span>
+            </div>
+            <p class="ffr tipcard" id="scrubLabel">24:05 · Catches an invented column</p>
+          </div>
+          <h3>Every minute replayable.</h3>
+          <p>Every timestamp in the report plays the recording from that point, so you go straight to a decision instead of scrubbing through the hour.</p>
+          <a class="link-arrow" href="#session" data-jump="4">Replay 24:05 <span aria-hidden="true">↑</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------ how it works -->
+    <section class="how wrap" id="how" aria-labelledby="how-title">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">From brief to <em>shortlist</em>.</h2>
+        <p class="lede">We design the assessment with your team once. After that, every candidate gets the same task, scored the same way.</p>
+      </header>
+      <ol class="steps" id="steps">
+        <li data-reveal>
+          <span class="step-mark" aria-hidden="true"><svg><use href="#ff-spark"/></svg></span>
+          <p class="step-n">01</p>
+          <h3>Design it with us</h3>
+          <p>We shape the task around a real scenario at your company: the objective, the brief the candidate reads, and how much each score counts.</p>
+          <div class="ffr step-ui" aria-hidden="true"><div class="wbar wbar-sm"><i style="flex-basis:50%">50%</i><i style="flex-basis:30%">30%</i><i style="flex-basis:20%">20%</i></div></div>
+        </li>
+        <li data-reveal>
+          <span class="step-mark" aria-hidden="true"><svg><use href="#ff-spark"/></svg></span>
+          <p class="step-n">02</p>
+          <h3>Deploy from your ATS</h3>
+          <p>Send each candidate a single-use link by email, or trigger it from Ashby by moving them to the assessment stage. Scores and feedback go back into Ashby, and nobody on your side has to invigilate.</p>
+          <div class="ffr step-ui" aria-hidden="true">
+            <p class="chipin"><span class="email-chip">amara.o@example.com</span><span class="email-chip">jonah.p@example.com</span><span class="email-chip">lena.v@example.com</span></p>
+          </div>
+          <ul class="ats" aria-label="Applicant tracking systems">
+            <li>Ashby</li><li>Other ATSs on request</li>
+          </ul>
+        </li>
+        <li data-reveal>
+          <span class="step-mark" aria-hidden="true"><svg><use href="#ff-spark"/></svg></span>
+          <p class="step-n">03</p>
+          <h3>Decide with evidence</h3>
+          <p>Every finished session lands in one results table, with the overall score and the three section scores side by side, and the full report and recording behind each row.</p>
+          <div class="ffr step-ui" aria-hidden="true">
+            <p class="mini-row"><span>Amara O.</span><span class="pill pill-sm tone-high">8.6</span></p>
+            <p class="mini-row"><span>Jonah P.</span><span class="pill pill-sm tone-high">8.3</span></p>
+            <p class="mini-row"><span>Sam K.</span><span class="pill pill-sm tone-medium">6.9</span></p>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </div>
+
+  <!-- ================================================================ PAPER -->
+  <div class="sheet sheet-paper" data-nav="paper">
+
+    <section class="voices wrap" id="voices" aria-labelledby="voices-title">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow">In their words</p>
+        <h2 id="voices-title">From hiring teams and one candidate</h2>
+      </header>
+
+      <!-- The headline result, then the four people. Portraits are shown at
+           a size the source photos hold sharply (440px files, about 190px
+           on screen). Quotes are verbatim: real people at real companies. -->
+      <div class="vs-stat" data-reveal>
+        <p class="vs-num">6</p>
+        <div>
+          <p class="vs-of">tier 1 hires from an initial pool of <b>700</b></p>
+          <p class="vs-ctx">SilverTree Equity, graduate forward deployed engineering scheme</p>
+        </div>
+      </div>
+
+      <div class="pf-grid">
+        <figure class="pf" data-reveal style="--d:0.00s">
+          <img class="pf-face" src="assets/face-romil.webp" alt="" width="440" height="440" loading="lazy" decoding="async">
+          <figcaption><strong>Romil Depala</strong><span>SilverTree Equity</span></figcaption>
+          <blockquote><p>"We used the fluency assessor to screen candidates for our graduate forward deployed engineering scheme, helping us find 6 tier 1 hires out of an initial pool of 700."</p></blockquote>
+        </figure>
+        <figure class="pf" data-reveal style="--d:0.08s">
+          <img class="pf-face" src="assets/face-tess.webp" alt="" width="440" height="440" loading="lazy" decoding="async">
+          <figcaption><strong>Tess Cohen</strong><span>Venture Associate, Spin.vc</span></figcaption>
+          <blockquote><p>"Setup was so easy and candidates responded really well. I was blown away by how much the report picked up, strengths and weaknesses across text, audio, and video, catching specific things I would've missed. We used it for marketing and comms roles, and the scoring was spot on every time."</p></blockquote>
+        </figure>
+        <figure class="pf" data-reveal style="--d:0.16s">
+          <img class="pf-face" src="assets/face-eleonora.webp" alt="" width="440" height="440" loading="lazy" decoding="async">
+          <figcaption><strong>Eleonora Shepel</strong><span>Talent Lead, HIVED</span></figcaption>
+          <blockquote><p>"When somebody is applying for a role and they don't have 20 years of experience in their CV, it's very hard to stand out. Thanks to Fluencyfox you can actually get a glimpse at how the person actually thinks, and how they work. And that makes the process a lot more personable."</p></blockquote>
+        </figure>
+        <figure class="pf" data-reveal style="--d:0.24s">
+          <img class="pf-face" src="assets/face-jay.webp" alt="" width="440" height="440" loading="lazy" decoding="async">
+          <figcaption><strong>Jay Cushen</strong><span>Candidate</span></figcaption>
+          <blockquote><p>"The test was unique and unlike anything I have ever had to do for job applications. I really liked how it gave us the freedom to approach a problem as we wished using whatever AI tool we want. I like how it was recorded, and we got to show our personality rather than just the results. It was a very fun experience."</p></blockquote>
+        </figure>
+      </div>
+    </section>
+
+    <section class="teams wrap" id="teams" aria-labelledby="teams-title">
+      <div class="teams-copy" data-reveal>
+        <p class="eyebrow">Employee development</p>
+        <h2 id="teams-title">How AI-fluent is the team you <em>already</em> have?</h2>
+        <p class="lede">Each person spends an hour on their own work with AI. You get a map by person, skill area and department, and we build the training around the results, then measure again. We're building this with a small number of teams.</p>
+        <a class="link-arrow" href="https://fluencyfox.ai/employee-development">How teams use it <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="ffr card fmap" id="fmap" data-reveal>
+        <div class="segmented fmap-tabs" role="tablist" aria-label="Skill area">
+          <button role="tab" type="button" aria-selected="true" data-area="0">Core work</button>
+          <button role="tab" type="button" aria-selected="false" data-area="1">Comms</button>
+          <button role="tab" type="button" aria-selected="false" data-area="2">Systems</button>
+          <button role="tab" type="button" aria-selected="false" data-area="3">Admin</button>
+        </div>
+        <div class="fmap-grid" id="fmapGrid" role="img" aria-label="Example team of 48 people, coloured by AI fluency"></div>
+        <p class="fmap-tip" id="fmapTip" aria-hidden="true">Hover a person</p>
+        <ul class="legend">
+          <li><i class="lv lv0"></i>Not yet using AI</li>
+          <li><i class="lv lv1"></i>Basic use</li>
+          <li><i class="lv lv2"></i>Confident</li>
+          <li><i class="lv lv3"></i>Fluent</li>
+        </ul>
+        <p class="note">Example team of 48.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================================================================ FINALE -->
+  <section class="finale" id="finale" data-nav="night" aria-labelledby="finale-title">
+    <div class="sparks" id="sparks" aria-hidden="true"></div>
+    <div class="finale-inner wrap">
+      <svg class="finale-spark" aria-hidden="true"><use href="#ff-spark"/></svg>
+      <h2 id="finale-title">See how candidates work with AI <em>before</em> you hire them.</h2>
+      <p class="lede">In half an hour, Callum from our team walks you through a candidate session end to end and the report your team would get, no slideshow presentations, promise!</p>
+      <a class="btn btn-sand btn-xl" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a demo</a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <a class="brand" href="#top" aria-label="Fluencyfox, back to top">
+      <svg class="brand-mark" aria-hidden="true"><use href="#ff-mark"/></svg>
+      <span class="brand-word" aria-hidden="true">Fluency<i>fox</i></span>
+    </a>
+    <nav aria-label="Menu"><h2>Menu</h2><a href="#session">The session</a><a href="#scores">Scoring</a><a href="#evidence">Evidence</a><a href="https://fluencyfox.ai/grad-schemes">Grad schemes</a><a href="https://fluencyfox.ai/employee-development">Employee development</a></nav>
+    <nav aria-label="Insights"><h2>Insights</h2><a href="https://fluencyfox.ai/research/ai-fluency-data-index">Research</a><a href="https://fluencyfox.ai/blog">Blog</a></nav>
+    <nav aria-label="Docs"><h2>Docs</h2><a href="https://fluencyfox.ai/privacy">Privacy Policy</a><a href="https://fluencyfox.ai/terms">Terms &amp; Conditions</a></nav>
+    <div><h2>Address</h2><p>71-75 Shelton Street,<br>London, UK WC2H 9JQ</p><p><a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener">LinkedIn</a></p></div>
+  </div>
+</footer>
+
+</body>
+</html>
