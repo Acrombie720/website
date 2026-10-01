@@ -169,6 +169,32 @@
     });
   });
 
+  // On narrow screens the heatmap table scrolls sideways. Its right edge
+  // fades while columns are still off screen and clears at the end; touch
+  // screens also get the "Swipe to see all scores" line. Styles in home.css.
+  feature('heatmap swipe cue', () => {
+    const frame = $('.ff-swipe');
+    const table = frame && $('table', frame);
+    if (!table) return;
+    const scroller = table.parentElement; // the div that actually scrolls
+    const hint = $('.ff-swipe-hint');
+    const touch = matchMedia('(hover: none) and (pointer: coarse)');
+    let raf = 0, scrollable = null;
+    const update = () => {
+      raf = 0;
+      const max = scroller.scrollWidth - scroller.clientWidth;
+      const can = max > 2;
+      frame.classList.toggle('is-more', can && scroller.scrollLeft < max - 2);
+      if (hint && can !== scrollable) hint.hidden = !(can && touch.matches);
+      scrollable = can;
+    };
+    const request = () => { if (!raf) raf = requestAnimationFrame(update); };
+    scroller.addEventListener('scroll', request, { passive: true });
+    observe(scroller, request);
+    observe(table, request);
+    update();
+  });
+
   // ---------------------------------------------------------------- header
 
   const header = $('#siteHeader');

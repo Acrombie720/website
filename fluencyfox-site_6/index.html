@@ -189,10 +189,26 @@
   .ff-consent-toggle input:checked + span::before { transform: translateX(18px); }
   .ff-consent-toggle.disabled { opacity: 0.6; }
   .ff-consent-modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; flex-wrap: wrap; }
+  /* Phones: Reject and Accept side by side at the same size and weight,
+     Customise as a text link under them. Same as styles.css. */
   @media (max-width: 640px) {
-    .ff-consent-bar { left: 12px; right: 12px; padding: 18px; }
-    .ff-consent-actions { width: 100%; }
-    .ff-consent-actions .btn { flex: 1; }
+    .ff-consent-bar { left: 10px; right: 10px; bottom: 10px; padding: 12px 14px 6px; gap: 10px; }
+    .ff-consent-bar p { font-size: 13px; line-height: 1.4; }
+    .ff-consent-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 2px 8px; }
+    .ff-consent-actions .btn { min-height: 40px; padding: 8px; font-size: 13px; line-height: 1.3; text-align: center; }
+    .ff-consent-bar #ffConsentReject,
+    .ff-consent-bar #ffConsentAcceptAll { background: var(--blue-light); color: var(--white); border: 1px solid transparent; }
+    .ff-consent-bar #ffConsentReject:hover,
+    .ff-consent-bar #ffConsentAcceptAll:hover { background: var(--blue-dark); }
+    .ff-consent-bar #ffConsentCustomize {
+      grid-row: 2; grid-column: 1 / -1; justify-self: center;
+      min-height: 24px; padding: 4px 12px; border: 0; background: none;
+      color: var(--blue-light); text-decoration: underline; text-underline-offset: 2px;
+    }
+    .ff-consent-bar #ffConsentCustomize:hover { background: none; transform: none; }
+  }
+  @media (max-width: 374px) {
+    .ff-consent-actions .btn { font-size: 12px; }
   }
 </style>
 </head>
@@ -520,7 +536,8 @@
           </header>
           <div class="text-card-foreground mx-auto w-full max-w-[1140px] rounded-[15px] border-0 bg-white shadow-none ff-heatmap" data-reveal="rise">
             <div class="p-5 sm:p-8">
-              <div class="overflow-x-auto">
+              <p class="ff-swipe-hint" aria-hidden="true" hidden>Swipe to see all scores</p>
+              <div class="overflow-x-auto ff-swipe">
                 <div class="relative w-full overflow-auto">
                   <table class="w-full caption-bottom text-sm min-w-[880px] border-collapse"><thead class="[&_tr]:border-b"><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto w-[31%] px-0 pb-[19px] pt-[9px] text-left [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">PERSON</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">CORE WORK</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">COMMS</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">SYSTEMS</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">ADMIN</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">AVG</th></tr></thead><tbody class="[&_tr:last-child]:border-0"><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[31%] px-0 py-[14px]">
                           <div class="flex h-[70px] items-center gap-3 ff-person" style="--r:0">
