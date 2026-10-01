@@ -19,12 +19,14 @@ site_assets="$here/../../../fluencyfox-site_6/assets"
 out="$(mktemp -d)"
 trap 'rm -rf "$out"' EXIT
 
-# The concept borrows two files from the live site's assets; the share build
-# carries its own copies so it stands alone.
-mkdir -p "$out/site/assets"
+# The concept borrows files from the live site's assets (the screenshare clip,
+# the favicon and the fonts with their licence); the share build carries its
+# own copies so it stands alone.
+mkdir -p "$out/site/assets/fonts"
 cp "$concept/index.html" "$concept/concept.css" "$concept/concept.js" "$out/site/"
 cp "$concept"/assets/* "$out/site/assets/"
 cp "$site_assets/candidate-screenshare-TLIHC6EP.mp4" "$site_assets/favicon-32.png" "$out/site/assets/"
+cp "$site_assets"/fonts/*.woff2 "$site_assets/fonts/OFL.txt" "$out/site/assets/fonts/"
 sed -i.bak 's#\.\./\.\./fluencyfox-site_6/assets/#assets/#g' "$out/site/index.html" && rm "$out/site/index.html.bak"
 if grep -q '\.\./\.\./' "$out/site/index.html" "$out/site/concept.css" "$out/site/concept.js"; then
   echo "The concept points at a file outside its folder; copy it in above." >&2

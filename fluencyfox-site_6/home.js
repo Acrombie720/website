@@ -266,17 +266,6 @@
     $$('.ff-bgcard').forEach(card => once(card, () => card.classList.add('ff-near'), '600px 0px'));
   });
 
-  // The three handwriting faces draw only "AI", "AI" and "X", well down the
-  // page, so they load after everything else.
-  feature('handwriting fonts', () => {
-    onLoaded(() => {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Shalimar&family=Waterfall&display=swap';
-      document.head.appendChild(link);
-    });
-  });
-
   // ---------------------------------------------------------------- scroll-linked scene
 
   // One rAF loop drives everything that follows the scroll position or the

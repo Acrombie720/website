@@ -11,7 +11,7 @@
 		X-Content-Type-Options "nosniff"
 		Referrer-Policy "strict-origin-when-cross-origin"
 	}
-	@assets path *.css *.js *.webp *.png *.mp4
+	@assets path *.css *.js *.webp *.png *.mp4 *.woff2
 	header @assets Cache-Control "public, max-age=3600"
 	file_server
 }

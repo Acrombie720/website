@@ -42,17 +42,40 @@
   })(document.documentElement);
 </script>
 
-<!-- Fonts: fetched in parallel with the page rather than chained behind the
-     stylesheet. The three handwriting faces (about 60KB together) only draw
-     "AI", "AI" and "X" far down the page, so home.js adds them after load;
-     the noscript copy covers visitors without JS. -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/ovo/v18/yYLl0h7WyfzTzI443XaFxQ.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&amp;family=Poppins:wght@300;400;500&amp;display=swap">
+<!-- Fonts: served from this site (assets/fonts/, licences in OFL.txt there)
+     rather than Google Fonts. They are Google Fonts' own files, latin and
+     latin-ext only, with Google's unicode-range, so the latin-ext file is
+     fetched only for a character that needs it. The two preloads start the
+     hero's headline and body faces before the stylesheets arrive. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/ovo-latin-400-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-latin-400-normal.woff2" crossorigin>
+<style>
+  @font-face { font-family: "Ovo"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/ovo-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 300; font-display: swap;
+    src: url(assets/fonts/poppins-latin-ext-300-normal.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 300; font-display: swap;
+    src: url(assets/fonts/poppins-latin-300-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/poppins-latin-ext-400-normal.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/poppins-latin-400-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url(assets/fonts/poppins-latin-ext-500-normal.woff2) format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: "Poppins"; font-style: normal; font-weight: 500; font-display: swap;
+    src: url(assets/fonts/poppins-latin-500-normal.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  /* The handwriting faces draw only "AI", "AI" and "X" in The Problem, so each
+     file holds just those letters (about 1 KB). Other letters there need a new
+     file, cut from Google's latin file with fontTools, e.g.
+     pyftsubset in.woff2 --unicodes=U+41,U+49 --flavor=woff2 --name-IDs='*' --no-hinting */
+  @font-face { font-family: "Reenie Beanie"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/reenie-beanie-ai.woff2) format("woff2"); unicode-range: U+41, U+49; }
+  @font-face { font-family: "Waterfall"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/waterfall-ai.woff2) format("woff2"); unicode-range: U+41, U+49; }
+  @font-face { font-family: "Shalimar"; font-style: normal; font-weight: 400; font-display: swap;
+    src: url(assets/fonts/shalimar-x.woff2) format("woff2"); unicode-range: U+58; }
+</style>
 <noscript>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&amp;family=Shalimar&amp;family=Waterfall&amp;display=swap">
   <!-- The screenshare clip only plays via home.js; the still underneath shows instead. -->
   <style>video[data-autoplay] { display: none; }</style>
 </noscript>
