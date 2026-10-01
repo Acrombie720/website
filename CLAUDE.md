@@ -12,6 +12,29 @@ The site is in `fluencyfox-site_6/`, **not** at the repo root.
 - `assets/` — images and video
 - `robots.txt`, `sitemap.xml`
 
+### The homepage
+
+`index.html` is static HTML. It was converted on 2026-09-30 from the designer's React/Anima
+export, which used to draw the whole page in the browser from `assets/index-ZWFN_phX.js` (an
+empty page until 267KB of script ran). That bundle and `assets/index-L9KnxXDe.css` are no
+longer loaded by the homepage. Edit the text in `index.html` directly.
+
+- `home-base.css`: the designer's Tailwind CSS, copied with the Google Fonts `@import` removed
+  and a brace restored that the 29 Sep hand edit had deleted (it broke the sticky header).
+  On 30 Sep its off-palette colours (#5f5f5f, #7da8bf, #7b9cc9 and others) were swapped for
+  the assessment platform's colours, in `index.html` too. The palette is the `ff` block in the
+  platform repo's `tailwind.config.js`.
+- `home.css`, `home.js`: the motion layer and behaviour (menu, carousel, typewriter, counters).
+  Hidden "before" states only apply under `html.ff-reveal`, so no JS or reduced motion shows
+  the page complete and still.
+- Images come in several sizes from `node build/optimise-home-images.mjs --write`. Do not
+  re-run the older `build/optimise-images.mjs` on `hero-mockup.svg`: sharp drops the mockup's
+  embedded pictures and leaves blank panels.
+
+If the designer uploads a new export (a new `assets/index-*.js` plus an `index.html` that
+loads it), it replaces all of this. Ask before accepting one; the change needs converting to
+static HTML again.
+
 Do not create a new numbered folder (`_7`, `_8`). The numbered copies are a leftover from
 editing via the GitHub website. Git is the version history now; edit `fluencyfox-site_6`
 in place.

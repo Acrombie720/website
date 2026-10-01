@@ -24,11 +24,42 @@
 <meta name="twitter:description" content="The immersive assessor for modern hiring: a real-world task, on the tools they&#39;d use in the job.">
 <meta name="twitter:image" content="https://fluencyfox.ai/assets/hero-visual.jpg">
 
-<link rel="icon" type="image/png" sizes="512x512" href="assets/logo-mark.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/logo-mark.png">
+<meta name="theme-color" content="#f0f4f6">
 
-<!-- Fonts used by the page design (loaded via the stylesheet below) -->
+<!-- Motion is opt-in. ff-motion switches on the CSS-only hero entrance;
+     ff-reveal hides below-the-fold content until home.js reveals it. With no
+     JS, or with reduced motion requested, neither is set and the page renders
+     complete and still. If home.js has not started within 4s, only ff-reveal
+     is dropped, so hidden content appears without the hero jumping. -->
+<script>
+  (function (d) {
+    d.classList.add('ff-js');
+    if (!window.matchMedia || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    d.classList.add('ff-motion', 'ff-reveal');
+    setTimeout(function () { if (!window.ffReady) d.classList.remove('ff-reveal'); }, 4000);
+  })(document.documentElement);
+</script>
+
+<!-- Fonts: fetched in parallel with the page rather than chained behind the
+     stylesheet. The three handwriting faces (about 60KB together) only draw
+     "AI", "AI" and "X" far down the page, so home.js adds them after load;
+     the noscript copy covers visitors without JS. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/ovo/v18/yYLl0h7WyfzTzI443XaFxQ.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ovo&amp;family=Poppins:wght@300;400;500&amp;display=swap">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&amp;family=Shalimar&amp;family=Waterfall&amp;display=swap">
+  <!-- The screenshare clip only plays via home.js; the still underneath shows instead. -->
+  <style>video[data-autoplay] { display: none; }</style>
+</noscript>
+
+<link rel="stylesheet" href="home-base.css?v=20260930b">
+<link rel="stylesheet" href="home.css?v=20260930b">
+<script src="home.js?v=20260930c" defer></script>
 
 <script type="application/ld+json">
 {
@@ -81,16 +112,13 @@
 }
 </script>
 
-<script type="module" crossorigin src="./assets/index-ZWFN_phX.js"></script>
-<link rel="stylesheet" crossorigin href="./assets/index-L9KnxXDe.css">
-
 <!-- Styling for the cookie-consent banner (cookie-consent.js), kept in sync
      with the shared styles.css so the banner still looks right on this page
      even though the rest of styles.css is no longer loaded here. -->
 <style>
   :root {
     --dark: #1e1e1e;
-    --grey-900: #1a1a1a;
+    --grey-900: #1e1e1e;
     --grey-500: #6e7270;
     --grey-100: #e7e7e7;
     --white: #ffffff;
@@ -137,7 +165,7 @@
     font-family: var(--font-display); font-weight: 400; font-size: 24px;
     color: var(--dark); margin: 0 0 20px;
   }
-  .ff-consent-modal .btn-outline { background: #f0f4f6; color: var(--blue-light); border: 1px solid #7da8bf; }
+  .ff-consent-modal .btn-outline { background: #f0f4f6; color: var(--blue-light); border: 1px solid #92bad5; }
   .ff-consent-modal .btn-outline:hover { background: white; }
   .ff-consent-row {
     display: flex; align-items: flex-start; justify-content: space-between;
@@ -169,7 +197,531 @@
 </style>
 </head>
 <body>
-<div id="app"></div>
-<script src="cookie-consent.js"></script>
+<div class="min-h-screen w-full bg-[#f0f4f6] ff-page">
+  <header class="sticky top-0 z-30 bg-[#f0f4f6] mx-auto flex w-full max-w-[1440px] items-center justify-between px-4 py-4 sm:px-8 lg:px-[100px] ff-header" id="siteHeader">
+    <a href="#" aria-label="Fluencyfox home" class="shrink-0" data-top="">
+      <img class="h-8 w-[151px] sm:h-11 sm:w-[207.57px]" alt="" src="assets/logo-DK91_vQ0.svg" width="208" height="44">
+    </a>
+    <div class="flex items-center gap-3 sm:gap-[22px]">
+      <nav aria-label="Main" class="relative z-10 max-w-max flex-1 items-center justify-center hidden md:flex">
+        <div style="position: relative;">
+          <ul class="group flex flex-1 list-none items-center justify-center space-x-1 gap-[22px]">
+            <li><a href="#testimonials" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">Testimonials</a></li>
+            <li><a href="#how-it-works" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">How It Works</a></li>
+            <li><a href="#what-we-measure" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal text-[#606060] transition-colors hover:text-[#5474a1] ff-navlink">What we Measure</a></li>
+          </ul>
+        </div>
+      </nav>
+      <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-auto rounded-xl bg-[#5474a1] px-[18px] py-2.5 sm:px-[22px] sm:py-3 [font-family:'Poppins',Helvetica] text-sm font-medium leading-normal text-white hover:bg-[#46618a] ff-cta">Book a Demo</a>
+      <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 shrink-0 text-[#1e1e1e] hover:bg-[#dae9f1] md:hidden" type="button" aria-label="Open menu" aria-expanded="false" id="navToggle" aria-controls="mobileNav"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-6 w-6 ff-icon-menu" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-6 w-6 ff-icon-close" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+    </div>
+    <nav id="mobileNav" aria-label="Mobile" hidden="" class="ff-mobile-nav absolute left-4 right-4 top-full z-30 mt-2 flex flex-col gap-1 rounded-xl border border-[#dae9f1] bg-white p-3 shadow-lg sm:left-8 sm:right-8 md:hidden"><a href="#testimonials" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">Testimonials</a><a href="#how-it-works" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">How It Works</a><a href="#what-we-measure" class="rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-normal text-[#606060] transition-colors hover:bg-[#f0f4f6] hover:text-[#5474a1]">What we Measure</a><a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="ff-menu-cta rounded-lg px-3 py-2.5 [font-family:'Poppins',Helvetica] text-base font-medium text-[#5474a1] transition-colors hover:bg-[#f0f4f6] ff-cta">Book a Demo</a></nav><span class="ff-progress" aria-hidden="true"></span></header>
+  <main class="mx-auto flex w-full max-w-[1440px] flex-col items-center gap-[190px] px-4 pt-16 sm:px-8 sm:pt-[190px] lg:px-[100px]">
+    <section id="hero" class="w-full" data-section="hero">
+      <section class="w-full">
+        <header class="relative z-10 mx-auto flex h-auto w-full max-w-[864px] flex-col items-center justify-center gap-4 px-2.5 pt-4 pb-2.5 sm:gap-[22px]"><span class="ff-aurora" aria-hidden="true"><span></span><span></span></span>
+          <h1 class="w-full max-w-[781.23px] [font-family:'Ovo',Helvetica] text-center text-[44px] font-normal leading-[1.14] tracking-[0] text-[#1e1e1e] sm:text-[54px] sm:leading-[1.12] md:text-[62px] md:leading-[1.08]" data-split="hero" aria-label="Reveal the candidates who are brilliant with AI."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">Reveal</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">the</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">candidates</span></span><br><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">who</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:4">are</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:5">brilliant</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:6">with</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:7">AI.</span></span></h1>
+          <p class="w-full max-w-[716.72px] [font-family:'Poppins',Helvetica] text-center text-base font-normal leading-[normal] tracking-[0] text-[#606060] md:text-lg" data-hero="blur" style="--d:560ms">See the work, not the CV. Fluencyfox gives candidates a real-world task using the AI tools they'd use on day one, and reveals the brilliant ones through three things: a full session recording, the solution they shipped, and scores on how they built, used AI, and communicated.</p>
+          <nav aria-label="Hero actions" class="flex flex-wrap justify-center gap-3">
+            <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto w-[164px] rounded-xl bg-[#92bad5] px-[22px] py-3 [font-family:'Poppins',Helvetica] text-sm font-medium text-white shadow-none hover:bg-[#5474a1] ff-cta" data-hero="pop" style="--d:760ms">Book a Demo</a>
+            <a href="#how-it-works" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto w-[164px] rounded-xl border border-solid border-[#92bad5] bg-[#f0f4f6] px-[22px] py-3 [font-family:'Poppins',Helvetica] text-sm font-medium text-[#5474a1] shadow-none hover:bg-[#dae9f1] ff-ghost" data-hero="pop" style="--d:850ms">See How It Works</a>
+          </nav>
+        </header>
+        <div class="relative left-1/2 grid w-[100vw] max-w-[100vw] -translate-x-1/2 grid-cols-1 ff-stage" id="heroStage">
+          <img class="col-start-1 row-start-1 -mt-[80px] h-auto w-[100vw] max-w-none rounded-t-none rounded-b-[12px] object-top ff-hero-mountains" alt="" src="assets/hero-mountains-d-1280.webp" srcset="assets/hero-mountains-d-768.webp 768w, assets/hero-mountains-d-1280.webp 1280w, assets/hero-mountains-d-1440.webp 1440w, assets/hero-mountains-d-1600.webp 1600w, assets/hero-mountains-d-1920.webp 1920w, assets/hero-mountains-d-2048.webp 2048w" sizes="(max-width: 767px) 60vw, 100vw" aria-hidden="true" width="2048" height="1526" fetchpriority="high" decoding="async">
+          <div class="relative z-10 col-start-1 row-start-1 mt-[4.8%] w-[83.47%] justify-self-center self-start ff-hero-mockup" data-tilt=""><div class="ff-hero-mockup-in">
+              <img class="block w-full ff-mockup-img" alt="A live Fluencyfox assessment: candidate screenshare, AI team-leader chat, and a scored task result" src="assets/hero-mockup-d-1280.webp" srcset="assets/hero-mockup-d-768.webp 768w, assets/hero-mockup-d-1280.webp 1280w, assets/hero-mockup-d-1600.webp 1600w, assets/hero-mockup-d-2404.webp 2404w" sizes="(min-width: 1100px) 111vw, 84vw" width="1202" height="682" decoding="async">
+              <video class="absolute rounded-[6px] object-cover" loop="" playsinline="" src="assets/candidate-screenshare-TLIHC6EP.mp4" style="left: 26.583%; top: 27.665%; width: 10%; height: 10.581%;" muted="" preload="none" aria-hidden="true" tabindex="-1" data-autoplay=""></video>
+              <span class="ff-sheen" aria-hidden="true"></span></div></div>
+          <img class="relative z-20 col-start-1 row-start-1 mt-[calc(16.42%_-_80px)] w-[99.86%] rounded-b-[12px] justify-self-center ff-hero-flowers" alt="" src="assets/hero-flowers-d-1280.webp" srcset="assets/hero-flowers-d-768.webp 768w, assets/hero-flowers-d-1280.webp 1280w, assets/hero-flowers-d-1440.webp 1440w, assets/hero-flowers-d-1600.webp 1600w, assets/hero-flowers-d-1920.webp 1920w, assets/hero-flowers-d-2216.webp 2216w" sizes="(max-width: 767px) 60vw, 100vw" aria-hidden="true" width="2216" height="1288" decoding="async">
+          <canvas class="ff-pollen ff-pollen-hero" aria-hidden="true" data-pollen="hero"></canvas></div>
+      </section>
+    </section>
+    <script>(function(d){if(!d.classList.contains("ff-motion"))return;var go=function(){d.classList.add("ff-go")};if(document.fonts&&document.fonts.load){Promise.race([document.fonts.load("62px Ovo"),new Promise(function(r){setTimeout(r,550)})]).then(go,go)}else go();var imgs=document.querySelectorAll(".ff-hero-mountains,.ff-hero-flowers");for(var i=0;i<imgs.length;i++)(function(img){var ok=function(){img.classList.add("is-ready")};if(img.complete&&img.naturalWidth)ok();else if(img.decode)img.decode().then(ok,ok);else{img.onload=ok;img.onerror=ok}})(imgs[i])})(document.documentElement);</script>
+    <section id="testimonials" class="w-full" data-section="testimonials">
+      <section class="flex w-full flex-col items-start justify-center gap-[42px]" aria-labelledby="customer-testimonials-heading">
+        <h2 id="customer-testimonials-heading" class="[font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[normal] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="From the Teams Running FluencyFox"><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">From</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">the</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">Teams</span></span><br><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">Running</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:4">FluencyFox</span></span></h2>
+        <div class="grid w-full grid-cols-1 items-stretch gap-[22px] rounded-xl lg:grid-cols-[minmax(0,467.79fr)_minmax(0,748.21fr)] ff-carousel" id="testimonialCarousel" role="region" aria-roledescription="carousel" aria-label="Testimonials" data-reveal="rise">
+          <div class="ff-t-photos order-2 lg:order-1" aria-hidden="true"><img class="ff-t-photo h-full min-h-[360px] w-full rounded-xl object-cover lg:h-[575.75px] is-active" alt="" src="assets/testimonial-eleonora-d.webp" loading="lazy" fetchpriority="low" width="700" height="700" decoding="async" data-slide="0"><img class="ff-t-photo h-full min-h-[360px] w-full rounded-xl object-cover lg:h-[575.75px]" alt="" data-src="assets/testimonial-romil-d.webp" width="700" height="861" decoding="async" data-slide="1"><img class="ff-t-photo h-full min-h-[360px] w-full rounded-xl object-cover lg:h-[575.75px]" alt="" data-src="assets/testimonial-tess-d.webp" width="555" height="780" decoding="async" data-slide="2"><img class="ff-t-photo h-full min-h-[360px] w-full rounded-xl object-cover lg:h-[575.75px]" alt="" data-src="assets/testimonial-jay-d.webp" width="870" height="1071" decoding="async" data-slide="3"></div>
+          <div class="text-card-foreground order-1 h-[575.75px] rounded-xl border-0 bg-white shadow-none lg:order-2">
+            <div class="flex h-[575.75px] flex-col p-[30px]">
+              <div class="ff-t-slides" id="testimonialSlides" aria-live="polite">
+                <div class="ff-t-slide is-active" data-slide="0" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <header class="flex min-h-14 justify-end"><img class="w-auto max-w-[220px] object-contain h-14" alt="HIVED logo" src="assets/logo-hived-d.webp" loading="lazy" decoding="async"></header>
+                  <blockquote class="my-auto flex max-w-[688px] flex-col items-start gap-[34px] px-[22px] py-[22px] text-left">
+                    <p class="ff-t-quote [font-family:'Poppins',Helvetica] text-base font-light leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">"When somebody is applying for a role and they don't have 20 years of experience in their CV, it's very hard to stand out. Thanks to Calyptus you can actually get a glimpse at how the person actually thinks, and how they work. And that makes the process a lot more personable."</p>
+                    <footer class="flex items-center gap-4">
+                      <div class="ff-t-who flex flex-col items-start justify-center gap-1.5">
+                        <cite class="[font-family:'Ovo',Helvetica] text-lg font-normal not-italic leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">Eleonora Shepel</cite>
+                        <p class="[font-family:'Poppins',Helvetica] text-sm font-light leading-[normal] tracking-[0] text-[#606060]">Talent Lead, HIVED</p>
+                      </div>
+                    </footer>
+                  </blockquote>
+                </div>
+                <div class="ff-t-slide" data-slide="1" role="group" aria-roledescription="slide" aria-label="2 of 4" aria-hidden="true" inert="">
+                  <header class="flex min-h-14 justify-end"><img class="w-auto max-w-[220px] object-contain h-20" alt="SilverTree Equity logo" data-src="assets/testimonial-silvertree-logo-CWr2McSI.webp" decoding="async"></header>
+                  <blockquote class="my-auto flex max-w-[688px] flex-col items-start gap-[34px] px-[22px] py-[22px] text-left">
+                    <p class="ff-t-quote [font-family:'Poppins',Helvetica] text-base font-light leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">"We used the fluency assessor to screen candidates for our graduate forward deployed engineering scheme, helping us find 6 tier 1 hires out of an initial pool of 700."</p>
+                    <footer class="flex items-center gap-4">
+                      <div class="ff-t-who flex flex-col items-start justify-center gap-1.5">
+                        <cite class="[font-family:'Ovo',Helvetica] text-lg font-normal not-italic leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">Romil Depala</cite>
+                        <p class="[font-family:'Poppins',Helvetica] text-sm font-light leading-[normal] tracking-[0] text-[#606060]">SilverTree Equity</p>
+                      </div>
+                    </footer>
+                  </blockquote>
+                </div>
+                <div class="ff-t-slide" data-slide="2" role="group" aria-roledescription="slide" aria-label="3 of 4" aria-hidden="true" inert="">
+                  <header class="flex min-h-14 justify-end"><img class="w-auto max-w-[220px] object-contain h-14" alt="Spin logo" data-src="assets/logo-spin-d.webp" decoding="async"></header>
+                  <blockquote class="my-auto flex max-w-[688px] flex-col items-start gap-[34px] px-[22px] py-[22px] text-left">
+                    <p class="ff-t-quote [font-family:'Poppins',Helvetica] text-base font-light leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">"Setup was so easy and candidates responded really well. I was blown away by how much the report picked up, strengths and weaknesses across text, audio, and video, catching specific things I would've missed. We used it for marketing and comms roles, and the scoring was spot on every time."</p>
+                    <footer class="flex items-center gap-4">
+                      <div class="ff-t-who flex flex-col items-start justify-center gap-1.5">
+                        <cite class="[font-family:'Ovo',Helvetica] text-lg font-normal not-italic leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">Tess Cohen</cite>
+                        <p class="[font-family:'Poppins',Helvetica] text-sm font-light leading-[normal] tracking-[0] text-[#606060]">Venture Associate, Spin.vc</p>
+                      </div>
+                    </footer>
+                  </blockquote>
+                </div>
+                <div class="ff-t-slide" data-slide="3" role="group" aria-roledescription="slide" aria-label="4 of 4" aria-hidden="true" inert="">
+                  <header class="flex min-h-14 justify-end"></header>
+                  <blockquote class="my-auto flex max-w-[688px] flex-col items-start gap-[34px] px-[22px] py-[22px] text-left">
+                    <p class="ff-t-quote [font-family:'Poppins',Helvetica] text-base font-light leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">"The test was unique and unlike anything I have ever had to do for job applications. I really liked how it gave us the freedom to approach a problem as we wished using whatever AI tool we want. I like how it was recorded, and we got to show our personality rather than just the results. It was a very fun experience."</p>
+                    <footer class="flex items-center gap-4">
+                      <div class="ff-t-who flex flex-col items-start justify-center gap-1.5">
+                        <cite class="[font-family:'Ovo',Helvetica] text-lg font-normal not-italic leading-[normal] tracking-[0] text-maingrey sm:text-[22px]">Jay Cushen</cite>
+                      </div>
+                    </footer>
+                  </blockquote>
+                </div>
+              </div>
+              <div class="flex justify-end gap-4">
+                <button type="button" class="ff-t-btn flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95" aria-label="Show previous testimonial" data-dir="-1" aria-controls="testimonialSlides">
+                  <img class="h-10 w-10" src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='32'%20y='32'%20width='32'%20height='32'%20rx='16'%20transform='rotate(-180%2032%2032)'%20fill='%23F0F4F6'/%3e%3cpath%20d='M21.7866%2016L10.2134%2016'%20stroke='%23606060'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M15.9999%2021.7866L10.2132%2016L15.9999%2010.2134'%20stroke='%23606060'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e" alt="">
+                </button>
+                <button type="button" class="ff-t-btn flex h-10 w-10 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 active:scale-95" aria-label="Show next testimonial" data-dir="1" aria-controls="testimonialSlides">
+                  <img class="h-10 w-10" src="data:image/svg+xml,%3csvg%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='32'%20height='32'%20rx='16'%20fill='%23F0F4F6'/%3e%3cpath%20d='M10.2134%2016H21.7866'%20stroke='%23606060'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M16.0001%2010.2134L21.7868%2016L16.0001%2021.7866'%20stroke='%23606060'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e" alt="">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="candidate-evaluation" class="w-full" data-section="candidate-evaluation">
+      <section aria-labelledby="candidate-evaluation-problem-title" class="relative flex w-full flex-col items-start justify-center gap-[42px]">
+        <header class="flex w-full flex-col items-start justify-between gap-6 lg:flex-row">
+          <div class="flex max-w-[802px] flex-col items-start gap-[22px]">
+            <h2 id="candidate-evaluation-problem-title" class="[font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[1.08] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="A master and a beginner look identical on paper."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">A</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">master</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">and</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">a</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:4">beginner</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:5">look</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:6">identical</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:7">on</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:8">paper.</span></span></h2>
+          </div>
+          <p class="order-first shrink-0 [font-family:'Poppins',Helvetica] text-[22px] font-normal leading-[normal] tracking-[0] text-[#5474a1] lg:order-none" data-reveal="fade">THE PROBLEM</p>
+        </header>
+        <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-3" data-stagger="110">
+          <div class="rounded-xl text-card-foreground min-h-[345px] border-0 bg-white shadow-none ff-card ff-spot" data-reveal="rise">
+            <div class="flex flex-col space-y-1.5 p-[22px] pb-0">
+              <div aria-hidden="true" class="relative h-14 w-[127px]">
+                <span class="absolute left-0 top-px whitespace-nowrap [font-family:'Reenie_Beanie',Helvetica] text-[53.6px] font-normal leading-[normal] tracking-[0] text-[#e7e7e7] ff-ink">AI</span>
+                <span class="absolute left-[67px] top-0 whitespace-nowrap [font-family:'Waterfall',Helvetica] text-[53.6px] font-normal leading-[normal] tracking-[0] text-[#e7e7e7] ff-ink">AI</span>
+              </div>
+            </div>
+            <div class="flex min-h-[245px] flex-col justify-end p-[22px] pt-0">
+              <div class="flex flex-col items-start gap-2.5">
+                <div class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-[#1e1e1e]">CVs can't show fluency</div>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]">Two candidates write the same two letters - "AI". One is masterful, one is just getting started. On paper, they are exactly the same person.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-xl bg-card text-card-foreground min-h-[345px] overflow-hidden border-0 bg-cover bg-center shadow-none ff-card ff-spot ff-bgcard" data-reveal="rise"><div class="ff-bg" aria-hidden="true" style='--bg: linear-gradient(rgba(26, 26, 26, 0) 0%, rgb(26, 26, 26) 73%), url("assets/interview-card-bg-DRuvpuDy.webp");'></div>
+            <div class="flex flex-col space-y-1.5 p-6 sr-only">
+              <div class="font-semibold leading-none tracking-tight">Interviews skim the surface</div>
+            </div>
+            <div class="flex min-h-[345px] flex-col justify-end p-[22px]">
+              <div class="flex flex-col items-start gap-2.5">
+                <div class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-white">Interviews skim the surface</div>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#dbdcdb]">Talking about how you work with AI and actually doing it are two different skills. A conversation can only ever test the first one.</p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-xl text-card-foreground min-h-[345px] border-0 bg-white shadow-none ff-card ff-spot" data-reveal="rise">
+            <div class="flex flex-col space-y-1.5 p-[22px] pb-0">
+              <div aria-hidden="true" class="relative h-14 w-[127px]">
+                <span class="absolute left-0 top-px [font-family:'Shalimar',Helvetica] text-[53.6px] font-normal leading-[normal] tracking-[0] text-[#e7e7e7] ff-ink">X</span>
+              </div>
+            </div>
+            <div class="flex min-h-[245px] flex-col justify-end p-[22px] pt-0">
+              <div class="flex flex-col items-start gap-2.5">
+                <div class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-[#1e1e1e]">Most assessments ban AI</div>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]">Assessment platforms that try to sandbox or ban AI usage have become outdated. Future-proof skills are not cheating, don't lose out on top talent.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="how-it-works" class="w-full" data-section="how-it-works">
+      <section aria-labelledby="assessment-workflow-title" class="flex w-full flex-col items-start justify-center gap-[42px] rounded-xl bg-white p-[22px]">
+        <header class="flex w-full flex-col items-start justify-between gap-6 sm:flex-row">
+          <div class="flex max-w-[802px] flex-col items-start gap-[22px]">
+            <h2 id="assessment-workflow-title" class="[font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[normal] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="Design. Deploy. Decide." style="--stagger:170ms"><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">Design.</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">Deploy.</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">Decide.</span></span></h2>
+            <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]" data-reveal="fade">One consultative build with our team then it runs itself, at any volume.</p>
+          </div>
+          <p class="order-first shrink-0 [font-family:'Poppins',Helvetica] text-[22px] font-normal leading-[normal] tracking-[0] text-[#5474a1] sm:order-none" data-reveal="fade">HOW IT WORKS</p>
+        </header>
+        <div class="flex w-full flex-col gap-[42px]">
+          <div class="text-card-foreground w-full overflow-hidden rounded-xl border border-dashed border-[#92bad5] bg-transparent shadow-none ff-step" data-reveal="step" style="--step:0">
+            <div class="p-6 grid items-center gap-6 px-8 py-6 md:grid-cols-2 md:gap-8 md:py-1.5">
+              <div class="flex w-full min-w-0 max-w-[542px] flex-col items-start gap-2.5 px-3 py-0">
+                <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-[#1e1e1e]">Design it with us</h3>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]">We work with your team to customise the task around your bar: the objective, the brief, and the weightings that reflect a real-world scenario at your company.</p>
+              </div>
+              <div class="min-w-0">
+                <div class="relative flex h-[352px] w-full max-w-[546px] shrink-0 items-center justify-center overflow-hidden rounded-md bg-white ff-embed" data-embed-w="1040" data-embed-h="731">
+                  <iframe title="Design it with us" scrolling="no" style="width:1040px;height:731px;border:0;transform-origin:center center;pointer-events:none;flex-shrink:0" data-src="./animations/design-it-with-us.html" tabindex="-1" aria-hidden="true" inert=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-card-foreground w-full overflow-hidden rounded-xl border border-dashed border-[#92bad5] bg-transparent shadow-none ff-step" data-reveal="step" style="--step:1">
+            <div class="p-6 grid items-center gap-6 px-8 py-6 md:grid-cols-2 md:gap-8 md:py-1.5">
+              <div class="flex w-full min-w-0 max-w-[542px] flex-col items-start gap-2.5 px-3 py-0 order-1 md:order-2">
+                <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-[#1e1e1e]">Deploy from your ATS</h3>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]"><strong class="font-medium">Fully integrated with your ATS.</strong> Move a candidate into the assessment stage and they get a single-use link. Scores and feedback come straight back into the ATS. Scheduling and email sit in the same flow. No invigilators.</p>
+              </div>
+              <div class="min-w-0 order-2 md:order-1">
+                <div class="relative flex h-[352px] w-full max-w-[546px] shrink-0 items-center justify-center overflow-hidden rounded-md bg-white ff-embed" style="mask-image: linear-gradient(to right, transparent 0px, black 64px, black calc(100% - 64px), transparent 100%);" data-embed-w="1100" data-embed-h="216">
+                  <iframe title="Deploy from your ATS" scrolling="no" style="width:1100px;height:216px;border:0;transform-origin:center center;pointer-events:none;flex-shrink:0" data-src="./animations/deploy-from-ats.html" tabindex="-1" aria-hidden="true" inert=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-card-foreground w-full overflow-hidden rounded-xl border border-dashed border-[#92bad5] bg-transparent shadow-none ff-step" data-reveal="step" style="--step:2">
+            <div class="p-6 grid items-center gap-6 px-8 py-6 md:grid-cols-2 md:gap-8 md:py-1.5">
+              <div class="flex w-full min-w-0 max-w-[542px] flex-col items-start gap-2.5 px-3 py-0">
+                <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0] text-[#1e1e1e]">Decide with evidence</h3>
+                <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]">Every candidate lands in one dashboard, ranked by three scores weighted your way. Read the full transcript. Jump the chaptered video straight to the moments that matter - where they diagnosed the problem, briefed the AI, caught its mistake, shipped the file.</p>
+              </div>
+              <div class="min-w-0">
+                <div class="relative flex h-[352px] w-full max-w-[546px] shrink-0 items-center justify-center overflow-hidden rounded-md bg-white ff-embed" data-embed-w="1260" data-embed-h="900">
+                  <iframe title="Decide with evidence" scrolling="no" style="width:1260px;height:900px;border:0;transform-origin:center center;pointer-events:none;flex-shrink:0" data-src="./animations/decide-with-evidence.html" tabindex="-1" aria-hidden="true" inert=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="what-we-measure" class="w-full" data-section="what-we-measure">
+      <section class="flex w-full max-w-[1238px] flex-col items-start justify-center gap-[42px]" aria-labelledby="scoring-framework-heading">
+        <header class="flex w-full flex-col items-start justify-between gap-6 md:flex-row md:gap-10">
+          <div class="flex max-w-[802px] flex-col items-start gap-[22px]">
+            <h2 id="scoring-framework-heading" class="[font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[1.08] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="Three scores. You set the weights."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">Three</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">scores.</span></span><br><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">You</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">set</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:4">the</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:5">weights.</span></span></h2>
+            <p class="[font-family:'Poppins',Helvetica] max-w-[802px] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]" data-reveal="fade">Every session is scored on the three things a hiring team actually buys weighted the way you set them.</p>
+          </div>
+          <p class="order-first shrink-0 [font-family:'Poppins',Helvetica] text-[22px] font-normal leading-[normal] tracking-[0] text-[#5474a1] md:order-none" data-reveal="fade">WHAT WE MEASURE</p>
+        </header>
+        <div class="grid w-full grid-cols-1 items-start gap-3 md:grid-cols-3" data-stagger="120">
+          <div class="text-card-foreground min-h-[420px] rounded-xl border-0 bg-white shadow-none ff-card ff-spot" data-reveal="rise">
+            <div class="flex min-h-[420px] flex-col justify-between p-[18px]">
+              <div class="flex h-4 w-full max-w-[340px] items-center">
+                <img class="h-full w-auto max-w-full object-contain ff-bar" alt="" src="data:image/svg+xml,%3csvg%20width='361'%20height='14'%20viewBox='0%200%20361%2014'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20width='216.4'%20height='14'%20rx='7'%20fill='%235474A1'/%3e%3cg%20opacity='0.3'%3e%3crect%20x='216.4'%20width='108.2'%20height='14'%20rx='7'%20fill='%235D54A1'/%3e%3c/g%3e%3cg%20opacity='0.3'%3e%3crect%20x='324.6'%20width='36.0667'%20height='14'%20rx='7'%20fill='%23518555'/%3e%3c/g%3e%3c/svg%3e">
+              </div>
+              <div class="flex w-full flex-col items-start gap-4">
+                <div class="flex w-full flex-col items-start gap-2">
+                  <h3 class="[font-family:'Poppins',Helvetica] w-full text-[22px] font-medium leading-[normal] tracking-[0] text-[#5474a1]">Solution <span data-count="70">70</span>%</h3>
+                  <p class="[font-family:'Poppins',Helvetica] min-h-[108px] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]"><strong class="font-medium">What they shipped.</strong> The file your team would actually receive, judged against the objective you set.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-card-foreground min-h-[420px] rounded-xl border-0 bg-white shadow-none ff-card ff-spot" data-reveal="rise">
+            <div class="flex min-h-[420px] flex-col justify-between p-[18px]">
+              <div class="flex h-4 w-full max-w-[340px] items-center">
+                <img class="h-full w-auto max-w-full object-contain ff-bar" alt="" src="data:image/svg+xml,%3csvg%20width='361'%20height='14'%20viewBox='0%200%20361%2014'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20opacity='0.3'%3e%3crect%20width='216.4'%20height='14'%20rx='7'%20fill='%235474A1'/%3e%3c/g%3e%3crect%20x='216.4'%20width='108.2'%20height='14'%20rx='7'%20fill='%235D54A1'/%3e%3cg%20opacity='0.3'%3e%3crect%20x='324.6'%20width='36.0667'%20height='14'%20rx='7'%20fill='%23518555'/%3e%3c/g%3e%3c/svg%3e">
+              </div>
+              <div class="flex w-full flex-col items-start gap-4">
+                <div class="flex w-full flex-col items-start gap-2">
+                  <h3 class="[font-family:'Poppins',Helvetica] w-full text-[22px] font-medium leading-[normal] tracking-[0] text-[#5d54a1]">Communication <span data-count="20">20</span>%</h3>
+                  <p class="[font-family:'Poppins',Helvetica] min-h-[108px] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]"><strong class="font-medium">How they think out loud.</strong> The full session is voiced and transcribed. You are sitting in on the work, not a follow-up chat after it.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-card-foreground min-h-[420px] rounded-xl border-0 bg-white shadow-none ff-card ff-spot" data-reveal="rise">
+            <div class="flex min-h-[420px] flex-col justify-between p-[18px]">
+              <div class="flex h-4 w-full max-w-[340px] items-center">
+                <img class="h-full w-auto max-w-full object-contain ff-bar" alt="" src="data:image/svg+xml,%3csvg%20width='361'%20height='14'%20viewBox='0%200%20361%2014'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20opacity='0.3'%3e%3crect%20width='216.4'%20height='14'%20rx='7'%20fill='%235474A1'/%3e%3c/g%3e%3cg%20opacity='0.3'%3e%3crect%20x='216.4'%20width='108.2'%20height='14'%20rx='7'%20fill='%235D54A1'/%3e%3c/g%3e%3crect%20x='324.6'%20width='36.0667'%20height='14'%20rx='7'%20fill='%23518555'/%3e%3c/svg%3e">
+              </div>
+              <div class="flex w-full flex-col items-start gap-4">
+                <div class="flex w-full flex-col items-start gap-2">
+                  <h3 class="[font-family:'Poppins',Helvetica] w-full text-[22px] font-medium leading-[normal] tracking-[0] text-[#518555]">AI collaboration <span data-count="10">10</span>%</h3>
+                  <p class="[font-family:'Poppins',Helvetica] min-h-[108px] text-lg font-normal leading-[normal] tracking-[0] text-[#606060]"><strong class="font-medium">How they direct the machine.</strong> Any tools they like: Claude, GrokBot, n8n, Zapier. What matters is how well they drive them.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="assessment-evidence" class="w-full" data-section="assessment-evidence">
+      <section aria-labelledby="assessment-evidence-heading" class="flex w-full max-w-[1238px] flex-col items-center gap-[72px]">
+        <div class="flex w-full flex-col gap-[42px]">
+          <header class="flex w-full flex-col items-start justify-between gap-6 sm:flex-row">
+            <h2 id="assessment-evidence-heading" class="[font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[normal] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="Evidence, not claims."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">Evidence,</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">not</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">claims.</span></span></h2>
+            <p class="order-first shrink-0 [font-family:'Poppins',Helvetica] text-[22px] font-normal leading-[normal] tracking-[0] text-[#5474a1] sm:order-none" data-reveal="fade">AUTHENTICITY</p>
+          </header>
+          <div class="grid w-full grid-cols-1 gap-3 md:grid-cols-4" data-stagger="100">
+            <div class="text-card-foreground min-h-[395px] rounded-xl border-0 bg-[#92bad5] shadow-none ff-card" data-reveal="flip">
+              <div class="flex min-h-[395px] flex-col justify-between p-[22px] text-white">
+                <img class="w-full ff-screenbar" alt="" src="data:image/svg+xml,%3csvg%20width='348'%20height='19'%20viewBox='0%200%20348%2019'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20cx='6.64969'%20cy='9.50033'%20r='6.64969'%20fill='%23912018'/%3e%3ccircle%20cx='23.466'%20cy='9.50033'%20r='6.64969'%20fill='%23E6A721'/%3e%3ccircle%20cx='40.2822'%20cy='9.50033'%20r='6.64969'%20fill='%23518555'/%3e%3crect%20x='51.554'%20width='95.7259'%20height='19.0002'%20rx='3.25474'%20fill='%23F0F4F6'/%3e%3crect%20x='151.902'%20width='95.7259'%20height='19.0002'%20rx='3.25474'%20fill='%23F0F4F6'/%3e%3crect%20x='252.25'%20width='95.7259'%20height='19.0002'%20rx='3.25474'%20fill='%23F0F4F6'/%3e%3c/svg%3e">
+                <div class="flex flex-col gap-2.5">
+                  <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0]">Full screen capture,<br>no sandbox.</h3>
+                  <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0]">The whole session. Every tool and tab. Not a locked environment, and not a webcam guess.</p>
+                </div>
+              </div>
+            </div>
+            <div class="text-card-foreground grid min-h-[395px] overflow-hidden rounded-xl border-0 bg-transparent shadow-none ff-card ff-bgcard" data-reveal="flip"><div class="ff-bg" aria-hidden="true" style='--bg: linear-gradient(rgba(26, 26, 26, 0) 0%, rgb(26, 26, 26) 73%), url("assets/assessment-camera-d.webp"); background-position: 50% 50%; background-size: cover;'></div><span class="ff-rec" aria-hidden="true"><i></i>REC</span>
+              <div class="p-6 col-start-1 row-start-1 flex min-h-[395px] flex-col px-[22px] pb-[22px] pt-[189px] text-white ff-bgcard-body">
+                <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0]">Camera on, identity verified</h3>
+                <p class="mt-2.5 [font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0]">It's really them, in the moment - every session is authentic, on the record, and fair to every candidate.</p>
+              </div>
+            </div>
+            <div class="text-card-foreground min-h-[395px] rounded-xl border-0 bg-[#92bad5] shadow-none ff-card" data-reveal="flip">
+              <div class="flex min-h-[395px] flex-col justify-between p-[22px] text-white">
+                <span class="ff-wave" aria-hidden="true"><img class="h-[25.95px] w-[146.76px]" alt="" src="assets/voice-wave-d.webp"></span>
+                <div class="flex flex-col gap-2.5">
+                  <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0]">Voice throughout, transcribed</h3>
+                  <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0]">Candidates think aloud for the whole build. You get every word, searchable, next to the video.</p>
+                </div>
+              </div>
+            </div>
+            <div class="text-card-foreground min-h-[395px] rounded-xl border-0 bg-[#92bad5] shadow-none ff-card" data-reveal="flip">
+              <div class="flex min-h-[395px] flex-col justify-between p-[22px] text-white">
+                <div class="flex items-center gap-[7.64px]">
+                  <img class="h-[12.74px] w-[12.74px] ff-play" alt="" src="data:image/svg+xml,%3csvg%20width='13'%20height='13'%20viewBox='0%200%2013%2013'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.70829%202.70808C2.70823%202.51746%202.75847%202.33021%202.85393%202.16522C2.9494%202.00023%203.0867%201.86334%203.25199%201.76839C3.41727%201.67344%203.60469%201.62378%203.7953%201.62443C3.98592%201.62508%204.17299%201.67601%204.33763%201.77208L10.836%205.56268C11%205.65784%2011.1362%205.79437%2011.2309%205.95864C11.3256%206.12291%2011.3755%206.30915%2011.3757%206.49876C11.3758%206.68836%2011.3262%206.87469%2011.2318%207.03912C11.1374%207.20355%2011.0015%207.34032%2010.8377%207.43577L4.33763%2011.2274C4.17299%2011.3235%203.98592%2011.3745%203.7953%2011.3751C3.60469%2011.3757%203.41727%2011.3261%203.25199%2011.2311C3.0867%2011.1362%202.9494%2010.9993%202.85393%2010.8343C2.75847%2010.6693%202.70823%2010.4821%202.70829%2010.2914V2.70808Z'%20fill='%23F0F4F6'/%3e%3c/svg%3e">
+                  <span class="[font-family:'Poppins',Helvetica] text-[17.8px] font-normal leading-[25px] tracking-[0] text-[#f0f4f6]" data-timer="2480">41:20</span>
+                </div>
+                <div class="flex flex-col gap-2.5">
+                  <h3 class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[normal] tracking-[0]">Every minute replayable</h3>
+                  <p class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[normal] tracking-[0]">Chaptered video takes you straight to the decisions, no scrubbing through an hour of footage.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <blockquote class="max-w-[1000px] whitespace-pre-line [font-family:'Ovo',Helvetica] text-center text-[62px] font-normal leading-[normal] tracking-[0] text-[#92bad5] ff-typewriter" data-typewriter="">“An hour of tomorrow's work
+        proves yesterday's interview.”</blockquote>
+      </section>
+    </section>
+    <section id="book-a-demo" class="w-full" data-section="book-a-demo">
+      <section class="w-full bg-[#f0f4f6]">
+        <div class="mx-auto flex w-full max-w-[1240px] flex-col gap-[56px] px-4 pt-4 sm:px-8 lg:px-0">
+          <header class="flex flex-col justify-between gap-8 lg:flex-row lg:items-start">
+            <h2 class="max-w-[576px] [font-family:'Ovo',Helvetica] text-[36px] font-normal leading-[1.12] tracking-[0] text-[#1e1e1e] sm:text-[50px]" data-split="" aria-label="Find out how AI-fluent your company really is."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">Find</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">out</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">how</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">AI-</span></span><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:4">fluent</span></span> <br class="hidden sm:block"><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:5">your</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:6">company</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:7">really</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:8">is.</span></span></h2>
+            <p class="max-w-[630px] [font-family:'Poppins',Helvetica] text-lg font-normal leading-normal tracking-[0] text-[#606060]" data-reveal="fade"><strong class="font-semibold">Fluencyfox isn't just for hiring.</strong> Turn the same immersive assessment inward and map AI fluency across the team you already have so you can see exactly where the strengths are, where the gaps are, and what to do next.</p>
+          </header>
+          <div class="text-card-foreground mx-auto w-full max-w-[1140px] rounded-[15px] border-0 bg-white shadow-none ff-heatmap" data-reveal="rise">
+            <div class="p-5 sm:p-8">
+              <div class="overflow-x-auto">
+                <div class="relative w-full overflow-auto">
+                  <table class="w-full caption-bottom text-sm min-w-[880px] border-collapse"><thead class="[&_tr]:border-b"><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto w-[31%] px-0 pb-[19px] pt-[9px] text-left [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">PERSON</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">CORE WORK</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">COMMS</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">SYSTEMS</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">ADMIN</th><th class="align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] h-auto px-[10px] pb-[19px] pt-[9px] text-center [font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">AVG</th></tr></thead><tbody class="[&_tr:last-child]:border-0"><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[31%] px-0 py-[14px]">
+                          <div class="flex h-[70px] items-center gap-3 ff-person" style="--r:0">
+                            <img class="h-[43px] w-[43px] shrink-0 rounded-full object-cover" alt="" src="assets/avatar-priya.webp" width="43" height="43" loading="lazy" decoding="async">
+                            <div class="flex flex-col">
+                              <span class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[30.8px] text-maindark-grey">Priya K.</span>
+                              <span class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[25.2px] text-grey-scale300">Team Lead</span>
+                            </div>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-adddark-blue ff-cell" style="--r:0;--c:1">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="8.9">8.9</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-mainlight-blue ff-cell" style="--r:0;--c:2">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="5.1">5.1</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:0;--c:3">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="7.2">7.2</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:0;--c:4">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="7.0">7.0</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-mainmilk text-maindark-grey ff-cell" style="--r:0;--c:5">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-[#1e1e1e]" data-count="7.0">7.0</span>
+                          </div>
+                      </td></tr><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[31%] px-0 py-[14px]">
+                          <div class="flex h-[70px] items-center gap-3 ff-person" style="--r:1">
+                            <img class="h-[43px] w-[43px] shrink-0 rounded-full object-cover" alt="" src="assets/avatar-marcus.webp" width="43" height="43" loading="lazy" decoding="async">
+                            <div class="flex flex-col">
+                              <span class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[30.8px] text-maindark-grey">Marcus D.</span>
+                              <span class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[25.2px] text-grey-scale300">Account exec</span>
+                            </div>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:1;--c:1">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="7.4">7.4</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#dae9f1] ff-cell" style="--r:1;--c:2">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="3.2">3.2</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#92bad5] ff-cell" style="--r:1;--c:3">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="5.5">5.5</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#92bad5] ff-cell" style="--r:1;--c:4">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="5.8">5.8</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-mainmilk text-maindark-grey ff-cell" style="--r:1;--c:5">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-[#1e1e1e]" data-count="5.5">5.5</span>
+                          </div>
+                      </td></tr><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[31%] px-0 py-[14px]">
+                          <div class="flex h-[70px] items-center gap-3 ff-person" style="--r:2">
+                            <img class="h-[43px] w-[43px] shrink-0 rounded-full object-cover" alt="" src="assets/avatar-hannah.webp" width="43" height="43" loading="lazy" decoding="async">
+                            <div class="flex flex-col">
+                              <span class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[30.8px] text-maindark-grey">Hannah W.</span>
+                              <span class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[25.2px] text-grey-scale300">Ops manager</span>
+                            </div>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:2;--c:1">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="6.8">6.8</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#5474a1] ff-cell" style="--r:2;--c:2">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="8.6">8.6</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#5474a1] ff-cell" style="--r:2;--c:3">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="8.1">8.1</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#5474a1] ff-cell" style="--r:2;--c:4">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="9.0">9.0</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-mainmilk text-maindark-grey ff-cell" style="--r:2;--c:5">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-[#1e1e1e]" data-count="8.1">8.1</span>
+                          </div>
+                      </td></tr><tr class="transition-colors data-[state=selected]:bg-muted border-0 hover:bg-transparent"><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] w-[31%] px-0 py-[14px]">
+                          <div class="flex h-[70px] items-center gap-3 ff-person" style="--r:3">
+                            <img class="h-[43px] w-[43px] shrink-0 rounded-full object-cover" alt="" src="assets/avatar-tom.webp" width="43" height="43" loading="lazy" decoding="async">
+                            <div class="flex flex-col">
+                              <span class="[font-family:'Poppins',Helvetica] text-[22px] font-medium leading-[30.8px] text-maindark-grey">Tom R.</span>
+                              <span class="[font-family:'Poppins',Helvetica] text-lg font-normal leading-[25.2px] text-grey-scale300">Engineer</span>
+                            </div>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-adddark-blue ff-cell" style="--r:3;--c:1">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="8.2">8.2</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#dae9f1] ff-cell" style="--r:3;--c:2">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="2.9">2.9</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:3;--c:3">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="4.4">4.4</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-[#7397bb] ff-cell" style="--r:3;--c:4">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-white" data-count="4.9">4.9</span>
+                          </div>
+                        </td><td class="p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] px-[10px] py-[14px]">
+                          <div class="flex h-[63px] min-w-[112px] items-center justify-center rounded-[10.49px] bg-mainmilk text-maindark-grey ff-cell" style="--r:3;--c:5">
+                            <span class="[font-family:'Poppins',Helvetica] text-xl font-medium leading-7 text-[#1e1e1e]" data-count="5.1">5.1</span>
+                          </div>
+                  </td></tr></tbody></table>
+                </div>
+              </div>
+              <ul class="mt-[9px] flex flex-wrap gap-x-[33px] gap-y-3 py-[9px]" data-stagger="80">
+                <li class="flex items-center gap-2.5" data-reveal="fade">
+                  <span aria-hidden="true" class="h-[22px] w-[22px] rounded-[10.49px] bg-[#dae9f1]"></span>
+                  <span class="[font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">Not yet using AI</span>
+                </li>
+                <li class="flex items-center gap-2.5" data-reveal="fade">
+                  <span aria-hidden="true" class="h-[22px] w-[22px] rounded-[10.49px] bg-[#92bad5]"></span>
+                  <span class="[font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">Basic use</span>
+                </li>
+                <li class="flex items-center gap-2.5" data-reveal="fade">
+                  <span aria-hidden="true" class="h-[22px] w-[22px] rounded-[10.49px] bg-[#7397bb]"></span>
+                  <span class="[font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">Confident</span>
+                </li>
+                <li class="flex items-center gap-2.5" data-reveal="fade">
+                  <span aria-hidden="true" class="h-[22px] w-[22px] rounded-[10.49px] bg-[#5474a1]"></span>
+                  <span class="[font-family:'Poppins',Helvetica] text-lg font-medium leading-[25.2px] text-grey-scale500">Fluent</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <section class="relative left-1/2 -mt-20 flex w-[100vw] max-w-[100vw] -translate-x-1/2 justify-center overflow-visible pb-[260px] pt-[208px] ff-cta-stage" id="ctaStage">
+          <img class="absolute inset-0 h-full w-[100vw] max-w-none rounded-b-[12px] object-cover object-top ff-cta-land" alt="" src="assets/hero-mountains-d-1280.webp" srcset="assets/hero-mountains-d-768.webp 768w, assets/hero-mountains-d-1280.webp 1280w, assets/hero-mountains-d-1440.webp 1440w, assets/hero-mountains-d-1600.webp 1600w, assets/hero-mountains-d-1920.webp 1920w, assets/hero-mountains-d-2048.webp 2048w" sizes="(max-width: 767px) 60vw, 100vw" aria-hidden="true" loading="lazy" decoding="async" width="2048" height="1526">
+          <div id="live-assessment-blue-panel" class="relative z-10 mx-5 flex w-full max-w-[1060px] items-center justify-center rounded-xl bg-[#92bad5] px-5 py-[88px] sm:mx-0 sm:px-10 ff-panel" data-reveal="panel">
+            <div id="live-assessment-cta-content" class="mx-auto flex w-full max-w-[800px] flex-col items-center justify-center gap-[22px] text-center">
+              <h2 class="[font-family:'Ovo',Helvetica] text-[44px] font-normal leading-normal tracking-[0] text-white sm:text-[62px]" data-split="" aria-label="See a live assessment."><span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:0">See</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:1">a</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:2">live</span></span> <span class="ff-w" aria-hidden="true"><span class="ff-wi" style="--i:3">assessment.</span></span></h2>
+              <p class="max-w-[717px] [font-family:'Poppins',Helvetica] text-lg font-normal leading-normal tracking-[0] text-white" data-reveal="fade" style="--d:260ms">Watch a real candidate session end-to-end and the dashboard your team would review it in. Half an hour, no slides.</p>
+              <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-auto w-[164px] rounded-xl bg-white px-[22px] py-3 [font-family:'Poppins',Helvetica] text-sm font-medium text-[#92bad5] hover:bg-white/90 ff-cta" data-reveal="pop" style="--d:420ms">Book a Demo</a>
+            </div>
+          </div>
+          <img id="live-assessment-flower" class="pointer-events-none absolute bottom-0 left-0 z-20 block h-[320px] w-[100vw] max-w-none rounded-b-[12px] object-cover object-bottom [clip-path:inset(0_round_0_0_12px_12px)] sm:h-[380px] md:h-auto ff-cta-flowers" alt="" src="assets/hero-flowers-d-1280.webp" srcset="assets/hero-flowers-d-768.webp 768w, assets/hero-flowers-d-1280.webp 1280w, assets/hero-flowers-d-1440.webp 1440w, assets/hero-flowers-d-1600.webp 1600w, assets/hero-flowers-d-1920.webp 1920w, assets/hero-flowers-d-2216.webp 2216w" sizes="(max-width: 767px) 60vw, 100vw" aria-hidden="true" loading="lazy" decoding="async" width="2216" height="1288">
+          <canvas class="ff-pollen ff-pollen-cta" aria-hidden="true" data-pollen="cta"></canvas></section>
+      </section>
+    </section>
+  </main>
+  <footer class="mt-[190px] flex w-full flex-col items-center justify-center gap-[21px] px-4 pb-8 pt-10 sm:px-6 lg:px-0 ff-footer">
+    <div class="flex w-full max-w-[1238px] items-start justify-between gap-6">
+      <a href="#" aria-label="Back to top" class="flex h-11 items-center gap-[7px]" data-top="">
+        <img class="h-8 w-auto shrink-0 sm:h-11" alt="Fluencyfox" src="assets/footer-logo-mark-Bh9WfdCK.svg" loading="lazy" decoding="async">
+      </a>
+      <a href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-auto rounded-xl bg-[#5474a1] px-[22px] py-3 [font-family:'Poppins',Helvetica] text-sm font-medium leading-normal text-white hover:bg-[#5474a1]/90 ff-cta">Book a Demo</a>
+    </div>
+    <img class="h-px w-full max-w-[1310px] ff-rule" alt="" src="data:image/svg+xml,%3csvg%20width='1310'%20height='1'%20viewBox='0%200%201310%201'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M0%200.5H1310'%20stroke='%23E7E7E7'/%3e%3c/svg%3e">
+    <div class="flex w-full max-w-[1238px] flex-wrap items-start justify-between gap-x-8 gap-y-10 rounded-xl py-4" data-stagger="70">
+      <nav aria-label="Menu" class="flex flex-col items-start gap-[22px]" data-reveal="fade">
+        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Menu</h2>
+        <ul class="flex flex-col items-start gap-[22px]">
+          <li><a href="#testimonials" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Testimonials</a></li>
+          <li><a href="#how-it-works" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">How It Works</a></li>
+          <li><a href="#what-we-measure" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">What we Measure</a></li>
+          <li><a href="/grad-schemes" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Grad Schemes</a></li>
+          <li><a href="/employee-development" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Employee Development</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Insights" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
+        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Insights</h2>
+        <ul class="flex flex-col items-start gap-[22px]">
+          <li><a href="/research/ai-fluency-data-index" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Research</a></li>
+          <li><a href="/blog" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Blog</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Docs" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
+        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Docs</h2>
+        <ul class="flex flex-col items-start gap-[22px]">
+          <li><a href="/privacy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Privacy Policy</a></li>
+          <li><a href="/terms" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-auto justify-start whitespace-normal p-0 [font-family:'Poppins',Helvetica] text-left text-base font-normal leading-normal tracking-[0] text-[#606060] hover:bg-transparent hover:text-[#606060] ff-link">Terms & Conditions</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Address" class="flex flex-col items-start gap-[22px] md:w-[212.9px]" data-reveal="fade">
+        <h2 class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Address</h2>
+        <ul class="flex flex-col items-start gap-[22px]">
+          <li class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#606060]">71-75 Shelton Street, London, UK WC2H 9JQ</li>
+        </ul>
+      </nav>
+      <section class="flex flex-col items-start gap-[22px]" aria-labelledby="socials-heading" data-reveal="fade">
+        <h2 id="socials-heading" class="[font-family:'Poppins',Helvetica] text-base font-normal leading-normal tracking-[0] text-[#6e7270]">Socials</h2>
+        <div class="flex items-center gap-4">
+          <a href="https://www.linkedin.com/company/fluencyfox/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:text-accent-foreground h-auto p-0 hover:bg-transparent ff-link">
+            <img class="h-6 w-6" alt="" src="data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3crect%20x='1.5'%20y='1.5'%20width='21'%20height='21'%20rx='10.5'%20fill='%231275B1'/%3e%3cpath%20d='M9.46392%207.26911C9.46392%207.97002%208.85639%208.53822%208.10696%208.53822C7.35753%208.53822%206.75%207.97002%206.75%207.26911C6.75%206.5682%207.35753%206%208.10696%206C8.85639%206%209.46392%206.5682%209.46392%207.26911Z'%20fill='white'/%3e%3cpath%20d='M6.93557%209.47107H9.25515V16.5H6.93557V9.47107Z'%20fill='white'/%3e%3cpath%20d='M12.9897%209.47107H10.6701V16.5H12.9897C12.9897%2016.5%2012.9897%2014.2872%2012.9897%2012.9036C12.9897%2012.0732%2013.2732%2011.2392%2014.4046%2011.2392C15.6833%2011.2392%2015.6756%2012.3259%2015.6696%2013.1678C15.6618%2014.2683%2015.6804%2015.3914%2015.6804%2016.5H18V12.7903C17.9804%2010.4215%2017.3631%209.33006%2015.3325%209.33006C14.1265%209.33006%2013.379%209.87754%2012.9897%2010.3729V9.47107Z'%20fill='white'/%3e%3c/svg%3e">
+          </a>
+        </div>
+      </section>
+    </div>
+  </footer>
+</div>
+<script src="cookie-consent.js" defer></script>
 </body>
 </html>
