@@ -498,6 +498,42 @@ section[data-section] { scroll-margin-top: 84px; }
   .ff-motion .ff-person img { transition: transform .4s var(--ff-ease-spring); }
 }
 
+/* Swipe cue. On narrow screens the table scrolls sideways: home.js fades its
+   right edge (is-more) while columns are still off screen and clears it at
+   the end, and shows the hint line on touch screens. Without JS neither
+   appears and the table simply scrolls. .ff-swipe itself never scrolls (the
+   div inside it does), so the fade stays put at the edge. */
+.ff-swipe { position: relative; }
+.ff-swipe::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+  pointer-events: none;
+  opacity: 0;
+}
+.ff-motion .ff-swipe::after { transition: opacity .3s ease; }
+.ff-swipe.is-more::after { opacity: 1; }
+.ff-swipe-hint {
+  margin: 0 0 6px;
+  text-align: right;
+  font: 500 14px/1.4 "Poppins", Helvetica, Arial, sans-serif;
+  color: var(--grey-scale500);
+}
+.ff-swipe-hint::after {
+  content: "";
+  display: inline-block;
+  width: .42em;
+  height: .42em;
+  margin: 0 .15em 0 .45em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-.08em) rotate(45deg);
+}
+
 /* -------------------------------------------------------------- final CTA */
 
 /* Same idea as the hero stage: parallax stays inside the section's sides and
