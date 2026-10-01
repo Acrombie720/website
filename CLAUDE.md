@@ -76,6 +76,20 @@ conflicts.
 4. `git commit` and `git push origin main`
 5. Confirm the change is live
 
+## The homepage concept (`concepts/freeform`)
+
+A separate redesign concept for the team to discuss, not the live site (it is noindex). It is
+shared at https://web-production-66a5f.up.railway.app, hosted on Railway (project
+`fluencyfox-concept`, Nishant's personal workspace). Publish changes with:
+
+```bash
+concepts/freeform/deploy/deploy.sh "what changed"
+```
+
+It needs the Railway CLI and either `RAILWAY_TOKEN` (a project token for that project, which is
+how Claude Code cloud sessions sign in) or a local `railway login`. This never touches
+fluencyfox.ai, which still deploys only from pushes to `main`.
+
 ## DNS
 
 Cloudflare. `www.fluencyfox.ai` 301-redirects to `https://fluencyfox.ai` via a Cloudflare
