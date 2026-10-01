@@ -925,7 +925,7 @@ body[data-nav="night"] .nav .brand-word i, .foot .brand-word i { color: var(--bl
   .pf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: calc(var(--face) / 2 + 40px); }
   .hero-grid { grid-template-columns: 1fr; }
   .desk { height: 540px; max-width: 700px; width: 100%; margin-inline: auto; }
-  .scores, .teams { grid-template-columns: 1fr; }
+  .scores, .teams { grid-template-columns: minmax(0, 1fr); }
   .weigher { position: relative; top: 0; }
   .session-stage { grid-template-columns: 1fr; grid-template-rows: auto auto; align-content: start; gap: 14px; padding: 76px 0 16px; }
   .narr { grid-template-columns: auto 1fr; align-items: baseline; gap: 6px 16px; }
@@ -936,7 +936,7 @@ body[data-nav="night"] .nav .brand-word i, .foot .brand-word i { color: var(--bl
   .moments::before { border-left: 0; border-top: 1.5px dashed var(--dash-night); }
   .moments::after { border-left: 0; border-top: 1.5px solid var(--sand); transform: scaleX(var(--prog)); transform-origin: left; }
   .moments li { position: relative; }
-  .moments button { display: block; width: auto; padding: 4px 0; }
+  .moments button { display: block; width: auto; padding: 13px 15px; margin: -9px -15px; }
   .moments time, .moments button span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .rp-view { grid-template-columns: 1fr; }
   .rp-rail { contain: none; height: 150px; gap: 8px; }
@@ -1004,6 +1004,16 @@ body[data-nav="night"] .nav .brand-word i, .foot .brand-word i { color: var(--bl
   .tile { min-height: 380px; padding: 22px; }
   .tile-art { height: calc(100% - 206px); left: 16px; right: 16px; top: 16px; }
   .fmap-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+}
+/* The smallest phones (320px): keep the bar inside the screen. */
+@media (max-width: 360px) {
+  .nav { width: calc(100% - 16px); gap: 8px; padding-left: 10px; }
+  .brand { gap: 6px; }
+  .brand-mark { width: 26px; height: 26px; }
+  .brand-word { font-size: 18px; }
+  .fmap { padding-inline: 14px; }
+  .fmap-tabs { gap: 2px; }
+  .fmap-tabs button { padding-inline: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html.smooth { scroll-behavior: auto; }
