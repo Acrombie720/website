@@ -25,7 +25,7 @@ trap 'rm -rf "$out"' EXIT
 mkdir -p "$out/site/assets/fonts"
 cp "$concept/index.html" "$concept/concept.css" "$concept/concept.js" "$out/site/"
 cp "$concept"/assets/* "$out/site/assets/"
-cp "$site_assets/candidate-screenshare-TLIHC6EP.mp4" "$site_assets/favicon-32.png" "$out/site/assets/"
+cp "$site_assets/candidate-screenshare-TLIHC6EP.mp4" "$site_assets/candidate-screenshare-poster.webp" "$site_assets/favicon-32.png" "$out/site/assets/"
 cp "$site_assets"/fonts/*.woff2 "$site_assets/fonts/OFL.txt" "$out/site/assets/fonts/"
 sed -i.bak 's#\.\./\.\./fluencyfox-site_6/assets/#assets/#g' "$out/site/index.html" && rm "$out/site/index.html.bak"
 if grep -q '\.\./\.\./' "$out/site/index.html" "$out/site/concept.css" "$out/site/concept.js"; then
