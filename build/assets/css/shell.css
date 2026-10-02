@@ -18,16 +18,30 @@
 }
 
 /* ---------- top bar ---------- */
-/* Mirrors .site-header on the hand-written pages: full wordmark at its real
-   size, Poppins nav, solid blue Book a Demo button. */
+/* Mirrors .site-header on the hand-written pages: sticky on scroll, full
+   wordmark at its real size, Poppins nav, solid blue Book a Demo button,
+   and a mobile burger menu below 620px. */
 
 .ff-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  background: rgba(240, 244, 246, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-inline: -24px;
+  padding-inline: 24px;
+}
+
+.ff-bar-inner {
   max-width: var(--ff-max);
   margin-inline: auto;
-  padding-block: 22px;
+  padding-block: 18px;
   display: flex;
   align-items: center;
   gap: 24px;
+  position: relative;
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
@@ -73,9 +87,37 @@
   text-decoration: none !important;
 }
 
+.ff-bar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink, #1e1e1e);
+  cursor: pointer;
+  margin-left: auto;
+  padding: 4px;
+}
+
 @media (max-width: 620px) {
-  .ff-bar { flex-wrap: wrap; gap: 14px; }
-  .ff-bar-nav { width: 100%; margin-left: 0; font-size: 14px; gap: 8px 18px; }
+  .ff-bar-inner { flex-wrap: nowrap; }
+  .ff-bar-nav {
+    position: absolute;
+    top: 100%;
+    left: -24px;
+    right: -24px;
+    background: var(--paper, #f0f4f6);
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    margin-left: 0;
+    padding: 18px 24px 24px;
+    gap: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: none;
+  }
+  .ff-bar-nav.open { display: flex; }
+  .ff-bar-toggle { display: block; }
 }
 
 /* ---------- blocks the generator appends ---------- */

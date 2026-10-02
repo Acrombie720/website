@@ -217,14 +217,29 @@ function header(shell) {
   if (shell === 'none') return '';
   return `
 <header class="ff-bar">
-  <a class="ff-bar-logo" href="/"><img src="${site.wordmark}" alt="${esc(site.name)}" width="208" height="44"></a>
-  <nav class="ff-bar-nav" aria-label="Main">
-    <a href="/#testimonials">Testimonials</a>
-    <a href="/#how-it-works">How It Works</a>
-    <a href="/#measure">What we Measure</a>
-    <a class="ff-bar-cta" href="${site.demoUrl}" target="_blank" rel="noopener">Book a Demo</a>
-  </nav>
-</header>`;
+  <div class="ff-bar-inner">
+    <a class="ff-bar-logo" href="/"><img src="${site.wordmark}" alt="${esc(site.name)}" width="208" height="44"></a>
+    <nav class="ff-bar-nav" id="ffBarNav" aria-label="Main">
+      <a href="/#testimonials">Testimonials</a>
+      <a href="/#how-it-works">How It Works</a>
+      <a href="/#measure">What we Measure</a>
+      <a class="ff-bar-cta" href="${site.demoUrl}" target="_blank" rel="noopener">Book a Demo</a>
+    </nav>
+    <button class="ff-bar-toggle" id="ffBarToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </div>
+</header>
+<script>
+(function () {
+  var btn = document.getElementById('ffBarToggle');
+  var nav = document.getElementById('ffBarNav');
+  if (btn && nav) {
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+})();
+</script>`;
 }
 
 // A research page earns attention but has nowhere to send it. This is the one
@@ -233,9 +248,15 @@ function cta(shell) {
   if (shell === 'none') return '';
   return `
 <section class="ff-cta">
-  <h2>Want to see one of these assessments?</h2>
-  <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
-  <a href="${site.demoUrl}?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+  <img class="ff-cta-bg" src="/assets/hero-mountains-BD-V2s5g.webp" alt="" aria-hidden="true">
+  <div class="ff-cta-panel">
+    <div class="ff-cta-content">
+      <h2>Want to see one of these assessments?</h2>
+      <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
+      <a href="${site.demoUrl}?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+  </div>
+  <img class="ff-cta-flowers" src="/assets/hero-flowers-overlap-5zR-FvQe.webp" alt="" aria-hidden="true">
 </section>`;
 }
 

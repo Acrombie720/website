@@ -29,16 +29,30 @@
 }
 
 /* ---------- top bar ---------- */
-/* Mirrors .site-header on the hand-written pages: full wordmark at its real
-   size, Poppins nav, solid blue Book a Demo button. */
+/* Mirrors .site-header on the hand-written pages: sticky on scroll, full
+   wordmark at its real size, Poppins nav, solid blue Book a Demo button,
+   and a mobile burger menu below 620px. */
 
 .ff-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: block;
+  background: rgba(240, 244, 246, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-inline: -24px;
+  padding-inline: 24px;
+}
+
+.ff-bar-inner {
   max-width: var(--ff-max);
   margin-inline: auto;
-  padding-block: 22px;
+  padding-block: 18px;
   display: flex;
   align-items: center;
   gap: 24px;
+  position: relative;
 }
 
 .ff-bar-logo { display: inline-flex; flex: 0 0 auto; }
@@ -84,9 +98,37 @@
   text-decoration: none !important;
 }
 
+.ff-bar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink, #1e1e1e);
+  cursor: pointer;
+  margin-left: auto;
+  padding: 4px;
+}
+
 @media (max-width: 620px) {
-  .ff-bar { flex-wrap: wrap; gap: 14px; }
-  .ff-bar-nav { width: 100%; margin-left: 0; font-size: 14px; gap: 8px 18px; }
+  .ff-bar-inner { flex-wrap: nowrap; }
+  .ff-bar-nav {
+    position: absolute;
+    top: 100%;
+    left: -24px;
+    right: -24px;
+    background: var(--paper, #f0f4f6);
+    flex-direction: column;
+    align-items: flex-start;
+    width: auto;
+    margin-left: 0;
+    padding: 18px 24px 24px;
+    gap: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    display: none;
+  }
+  .ff-bar-nav.open { display: flex; }
+  .ff-bar-toggle { display: block; }
 }
 
 /* ---------- blocks the generator appends ---------- */
@@ -346,7 +388,7 @@ h1 {
 
 .filterbar {
   position: sticky;
-  top: 0;
+  top: 84px;
   z-index: 10;
   background: var(--paper);
   padding-block: 16px;
@@ -355,6 +397,10 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 620px) {
+  .filterbar { top: 78px; }
 }
 
 .filterbar button {
@@ -591,50 +637,129 @@ footer.foot {
 }
 
 /* ---------- closing call to action ---------- */
+/* One-to-one copy of the homepage's "See a live assessment" panel: same
+   full-bleed mountains + flower-meadow photo, same floating blue card,
+   same button — only this page's own heading, copy and link. */
 
 .ff-cta {
-  /* The margin shorthand has to carry the centring: a later `margin` would
-     reset the left and right back to 0, which is what knocked this block
-     132px out of line with the rest of the page. */
-  max-width: var(--ff-max, 1190px);
-  margin: 0 auto 56px;
-  background: var(--accent);
-  border-radius: var(--radius-lg);
-  padding: 56px 40px;
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+  margin-top: -80px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+  padding: 208px 0 260px;
+  background: none;
+  border-radius: 0;
+  text-align: center;
+}
+.ff-cta-bg {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100vw;
+  max-width: none;
+  border-radius: 0 0 12px 12px;
+  object-fit: cover;
+  object-position: top;
+}
+.ff-cta-panel {
+  position: relative;
+  z-index: 10;
+  margin-inline: 20px;
+  width: 100%;
+  max-width: 1060px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--accent, #92bad5);
+  padding: 88px 20px;
+}
+.ff-cta-content {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
   text-align: center;
 }
 .ff-cta h2 {
-  font-family: var(--ff-disp);
+  font-family: var(--ff-disp, 'Ovo', Georgia, serif);
+  font-size: 44px;
   font-weight: 400;
-  font-size: var(--s-2);
+  line-height: normal;
+  letter-spacing: 0;
   color: #fff;
-  margin: 0 auto 14px;
-  max-width: 20ch;
+  margin: 0;
+  max-width: none;
   border: 0;
   padding: 0;
 }
 .ff-cta p {
-  color: rgba(255,255,255,0.92);
-  max-width: 54ch;
-  margin: 0 auto 24px;
+  max-width: 717px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #fff;
+  margin: 0;
 }
 .ff-cta a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  width: 164px;
+  height: auto;
+  border-radius: 12px;
   background: #fff;
-  color: var(--link) !important;
+  padding: 12px 22px;
+  font-family: var(--ff-ui, "Poppins", system-ui, sans-serif);
+  font-size: 14px;
   font-weight: 500;
-  font-size: 15px;
-  padding: 13px 26px;
-  border-radius: 99px;
+  color: var(--accent, #92bad5) !important;
   text-decoration: none;
-  transition: background 140ms ease, color 140ms ease;
+  transition: background 140ms ease;
 }
-.ff-cta a:hover { background: var(--link); color: #fff !important; }
+.ff-cta a:hover { background: rgba(255,255,255,0.9); }
+.ff-cta-flowers {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  display: block;
+  width: 100vw;
+  max-width: none;
+  height: 320px;
+  border-radius: 0 0 12px 12px;
+  object-fit: cover;
+  object-position: bottom;
+  clip-path: inset(0 round 0 0 12px 12px);
+}
+@media (min-width: 640px) {
+  .ff-cta-panel { margin-inline: 0; padding: 88px 40px; }
+  .ff-cta h2 { font-size: 62px; }
+  .ff-cta-flowers { height: 380px; }
+}
+@media (min-width: 768px) {
+  .ff-cta-flowers { height: auto; }
+}
 
 @media (max-width: 640px) {
   :root { --s-4: 2.4rem; --s-3: 2rem; --s-2: 1.5rem; }
   .wrap { padding-block: 32px 56px; }
-  .ff-cta { padding: 40px 24px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -772,14 +897,29 @@ footer.foot {
 <body class="ff-page">
 
 <header class="ff-bar">
-  <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a>
-  <nav class="ff-bar-nav" aria-label="Main">
-    <a href="/#testimonials">Testimonials</a>
-    <a href="/#how-it-works">How It Works</a>
-    <a href="/#measure">What we Measure</a>
-    <a class="ff-bar-cta" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a Demo</a>
-  </nav>
+  <div class="ff-bar-inner">
+    <a class="ff-bar-logo" href="/"><img src="/assets/logo-full.svg" alt="Fluencyfox" width="208" height="44"></a>
+    <nav class="ff-bar-nav" id="ffBarNav" aria-label="Main">
+      <a href="/#testimonials">Testimonials</a>
+      <a href="/#how-it-works">How It Works</a>
+      <a href="/#measure">What we Measure</a>
+      <a class="ff-bar-cta" href="https://calendly.com/callum-fluencyfox/30min" target="_blank" rel="noopener">Book a Demo</a>
+    </nav>
+    <button class="ff-bar-toggle" id="ffBarToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  </div>
 </header>
+<script>
+(function () {
+  var btn = document.getElementById('ffBarToggle');
+  var nav = document.getElementById('ffBarNav');
+  if (btn && nav) {
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  }
+})();
+</script>
 <main id="main">
 <div class="wrap">
 
@@ -1285,9 +1425,15 @@ footer.foot {
 </main>
 
 <section class="ff-cta">
-  <h2>Want to see one of these assessments?</h2>
-  <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
-  <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+  <img class="ff-cta-bg" src="/assets/hero-mountains-BD-V2s5g.webp" alt="" aria-hidden="true">
+  <div class="ff-cta-panel">
+    <div class="ff-cta-content">
+      <h2>Want to see one of these assessments?</h2>
+      <p>Give us half an hour and you can watch a real candidate session from start to finish, along with the dashboard your team would score it in.</p>
+      <a href="https://calendly.com/callum-fluencyfox/30min?utm_source=fluencyfox&amp;utm_medium=site&amp;utm_campaign=research" target="_blank" rel="noopener">Book a Demo</a>
+    </div>
+  </div>
+  <img class="ff-cta-flowers" src="/assets/hero-flowers-overlap-5zR-FvQe.webp" alt="" aria-hidden="true">
 </section>
 
 <footer class="ff-foot">
