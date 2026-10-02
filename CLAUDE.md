@@ -67,6 +67,10 @@ fires and www stops resolving entirely. Canonical URL is non-www throughout.
   correctly has `alt="HIVED"`. Check what is next to an image before "fixing" its alt text.
 - Decorative images (`hero-mountains`, `hero-flowers-overlap`) correctly have `alt=""` plus
   `aria-hidden="true"`.
+- **The homepage text is a saved snapshot.** The homepage is a compiled app that draws itself
+  with JavaScript, so `index.html` carries a plain-HTML copy between `snapshot:start` and
+  `snapshot:end` for search engines. Whenever the designer ships a new homepage bundle, run
+  `node build/snapshot-home.mjs` or Google keeps reading the old wording.
 - Testimonial quotes are attributed to real named people at real companies. Flag any request
   to reword them rather than silently editing.
 

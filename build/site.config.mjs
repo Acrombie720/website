@@ -21,12 +21,13 @@ export const site = {
 
 // Hand-written pages the generator does not own, but the sitemap still needs.
 export const staticPages = [
-  { url: '/', changefreq: 'weekly', priority: '1.0', lastmod: '2026-09-18' },
+  { url: '/', changefreq: 'weekly', priority: '1.0', lastmod: '2026-10-02' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3', lastmod: '2026-09-02' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3', lastmod: '2026-09-02' },
   { url: '/grad-schemes', changefreq: 'monthly', priority: '0.9', lastmod: '2026-09-21' },
   { url: '/employee-development', changefreq: 'monthly', priority: '0.9', lastmod: '2026-09-21' },
   { url: '/scoring', changefreq: 'monthly', priority: '0.8', lastmod: '2026-10-02' },
+  { url: '/integrations/ashby/', changefreq: 'yearly', priority: '0.4', lastmod: '2026-10-02' },
 ];
 
 // The single Menu column, in the same order as the hand-written footers in

@@ -356,7 +356,9 @@ function render(page, byslug) {
 <meta name="twitter:description" content="${esc(meta.ogDescription || meta.description)}">
 <meta name="twitter:image" content="${esc(ogImage)}">
 
-<link rel="icon" type="image/png" sizes="512x512" href="${site.logo}">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="${fonts}">

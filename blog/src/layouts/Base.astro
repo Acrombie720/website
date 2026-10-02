@@ -85,7 +85,9 @@ const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': grap
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={abs(ogImage)} />
 
-<link rel="icon" type="image/png" sizes="512x512" href={site.logo} />
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png" />
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
 <link rel="alternate" type="application/rss+xml" title="Fluencyfox blog" href={site.origin + '/blog/rss.xml'} />
 {markdown && <link rel="alternate" type="text/markdown" href={abs(markdown)} title="Markdown" />}
 <!-- Self-hosted and preloaded. No third-party connection before text paints,
