@@ -260,7 +260,7 @@ function footer(shell) {
     </div>
     <div>
       <h2>Insights</h2>
-      ${insightsNav.concat([{ url: '/blog', label: 'Blog' }]).map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join('\n      ')}
+      ${insightsNav.concat([{ url: '/blog', label: 'Blog' }, { url: '/scoring', label: 'How We Score' }]).map(l => `<a href="${esc(l.url)}">${esc(l.label)}</a>`).join('\n      ')}
     </div>
     <div>
       <h2>Docs</h2>
