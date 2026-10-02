@@ -902,7 +902,7 @@ footer.foot {
       "@type": "Dataset",
       "@id": "https://fluencyfox.ai/research/ai-fluency-data-index#dataset",
       "name": "The AI Fluency Data Index",
-      "description": "A maintained compilation of published statistics on AI fluency in hiring, drawn from 27 named sources, plus anonymised figures from Fluencyfox assessments. Each figure carries its source, sample size and fieldwork date. Compiled by Fluencyfox and updated monthly.",
+      "description": "A maintained compilation of published statistics on AI fluency in hiring, drawn from 23 named sources, plus anonymised figures from Fluencyfox assessments. Each figure carries its source, sample size and fieldwork date. Compiled by Fluencyfox and updated monthly.",
       "url": "https://fluencyfox.ai/research/ai-fluency-data-index",
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "isAccessibleForFree": true,
@@ -1000,8 +1000,8 @@ footer.foot {
     <h1>The AI Fluency Data Index</h1>
     <p class="dek">Everything credible that has been published on AI fluency in hiring, collected in one place. Each figure keeps its sample size and the date the fieldwork happened, because both change what the number actually means. We started this as a working document for ourselves and it got out of hand. Use it however you like.</p>
     <div class="counters">
-      <span><b id="total">90</b> figures</span>
-      <span><b>27</b> sources</span>
+      <span><b id="total">70</b> figures</span>
+      <span><b>23</b> sources</span>
       <span><b>Last updated</b> 2 Oct 2026</span>
       <span><b>Next update</b> Nov 2026</span>
     </div>
@@ -1012,7 +1012,7 @@ footer.foot {
   <div class="browse">
   <div class="filterbar" role="group" aria-label="Filter figures by category">
     <button type="button" id="f-all" data-filter="all" aria-pressed="true">All</button>
-    <button type="button" data-filter="ours" aria-pressed="false">Our data</button>
+    <button type="button" data-filter="ff" aria-pressed="false">FF data</button>
     <button type="button" data-filter="demand" aria-pressed="false">Demand</button>
     <button type="button" data-filter="gap" aria-pressed="false">Measurement gap</button>
     <button type="button" data-filter="cap" aria-pressed="false">Capability</button>
@@ -1021,87 +1021,11 @@ footer.foot {
     <button type="button" data-filter="grad" aria-pressed="false">Graduates</button>
     <button type="button" data-filter="valid" aria-pressed="false">What predicts performance</button>
     <button type="button" data-filter="market" aria-pressed="false">Market context</button>
-    <span class="showing" id="showing">Showing 90 of 90</span>
+    <span class="showing" id="showing">Showing 70 of 70</span>
   </div>
 
   <div class="grid" id="grid">
 
-    <!-- ============ OUR DATA ============ -->
-    <!-- Anonymised, high-level figures only. The underlying candidate data is
-         private and never published. -->
-
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig">0.70</p>
-      <p class="claim">correlation between candidates&rsquo; Fluencyfox scores and the hiring company&rsquo;s own rating of each candidate after reviewing their work.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">7.7 vs 2.9</p>
-      <p class="claim">average AI collaboration score out of 10 for candidates rated 7 or above overall, against those rated below 5. The strongest candidates were the ones working well with AI, not avoiding it.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig">19%</p>
-      <p class="claim">of graduate applicants made little or no real use of AI (3 or below out of 10 for AI collaboration), even though AI tools were allowed throughout.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig">0.07</p>
-      <p class="claim">correlation between time spent on the task and overall score. Taking longer did not mean doing better. The median candidate used 27 minutes.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">2 of the top 3</p>
-      <p class="claim">highest-scoring candidates were women, even though women made up under a quarter of the applicants.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">8% vs 22%</p>
-      <p class="claim">of women made little or no real use of AI (3 or below out of 10 for AI collaboration), against 22% of men.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">5.9 vs 5.5</p>
-      <p class="claim">average AI collaboration score out of 10 for women against men. Women made more and better use of the AI tools available.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">5.95 vs 5.62</p>
-      <p class="claim">average overall score out of 10 for women against men. Women also spent longer on the task, 28 minutes against 24.</p>
-      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="ours">
-      <p class="cat c-ours">Our data</p>
-      <p class="fig long">6 of 700</p>
-      <p class="claim">applicants screened with Fluencyfox became tier-1 hires onto SilverTree Equity&rsquo;s graduate forward deployed engineering scheme.</p>
-      <p class="src"><a href="https://fluencyfox.ai/grad-schemes">Fluencyfox customer case, SilverTree Equity</a><br>n=700 graduate applicants · 2026</p>
-      <p class="flag">Our own data. We sell these assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <!-- ============ DEMAND ============ -->
 
@@ -1177,14 +1101,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="demand">
-      <p class="cat c-demand">Demand</p>
-      <p class="fig">95%</p>
-      <p class="claim">of organisations list AI fluency as a hiring requirement.</p>
-      <p class="src"><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, State of Hiring for AI Fluency 2026</a><br>n=1,928 senior hiring leaders · 2026</p>
-      <p class="flag">Published by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <!-- ============ MEASUREMENT GAP ============ -->
 
@@ -1197,14 +1113,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="gap">
-      <p class="cat c-gap">Measurement gap</p>
-      <p class="fig">37%</p>
-      <p class="claim">of employers set the minimum AI competency bar at tool awareness alone. In the US the figure is 45%.</p>
-      <p class="src"><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, State of Hiring for AI Fluency 2026</a><br>n=1,928 senior hiring leaders · 2026</p>
-      <p class="flag">Published by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="gap">
       <p class="cat c-gap">Measurement gap</p>
@@ -1215,14 +1123,15 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="gap">
-      <p class="cat c-gap">Measurement gap</p>
-      <p class="fig">19%</p>
-      <p class="claim">of organisations leave AI fluency assessment entirely to the discretion of individual hiring managers.</p>
-      <p class="src"><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, State of Hiring for AI Fluency 2026</a><br>n=1,928 senior hiring leaders · 2026</p>
-      <p class="flag">Published by a company that sells AI skills assessments</p>
+    <article class="stat" data-cat="gap" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig">0.70</p>
+      <p class="claim">correlation between candidates&rsquo; Fluencyfox scores and the hiring company&rsquo;s own rating of each candidate after reviewing their work.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
+
 
     <article class="stat" data-cat="gap">
       <p class="cat c-gap">Measurement gap</p>
@@ -1233,23 +1142,7 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="gap">
-      <p class="cat c-gap">Measurement gap</p>
-      <p class="fig">53%</p>
-      <p class="claim">of hiring managers would now prefer a candidate with high AI fluency over one with deep domain expertise.</p>
-      <p class="src"><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, State of Hiring for AI Fluency 2026</a><br>n=1,928 senior hiring leaders · 2026</p>
-      <p class="flag">Published by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
-    <article class="stat" data-cat="gap">
-      <p class="cat c-gap">Measurement gap</p>
-      <p class="fig">33% / 13%</p>
-      <p class="claim">of US organisations report frequent AI-driven errors, against 13% in the UK, a gap wide enough to suggest different assessment norms rather than different talent.</p>
-      <p class="src"><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, State of Hiring for AI Fluency 2026</a><br>n=1,928 senior hiring leaders · 2026</p>
-      <p class="flag">Published by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="gap">
       <p class="cat c-gap">Measurement gap</p>
@@ -1260,14 +1153,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="gap">
-      <p class="cat c-gap">Measurement gap</p>
-      <p class="fig">40%</p>
-      <p class="claim">of IT leaders say skills development tracking in their organisation is fragmented, making verified skill levels hard to establish.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="gap">
       <p class="cat c-gap">Measurement gap</p>
@@ -1299,6 +1184,24 @@ footer.foot {
       <p class="fig">61%</p>
       <p class="claim">of job seekers limit their AI proficiency to general tools like ChatGPT, Copilot or Gemini.</p>
       <p class="src"><a href="https://www.prnewswire.com/news-releases/icims-insights-workers-are-teaching-themselves-ai-skills-faster-than-employers-train-them-raising-stakes-for-ai-powered-recruiting-and-screening-302874634.html">iCIMS Insights</a><br>n=1,000 US job seekers · Sept 2026</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
+    <article class="stat" data-cat="cap" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig long">7.7 vs 2.9</p>
+      <p class="claim">average AI collaboration score out of 10 for candidates rated 7 or above overall, against those rated below 5. The strongest candidates were the ones working well with AI, not avoiding it.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
+    <article class="stat" data-cat="cap" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig">19%</p>
+      <p class="claim">of graduate applicants made little or no real use of AI (3 or below out of 10 for AI collaboration), even though AI tools were allowed throughout.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
 
@@ -1358,23 +1261,7 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="cap">
-      <p class="cat c-cap">Capability</p>
-      <p class="fig">35%</p>
-      <p class="claim">of leaders believe they have adequately prepared their staff for AI-driven ways of working.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
-    <article class="stat" data-cat="cap">
-      <p class="cat c-cap">Capability</p>
-      <p class="fig">1 in 3</p>
-      <p class="claim">organisations say they are fully ready to adopt AI-driven ways of working.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <!-- ============ TRAINING ============ -->
 
@@ -1426,13 +1313,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="train">
-      <p class="cat c-train">Training</p>
-      <p class="fig">67%</p>
-      <p class="claim">of employees say two hours a week would be enough to meaningfully improve their AI skills. 41% cite lack of time as the main barrier.</p>
-      <p class="src"><a href="https://study.com/resources/state-of-ai-jobs-and-skills.html">Study.com, State of AI Jobs and Skills 2026</a><br>n=1,000 employees · Mar 2026</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="train">
       <p class="cat c-train">Training</p>
@@ -1500,20 +1380,6 @@ footer.foot {
       <p class="src"><a href="https://www.managers.org.uk/wp-content/uploads/2026/06/cmi_thought-leadership-report-ai-leadership.pdf">Chartered Management Institute, Artificial Intelligence; Real Leadership</a><br>n=1,019 UK managers · Jun 2026</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
-    <article class="stat" data-cat="uk">
-      <p class="cat c-uk">UK</p>
-      <p class="fig">97%</p>
-      <p class="claim">of UK AI-sector organisations identified at least one AI skills gap, and 57% a technical skills gap.</p>
-      <p class="src"><a href="https://www.gov.uk/government/publications/ai-labour-market-survey-2025-report/ai-labour-market-survey-2025-report-executive-summary">DSIT, AI Labour Market Survey 2025</a><br>n=119 organisations in the UK AI sector, 93% SMEs · Jan 2026</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="uk">
-      <p class="cat c-uk">UK</p>
-      <p class="fig">35%</p>
-      <p class="claim">of UK AI-sector organisations had AI vacancies they found hard to fill, mainly because candidates lacked work experience (31%) or technical skills (30%).</p>
-      <p class="src"><a href="https://assets.publishing.service.gov.uk/media/6960ef384343a0da370869b7/AI_Labour_Market_Survey_2025_report.pdf">DSIT, AI Labour Market Survey 2025</a><br>n=119 organisations in the UK AI sector; question base 66 · Jan 2026</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <!-- ============ GRADUATES ============ -->
 
@@ -1559,18 +1425,47 @@ footer.foot {
       <p class="src"><a href="https://luminate.prospects.ac.uk/1-in-5-graduates-apply-for-more-than-100-jobs">Prospects at Jisc, Early Careers Survey 2026</a><br>n=5,000 UK students and graduates · Jun 2026</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
+
+    <article class="stat" data-cat="grad" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig long">2 of the top 3</p>
+      <p class="claim">highest-scoring candidates were women, even though women made up under a quarter of the applicants.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
+    <article class="stat" data-cat="grad" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig long">8% vs 22%</p>
+      <p class="claim">of women made little or no real use of AI (3 or below out of 10 for AI collaboration), against 22% of men.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
+    <article class="stat" data-cat="grad" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig long">5.9 vs 5.5</p>
+      <p class="claim">average AI collaboration score out of 10 for women against men. Women made more and better use of the AI tools available.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
+    <article class="stat" data-cat="grad" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig long">5.95 vs 5.62</p>
+      <p class="claim">average overall score out of 10 for women against men. Women also spent longer on the task, 28 minutes against 24.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants (13 women, 45 men), one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
     <article class="stat" data-cat="grad">
       <p class="cat c-grad">Graduates</p>
       <p class="fig">95%</p>
       <p class="claim">of UK students and graduates believe employers use AI to shortlist applicants, though actual employer use for shortlisting remains minimal.</p>
       <p class="src"><a href="https://ise.org.uk/knowledge/insights/569/students_use_ai_to_compete_yet_oppose_ai_assessment">Prospects at Jisc, Early Careers Survey 2026, via ISE</a><br>n=5,000 UK students and graduates · Jun 2026</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="grad">
-      <p class="cat c-grad">Graduates</p>
-      <p class="fig">50%</p>
-      <p class="claim">of Bright Network&rsquo;s student and graduate members say they use AI to enhance their job applications.</p>
-      <p class="src"><a href="https://employers.brightnetwork.co.uk/research/what-do-graduates-want-2025-26/">Bright Network, What Do Graduates Want? 2025/26</a><br>15,000+ UK members · 2025</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
     <article class="stat" data-cat="grad">
@@ -1585,13 +1480,6 @@ footer.foot {
       <p class="fig long">&minus;24.5%</p>
       <p class="claim">fall in graduate recruitment at the UK&rsquo;s leading employers since 2022, including a 5.1% cut in 2025.</p>
       <p class="src"><a href="https://highfliers.co.uk/publication-the-graduate-market-report">High Fliers Research, The Graduate Market in 2026</a><br>The UK&rsquo;s 100 leading graduate employers · Jan 2026</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
-    <article class="stat" data-cat="grad">
-      <p class="cat c-grad">Graduates</p>
-      <p class="fig">&minus;7%</p>
-      <p class="claim">UK graduate job postings were down about 7% year on year in July 2026, the lowest for the time of year since 2020.</p>
-      <p class="src"><a href="https://hiringlab.indeed.com/uk/blog/2026/08/03/mid-year-uk-jobs-hiring-trends-report/">Indeed Hiring Lab, 2026 Mid-Year UK Jobs and Hiring Trends</a><br>UK job postings on Indeed · Aug 2026</p>
       <button class="cite" type="button">Copy citation</button>
     </article>
 
@@ -1633,16 +1521,18 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
+    <article class="stat" data-cat="valid" data-ff>
+      <p class="cat c-ours">FF data</p>
+      <p class="fig">0.07</p>
+      <p class="claim">correlation between time spent on the task and overall score. Taking longer did not mean doing better. The median candidate used 27 minutes.</p>
+      <p class="src">Fluencyfox, graduate assessment round for a UK scale-up<br>n=58 graduate applicants, one live hiring round · 2026</p>
+      <p class="flag">Fluencyfox data. We sell these assessments</p>
+      <button class="cite" type="button">Copy citation</button>
+    </article>
+
 
     <!-- ============ MARKET CONTEXT ============ -->
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">72%</p>
-      <p class="claim">of employers worldwide report difficulty filling roles, down marginally from 74% the year before.</p>
-      <p class="src"><a href="https://www.prnewswire.com/news-releases/global-talent-shortage-reaches-turning-point-as-ai-skills-claim-top-spot-302698509.html">ManpowerGroup, 2026 Talent Shortage Survey</a><br>n=39,063 employers, 41 countries · Oct 2025</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="market">
       <p class="cat c-market">Market context</p>
@@ -1660,23 +1550,7 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">$5.5tn</p>
-      <p class="claim">in projected losses by 2026 from AI-related skills shortages, through product delays, quality problems and missed revenue.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">90%+</p>
-      <p class="claim">of global enterprises are projected to face critical skills shortages by 2026.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="market">
       <p class="cat c-market">Market context</p>
@@ -1702,14 +1576,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">46%</p>
-      <p class="claim">of organisations name lack of talent as the single biggest barrier to AI adoption, ahead of data privacy at 43% and data quality at 40%.</p>
-      <p class="src">IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a><br>Sample not disclosed · 2026</p>
-      <p class="flag">Reported by a company that sells AI skills assessments</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="market">
       <p class="cat c-market">Market context</p>
@@ -1719,13 +1585,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">83% / 48%</p>
-      <p class="claim">of employers report talent shortages in Germany against 48% in China, with the UK at 73% and the US at 69%.</p>
-      <p class="src"><a href="https://www.prnewswire.com/news-releases/global-talent-shortage-reaches-turning-point-as-ai-skills-claim-top-spot-302698509.html">ManpowerGroup, 2026 Talent Shortage Survey</a><br>n=39,063 employers, 41 countries · Oct 2025</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
     <article class="stat" data-cat="market">
       <p class="cat c-market">Market context</p>
@@ -1751,13 +1610,6 @@ footer.foot {
       <button class="cite" type="button">Copy citation</button>
     </article>
 
-    <article class="stat" data-cat="market">
-      <p class="cat c-market">Market context</p>
-      <p class="fig">~40%</p>
-      <p class="claim">of global employment is exposed to AI, by IMF estimates, rising to about 60% of jobs in advanced economies.</p>
-      <p class="src"><a href="https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity">IMF, AI Will Transform the Global Economy (Georgieva)</a><br>IMF staff analysis of global employment data · Jan 2024</p>
-      <button class="cite" type="button">Copy citation</button>
-    </article>
 
   </div>
   </div><!-- /.browse -->
@@ -1786,10 +1638,9 @@ footer.foot {
       <li><strong>Sample size and date on all of them.</strong> 74% of a thousand hiring managers surveyed last June means something quite different from 74% of a sample nobody will describe. You should be able to tell which one you are reading.</li>
       <li><strong>Secondhand numbers are marked.</strong> Now and then we could not get hold of the original report. Where that happened, the entry says who we took it from.</li>
       <li><strong>Nothing gets adjusted.</strong> We keep whatever rounding and wording the original used. If a publisher broke a number into parts, you get the parts.</li>
-      <li><strong>Vendors are flagged.</strong> Some of the most quoted figures come from companies that sell AI skills assessments, and so does our own data. Those carry a red dot so you can weigh them accordingly.</li>
+      <li><strong>Vendors are flagged.</strong> Some of the most quoted figures come from companies that sell AI skills assessments, and so does our own data, marked FF data. Those carry a red dot so you can weigh them accordingly.</li>
       <li><strong>Tell us when we get it wrong.</strong> If we have misread your data, or you have published something newer, send it over and it gets fixed next month.</li>
     </ul>
-    <p>A handful are marked <em>sample not disclosed</em>. Those are here because people quote them constantly, not because we rate them alongside the properly surveyed ones. Worth bearing in mind when you use them.</p>
   </div>
 
   <div class="block">
@@ -1804,9 +1655,9 @@ footer.foot {
   <div class="block">
     <h2>Sources</h2>
     <details class="sourcebox">
-      <summary>The 27 sources, with sample sizes and fieldwork dates</summary>
+      <summary>The 23 sources, with sample sizes and fieldwork dates</summary>
     <ul class="sourcelist">
-      <li><b><a href="https://fluencyfox.ai/scoring">Fluencyfox, own assessment data</a></b><span>Anonymised summary figures from live hiring rounds: 58 graduate applicants in one UK scale-up&rsquo;s round, and 700 applicants to SilverTree Equity&rsquo;s graduate scheme. Scored as described on our scoring page. No individual results are published.</span></li>
+      <li><b><a href="https://fluencyfox.ai/scoring">Fluencyfox, own assessment data</a></b><span>Anonymised summary figures from a live graduate hiring round: 58 applicants (13 women, 45 men) at a UK scale-up. Scored as described on our scoring page. No individual results are published.</span></li>
       <li><b><a href="https://www.testgorilla.com/talent-discovery/state-hiring-ai-fluency/">TestGorilla, The State of Hiring for AI Fluency in 2026</a></b><span>Survey of 1,928 senior hiring leaders, US and UK, 29 industries.</span></li>
       <li><b><a href="https://www.ziprecruiter-research.org/economic-insights-research/ai-employer-report-2026">ZipRecruiter Economic Research, 2026 AI Employer Report</a></b><span>1,000+ verified talent acquisition professionals and hiring managers, online panel, 11–18 June 2026.</span></li>
       <li><b><a href="https://www.prnewswire.com/news-releases/icims-insights-workers-are-teaching-themselves-ai-skills-faster-than-employers-train-them-raising-stakes-for-ai-powered-recruiting-and-screening-302874634.html">iCIMS Insights</a></b><span>1,000 US job seekers, plus proprietary data across 691m candidate profiles and Lightcast posting data. September 2026.</span></li>
@@ -1815,21 +1666,17 @@ footer.foot {
       <li><b><a href="https://academy.claude.com/tutorials/the-ai-fluency-index">Anthropic, The AI Fluency Index</a></b><span>9,830 anonymised Claude.ai conversations, January 2026, scored against 11 observable behaviours.</span></li>
       <li><b><a href="https://www.comptia.org/en-us/about-us/news/press-releases/key-employment-metrics-market-insights-and-the-impact-of-ai-revealed-in-comptia-state-of-tech-workforce-2026-report/">CompTIA, State of the Tech Workforce 2026</a></b><span>US job posting analysis and workforce projections. Sample methodology not disclosed.</span></li>
       <li><b><a href="https://www.prnewswire.com/news-releases/new-data-from-ashby-reveals-surge-in-applications-rising-selectivity-and-shifting-recruiter-workloads-302765846.html">Ashby</a></b><span>100m+ applications across 200k+ jobs, 2021–2026, presented May 2026.</span></li>
-      <li><b>IDC Analyst Brief, via <a href="https://www.workera.ai/guides-reports/the-5-5-trillion-skills-gap-what-idcs-new-report-reveals-about-ai-workforce-readiness">Workera</a></b><span>Secondary source. Original sample size not disclosed in the version available to us.</span></li>
       <li><b>Lightcast, <em>Beyond the Buzz</em>, via <a href="https://joberney.com/blog/what-is-ai-fluency">Joberney</a></b><span>Secondary source. 1.3bn job postings analysed, July 2025.</span></li>
       <li><b><a href="https://www.census.gov/library/working-papers/2026/adrm/CES-WP-26-56.html">US Census Bureau, Graduating into Disruption (Orr, Tucker &amp; Warren)</a></b><span>Administrative earnings records for 6,665,500 bachelor's graduates, about 29% of US degrees conferred 2016–2024. Working paper, September 2026.</span></li>
       <li><b><a href="https://digitaleconomy.stanford.edu/publication/how-does-ai-change-labor-demand/">Stanford Digital Economy Lab, How Does AI Change Labor Demand? (Chandar &amp; Klein Teeselink)</a></b><span>1.25bn job postings and 154m employment records across 41 countries, January 2021 to March 2026. Working paper, September 2026.</span></li>
       <li><b><a href="https://www.nber.org/papers/w31161">Brynjolfsson, Li &amp; Raymond, Generative AI at Work</a></b><span>5,179 customer support agents at one company. NBER working paper, 2023; published in the Quarterly Journal of Economics, 2025.</span></li>
-      <li><b><a href="https://www.imf.org/en/Blogs/Articles/2024/01/14/ai-will-transform-the-global-economy-lets-make-sure-it-benefits-humanity">IMF, AI Will Transform the Global Economy</a></b><span>Blog by Kristalina Georgieva summarising IMF staff analysis of global employment data, January 2024.</span></li>
       <li><b><a href="https://www.ons.gov.uk/businessindustryandtrade/business/businessservices/bulletins/businessinsightsandimpactontheukeconomy/2july2026">ONS, Business Insights and Conditions Survey, wave 159</a></b><span>10,311 responding UK businesses, fieldwork 15 to 28 June 2026. Published July 2026.</span></li>
       <li><b><a href="https://hiringlab.indeed.com/uk/blog/2026/08/03/mid-year-uk-jobs-hiring-trends-report/">Indeed Hiring Lab, 2026 Mid-Year UK Jobs and Hiring Trends Report</a></b><span>UK job postings on Indeed, to July 2026. Published August 2026.</span></li>
       <li><b><a href="https://www.pwc.co.uk/press-room/press-releases/research-commentary/2026/ai-jobs-barometer-2026.html">PwC UK, 2026 AI Jobs Barometer</a></b><span>More than 1 billion job adverts across 27 countries and territories. June 2026.</span></li>
       <li><b><a href="https://www.cipd.org/en/about/press-releases/one-in-six-employers-say-ai-shrink-headcount-autumn-labour-market-outlook/">CIPD, Labour Market Outlook Autumn 2025</a></b><span>2,019 UK senior HR professionals and decision makers, fieldwork 19 September to 14 October 2025.</span></li>
       <li><b><a href="https://www.managers.org.uk/wp-content/uploads/2026/06/cmi_thought-leadership-report-ai-leadership.pdf">Chartered Management Institute, Artificial Intelligence; Real Leadership</a></b><span>1,019 UK working managers, fieldwork 20 February to 9 March 2026. Published June 2026.</span></li>
-      <li><b><a href="https://www.gov.uk/government/publications/ai-labour-market-survey-2025-report/ai-labour-market-survey-2025-report-executive-summary">DSIT, AI Labour Market Survey 2025</a></b><span>119 organisations in the UK AI sector, 93% SMEs, roughly a 3% response rate. Describes the AI sector, not UK employers in general. Published January 2026.</span></li>
       <li><b><a href="https://ise.org.uk/knowledge/insights/513/ise_top_10_stats_of_2025_you_need_to_know/">Institute of Student Employers, Student Recruitment Survey 2025</a></b><span>155 ISE employer members, covering 31,000+ hires from 1.8m+ applications. October 2025. The full report is members-only; figures are from ISE&rsquo;s published summaries.</span></li>
       <li><b><a href="https://luminate.prospects.ac.uk/1-in-5-graduates-apply-for-more-than-100-jobs">Prospects at Jisc, Early Careers Survey 2026</a></b><span>5,000 UK students and graduates. June 2026.</span></li>
-      <li><b><a href="https://employers.brightnetwork.co.uk/research/what-do-graduates-want-2025-26/">Bright Network, What Do Graduates Want? 2025/26</a></b><span>Over 15,000 UK student and graduate members. Fieldwork dates not published.</span></li>
       <li><b><a href="https://highfliers.co.uk/publication-the-graduate-market-report">High Fliers Research, The Graduate Market in 2026</a></b><span>The UK&rsquo;s 100 leading graduate employers. January 2026.</span></li>
       <li><b><a href="https://www.gartner.com/en/newsroom/press-releases/2025-07-31-gartner-survey-shows-just-26-percent-of-job-applicants-trust-ai-will-fairly-evaluate-them">Gartner, candidate surveys</a></b><span>3,290 job candidates worldwide (Q4 2024) and 3,000 (Q2 2025). Published July 2025.</span></li>
       <li><b><a href="https://doi.org/10.1037/apl0000994">Sackett, Zhang, Berry &amp; Lievens, Revisiting Meta-Analytic Estimates of Validity in Personnel Selection</a></b><span>Journal of Applied Psychology 107(11), November 2022. Re-analyses the meta-analyses behind Schmidt &amp; Hunter (1998, Psychological Bulletin 124(2)), whose original estimates are given alongside.</span></li>
@@ -1842,10 +1689,10 @@ footer.foot {
   <section class="ff-methodology" aria-labelledby="methodology">
     <h2 id="methodology">Methodology</h2>
     <dl>
-      <div class="ff-meth-row"><dt>Sources</dt><dd><ul><li>Twenty-seven sources: TestGorilla, ZipRecruiter Economic Research, iCIMS Insights, Study.com, ManpowerGroup, Anthropic, CompTIA, Ashby, IDC and Lightcast via secondary reporting, the US Census Bureau, the Stanford Digital Economy Lab, Brynjolfsson, Li and Raymond (NBER), the IMF, ONS, Indeed Hiring Lab, PwC UK, CIPD, the Chartered Management Institute, DSIT, the Institute of Student Employers, Prospects at Jisc, Bright Network, High Fliers Research, Gartner, Sackett et al. (2022), and Fluencyfox's own anonymised assessment data.</li><li>Every figure links back to wherever it came from. The full list sits in the Sources section above.</li></ul></dd></div>
-      <div class="ff-meth-row"><dt>Sample size</dt><dd>90 figures across 27 sources. Survey samples range from 1,000 respondents to 39,063 employers across 41 countries; the labour market studies draw on administrative and job posting records covering millions of workers; three sources do not disclose a sample.</dd></div>
+      <div class="ff-meth-row"><dt>Sources</dt><dd><ul><li>Twenty-three sources: TestGorilla, ZipRecruiter Economic Research, iCIMS Insights, Study.com, ManpowerGroup, Anthropic, CompTIA, Ashby, Lightcast via secondary reporting, the US Census Bureau, the Stanford Digital Economy Lab, Brynjolfsson, Li and Raymond (NBER), ONS, Indeed Hiring Lab, PwC UK, CIPD, the Chartered Management Institute, the Institute of Student Employers, Prospects at Jisc, High Fliers Research, Gartner, Sackett et al. (2022), and anonymised Fluencyfox assessment data.</li><li>Every figure links back to wherever it came from. The full list sits in the Sources section above.</li></ul></dd></div>
+      <div class="ff-meth-row"><dt>Sample size</dt><dd>70 figures across 23 sources. Survey samples range from 155 employers to 39,063 employers across 41 countries; the labour market studies draw on administrative and job posting records covering millions of workers; our own figures come from one live hiring round of 58 graduate applicants.</dd></div>
       <div class="ff-meth-row"><dt>Date range</dt><dd>Survey fieldwork from July 2025 to September 2026, plus labour market studies published between 2023 and September 2026, and selection research from 1998 and 2022. Compiled 14 September 2026, extended 2 October 2026 with UK, graduate and selection-research figures and our own data.</dd></div>
-      <div class="ff-meth-row"><dt>Limitations</dt><dd><ul><li>Mostly a compilation. Apart from the figures marked Our data, we gathered and labelled these figures rather than producing them.</li><li>Our own figures come from small samples (58 applicants in one hiring round, and one 700-applicant scheme). Treat them as early evidence, not a benchmark.</li><li>Figures from companies that sell AI skills assessments, including us, are flagged on the page.</li><li>Figures marked <em>sample not disclosed</em> are here because they get quoted constantly, not because they stand up as well as the properly surveyed ones.</li><li>Two entries come from secondhand reporting, because we could not get at the original. Both name the publication we took them from.</li><li>Every source means something slightly different by “AI fluency”. You cannot really compare figures across publishers, so we never add them up or average them.</li><li>Most of it is people describing their own behaviour in surveys. The exceptions are the four labour market studies, which use employment, earnings and productivity records rather than self-report.</li></ul></dd></div>
+      <div class="ff-meth-row"><dt>Limitations</dt><dd><ul><li>Mostly a compilation. Apart from the figures marked FF data, we gathered and labelled these figures rather than producing them.</li><li>Figures marked FF data come from one live hiring round of 58 graduate applicants. Treat them as early evidence, not a benchmark.</li><li>Figures from companies that sell AI skills assessments, including us, are flagged on the page.</li><li>A few entries come from secondhand reporting, because we could not get at the original. Each names the publication we took it from.</li><li>Every source means something slightly different by “AI fluency”. You cannot really compare figures across publishers, so we never add them up or average them.</li><li>Most of it is people describing their own behaviour in surveys. The exceptions are the labour market studies, the selection research and our own FF data, which use records, meta-analysis or observed work rather than self-report.</li></ul></dd></div>
       <div class="ff-meth-row"><dt>Last updated</dt><dd>2 October 2026. Next pass November 2026.</dd></div>
     </dl>
   </section>
@@ -1928,7 +1775,8 @@ footer.foot {
   function apply(filter) {
     var n = 0;
     stats.forEach(function (el) {
-      var match = filter === "all" || el.getAttribute("data-cat") === filter;
+      var match = filter === "all" ||
+        (filter === "ff" ? el.hasAttribute("data-ff") : el.getAttribute("data-cat") === filter);
       el.hidden = !match;
       if (match) n++;
     });

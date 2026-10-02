@@ -10,7 +10,8 @@
   function apply(filter) {
     var n = 0;
     stats.forEach(function (el) {
-      var match = filter === "all" || el.getAttribute("data-cat") === filter;
+      var match = filter === "all" ||
+        (filter === "ff" ? el.hasAttribute("data-ff") : el.getAttribute("data-cat") === filter);
       el.hidden = !match;
       if (match) n++;
     });

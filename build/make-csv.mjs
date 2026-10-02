@@ -12,7 +12,6 @@ const SRC = join(ROOT, 'build', 'pages', 'research', '_data-index.body.html');
 const OUT = join(ROOT, 'fluencyfox-site_6', 'research', 'ai-fluency-data-index.csv');
 
 const CATEGORY = {
-  ours: 'Our data',
   demand: 'Demand',
   gap: 'Measurement gap',
   cap: 'Capability',
@@ -34,7 +33,7 @@ const text = html => html
 const cell = v => `"${String(v).replace(/"/g, '""')}"`;
 
 const src = readFileSync(SRC, 'utf8');
-const cards = [...src.matchAll(/<article class="stat" data-cat="([a-z]+)">([\s\S]*?)<\/article>/g)];
+const cards = [...src.matchAll(/<article class="stat" data-cat="([a-z]+)"(?: data-ff)?>([\s\S]*?)<\/article>/g)];
 
 const rows = cards.map(([, cat, inner]) => {
   const pick = cls => {
