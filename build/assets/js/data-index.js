@@ -64,4 +64,35 @@
     try { document.execCommand("copy"); cb(); } catch (err) { /* no-op */ }
     document.body.removeChild(ta);
   }
+
+  // Monthly update sign-up. Posts straight to a Google Form, which writes each
+  // email into a private Google Sheet. Google does not let the page read the
+  // reply, so a sent request counts as success.
+  var form = document.getElementById("signup-form");
+  var box = document.getElementById("signup");
+  if (form && box && form.getAttribute("data-action") && form.getAttribute("data-field")) {
+    box.hidden = false;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var input = form.querySelector("input[type=email]");
+      var email = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        input.setCustomValidity("Please enter a valid email address.");
+        input.reportValidity();
+        input.setCustomValidity("");
+        return;
+      }
+      var btn = form.querySelector("button");
+      btn.disabled = true;
+      var body = new URLSearchParams();
+      body.append(form.getAttribute("data-field"), email);
+      fetch(form.getAttribute("data-action"), { method: "POST", mode: "no-cors", body: body })
+        .then(function () {
+          form.innerHTML = '<p class="done">Thanks. You will get the next update when it lands.</p>';
+        }, function () {
+          btn.disabled = false;
+          btn.textContent = "Try again";
+        });
+    });
+  }
 })();

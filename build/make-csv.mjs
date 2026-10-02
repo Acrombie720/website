@@ -12,10 +12,14 @@ const SRC = join(ROOT, 'build', 'pages', 'research', '_data-index.body.html');
 const OUT = join(ROOT, 'fluencyfox-site_6', 'research', 'ai-fluency-data-index.csv');
 
 const CATEGORY = {
+  ours: 'Our data',
   demand: 'Demand',
   gap: 'Measurement gap',
   cap: 'Capability',
   train: 'Training',
+  uk: 'UK',
+  grad: 'Graduates',
+  valid: 'What predicts performance',
   market: 'Market context',
 };
 
@@ -52,12 +56,13 @@ const rows = cards.map(([, cat, inner]) => {
     sample: bits.length > 1 ? bits.slice(0, -1).join(' · ') : tail,
     date: bits.length > 1 ? bits[bits.length - 1] : '',
     url: link,
+    note: text(pick('flag')),
   };
 });
 
-const header = ['Category', 'Figure', 'Claim', 'Source', 'Sample', 'Date', 'Source URL'];
+const header = ['Category', 'Figure', 'Claim', 'Source', 'Sample', 'Date', 'Source URL', 'Note'];
 const csv = [header.map(cell).join(',')]
-  .concat(rows.map(r => [r.category, r.figure, r.claim, r.source, r.sample, r.date, r.url]
+  .concat(rows.map(r => [r.category, r.figure, r.claim, r.source, r.sample, r.date, r.url, r.note]
     .map(cell).join(',')))
   .join('\r\n') + '\r\n';
 
